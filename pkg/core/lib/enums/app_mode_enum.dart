@@ -1,0 +1,1 @@
+enum AppModeEnum { fake, real }

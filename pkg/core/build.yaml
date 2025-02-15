@@ -1,0 +1,31 @@
+targets:
+  $default:
+    builders:
+      riverpod_generator:
+        options:
+          provider_name_suffix: "Pod"
+          provider_family_name_suffix: "Pod"
+      json_serializable:
+        options:
+          explicit_to_json: true
+          generic_argument_factories: true
+          include_if_null: false
+      freezed:
+        options:
+          generic_argument_factories: true
+      flutter_gen_runner:
+        options:
+          parse_metadata: true
+          output: lib/assets_gen/
+          line_length: 120
+          integrations:
+            flutter_svg: true
+            image: true
+            rive: true
+            lottie: true
+          assets:
+            outputs:
+              directory_path_enabled: true
+              package_parameter_enabled: true
+            exclude:
+              - assets/translations/**

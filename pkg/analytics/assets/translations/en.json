@@ -1,0 +1,4 @@
+{
+  "unknown_analytics_exception_message_key": "There was an unknown error with analytics, please try again later",
+  "wrong_analytics_event_usage_exception_message_key": "There was an error in usage of the analytics event parameter"
+}

@@ -1,0 +1,8 @@
+builders:
+  json_keys:
+    import: "package:custom_builders/builder.dart"
+    builder_factories: ["jsonKeysGenerator"]
+    build_extensions: { ".dart": ["jsonkey.g.part"] }
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]

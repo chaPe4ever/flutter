@@ -1,0 +1,3 @@
+timeout: 1s
+concurrency: 4
+reporter: github

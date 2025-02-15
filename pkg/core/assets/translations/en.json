@@ -1,0 +1,7 @@
+{
+  "launch_url_exception_message_key": "Failed to open url",
+  "no_network_exception_message_key": "Please check your internet connection and try again",
+  "storage_initialisation_exception_message_key": "There was an error on the storage initialisation, please try again later",
+  "unexpected_error_message_key": "An error has occurred. Please try again later",
+  "unknown_core_exception_message_key": "An unknown error has occurred. Please try again later"
+}

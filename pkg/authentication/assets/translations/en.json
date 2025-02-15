@@ -1,0 +1,22 @@
+{
+  "auth_canceled_by_user_exception_message_key": "The authentication process was canceled by the user",
+  "auth_email_already_in_use_exception_message_key": "The provided email has already been registered. Please sign in instead",
+  "auth_invalid_email_and_password_combination_exception_message_key": "The combination of email and password is invalid",
+  "auth_server_error_exception_message_key": "There was a server error during authentication, please try again",
+  "invalid_email_exception_message_key": "Please enter a valid email address",
+  "invalid_password_exception_message_key": "Please enter a valid password",
+  "sign_out_failed_exception_message_key": "Sign out failed, please try again",
+  "no_signed_in_user_exception_message_key": "No user is signed in",
+  "is_email_verified_failed_exception_message_key": "This email has not been verified",
+  "firebase_auth_core_exception_message_key": "Firebase authentication core exception has occurred",
+  "reset_password_failed_exception_message_key": "Failed to reset password, please try again",
+  "send_email_verification_failed_exception_message_key": "Failed to send email verification link, please try again",
+  "user_email_is_null_auth_exception": "An email is null exception has occurred",
+  "user_signed_in_anonymously_exception_message_key": "A user has signed in anonymously exception has occurred.",
+  "unknown_auth_exception_message_key": "An unknown error has occurred. Please try again later",
+  "expired-action-code": "This link has expired",
+  "invalid-action-code": "This link is invalid",
+  "user-disabled": "Your account has been disabled, please contact us",
+  "user-not-found": "Your account has been deleted, please contact us",
+  "email_not_verified": "Please verify your email address to proceed"
+}

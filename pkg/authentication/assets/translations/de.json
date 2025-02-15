@@ -1,0 +1,21 @@
+{
+  "auth_canceled_by_user_exception_message_key": "Der Authentifizierungsvorgang wurde vom Benutzer abgebrochen",
+  "auth_email_already_in_use_exception_message_key": "Die angegebene E-Mail wurde bereits registriert. Bitte melden Sie sich stattdessen an",
+  "auth_invalid_email_and_password_combination_exception_message_key": "Die Kombination aus E-Mail und Passwort ist ungültig",
+  "auth_server_error_exception_message_key": "Bei der Authentifizierung ist ein Serverfehler aufgetreten, bitte versuchen Sie es erneut",
+  "invalid_email_exception_message_key": "Bitte überprüfen Sie Ihre E-Mail-Adresse",
+  "invalid_password_exception_message_key": "Bitte überprüfen Sie Ihr Passwort",
+  "sign_out_failed_exception_message_key": "Abmeldung fehlgeschlagen, bitte versuchen Sie es erneut",
+  "no_signed_in_user_exception_message_key": "Kein Benutzer ist angemeldet",
+  "is_email_verified_failed_exception_message_key": "Diese E-Mail wurde nicht verifiziert",
+  "firebase_auth_core_exception_message_key": "Firebase Authentication Kernausnahme ist aufgetreten",
+  "reset_password_failed_exception_message_key": "Passwort konnte nicht zurückgesetzt werden, bitte versuchen Sie es erneut",
+  "send_email_verification_failed_exception_message_key": "E-Mail-Verifizierungslink konnte nicht gesendet werden, bitte versuchen Sie es erneut",
+  "user_email_is_null_auth_exception_key": "Eine E-Mail ist null Ausnahme ist aufgetreten",
+  "user_signed_in_anonymously_exception_message_key": "Ein Benutzer hat sich anonym angemeldet Eine Ausnahme ist aufgetreten.",
+  "unknown_auth_exception_message_key": "Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut",
+  "expired-action-code": "Dieser Link ist abgelaufen",
+  "invalid-action-code": "Dieser Link ist ungültig",
+  "user-disabled": "Ihr Konto wurde deaktiviert, bitte kontaktieren Sie uns",
+  "user-not-found": "Ihr Konto wurde gelöscht, bitte kontaktieren Sie uns"
+}
