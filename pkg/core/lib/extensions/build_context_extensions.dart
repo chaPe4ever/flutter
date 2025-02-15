@@ -72,14 +72,14 @@ extension BuildContextX on BuildContext {
     return width >= BreakpointEnum.xl.start
         ? (xl ?? l ?? m ?? s ?? xs ?? fallBack)
         : width >= BreakpointEnum.l.start
-            ? (l ?? m ?? s ?? xs ?? fallBack)
-            : width >= BreakpointEnum.m.start
-                ? (m ?? s ?? xs ?? fallBack)
-                : width >= BreakpointEnum.s.start
-                    ? (s ?? xs ?? fallBack)
-                    : width >= BreakpointEnum.xs.start
-                        ? (xs ?? fallBack)
-                        : fallBack;
+        ? (l ?? m ?? s ?? xs ?? fallBack)
+        : width >= BreakpointEnum.m.start
+        ? (m ?? s ?? xs ?? fallBack)
+        : width >= BreakpointEnum.s.start
+        ? (s ?? xs ?? fallBack)
+        : width >= BreakpointEnum.xs.start
+        ? (xs ?? fallBack)
+        : fallBack;
   }
 
   /// Get the current focus scope node

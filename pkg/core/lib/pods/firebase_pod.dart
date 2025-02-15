@@ -21,12 +21,12 @@ FirebaseFirestore firestore(Ref ref) {
       .connectionStatusController
       .stream
       .listen((event) async {
-    if (event case NetworkStatus.offline) {
-      await FirebaseFirestore.instance.disableNetwork();
-    } else {
-      await FirebaseFirestore.instance.enableNetwork();
-    }
-  });
+        if (event case NetworkStatus.offline) {
+          await FirebaseFirestore.instance.disableNetwork();
+        } else {
+          await FirebaseFirestore.instance.enableNetwork();
+        }
+      });
 
   ref.onDispose(subscription.cancel);
 

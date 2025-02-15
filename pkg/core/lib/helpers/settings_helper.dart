@@ -8,9 +8,7 @@ final class SettingsHelper {
     required LocalStorageBase storage,
     Map<String, dynamic>? settingExtras,
   }) async {
-    final settingsMap = {
-      ...?settingExtras,
-    };
+    final settingsMap = {...?settingExtras};
     await Future.forEach(settingsMap.keys, (key) async {
       final value = settingsMap[key];
       if (storage.read<dynamic>(key) == null) {

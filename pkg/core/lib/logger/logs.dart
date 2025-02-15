@@ -129,9 +129,7 @@ class RiverpodLogger extends ProviderObserver {
         if (error is ClientVisibleException) {
           // Decide if you want to log something for this special failure
         } else {
-          Log.riverpod(
-            error: error.prefix ?? '$error\n${error.st}\n',
-          );
+          Log.riverpod(error: error.prefix ?? '$error\n${error.st}\n');
         }
       } else {
         Log.riverpod(error: error);

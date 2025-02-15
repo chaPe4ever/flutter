@@ -14,9 +14,9 @@ final class FirebaseAuthFacade implements AuthFacade {
   FirebaseAuthFacade({
     required FirebaseAuth firebaseAuth,
     required LoggerBase loggerBase,
-  })  : _firebaseAuth = firebaseAuth,
-        _logger = loggerBase,
-        _priorSignOutController = StreamController<void>.broadcast();
+  }) : _firebaseAuth = firebaseAuth,
+       _logger = loggerBase,
+       _priorSignOutController = StreamController<void>.broadcast();
 
   // Fields
   final FirebaseAuth _firebaseAuth;
@@ -26,7 +26,7 @@ final class FirebaseAuthFacade implements AuthFacade {
   // Methods
   @override
   Future<Either<AuthenticationEx, UserCredential>>
-      registerWithEmailAndPassword({
+  registerWithEmailAndPassword({
     required EmailAddress email,
     required Password password,
   }) async {
@@ -104,12 +104,11 @@ final class FirebaseAuthFacade implements AuthFacade {
   @override
   Future<Either<AuthenticationEx, UserCredential>> signInWithCredential({
     required AuthCredential authCredential,
-  }) =>
-      futureEitherAuthTryCatch(
-        () => _firebaseAuth.signInWithCredential(authCredential),
-        logger: _logger,
-        customException: const IsEmailVerifiedFailedException(),
-      );
+  }) => futureEitherAuthTryCatch(
+    () => _firebaseAuth.signInWithCredential(authCredential),
+    logger: _logger,
+    customException: const IsEmailVerifiedFailedException(),
+  );
 
   @override
   Future<Option<AuthenticationEx>> signInWithGoogle() async {
@@ -140,16 +139,16 @@ final class FirebaseAuthFacade implements AuthFacade {
 
   @override
   Future<Option<AuthenticationEx>> signOut() async => futureOptionAuthTryCatch(
-        () async {
-          _priorSignOutController.add(null);
+    () async {
+      _priorSignOutController.add(null);
 
-          // googleSignIn.signOut();
-          await _firebaseAuth.signOut();
-          await _firebaseAuth.currentUser?.reload();
-        },
-        logger: _logger,
-        customException: const SignOutFailedException(),
-      );
+      // googleSignIn.signOut();
+      await _firebaseAuth.signOut();
+      await _firebaseAuth.currentUser?.reload();
+    },
+    logger: _logger,
+    customException: const SignOutFailedException(),
+  );
 
   @override
   Future<Either<AuthenticationEx, bool>> isEmailVerified() async =>
@@ -170,84 +169,77 @@ final class FirebaseAuthFacade implements AuthFacade {
   @override
   Future<Option<AuthenticationEx>> sendEmailVerification({
     ActionCodeSettings? actionCodeSettings,
-  }) async =>
-      futureOptionAuthTryCatch(
-        () async {
-          final currentUser = _firebaseAuth.currentUser;
+  }) async => futureOptionAuthTryCatch(
+    () async {
+      final currentUser = _firebaseAuth.currentUser;
 
-          if (currentUser == null) {
-            // Means there is no logged in user
-            throw const NoSignedInUserException();
-          }
+      if (currentUser == null) {
+        // Means there is no logged in user
+        throw const NoSignedInUserException();
+      }
 
-          await currentUser.sendEmailVerification(actionCodeSettings);
-        },
-        logger: _logger,
-        customException: const SendEmailVerificationFailedException(),
-      );
+      await currentUser.sendEmailVerification(actionCodeSettings);
+    },
+    logger: _logger,
+    customException: const SendEmailVerificationFailedException(),
+  );
 
   @override
   Future<Either<AuthenticationEx, ActionCodeInfo>> checkActionCode({
     required String code,
-  }) async =>
-      futureEitherAuthTryCatch(
-        () async => _firebaseAuth.checkActionCode(code),
-        logger: _logger,
-      );
+  }) async => futureEitherAuthTryCatch(
+    () async => _firebaseAuth.checkActionCode(code),
+    logger: _logger,
+  );
 
   @override
   Future<Option<AuthenticationEx>> applyActionCode({
     required String code,
-  }) async =>
-      futureOptionAuthTryCatch(
-        () async => _firebaseAuth.applyActionCode(code),
-        logger: _logger,
-      );
+  }) async => futureOptionAuthTryCatch(
+    () async => _firebaseAuth.applyActionCode(code),
+    logger: _logger,
+  );
 
   @override
   Future<Option<AuthenticationEx>> sendPasswordResetEmail({
     required String emailAddress,
     ActionCodeSettings? actionCodeSettings,
-  }) async =>
-      futureOptionAuthTryCatch(
-        () async => _firebaseAuth.sendPasswordResetEmail(
-          email: emailAddress,
-          actionCodeSettings: actionCodeSettings,
-        ),
-        logger: _logger,
-        customException: const ResetPasswordFailedException(),
-      );
+  }) async => futureOptionAuthTryCatch(
+    () async => _firebaseAuth.sendPasswordResetEmail(
+      email: emailAddress,
+      actionCodeSettings: actionCodeSettings,
+    ),
+    logger: _logger,
+    customException: const ResetPasswordFailedException(),
+  );
 
   @override
   Future<Either<AuthenticationEx, String>> verifyPasswordResetCode({
     required String code,
-  }) async =>
-      futureEitherAuthTryCatch(
-        () async => _firebaseAuth.verifyPasswordResetCode(code),
-        logger: _logger,
-      );
+  }) async => futureEitherAuthTryCatch(
+    () async => _firebaseAuth.verifyPasswordResetCode(code),
+    logger: _logger,
+  );
 
   @override
   Future<Option<AuthenticationEx>> confirmPasswordReset({
     required String code,
     required String newPassword,
-  }) async =>
-      futureOptionAuthTryCatch(
-        () async => _firebaseAuth.confirmPasswordReset(
-          code: code,
-          newPassword: newPassword,
-        ),
-        logger: _logger,
-      );
+  }) async => futureOptionAuthTryCatch(
+    () async => _firebaseAuth.confirmPasswordReset(
+      code: code,
+      newPassword: newPassword,
+    ),
+    logger: _logger,
+  );
 
   @override
   Future<Option<AuthenticationEx>> setPersistence({
     required Persistence persistence,
-  }) async =>
-      futureOptionAuthTryCatch(
-        () async => _firebaseAuth.setPersistence(persistence),
-        logger: _logger,
-      );
+  }) async => futureOptionAuthTryCatch(
+    () async => _firebaseAuth.setPersistence(persistence),
+    logger: _logger,
+  );
 
   @override
   Future<Option<AuthenticationEx>> deleteCurrentUser() async {
@@ -265,13 +257,13 @@ final class FirebaseAuthFacade implements AuthFacade {
       return e.code == 'requires-recent-login'
           ? some(const RequiresRecentLoginException())
           : some(
-              FirebaseAuthRawException(
-                innerError: e,
-                innerMessage: e.message,
-                innerCode: e.code,
-                st: st,
-              ),
-            );
+            FirebaseAuthRawException(
+              innerError: e,
+              innerMessage: e.message,
+              innerCode: e.code,
+              st: st,
+            ),
+          );
     }
   }
 
@@ -294,13 +286,13 @@ final class FirebaseAuthFacade implements AuthFacade {
       return e.code == 'requires-recent-login'
           ? some(const RequiresRecentLoginException())
           : some(
-              FirebaseAuthRawException(
-                innerError: e,
-                innerMessage: e.message,
-                innerCode: e.code,
-                st: st,
-              ),
-            );
+            FirebaseAuthRawException(
+              innerError: e,
+              innerMessage: e.message,
+              innerCode: e.code,
+              st: st,
+            ),
+          );
     }
   }
 
@@ -335,11 +327,11 @@ final class FirebaseAuthFacade implements AuthFacade {
         (e.code == 'wrong-password')
             ? const InvalidPasswordException()
             : FirebaseAuthRawException(
-                innerError: e,
-                innerMessage: e.message,
-                innerCode: e.code,
-                st: st,
-              ),
+              innerError: e,
+              innerMessage: e.message,
+              innerCode: e.code,
+              st: st,
+            ),
       );
     }
   }

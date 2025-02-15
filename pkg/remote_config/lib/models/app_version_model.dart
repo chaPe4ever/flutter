@@ -1,29 +1,20 @@
 import 'package:core/core.dart';
 
 final class AppVersionModel extends Equatable {
-  const AppVersionModel({
-    required this.version,
-    required this.buildNumber,
-  });
+  const AppVersionModel({required this.version, required this.buildNumber});
 
   AppVersionModel.fromJson(Map<String, dynamic> json)
-      : version = json['version'] as String,
-        buildNumber = json['build_number'] as int;
+    : version = json['version'] as String,
+      buildNumber = json['build_number'] as int;
 
   final String version;
   final int buildNumber;
 
   Map<String, dynamic> toJson() {
-    return {
-      'version': version,
-      'build_number': buildNumber,
-    };
+    return {'version': version, 'build_number': buildNumber};
   }
 
-  AppVersionModel copyWith({
-    String? version,
-    int? buildNumber,
-  }) {
+  AppVersionModel copyWith({String? version, int? buildNumber}) {
     return AppVersionModel(
       version: version ?? this.version,
       buildNumber: buildNumber ?? this.buildNumber,
@@ -42,17 +33,14 @@ final class AppVersionRemoteModel extends AppVersionModel with EquatableMixin {
   });
 
   AppVersionRemoteModel.fromJson(super.json)
-      : isOptional = json['is_optional'] as bool,
-        super.fromJson();
+    : isOptional = json['is_optional'] as bool,
+      super.fromJson();
 
   final bool isOptional;
 
   @override
   Map<String, dynamic> toJson() {
-    return super.toJson()
-      ..addAll({
-        'is_optional': isOptional,
-      });
+    return super.toJson()..addAll({'is_optional': isOptional});
   }
 
   @override
@@ -82,17 +70,14 @@ final class AppVersionUpdateModel extends AppVersionRemoteModel
   });
 
   AppVersionUpdateModel.fromJson(super.json)
-      : isUpdateAvailable = json['is_update_available'] as bool,
-        super.fromJson();
+    : isUpdateAvailable = json['is_update_available'] as bool,
+      super.fromJson();
 
   final bool isUpdateAvailable;
 
   @override
   Map<String, dynamic> toJson() {
-    return super.toJson()
-      ..addAll({
-        'is_update_available': isUpdateAvailable,
-      });
+    return super.toJson()..addAll({'is_update_available': isUpdateAvailable});
   }
 
   @override
@@ -111,6 +96,10 @@ final class AppVersionUpdateModel extends AppVersionRemoteModel
   }
 
   @override
-  List<Object?> get props =>
-      [version, buildNumber, isOptional, isUpdateAvailable];
+  List<Object?> get props => [
+    version,
+    buildNumber,
+    isOptional,
+    isUpdateAvailable,
+  ];
 }

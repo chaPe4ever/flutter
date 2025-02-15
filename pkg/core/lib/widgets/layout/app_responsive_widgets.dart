@@ -51,11 +51,7 @@ class ResponsiveTwoColumnLayout extends StatelessWidget {
           return Column(
             mainAxisAlignment: columnMainAxisAlignment,
             crossAxisAlignment: columnCrossAxisAlignment,
-            children: [
-              startContent,
-              SizedBox(height: spacing),
-              endContent,
-            ],
+            children: [startContent, SizedBox(height: spacing), endContent],
           );
         }
       },
@@ -84,10 +80,7 @@ class ResponsiveScrollableCard extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(padding),
           child: Card(
-            child: Padding(
-              padding: EdgeInsets.all(padding),
-              child: child,
-            ),
+            child: Padding(padding: EdgeInsets.all(padding), child: child),
           ),
         ),
       ),
@@ -122,10 +115,7 @@ class ResponsiveCenter extends StatelessWidget {
       // https://twitter.com/biz84/status/1445400059894542337
       child: SizedBox(
         width: breakpoint.end,
-        child: Padding(
-          padding: padding,
-          child: child,
-        ),
+        child: Padding(padding: padding, child: child),
       ),
     );
   }
@@ -170,10 +160,7 @@ class AppResponsiveScaledBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveScaledBox(
-      width: width,
-      child: child,
-    );
+    return ResponsiveScaledBox(width: width, child: child);
   }
 }
 
@@ -477,17 +464,14 @@ class AppResponsiveConstraints extends StatelessWidget {
 }
 
 ///
-enum AppRowColumnType {
-  row,
-  column,
-}
+enum AppRowColumnType { row, column }
 
 ///
 extension AppRowColumnTypeX on AppRowColumnType {
   ResponsiveRowColumnType get toResponsiveRowColumnType => switch (this) {
-        AppRowColumnType.row => ResponsiveRowColumnType.ROW,
-        AppRowColumnType.column => ResponsiveRowColumnType.COLUMN,
-      };
+    AppRowColumnType.row => ResponsiveRowColumnType.ROW,
+    AppRowColumnType.column => ResponsiveRowColumnType.COLUMN,
+  };
 }
 
 class AppBreakpoint extends Breakpoint {
@@ -501,21 +485,16 @@ class AppBreakpoint extends Breakpoint {
 }
 
 /// Internal equality comparators.
-enum AppConditional {
-  largerThan,
-  equals,
-  smallerThan,
-  between,
-}
+enum AppConditional { largerThan, equals, smallerThan, between }
 
 /// Internal equality comparators extension.
 extension AppConditionalX on AppConditional {
   Conditional get toConditional => switch (this) {
-        AppConditional.largerThan => Conditional.LARGER_THAN,
-        AppConditional.equals => Conditional.EQUALS,
-        AppConditional.smallerThan => Conditional.SMALLER_THAN,
-        AppConditional.between => Conditional.BETWEEN,
-      };
+    AppConditional.largerThan => Conditional.LARGER_THAN,
+    AppConditional.equals => Conditional.EQUALS,
+    AppConditional.smallerThan => Conditional.SMALLER_THAN,
+    AppConditional.between => Conditional.BETWEEN,
+  };
 }
 
 /// A conditional value provider.
@@ -524,11 +503,8 @@ extension AppConditionalX on AppConditional {
 /// Compare conditions by setting either [breakpoint] or
 /// [name] values.
 class AppCondition<T> extends Condition<T> {
-  AppCondition.equals({
-    required super.name,
-    super.value,
-    super.landscapeValue,
-  }) : super.equals();
+  AppCondition.equals({required super.name, super.value, super.landscapeValue})
+    : super.equals();
 
   const AppCondition.largerThan({
     super.breakpoint,
@@ -584,21 +560,23 @@ class AppResponsiveBreakpoints extends ResponsiveBreakpoints {
   }
 
   static ResponsiveBreakpointsData of(BuildContext context) {
-    final data = context
-        .dependOnInheritedWidgetOfExactType<InheritedResponsiveBreakpoints>();
+    final data =
+        context
+            .dependOnInheritedWidgetOfExactType<
+              InheritedResponsiveBreakpoints
+            >();
     if (data != null) return data.data;
-    throw FlutterError.fromParts(
-      <DiagnosticsNode>[
-        ErrorSummary(
-          'ResponsiveBreakpoints.of() called with a context that does not contain ResponsiveBreakpoints.',
-        ),
-        ErrorDescription(
-            'No Responsive ancestor could be found starting from the context that was passed '
-            'to ResponsiveBreakpoints.of(). Place a ResponsiveBreakpoints at the root of the app '
-            'or supply a ResponsiveBreakpoints.builder.'),
-        context.describeElement('The context used was'),
-      ],
-    );
+    throw FlutterError.fromParts(<DiagnosticsNode>[
+      ErrorSummary(
+        'ResponsiveBreakpoints.of() called with a context that does not contain ResponsiveBreakpoints.',
+      ),
+      ErrorDescription(
+        'No Responsive ancestor could be found starting from the context that was passed '
+        'to ResponsiveBreakpoints.of(). Place a ResponsiveBreakpoints at the root of the app '
+        'or supply a ResponsiveBreakpoints.builder.',
+      ),
+      context.describeElement('The context used was'),
+    ]);
   }
 }
 

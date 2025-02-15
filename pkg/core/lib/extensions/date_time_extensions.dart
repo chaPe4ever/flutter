@@ -23,12 +23,7 @@ extension DateTimeX on DateTime {
       return DateTime(year, month, day, nextHour);
     } else {
       // Otherwise, round down to the current hour
-      return DateTime(
-        year,
-        month,
-        day,
-        hour,
-      );
+      return DateTime(year, month, day, hour);
     }
   }
 
@@ -36,22 +31,21 @@ extension DateTimeX on DateTime {
   /// [tzLocationName]
   Either<CoreException, int> tzRemainingSecondsUntilNextHour({
     required String tzLocationName,
-  }) =>
-      TzHelper.eitherNow(tzLocationName: tzLocationName).fold(
-        left,
-        (dt) => right(
-          dt
-              .copyWith(
-                hour: dt.hour + 1,
-                minute: 0,
-                second: 0,
-                millisecond: 0,
-                microsecond: 0,
-              )
-              .difference(dt)
-              .inSeconds,
-        ),
-      );
+  }) => TzHelper.eitherNow(tzLocationName: tzLocationName).fold(
+    left,
+    (dt) => right(
+      dt
+          .copyWith(
+            hour: dt.hour + 1,
+            minute: 0,
+            second: 0,
+            millisecond: 0,
+            microsecond: 0,
+          )
+          .difference(dt)
+          .inSeconds,
+    ),
+  );
 }
 
 /// Time of day extensions
@@ -72,9 +66,6 @@ extension TimeOfDayX on TimeOfDay {
   /// A method that returns a DateTime object with the current date and the
   /// time of day
   DateTime toDtNow() {
-    return DateTime.now().copyWith(
-      hour: hour,
-      minute: minute,
-    );
+    return DateTime.now().copyWith(hour: hour, minute: minute);
   }
 }

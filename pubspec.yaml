@@ -1,17 +1,11 @@
 name: my_workspace
 publish_to: none
+
 environment:
-  sdk: ^3.6.0
-workspace:
-  - pkg/analytics
-  - pkg/core
-  - pkg/crashlytics
-  - pkg/remote_config
-  - pkg/remote_storage
+  sdk: ^3.7.0
+
 dev_dependencies:
   melos: ^6.3.2
 
 melos:
-scripts:
-  bootstrap:
-    run: melos bootstrap
+  repository: https://github.com/chaPe4ever/flutter

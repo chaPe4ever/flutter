@@ -15,18 +15,19 @@ class AssetLoaderHelper extends AssetLoader {
   @override
   Future<Map<String, dynamic>?> load(String path, Locale locale) async =>
       AssetsHelper.populatePkgTrans(
-        pkgAssetTransNames: pkgAssetTransNames,
-        locale: locale,
-        trans: {},
-      )
+            pkgAssetTransNames: pkgAssetTransNames,
+            locale: locale,
+            trans: {},
+          )
           .then(
-        (trans) async => AssetsHelper.populateTransFromPath(
-          path: '$path/${locale.toStringWithSeparator(separator: "-")}.json',
-          trans: trans,
-        ),
-      )
+            (trans) async => AssetsHelper.populateTransFromPath(
+              path:
+                  '$path/${locale.toStringWithSeparator(separator: "-")}.json',
+              trans: trans,
+            ),
+          )
           .then((trans) {
-        completer.complete();
-        return trans;
-      });
+            completer.complete();
+            return trans;
+          });
 }

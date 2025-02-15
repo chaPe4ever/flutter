@@ -9,16 +9,16 @@ import 'package:flutter/foundation.dart';
 final class FakeAuthFacade implements AuthFacade {
   /// Constructor
   FakeAuthFacade()
-      : _user = InMemoryStore<User?>(
-          FakeUser(
-            metadata: UserMetadata(0, 0),
-            uid: faker.guid.guid(),
-            email: faker.internet.email(),
-            displayName: faker.person.name(),
-            photoURL: faker.internet.httpsUrl(),
-            phoneNumber: faker.phoneNumber.us(),
-          ),
-        );
+    : _user = InMemoryStore<User?>(
+        FakeUser(
+          metadata: UserMetadata(0, 0),
+          uid: faker.guid.guid(),
+          email: faker.internet.email(),
+          displayName: faker.person.name(),
+          photoURL: faker.internet.httpsUrl(),
+          phoneNumber: faker.phoneNumber.us(),
+        ),
+      );
 
   // Fields
 
@@ -27,7 +27,7 @@ final class FakeAuthFacade implements AuthFacade {
   // Methods
   @override
   Future<Either<AuthenticationEx, UserCredential>>
-      registerWithEmailAndPassword({
+  registerWithEmailAndPassword({
     required EmailAddress email,
     required Password password,
   }) async {
@@ -110,12 +110,9 @@ final class FakeAuthFacade implements AuthFacade {
   @override
   Future<Either<AuthenticationEx, UserCredential>> signInWithCredential({
     required AuthCredential authCredential,
-  }) =>
-      Future.value(
-        right(
-          FakeUserCredential(user: _user.value, credential: authCredential),
-        ),
-      );
+  }) => Future.value(
+    right(FakeUserCredential(user: _user.value, credential: authCredential)),
+  );
 
   @override
   Future<Option<AuthenticationEx>> signInWithGoogle() async {
@@ -165,40 +162,34 @@ final class FakeAuthFacade implements AuthFacade {
   @override
   Future<Either<AuthenticationEx, ActionCodeInfo>> checkActionCode({
     required String code,
-  }) async =>
-      throw UnimplementedError();
+  }) async => throw UnimplementedError();
 
   @override
   Future<Option<AuthenticationEx>> applyActionCode({
     required String code,
-  }) async =>
-      throw UnimplementedError();
+  }) async => throw UnimplementedError();
 
   @override
   Future<Option<AuthenticationEx>> sendPasswordResetEmail({
     required String emailAddress,
     ActionCodeSettings? actionCodeSettings,
-  }) async =>
-      throw UnimplementedError();
+  }) async => throw UnimplementedError();
 
   @override
   Future<Either<AuthenticationEx, String>> verifyPasswordResetCode({
     required String code,
-  }) async =>
-      throw UnimplementedError();
+  }) async => throw UnimplementedError();
 
   @override
   Future<Option<AuthenticationEx>> confirmPasswordReset({
     required String code,
     required String newPassword,
-  }) async =>
-      throw UnimplementedError();
+  }) async => throw UnimplementedError();
 
   @override
   Future<Option<AuthenticationEx>> setPersistence({
     required Persistence persistence,
-  }) async =>
-      throw UnimplementedError();
+  }) async => throw UnimplementedError();
 
   @override
   Future<Option<AuthenticationEx>> deleteCurrentUser() async {
@@ -217,13 +208,13 @@ final class FakeAuthFacade implements AuthFacade {
       return e.code == 'requires-recent-login'
           ? some(const RequiresRecentLoginException())
           : some(
-              FirebaseAuthRawException(
-                innerError: e,
-                innerMessage: e.message,
-                innerCode: e.code,
-                st: st,
-              ),
-            );
+            FirebaseAuthRawException(
+              innerError: e,
+              innerMessage: e.message,
+              innerCode: e.code,
+              st: st,
+            ),
+          );
     }
   }
 
@@ -246,13 +237,13 @@ final class FakeAuthFacade implements AuthFacade {
       return e.code == 'requires-recent-login'
           ? some(const RequiresRecentLoginException())
           : some(
-              FirebaseAuthRawException(
-                innerError: e,
-                innerMessage: e.message,
-                innerCode: e.code,
-                st: st,
-              ),
-            );
+            FirebaseAuthRawException(
+              innerError: e,
+              innerMessage: e.message,
+              innerCode: e.code,
+              st: st,
+            ),
+          );
     }
   }
 
@@ -287,11 +278,11 @@ final class FakeAuthFacade implements AuthFacade {
         (e.code == 'wrong-password')
             ? const InvalidPasswordException()
             : FirebaseAuthRawException(
-                innerError: e,
-                innerMessage: e.message,
-                innerCode: e.code,
-                st: st,
-              ),
+              innerError: e,
+              innerMessage: e.message,
+              innerCode: e.code,
+              st: st,
+            ),
       );
     }
   }

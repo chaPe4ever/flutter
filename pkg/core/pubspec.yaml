@@ -6,7 +6,6 @@ publish_to: "none"
 
 environment:
   sdk: ^3.7.0
-resolution: workspace
 
 dependencies:
   async: ^2.11.0
@@ -15,7 +14,10 @@ dependencies:
   cloud_functions: ^5.1.0
   connectivity_plus: ^6.0.5
   custom_annotations:
-    path: ../../builders/custom_annotations
+    git:
+      url: https://github.com/chaPe4ever/flutter
+      ref: main
+      path: builders/custom_annotations
   dartz: ^0.10.1
   dio: ^5.6.0
   easy_localization: ^3.0.7

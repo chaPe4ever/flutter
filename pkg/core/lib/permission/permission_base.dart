@@ -67,7 +67,7 @@ enum CorePermissionStatus {
   /// notifications.
   ///
   /// *Only supported on iOS (iOS12+).*
-  provisional
+  provisional,
 }
 
 enum CorePermissionType {
@@ -113,12 +113,12 @@ enum CorePermissionType {
 
 extension PermissionStatusX on PermissionStatus {
   CorePermissionStatus get toCorePermissionStatus => switch (this) {
-        PermissionStatus.denied => CorePermissionStatus.denied,
-        PermissionStatus.granted => CorePermissionStatus.granted,
-        PermissionStatus.restricted => CorePermissionStatus.restricted,
-        PermissionStatus.limited => CorePermissionStatus.limited,
-        PermissionStatus.permanentlyDenied =>
-          CorePermissionStatus.permanentlyDenied,
-        PermissionStatus.provisional => CorePermissionStatus.provisional,
-      };
+    PermissionStatus.denied => CorePermissionStatus.denied,
+    PermissionStatus.granted => CorePermissionStatus.granted,
+    PermissionStatus.restricted => CorePermissionStatus.restricted,
+    PermissionStatus.limited => CorePermissionStatus.limited,
+    PermissionStatus.permanentlyDenied =>
+      CorePermissionStatus.permanentlyDenied,
+    PermissionStatus.provisional => CorePermissionStatus.provisional,
+  };
 }

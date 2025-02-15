@@ -89,13 +89,10 @@ extension WidgetRefX on WidgetRef {
   void listenForError<T>(
     ProviderListenable<AsyncValue<T>> provider, {
     required FutureOr<void> Function(CoreException e) onError,
-  }) =>
-      listen(provider, (previousState, state) async {
-        if (!state.isLoading && state.hasError) {
-          final e = state.error;
-          await onError(
-            e as CoreException? ?? UnknownCoreException(innerError: e),
-          );
-        }
-      });
+  }) => listen(provider, (previousState, state) async {
+    if (!state.isLoading && state.hasError) {
+      final e = state.error;
+      await onError(e as CoreException? ?? UnknownCoreException(innerError: e));
+    }
+  });
 }

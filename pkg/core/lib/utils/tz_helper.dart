@@ -20,9 +20,9 @@ final class TzHelper {
 
   /// Get the datTime.now based on the preferred timezone [tzLocationName]
   static DateTime? now(String tzLocationName) => _tryCatchSetLocation(
-        () => tz.TZDateTime.now(_tzLocation!),
-        tzLocationName: tzLocationName,
-      );
+    () => tz.TZDateTime.now(_tzLocation!),
+    tzLocationName: tzLocationName,
+  );
 
   /// EitherNow can be called from Widgets and requires to pass the [ref] so
   /// that we can log any potential error to crashlytics. In case we don't
@@ -45,7 +45,7 @@ final class TzHelper {
         innerMessage: switch (ex) {
           final TimeZoneInitException e => e.msg,
           final LocationNotFoundException e => e.msg,
-          _ => null
+          _ => null,
         },
       );
       LoggerHelper.logError(e: e, st: st, ref: ref);
@@ -84,7 +84,7 @@ final class TzHelper {
         innerMessage: switch (ex) {
           final TimeZoneInitException e => e.msg,
           final LocationNotFoundException e => e.msg,
-          _ => null
+          _ => null,
         },
       );
       LoggerHelper.logError(e: e, st: st, ref: ref);
@@ -97,11 +97,10 @@ final class TzHelper {
   static DateTime? parse(
     String formattedString, {
     required String tzLocationName,
-  }) =>
-      _tryCatchSetLocation(
-        () => tz.TZDateTime.parse(_tzLocation!, formattedString),
-        tzLocationName: tzLocationName,
-      );
+  }) => _tryCatchSetLocation(
+    () => tz.TZDateTime.parse(_tzLocation!, formattedString),
+    tzLocationName: tzLocationName,
+  );
 
   /// EitherParse can be called from Widgets and requires to pass the [ref] so
   /// that we can log any potential error to crashlytics. In case we don't
@@ -125,7 +124,7 @@ final class TzHelper {
         innerMessage: switch (ex) {
           final TimeZoneInitException e => e.msg,
           final LocationNotFoundException e => e.msg,
-          _ => null
+          _ => null,
         },
       );
       LoggerHelper.logError(e: e, st: st, ref: ref);

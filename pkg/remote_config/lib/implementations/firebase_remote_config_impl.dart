@@ -16,11 +16,10 @@ import 'package:remote_config/models/app_version_model.dart';
 ///
 final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
   /// Constructor
-  FirebaseRemoteConfigImpl({
-    required FirebaseRemoteConfig firebaseRemoteConfig,
-  })  : _firebaseRemoteConfig = firebaseRemoteConfig,
-        _remoteConfigKeysSetController =
-            StreamController<Set<String>>.broadcast() {
+  FirebaseRemoteConfigImpl({required FirebaseRemoteConfig firebaseRemoteConfig})
+    : _firebaseRemoteConfig = firebaseRemoteConfig,
+      _remoteConfigKeysSetController =
+          StreamController<Set<String>>.broadcast() {
     _subscription = _firebaseRemoteConfig.onConfigUpdated.distinct().listen(
       (RemoteConfigUpdate result) {
         _remoteConfigKeysSetController.add(result.updatedKeys);
@@ -32,9 +31,10 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
           log(
             e.message ?? e.details.toString(),
             error: e,
-            stackTrace: e.stacktrace != null
-                ? StackTrace.fromString(e.stacktrace!)
-                : st,
+            stackTrace:
+                e.stacktrace != null
+                    ? StackTrace.fromString(e.stacktrace!)
+                    : st,
             level: 1000,
           );
         }
@@ -63,11 +63,12 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
     try {
       await _firebaseRemoteConfig.ensureInitialized();
       await _firebaseRemoteConfig.setDefaults({
-        'app_version': const AppVersionRemoteModel(
-          version: '1.0.0',
-          buildNumber: 1,
-          isOptional: false,
-        ).toJson().toString(),
+        'app_version':
+            const AppVersionRemoteModel(
+              version: '1.0.0',
+              buildNumber: 1,
+              isOptional: false,
+            ).toJson().toString(),
       });
       await _firebaseRemoteConfig.setConfigSettings(
         RemoteConfigSettings(
@@ -92,17 +93,18 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
 
   @override
   Future<Either<CoreException, AppVersionUpdateModel>>
-      getAppUpdateStatus() async {
+  getAppUpdateStatus() async {
     try {
       final json = _firebaseRemoteConfig.getString('app_version');
 
       if (json.isEmpty) {
         return left(
           const RemoteConfigFirebaseException(
-            innerMessage: kDebugMode
-                ? 'The app_version json is null, please '
-                    'check that your firebase setup is correct'
-                : null,
+            innerMessage:
+                kDebugMode
+                    ? 'The app_version json is null, please '
+                        'check that your firebase setup is correct'
+                    : null,
           ),
         );
       }
@@ -112,8 +114,9 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
       );
 
       final appVersion = await VersionHelper.appVersion();
-      final isUpdateAvailable =
-          appVersion.checkIfUpdateIsAvailable(remoteAppVersion);
+      final isUpdateAvailable = appVersion.checkIfUpdateIsAvailable(
+        remoteAppVersion,
+      );
 
       return right(
         AppVersionUpdateModel(
@@ -133,9 +136,7 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
         ),
       );
     } catch (e, st) {
-      return left(
-        RemoteConfigFirebaseException(innerError: e, st: st),
-      );
+      return left(RemoteConfigFirebaseException(innerError: e, st: st));
     }
   }
 

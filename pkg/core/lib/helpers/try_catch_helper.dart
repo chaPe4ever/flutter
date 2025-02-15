@@ -27,11 +27,17 @@ Stream<T> firestoreStreamTryCatch<T>(
       logger.e(
         StackTraceLoggerHelper.st(st).toString(),
         e: e,
-        st: switch (st) { StackTrace.empty => StackTrace.current, _ => st },
+        st: switch (st) {
+          StackTrace.empty => StackTrace.current,
+          _ => st,
+        },
       );
       throw UnknownCoreException(
         innerError: e,
-        st: switch (st) { StackTrace.empty => StackTrace.current, _ => st },
+        st: switch (st) {
+          StackTrace.empty => StackTrace.current,
+          _ => st,
+        },
       );
     }
   });
@@ -43,43 +49,44 @@ Stream<T> firestoreStreamTryCatch<T>(
 Future<T> firestoreFutureTryCatch<T>(
   Future<T> Function() cb, {
   required LoggerBase logger,
-}) =>
-    cb().then(id).catchError((Object e, StackTrace st) {
-      if (e is FirebaseException) {
-        logger.e(e.message ?? e.code, e: e, st: st);
-        throw FirestoreException(
-          innerMessage: e.message,
-          innerCode: e.code,
-          innerError: e,
-          st: st,
-        );
-      } else if (e is CoreException) {
-        logger.e(e.messageKey.tr(), e: e, st: st);
-        throw e;
-      } else if (e is DioException) {
-        logger.e(
-          e.response?.statusMessage ?? e.type.name,
-          e: e,
-          st: e.stackTrace,
-        );
-        throw DioClientException(
-          innerError: e,
-          innerCode: e.response?.statusCode?.toString() ?? '',
-          innerMessage: e.response?.statusMessage ?? e.type.name,
-          st: e.stackTrace,
-        );
-      } else {
-        logger.e(
-          StackTraceLoggerHelper.st(st).toString(),
-          e: e,
-          st: switch (st) { StackTrace.empty => StackTrace.current, _ => st },
-        );
-        throw UnknownCoreException(
-          innerError: e,
-          st: switch (st) { StackTrace.empty => StackTrace.current, _ => st },
-        );
-      }
-    });
+}) => cb().then(id).catchError((Object e, StackTrace st) {
+  if (e is FirebaseException) {
+    logger.e(e.message ?? e.code, e: e, st: st);
+    throw FirestoreException(
+      innerMessage: e.message,
+      innerCode: e.code,
+      innerError: e,
+      st: st,
+    );
+  } else if (e is CoreException) {
+    logger.e(e.messageKey.tr(), e: e, st: st);
+    throw e;
+  } else if (e is DioException) {
+    logger.e(e.response?.statusMessage ?? e.type.name, e: e, st: e.stackTrace);
+    throw DioClientException(
+      innerError: e,
+      innerCode: e.response?.statusCode?.toString() ?? '',
+      innerMessage: e.response?.statusMessage ?? e.type.name,
+      st: e.stackTrace,
+    );
+  } else {
+    logger.e(
+      StackTraceLoggerHelper.st(st).toString(),
+      e: e,
+      st: switch (st) {
+        StackTrace.empty => StackTrace.current,
+        _ => st,
+      },
+    );
+    throw UnknownCoreException(
+      innerError: e,
+      st: switch (st) {
+        StackTrace.empty => StackTrace.current,
+        _ => st,
+      },
+    );
+  }
+});
 
 /// A generic try catch helper function.
 ///
@@ -88,36 +95,41 @@ Future<T> functionsFutureTryCatch<T>(
   Future<T> Function() cb, {
   required LoggerBase logger,
   T Function(CoreException e, StackTrace st)? onFunctionsCustomExCb,
-}) =>
-    cb().then(id).catchError((Object e, StackTrace st) {
-      if (e is FirebaseFunctionsException) {
-        logger.e(e.message ?? e.code, e: e, st: st);
-        final functionsEx = FirestoreFunctionsException(
-          messageKey: e.message ?? e.code,
-          innerMessage: e.message,
-          innerCode: e.code,
-          innerError: e,
-          st: st,
-        );
-        if (onFunctionsCustomExCb != null) {
-          return onFunctionsCustomExCb(functionsEx, st);
-        }
-        throw functionsEx;
-      } else if (e is CoreException) {
-        logger.e(e.messageKey.tr(), e: e, st: st);
-        throw e;
-      } else {
-        logger.e(
-          StackTraceLoggerHelper.st(st).toString(),
-          e: e,
-          st: switch (st) { StackTrace.empty => StackTrace.current, _ => st },
-        );
-        throw UnknownCoreException(
-          innerError: e,
-          st: switch (st) { StackTrace.empty => StackTrace.current, _ => st },
-        );
-      }
-    });
+}) => cb().then(id).catchError((Object e, StackTrace st) {
+  if (e is FirebaseFunctionsException) {
+    logger.e(e.message ?? e.code, e: e, st: st);
+    final functionsEx = FirestoreFunctionsException(
+      messageKey: e.message ?? e.code,
+      innerMessage: e.message,
+      innerCode: e.code,
+      innerError: e,
+      st: st,
+    );
+    if (onFunctionsCustomExCb != null) {
+      return onFunctionsCustomExCb(functionsEx, st);
+    }
+    throw functionsEx;
+  } else if (e is CoreException) {
+    logger.e(e.messageKey.tr(), e: e, st: st);
+    throw e;
+  } else {
+    logger.e(
+      StackTraceLoggerHelper.st(st).toString(),
+      e: e,
+      st: switch (st) {
+        StackTrace.empty => StackTrace.current,
+        _ => st,
+      },
+    );
+    throw UnknownCoreException(
+      innerError: e,
+      st: switch (st) {
+        StackTrace.empty => StackTrace.current,
+        _ => st,
+      },
+    );
+  }
+});
 
 /// Future Option try catch helper function.
 Future<Option<CoreException>> futureOptionTryCatch(
@@ -125,7 +137,9 @@ Future<Option<CoreException>> futureOptionTryCatch(
   required NetworkBase network,
 }) async {
   if (await network.isConnected) {
-    return cb().then((_) => none<CoreException>()).catchError(
+    return cb()
+        .then((_) => none<CoreException>())
+        .catchError(
           (Object e, StackTrace st) =>
               _eitherErrorHandlerCb<Unit>(e, st).swap().toOption(),
         );
@@ -163,11 +177,11 @@ Stream<Either<CoreException, T>> streamEitherTryCatch<T>(
   required NetworkBase network,
 }) async* {
   if (await network.isConnected) {
-    yield* cb().handleError(
-      (Object e, StackTrace st) {
-        return Stream.value(_eitherErrorHandlerCb<T>(e, st));
-      },
-    ).map(right);
+    yield* cb()
+        .handleError((Object e, StackTrace st) {
+          return Stream.value(_eitherErrorHandlerCb<T>(e, st));
+        })
+        .map(right);
   } else {
     yield const Left(NoNetworkException());
   }
@@ -205,11 +219,17 @@ Future<T> dioTryCatch<T>(
       logger.e(
         StackTraceLoggerHelper.st(st).toString(),
         e: e,
-        st: switch (st) { StackTrace.empty => StackTrace.current, _ => st },
+        st: switch (st) {
+          StackTrace.empty => StackTrace.current,
+          _ => st,
+        },
       );
       throw UnknownCoreException(
         innerError: e,
-        st: switch (st) { StackTrace.empty => StackTrace.current, _ => st },
+        st: switch (st) {
+          StackTrace.empty => StackTrace.current,
+          _ => st,
+        },
       );
     }
   });
@@ -223,9 +243,9 @@ Future<T> futureTryCatch<T>(
   if (await network.isConnected ||
       AppModeHelper().currentMode == AppModeEnum.fake) {
     if (cacheDuration.inSeconds >= 1) {
-      return AsyncCache<T>(cacheDuration).fetch(
-        () => cb().catchError(_errorThroableCb),
-      );
+      return AsyncCache<T>(
+        cacheDuration,
+      ).fetch(() => cb().catchError(_errorThroableCb));
     } else {
       return cb().catchError(_errorThroableCb);
     }
@@ -245,12 +265,12 @@ Stream<T> streamTryCatch<T>(
       throw e is CoreException
           ? e
           : UnknownCoreException(
-              innerError: e,
-              st: switch (st) {
-                StackTrace.empty => StackTrace.current,
-                _ => st
-              },
-            );
+            innerError: e,
+            st: switch (st) {
+              StackTrace.empty => StackTrace.current,
+              _ => st,
+            },
+          );
     });
   } else {
     throw const NoNetworkException();
@@ -267,7 +287,10 @@ Either<CoreException, T> _eitherErrorHandlerCb<T>(Object e, StackTrace st) {
     return left<CoreException, T>(
       UnknownCoreException(
         innerError: e,
-        st: switch (st) { StackTrace.empty => StackTrace.current, _ => st },
+        st: switch (st) {
+          StackTrace.empty => StackTrace.current,
+          _ => st,
+        },
       ),
     );
   }
@@ -280,7 +303,10 @@ Never _errorThroableCb(Object e, StackTrace st) {
   } else {
     throw UnknownCoreException(
       innerError: e,
-      st: switch (st) { StackTrace.empty => StackTrace.current, _ => st },
+      st: switch (st) {
+        StackTrace.empty => StackTrace.current,
+        _ => st,
+      },
     );
   }
 }

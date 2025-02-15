@@ -72,13 +72,12 @@ extension AssetGenImageX on AssetGenImage {
     Color? color,
     BoxFit? fit,
     Alignment alignment = Alignment.center,
-  }) =>
-      image(
-        package: pkgName,
-        height: height,
-        width: width,
-        color: context.appImgTheme.copyWith(color: color).color,
-        fit: fit,
-        alignment: alignment,
-      );
+  }) => image(
+    package: pkgName,
+    height: height,
+    width: width,
+    color: context.appImgTheme.copyWith(color: color).color,
+    fit: fit,
+    alignment: alignment,
+  );
 }

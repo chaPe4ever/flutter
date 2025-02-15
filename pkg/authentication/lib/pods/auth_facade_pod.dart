@@ -11,9 +11,9 @@ AuthFacade authFacade(Ref ref) {
   final authFacade = switch (AppModeHelper().currentMode) {
     AppModeEnum.fake => FakeAuthFacade(),
     AppModeEnum.real => FirebaseAuthFacade(
-        firebaseAuth: FirebaseAuth.instance,
-        loggerBase: ref.read(loggerPod),
-      ),
+      firebaseAuth: FirebaseAuth.instance,
+      loggerBase: ref.read(loggerPod),
+    ),
   };
 
   ref.onDispose(authFacade.dispose);

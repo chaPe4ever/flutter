@@ -8,13 +8,16 @@ Future<Option<AuthenticationEx>> futureOptionAuthTryCatch(
   required LoggerBase logger,
   AuthenticationEx? customException,
 }) async {
-  return cb().then((_) => none<AuthenticationEx>()).catchError(
-        (Object e, StackTrace st) => _eitherErrorHandlerCb<Unit>(
-          e,
-          st,
-          customException: customException,
-          logger: logger,
-        ).swap().toOption(),
+  return cb()
+      .then((_) => none<AuthenticationEx>())
+      .catchError(
+        (Object e, StackTrace st) =>
+            _eitherErrorHandlerCb<Unit>(
+              e,
+              st,
+              customException: customException,
+              logger: logger,
+            ).swap().toOption(),
       );
 }
 
@@ -24,7 +27,9 @@ Future<Either<AuthenticationEx, T>> futureEitherAuthTryCatch<T>(
   required LoggerBase logger,
   AuthenticationEx? customException,
 }) async {
-  return cb().then(right<AuthenticationEx, T>).catchError(
+  return cb()
+      .then(right<AuthenticationEx, T>)
+      .catchError(
         (Object e, StackTrace st) => _eitherErrorHandlerCb<T>(
           e,
           st,
@@ -59,12 +64,18 @@ Either<AuthenticationEx, T> _eitherErrorHandlerCb<T>(
     logger.e(
       StackTraceLoggerHelper.st(st).toString(),
       e: e,
-      st: switch (st) { StackTrace.empty => StackTrace.current, _ => st },
+      st: switch (st) {
+        StackTrace.empty => StackTrace.current,
+        _ => st,
+      },
     );
     return left<AuthenticationEx, T>(
       UnknownAuthException(
         innerError: e,
-        st: switch (st) { StackTrace.empty => StackTrace.current, _ => st },
+        st: switch (st) {
+          StackTrace.empty => StackTrace.current,
+          _ => st,
+        },
       ),
     );
   }

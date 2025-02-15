@@ -7,9 +7,8 @@ import 'package:flutter/foundation.dart';
 ///
 final class FirebaseCrashlyticsImpl implements CrashlyticsBase {
   ///
-  FirebaseCrashlyticsImpl({
-    required FirebaseCrashlytics crashlytics,
-  }) : _crashlytics = crashlytics;
+  FirebaseCrashlyticsImpl({required FirebaseCrashlytics crashlytics})
+    : _crashlytics = crashlytics;
 
   final FirebaseCrashlytics _crashlytics;
 

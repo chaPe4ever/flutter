@@ -9,34 +9,19 @@ class LoggerImpl implements LoggerBase {
   final Logger _logger;
 
   @override
-  void t(String message, {dynamic e, StackTrace? st}) => _logger.t(
-        message,
-        error: e,
-        stackTrace: st ?? StackTrace.current,
-      );
+  void t(String message, {dynamic e, StackTrace? st}) =>
+      _logger.t(message, error: e, stackTrace: st ?? StackTrace.current);
 
   @override
-  void d(String message, {dynamic e, StackTrace? st}) => _logger.d(
-        message,
-        error: e,
-        stackTrace: st ?? StackTrace.current,
-      );
+  void d(String message, {dynamic e, StackTrace? st}) =>
+      _logger.d(message, error: e, stackTrace: st ?? StackTrace.current);
   @override
-  void i(String message, {dynamic e, StackTrace? st}) => _logger.i(
-        message,
-        error: e,
-        stackTrace: st ?? StackTrace.empty,
-      );
+  void i(String message, {dynamic e, StackTrace? st}) =>
+      _logger.i(message, error: e, stackTrace: st ?? StackTrace.empty);
   @override
-  void w(String message, {dynamic e, StackTrace? st}) => _logger.w(
-        message,
-        error: e,
-        stackTrace: st ?? StackTrace.current,
-      );
+  void w(String message, {dynamic e, StackTrace? st}) =>
+      _logger.w(message, error: e, stackTrace: st ?? StackTrace.current);
   @override
-  void e(String message, {dynamic e, StackTrace? st}) => _logger.e(
-        message,
-        error: e,
-        stackTrace: st ?? StackTrace.current,
-      );
+  void e(String message, {dynamic e, StackTrace? st}) =>
+      _logger.e(message, error: e, stackTrace: st ?? StackTrace.current);
 }

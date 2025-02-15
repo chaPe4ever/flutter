@@ -35,9 +35,7 @@ typedef VoidCallbackDebounce = VoidCallback;
 /// debounced instance for multiple calls.
 VoidCallbackDebounce? createDebouncedCallback(
   VoidCallback? onTap, {
-  Debounce? debounce = const Debounce(
-    duration: Duration(milliseconds: 180),
-  ),
+  Debounce? debounce = const Debounce(duration: Duration(milliseconds: 180)),
 }) {
   if (onTap == null) return null;
   return () => debounce?.call(onTap);

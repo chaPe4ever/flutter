@@ -4,9 +4,8 @@ import 'package:core/core.dart' show CoreException;
 ///
 final class FirebaseAnalyticsImpl implements AnalyticsBase {
   ///
-  FirebaseAnalyticsImpl({
-    required FirebaseAnalytics analytics,
-  }) : _analytics = analytics;
+  FirebaseAnalyticsImpl({required FirebaseAnalytics analytics})
+    : _analytics = analytics;
 
   final FirebaseAnalytics _analytics;
 
@@ -15,13 +14,10 @@ final class FirebaseAnalyticsImpl implements AnalyticsBase {
     try {
       switch (analyticsEvent) {
         case FirebaseAnalyticsEvent(
-            name: final name,
-            parameters: final parameters
-          ):
-          await _analytics.logEvent(
-            name: name,
-            parameters: parameters,
-          );
+          name: final name,
+          parameters: final parameters,
+        ):
+          await _analytics.logEvent(name: name, parameters: parameters);
       }
     } on CoreException {
       rethrow;

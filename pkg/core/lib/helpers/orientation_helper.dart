@@ -21,9 +21,7 @@ class OrientationHelper {
         'The The orientation list cannot be empty',
       );
       if (orientations.isEmpty) {
-        return some(
-          UnknownCoreException(),
-        );
+        return some(UnknownCoreException());
       }
       if (defaultTargetPlatform case TargetPlatform.android) {
         await SystemChrome.setPreferredOrientations(
@@ -33,21 +31,21 @@ class OrientationHelper {
         if (orientations.length == 1) {
           final _ = switch (orientations.first) {
             DeviceOrientation.portraitUp => await _platform.invokeMethod(
-                'setOrientation',
-                DeviceOrientation.portraitUp.name,
-              ),
+              'setOrientation',
+              DeviceOrientation.portraitUp.name,
+            ),
             DeviceOrientation.portraitDown => await _platform.invokeMethod(
-                'setOrientation',
-                DeviceOrientation.portraitDown.name,
-              ),
+              'setOrientation',
+              DeviceOrientation.portraitDown.name,
+            ),
             DeviceOrientation.landscapeLeft => await _platform.invokeMethod(
-                'setOrientation',
-                DeviceOrientation.landscapeLeft.name,
-              ),
+              'setOrientation',
+              DeviceOrientation.landscapeLeft.name,
+            ),
             DeviceOrientation.landscapeRight => await _platform.invokeMethod(
-                'setOrientation',
-                DeviceOrientation.landscapeRight,
-              ),
+              'setOrientation',
+              DeviceOrientation.landscapeRight,
+            ),
           };
         } else {
           if (DeviceOrientation.values.every(
@@ -58,9 +56,7 @@ class OrientationHelper {
             DeviceOrientation.portraitUp,
             DeviceOrientation.portraitDown,
             DeviceOrientation.landscapeRight,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
+          ].every((item) => orientations.toSet().contains(item))) {
             await _platform.invokeMethod(
               'setOrientation',
               'portraitAllLandscapeRight',
@@ -69,9 +65,7 @@ class OrientationHelper {
             DeviceOrientation.portraitUp,
             DeviceOrientation.portraitDown,
             DeviceOrientation.landscapeLeft,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
+          ].every((item) => orientations.toSet().contains(item))) {
             await _platform.invokeMethod(
               'setOrientation',
               'portraitAllLandscapeLeft',
@@ -80,9 +74,7 @@ class OrientationHelper {
             DeviceOrientation.portraitUp,
             DeviceOrientation.landscapeLeft,
             DeviceOrientation.landscapeRight,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
+          ].every((item) => orientations.toSet().contains(item))) {
             await _platform.invokeMethod(
               'setOrientation',
               'portraitUpLandscapeAll',
@@ -91,9 +83,7 @@ class OrientationHelper {
             DeviceOrientation.portraitDown,
             DeviceOrientation.landscapeLeft,
             DeviceOrientation.landscapeRight,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
+          ].every((item) => orientations.toSet().contains(item))) {
             await _platform.invokeMethod(
               'setOrientation',
               'portraitDownLandscapeAll',
@@ -101,29 +91,17 @@ class OrientationHelper {
           } else if ([
             DeviceOrientation.landscapeLeft,
             DeviceOrientation.landscapeRight,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
-            await _platform.invokeMethod(
-              'setOrientation',
-              'landscapeAll',
-            );
+          ].every((item) => orientations.toSet().contains(item))) {
+            await _platform.invokeMethod('setOrientation', 'landscapeAll');
           } else if ([
             DeviceOrientation.portraitUp,
             DeviceOrientation.landscapeRight,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
-            await _platform.invokeMethod(
-              'setOrientation',
-              'portraitAll',
-            );
+          ].every((item) => orientations.toSet().contains(item))) {
+            await _platform.invokeMethod('setOrientation', 'portraitAll');
           } else if ([
             DeviceOrientation.portraitDown,
             DeviceOrientation.landscapeRight,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
+          ].every((item) => orientations.toSet().contains(item))) {
             await _platform.invokeMethod(
               'setOrientation',
               'portraitDownLandscapeRight',
@@ -131,9 +109,7 @@ class OrientationHelper {
           } else if ([
             DeviceOrientation.portraitUp,
             DeviceOrientation.landscapeLeft,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
+          ].every((item) => orientations.toSet().contains(item))) {
             await _platform.invokeMethod(
               'setOrientation',
               'portraitUpLandscapeLeft',
@@ -141,9 +117,7 @@ class OrientationHelper {
           } else if ([
             DeviceOrientation.portraitDown,
             DeviceOrientation.landscapeLeft,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
+          ].every((item) => orientations.toSet().contains(item))) {
             await _platform.invokeMethod(
               'setOrientation',
               'portraitDownLandscapeLeft',
@@ -151,58 +125,26 @@ class OrientationHelper {
           } else if ([
             DeviceOrientation.portraitUp,
             DeviceOrientation.portraitDown,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
-            await _platform.invokeMethod(
-              'setOrientation',
-              'portraitAll',
-            );
-          } else if ([
-            DeviceOrientation.portraitUp,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
-            await _platform.invokeMethod(
-              'setOrientation',
-              'portraitUp',
-            );
-          } else if ([
-            DeviceOrientation.portraitDown,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
-            await _platform.invokeMethod(
-              'setOrientation',
-              'portraitDown',
-            );
-          } else if ([
-            DeviceOrientation.landscapeRight,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
-            await _platform.invokeMethod(
-              'setOrientation',
-              'landscapeRight',
-            );
-          } else if ([
-            DeviceOrientation.landscapeLeft,
-          ].every(
-            (item) => orientations.toSet().contains(item),
-          )) {
-            await _platform.invokeMethod(
-              'setOrientation',
-              'landscapeLeft',
-            );
+          ].every((item) => orientations.toSet().contains(item))) {
+            await _platform.invokeMethod('setOrientation', 'portraitAll');
+          } else if ([DeviceOrientation.portraitUp].every((item) => orientations.toSet().contains(item))) {
+            await _platform.invokeMethod('setOrientation', 'portraitUp');
+          } else if ([DeviceOrientation.portraitDown].every((item) => orientations.toSet().contains(item))) {
+            await _platform.invokeMethod('setOrientation', 'portraitDown');
+          } else if ([DeviceOrientation.landscapeRight].every((item) => orientations.toSet().contains(item))) {
+            await _platform.invokeMethod('setOrientation', 'landscapeRight');
+          } else if ([DeviceOrientation.landscapeLeft].every((item) => orientations.toSet().contains(item))) {
+            await _platform.invokeMethod('setOrientation', 'landscapeLeft');
           }
         }
       } else {
         return some(
           UnknownCoreException(
-            innerMessage: kDebugMode
-                ? 'The orientation is not supported '
-                    'for the targetPlatform :$defaultTargetPlatform'
-                : null,
+            innerMessage:
+                kDebugMode
+                    ? 'The orientation is not supported '
+                        'for the targetPlatform :$defaultTargetPlatform'
+                    : null,
           ),
         );
       }
@@ -210,15 +152,11 @@ class OrientationHelper {
       return none();
     } on PlatformException catch (e) {
       return some(
-        UnknownCoreException(
-          innerMessage: kDebugMode ? e.message : null,
-        ),
+        UnknownCoreException(innerMessage: kDebugMode ? e.message : null),
       );
     } catch (e) {
       return some(
-        UnknownCoreException(
-          innerMessage: kDebugMode ? e.toString() : null,
-        ),
+        UnknownCoreException(innerMessage: kDebugMode ? e.toString() : null),
       );
     }
   }

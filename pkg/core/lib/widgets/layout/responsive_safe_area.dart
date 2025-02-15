@@ -19,9 +19,7 @@ class ResponsiveSafeArea extends StatelessWidget {
       top: context.responsive(true),
       bottom: context.responsive(true),
       child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: context.responsive(hPadding),
-        ),
+        padding: EdgeInsets.symmetric(horizontal: context.responsive(hPadding)),
         alignment: Alignment.topCenter,
         child: child,
       ),

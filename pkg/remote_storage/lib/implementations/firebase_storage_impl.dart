@@ -13,9 +13,8 @@ import 'package:remote_storage/models/storage_meta_data.dart';
 ///
 final class FirebaseRemoteStorageImpl implements RemoteStorageBase {
   /// Ctr
-  FirebaseRemoteStorageImpl({
-    required FirebaseStorage firebaseStorage,
-  }) : _storage = firebaseStorage;
+  FirebaseRemoteStorageImpl({required FirebaseStorage firebaseStorage})
+    : _storage = firebaseStorage;
 
   // Fields
   final FirebaseStorage _storage;
@@ -73,10 +72,7 @@ final class FirebaseRemoteStorageImpl implements RemoteStorageBase {
       return await _storage
           .ref()
           .child(path)
-          .putBlob(
-            blob,
-            metadata?.toSettableMetaData,
-          )
+          .putBlob(blob, metadata?.toSettableMetaData)
           .then((snapShot) async => right(await snapShot.ref.getDownloadURL()));
     } on FirebaseException catch (e) {
       return left(e.toFirestoreRemoteStorageEx());
@@ -93,10 +89,7 @@ final class FirebaseRemoteStorageImpl implements RemoteStorageBase {
       return await _storage
           .ref()
           .child(path)
-          .putData(
-            data,
-            metadata?.toSettableMetaData,
-          )
+          .putData(data, metadata?.toSettableMetaData)
           .then((snapShot) async => right(await snapShot.ref.getDownloadURL()));
     } on FirebaseException catch (e) {
       return left(e.toFirestoreRemoteStorageEx());
@@ -113,10 +106,7 @@ final class FirebaseRemoteStorageImpl implements RemoteStorageBase {
       return await _storage
           .ref()
           .child(path)
-          .putString(
-            data,
-            metadata: metadata?.toSettableMetaData,
-          )
+          .putString(data, metadata: metadata?.toSettableMetaData)
           .then((snapShot) async => right(await snapShot.ref.getDownloadURL()));
     } on FirebaseException catch (e) {
       return left(e.toFirestoreRemoteStorageEx());

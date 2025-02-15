@@ -14,9 +14,9 @@ class RefreshTokenInterceptor implements Interceptor {
     required LocalStorageBase localStorageBase,
     required ApiAuthStrategy apiAuth,
     required PrettyDioLogger prettyDioLoggerInterceptor,
-  })  : _dioRetry = dioRetry,
-        _localStorage = localStorageBase,
-        _apiAuth = apiAuth {
+  }) : _dioRetry = dioRetry,
+       _localStorage = localStorageBase,
+       _apiAuth = apiAuth {
     _dioRetry.interceptors
       ..clear()
       ..add(prettyDioLoggerInterceptor);
@@ -53,13 +53,12 @@ class RefreshTokenInterceptor implements Interceptor {
 
         final accessToken = await _apiAuth.getAccessToken();
 
-        await _localStorage.write(
-          kApiAuthTokenKey,
-          accessToken,
-        );
+        await _localStorage.write(kApiAuthTokenKey, accessToken);
 
-        err.requestOptions.headers
-            .update('Authorization', (value) => 'Bearer $accessToken');
+        err.requestOptions.headers.update(
+          'Authorization',
+          (value) => 'Bearer $accessToken',
+        );
 
         return handler.resolve(await _retry(err.requestOptions));
       } on DioException catch (e) {

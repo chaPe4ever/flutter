@@ -11,7 +11,7 @@ abstract interface class AuthFacade {
 
   /// Register user with his email and password
   Future<Either<AuthenticationEx, UserCredential>>
-      registerWithEmailAndPassword({
+  registerWithEmailAndPassword({
     required EmailAddress email,
     required Password password,
   });
@@ -60,9 +60,7 @@ abstract interface class AuthFacade {
   Future<Option<AuthenticationEx>> deleteCurrentUser();
 
   /// Self explained
-  Future<Option<AuthenticationEx>> updatePassword({
-    required Password password,
-  });
+  Future<Option<AuthenticationEx>> updatePassword({required Password password});
 
   /// Self explained
   Future<Option<AuthenticationEx>> reAuthenticateWithPassword({
@@ -98,9 +96,7 @@ abstract interface class AuthFacade {
   });
 
   /// Self explained
-  Future<Option<AuthenticationEx>> applyActionCode({
-    required String code,
-  });
+  Future<Option<AuthenticationEx>> applyActionCode({required String code});
 
   /// Self explained
   Future<Either<AuthenticationEx, ActionCodeInfo>> checkActionCode({

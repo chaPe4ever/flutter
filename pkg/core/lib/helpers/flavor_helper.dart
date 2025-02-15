@@ -36,8 +36,9 @@ final class FlavorHelper {
       if (kIsWeb || Platform.isWindows) {
         flavor = const String.fromEnvironment('flavor');
       } else {
-        flavor = await const MethodChannel('flavor')
-            .invokeMethod<String>('getFlavor');
+        flavor = await const MethodChannel(
+          'flavor',
+        ).invokeMethod<String>('getFlavor');
       }
 
       if (flavor == null || flavor.isEmpty) {
@@ -58,7 +59,8 @@ final class FlavorHelper {
       } else {
         return left(
           UnInitialisedFlavorException(
-            innerMessage: "The flavor: $flavor hasn't been defined or one "
+            innerMessage:
+                "The flavor: $flavor hasn't been defined or one "
                 "of onProd onStg onDev callback arguments haven't been used",
           ),
         );

@@ -27,12 +27,13 @@ class SpacedColumn extends StatelessWidget {
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
       mainAxisAlignment: mainAxisAlignment,
-      children: children
-          .whereType<Widget>()
-          .expand((x) => [Gap(spacing), x])
-          .skip(gapAtStart ? 0 : 1)
-          .toList()
-        ..addAll([if (gapAtEnd) Gap(spacing)]),
+      children:
+          children
+              .whereType<Widget>()
+              .expand((x) => [Gap(spacing), x])
+              .skip(gapAtStart ? 0 : 1)
+              .toList()
+            ..addAll([if (gapAtEnd) Gap(spacing)]),
     );
   }
 }
@@ -63,12 +64,13 @@ class SpacedRow extends StatelessWidget {
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
       mainAxisAlignment: mainAxisAlignment,
-      children: children
-          .whereType<Widget>()
-          .expand((x) => [Gap(spacing), x])
-          .skip(gapAtStart ? 0 : 1)
-          .toList()
-        ..addAll([if (gapAtEnd) Gap(spacing)]),
+      children:
+          children
+              .whereType<Widget>()
+              .expand((x) => [Gap(spacing), x])
+              .skip(gapAtStart ? 0 : 1)
+              .toList()
+            ..addAll([if (gapAtEnd) Gap(spacing)]),
     );
   }
 }

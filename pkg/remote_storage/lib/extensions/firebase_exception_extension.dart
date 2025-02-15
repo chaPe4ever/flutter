@@ -7,12 +7,11 @@ extension FirebaseExceptionX on FirebaseException {
   ///
   FirebaseRemoteStorageException toFirestoreRemoteStorageEx({
     String messageKey = TransKeys.firebaseRemoteStorageExceptionMessageKey,
-  }) =>
-      FirebaseRemoteStorageException(
-        messageKey: messageKey,
-        innerCode: code,
-        innerError: this,
-        innerMessage: message,
-        st: stackTrace,
-      );
+  }) => FirebaseRemoteStorageException(
+    messageKey: messageKey,
+    innerCode: code,
+    innerError: this,
+    innerMessage: message,
+    st: stackTrace,
+  );
 }

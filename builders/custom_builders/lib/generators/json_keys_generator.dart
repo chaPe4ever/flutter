@@ -45,11 +45,12 @@ class JsonKeysGenerator extends GeneratorForAnnotation<JSONKeysGen> {
 }
 
 String _formatKey(String key) {
-  final words = key.split(RegExp('[_-]')).map((word) {
-    return word.isNotEmpty
-        ? word[0].toUpperCase() + word.substring(1).toLowerCase()
-        : '';
-  }).toList();
+  final words =
+      key.split(RegExp('[_-]')).map((word) {
+        return word.isNotEmpty
+            ? word[0].toUpperCase() + word.substring(1).toLowerCase()
+            : '';
+      }).toList();
 
   // Join the words and make the first character lowercase to ensure camelCase
   final camelCase = words.join();

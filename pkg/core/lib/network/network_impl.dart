@@ -9,11 +9,12 @@ import 'package:flutter/foundation.dart';
 final class NetworkImpl implements NetworkBase {
   /// Constructor
   NetworkImpl({required Connectivity connectivity})
-      : _connectivity = connectivity,
-        _connectionStatusController =
-            StreamController<NetworkStatus>.broadcast() {
-    _subscription =
-        _connectivity.onConnectivityChanged.distinct().listen((results) {
+    : _connectivity = connectivity,
+      _connectionStatusController =
+          StreamController<NetworkStatus>.broadcast() {
+    _subscription = _connectivity.onConnectivityChanged.distinct().listen((
+      results,
+    ) {
       _connectionStatusController.add(getStatusFromResult(results.last));
     });
   }
@@ -45,8 +46,7 @@ final class NetworkImpl implements NetworkBase {
       ConnectivityResult.bluetooth ||
       ConnectivityResult.ethernet ||
       ConnectivityResult.vpn ||
-      ConnectivityResult.other =>
-        NetworkStatus.other
+      ConnectivityResult.other => NetworkStatus.other,
     };
   }
 
@@ -57,10 +57,7 @@ final class NetworkImpl implements NetworkBase {
   }
 
   @override
-  void statusChangeListener({
-    VoidCallback? onOnline,
-    VoidCallback? onOffline,
-  }) {
+  void statusChangeListener({VoidCallback? onOnline, VoidCallback? onOffline}) {
     assert(
       onOnline != null || onOffline != null,
       'At least one of onOnline or onOffline must be provided',

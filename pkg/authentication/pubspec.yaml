@@ -6,11 +6,13 @@ publish_to: "none"
 
 environment:
   sdk: ^3.7.0
-resolution: workspace
 
 dependencies:
   core:
-    path: ../core
+    git:
+      url: https://github.com/chaPe4ever/flutter
+      ref: main
+      path: pkg/core
   firebase_auth: ^5.2.0
   flutter:
     sdk: flutter

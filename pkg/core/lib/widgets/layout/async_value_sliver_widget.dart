@@ -52,39 +52,39 @@ class AsyncValueSliverWidget<T> extends StatelessWidget {
       skipLoadingOnRefresh: skipLoadingOnRefresh,
       skipError: skipError,
       data: data,
-      loading: () =>
-          loadingWidget ??
-          const SliverFillRemaining(
-            hasScrollBody: false,
-            child: Center(child: CircularProgressIndicator()),
-          ),
-      error: (e, st) =>
-          errorWidgetCb?.call(e, st) ??
-          SliverToBoxAdapter(
-            child: kDebugMode
-                ? Scaffold(
-                    body: Center(
-                      child: Container(
-                        margin: const EdgeInsets.all(15),
-                        padding: const EdgeInsets.all(3),
-                        height: context.height * 0.5,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.red,
-                            width: 2,
+      loading:
+          () =>
+              loadingWidget ??
+              const SliverFillRemaining(
+                hasScrollBody: false,
+                child: Center(child: CircularProgressIndicator()),
+              ),
+      error:
+          (e, st) =>
+              errorWidgetCb?.call(e, st) ??
+              SliverToBoxAdapter(
+                child:
+                    kDebugMode
+                        ? Scaffold(
+                          body: Center(
+                            child: Container(
+                              margin: const EdgeInsets.all(15),
+                              padding: const EdgeInsets.all(3),
+                              height: context.height * 0.5,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.red, width: 2),
+                              ),
+                              child: SingleChildScrollView(
+                                child: Text(
+                                  'ERROR_MESSAGE: ${e is CoreException ? e.messageKey.tr() : e}\n\nSTACKTRACE: $st',
+                                  style: const TextStyle(color: Colors.red),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                        child: SingleChildScrollView(
-                          child: Text(
-                            'ERROR_MESSAGE: ${e is CoreException ? e.messageKey.tr() : e}\n\nSTACKTRACE: $st',
-                            style: const TextStyle(color: Colors.red),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                : const SizedBox(),
-          ),
+                        )
+                        : const SizedBox(),
+              ),
     );
   }
 }

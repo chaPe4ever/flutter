@@ -1,0 +1,27 @@
+name: my_workspace
+packages:
+  - pkg/**
+  - builders/**
+scripts:
+  bootstrap:
+    run: melos bootstrap
+
+  test:
+    run: melos exec -- flutter test
+    description: "Run all tests in parallel across all packages"
+
+  test_changed:
+    run: melos exec --since=origin/main -- flutter test
+    description: "Run tests only for changed packages"
+
+  format:
+    run: melos exec -- flutter format --set-exit-if-changed
+    description: "Format all packages"
+
+  analyze:
+    run: melos exec -- flutter analyze .
+    description: "Analyze all packages"
+
+  build_runner_build: melos exec -- dart run build_runner build -d
+  build_runner_clean: melos exec -- pub run build_runner clean
+  build_runner_watch: melos exec -- dart run build_runner watch -d

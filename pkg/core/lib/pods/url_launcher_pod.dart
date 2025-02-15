@@ -21,9 +21,7 @@ class UrlLauncher {
 
     if (url == null) {
       return some(
-        LaunchUrlException(
-          innerMessage: 'Url parsing of: $urlString failed',
-        ),
+        LaunchUrlException(innerMessage: 'Url parsing of: $urlString failed'),
       );
     }
 

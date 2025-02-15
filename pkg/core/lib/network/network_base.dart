@@ -15,8 +15,5 @@ abstract interface class NetworkBase {
   void dispose();
 
   /// Network changes listener
-  void statusChangeListener({
-    VoidCallback? onOnline,
-    VoidCallback? onOffline,
-  });
+  void statusChangeListener({VoidCallback? onOnline, VoidCallback? onOffline});
 }

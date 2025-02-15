@@ -9,13 +9,12 @@ class AssetsHelper {
   /// Get an asset list given the [path]. Path normally consists of
   /// packageName and folderName like so: my_package/my_folder
   static Future<List<String>> getAssetList({required String path}) async =>
-      rootBundle.loadString('AssetManifest.json').then(
+      rootBundle
+          .loadString('AssetManifest.json')
+          .then(
             (manifestJsonStr) =>
-                (jsonDecode(manifestJsonStr) as Map<String, dynamic>?)
-                    ?.keys
-                    .where(
-                      (element) => element.contains('packages/$path'),
-                    )
+                (jsonDecode(manifestJsonStr) as Map<String, dynamic>?)?.keys
+                    .where((element) => element.contains('packages/$path'))
                     .toList() ??
                 List.empty(),
           );
@@ -26,14 +25,13 @@ class AssetsHelper {
     required Locale locale,
     required Map<String, dynamic> trans,
     String assetTransPath = 'assets/translations',
-  }) async =>
-      Future.wait(
-        pkgAssetTransNames
-            .map(
+  }) async => Future.wait(
+    pkgAssetTransNames
+        .map(
           (pkgName) =>
               'packages/$pkgName/$assetTransPath/${locale.toStringWithSeparator(separator: "-")}.json',
         )
-            .map((pkgAssetPath) async {
+        .map((pkgAssetPath) async {
           await rootBundle
               .loadString(pkgAssetPath)
               .then(
@@ -42,15 +40,12 @@ class AssetsHelper {
               )
               .then(
                 (assetTransMap) => assetTransMap.forEach(
-                  (key, value) => trans.update(
-                    key,
-                    (_) => value,
-                    ifAbsent: () => value,
-                  ),
+                  (key, value) =>
+                      trans.update(key, (_) => value, ifAbsent: () => value),
                 ),
               );
         }),
-      ).then((_) => trans);
+  ).then((_) => trans);
 
   /// Populates translations based on the [path] provided
   static Future<Map<String, dynamic>> populateTransFromPath({
@@ -59,12 +54,9 @@ class AssetsHelper {
   }) async {
     (json.decode(await rootBundle.loadString(path)) as Map<String, dynamic>)
         .forEach(
-      (key, value) => trans.update(
-        key,
-        (_) => value,
-        ifAbsent: () => value,
-      ),
-    );
+          (key, value) =>
+              trans.update(key, (_) => value, ifAbsent: () => value),
+        );
 
     return Future.value(trans);
   }
