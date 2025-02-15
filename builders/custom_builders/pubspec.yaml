@@ -13,7 +13,10 @@ dependencies:
   build: ^2.0.0
   source_gen: any
   custom_annotations:
-    path: ../custom_annotations
+    git:
+      url: https://github.com/chaPe4ever/flutter
+      ref: main
+      path: builders/custom_annotations
   analyzer: ">=5.2.0 <7.0.0"
 
 dev_dependencies:

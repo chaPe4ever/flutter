@@ -1,0 +1,17 @@
+name: my_workspace
+publish_to: none
+environment:
+  sdk: ^3.6.0
+workspace:
+  - pkg/analytics
+  - pkg/core
+  - pkg/crashlytics
+  - pkg/remote_config
+  - pkg/remote_storage
+dev_dependencies:
+  melos: ^6.3.2
+
+melos:
+scripts:
+  bootstrap:
+    run: melos bootstrap

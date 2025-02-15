@@ -5,11 +5,15 @@ version: 1.0.0
 publish_to: "none"
 
 environment:
-  sdk: ^3.5.1
+  sdk: ^3.7.0
+resolution: workspace
 
 dependencies:
   core:
-    path: ../core
+    git:
+      url: https://github.com/chaPe4ever/flutter
+      ref: main
+      path: pkg/core
   firebase_analytics: ^11.3.0
   flutter:
     sdk: flutter
@@ -17,7 +21,10 @@ dependencies:
 dev_dependencies:
   build_runner: ^2.4.13
   custom_builders:
-    path: ../../builders/custom_builders
+    git:
+      url: https://github.com/chaPe4ever/flutter
+      ref: main
+      path: builders/custom_builders
   custom_lint: ^0.7.0
   flutter_driver:
     sdk: flutter
