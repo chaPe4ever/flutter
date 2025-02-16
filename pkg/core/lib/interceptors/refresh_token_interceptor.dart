@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:core/contracts/api_auth_strategy.dart';
 import 'package:core/core.dart';
 
 const String kApiAuthTokenKey = 'apiAuthTokenKey';
