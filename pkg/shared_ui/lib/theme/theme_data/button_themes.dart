@@ -5,7 +5,7 @@ class ButtonThemes {
   static const Duration _animationDuration = Duration(milliseconds: 260);
 
   static const Size _minimumButtonSize =
-      Size(AppSpacing.secionS, AppSpacing.secionS);
+      Size(AppSpacing.sectionS, AppSpacing.sectionS);
   static const EdgeInsets _padding = EdgeInsets.all(AppSpacing.contentXL);
 
   static const BorderRadius _borderRadius = BorderRadius.all(

@@ -109,7 +109,7 @@ class AppIconButton extends IconButtonBase {
           s: const EdgeInsets.all(AppSpacing.contentL),
           m: const EdgeInsets.all(AppSpacing.contentXL),
           l: const EdgeInsets.all(AppSpacing.contentXL),
-          xl: const EdgeInsets.all(AppSpacing.secionS),
+          xl: const EdgeInsets.all(AppSpacing.sectionS),
         );
   }
 
@@ -117,9 +117,9 @@ class AppIconButton extends IconButtonBase {
   double? size(BuildContext context) {
     return switch (type) {
       IconButtonType.back => context.responsive(
-          AppSpacing.secionS,
-          s: AppSpacing.secionS,
-          m: AppSpacing.secionS,
+          AppSpacing.sectionS,
+          s: AppSpacing.sectionS,
+          m: AppSpacing.sectionS,
           l: AppSpacing.sectionM,
           xl: AppSpacing.sectionM,
         ),
@@ -127,8 +127,8 @@ class AppIconButton extends IconButtonBase {
           AppSpacing.contentXL,
           s: AppSpacing.contentXL,
           m: AppSpacing.contentXL,
-          l: AppSpacing.secionS,
-          xl: AppSpacing.secionS,
+          l: AppSpacing.sectionS,
+          xl: AppSpacing.sectionS,
         ),
     };
   }

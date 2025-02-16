@@ -43,12 +43,12 @@ abstract class OutlineTextFieldBase<T extends Object> extends TextFieldBase {
     this.errorText,
     this.suffixIcon,
     this.suffixIconConstraints = const BoxConstraints(
-      minHeight: AppSpacing.secionS,
+      minHeight: AppSpacing.sectionS,
       minWidth: AppSpacing.sectionL,
     ),
     this.prefixIcon,
     this.prefixIconConstraints = const BoxConstraints(
-      minHeight: AppSpacing.secionS,
+      minHeight: AppSpacing.sectionS,
       minWidth: AppSpacing.sectionL,
     ),
     this.autofillHints,

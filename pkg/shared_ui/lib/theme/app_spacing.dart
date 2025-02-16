@@ -9,7 +9,7 @@ abstract class AppSpacing {
   static const contentXL = 16.0;
   // Section
   static const sectionXS = 20.0;
-  static const secionS = 24.0;
+  static const sectionS = 24.0;
   static const sectionM = 32.0;
   static const sectionL = 40.0;
   static const sectionXL = 60.0;

@@ -185,8 +185,8 @@ abstract class ButtonBase extends StatelessWidget {
               AppSpacing.contentXL,
               s: AppSpacing.contentXL,
               m: AppSpacing.contentXL,
-              l: AppSpacing.secionS,
-              xl: AppSpacing.secionS,
+              l: AppSpacing.sectionS,
+              xl: AppSpacing.sectionS,
             );
           },
         ),
@@ -230,7 +230,7 @@ abstract class ElevatedButtonBase extends ButtonBase {
       s: AppSpacing.contentM,
       m: AppSpacing.contentL,
       l: AppSpacing.contentXL,
-      xl: AppSpacing.secionS,
+      xl: AppSpacing.sectionS,
     );
 
     final btStyle = buttonStyle(context);
@@ -315,7 +315,7 @@ abstract class OutlineButtonBase extends ButtonBase {
       s: AppSpacing.contentM,
       m: AppSpacing.contentL,
       l: AppSpacing.contentXL,
-      xl: AppSpacing.secionS,
+      xl: AppSpacing.sectionS,
     );
 
     final btStyle = buttonStyle(context);

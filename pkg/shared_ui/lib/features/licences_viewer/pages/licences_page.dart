@@ -26,7 +26,7 @@ class LicencesPage extends ConsumerWidget {
               ),
             ],
           ),
-          const SizedBox(height: AppSpacing.secionS),
+          const SizedBox(height: AppSpacing.sectionS),
           Expanded(
             child: AsyncValueWidget(
               value: ref.watch(fetchLicencesPod),
