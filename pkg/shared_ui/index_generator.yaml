@@ -1,0 +1,33 @@
+index_generator:
+  exclude:
+    - "**.g.dart"
+    - "**.freezed.dart"
+    - "**.gen.dart"
+    - "**_keys_constants.dart"
+    - "{_,**/_}*.dart"
+  indexes:
+    - path: lib/configs
+    - path: lib/features/authentication
+    - path: lib/features/licences_viewer
+    - path: lib/core/constants
+    - path: lib/core/exceptions
+    - path: lib/core/extensions
+    - path: lib/core/widgets
+    - path: lib/theme
+    - path: lib
+      include:
+        - "/"
+      exports:
+        - package: package:shared_ui/configs/configs.dart
+        - package: package:shared_ui/features/authentication/authentication.dart
+        - package: package:shared_ui/features/licences_viewer/licences_viewer.dart
+        - package: package:shared_ui/core/constants/constants.dart
+        - package: package:shared_ui/core/exceptions/exceptions.dart
+        - package: package:shared_ui/core/exports/exports.dart
+        - package: package:shared_ui/core/extensions/extensions.dart
+        - package: package:shared_ui/core/widgets/widgets.dart
+        - package: package:shared_ui/theme/theme.dart
+      comments: |
+        ignore_for_file: invalid_export_of_internal_element
+  library:
+    - shared_ui

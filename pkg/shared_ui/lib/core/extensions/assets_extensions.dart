@@ -1,19 +1,19 @@
-import 'package:core/assets_gen/assets.gen.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_ui/core/assets_gen/assets.gen.dart';
+import 'package:shared_ui/shared_ui.dart';
 
 extension SvgGenImageX on SvgGenImage {
-  SvgPicture svgFromPkg(
+  SvgPicture svgFromUIPkg(
     BuildContext context, {
-    required String pkgName,
     Color? color,
-    AlignmentGeometry alignment = Alignment.center,
-    BoxFit fit = BoxFit.contain,
     double height = 24,
     double width = 24,
+    AlignmentGeometry alignment = Alignment.center,
+    BoxFit fit = BoxFit.contain,
   }) {
     return this.svg(
-      package: pkgName,
+      package: kSharedUiPkgName,
       height: height,
       width: width,
       alignment: alignment,
@@ -64,20 +64,20 @@ extension SvgPictureX on SvgPicture {
 }
 
 extension AssetGenImageX on AssetGenImage {
-  Image imageFromPkg(
+  Image imageFromUIPkg(
     BuildContext context, {
-    required String pkgName,
-    double height = 24,
-    double width = 24,
+    double height = 16.0,
+    double width = 16.0,
     Color? color,
     BoxFit? fit,
     Alignment alignment = Alignment.center,
-  }) => image(
-    package: pkgName,
-    height: height,
-    width: width,
-    color: context.appImgTheme.copyWith(color: color).color,
-    fit: fit,
-    alignment: alignment,
-  );
+  }) =>
+      image(
+        package: kSharedUiPkgName,
+        height: height,
+        width: width,
+        color: context.appImgTheme.copyWith(color: color).color,
+        fit: fit,
+        alignment: alignment,
+      );
 }

@@ -1,4 +1,3 @@
-export 'package:core/extensions/assets_extensions.dart';
 export 'package:core/extensions/build_context_extensions.dart';
 export 'package:core/extensions/dartz_extensions.dart';
 export 'package:core/extensions/date_time_extensions.dart';
