@@ -97,7 +97,8 @@ class RefreshTokenInterceptor implements Interceptor {
     // for that reason we use the extra to get the saved data
     if (requestOptions.extra.containsKey(kMultiPartFormData)) {
       final multiPartFormData =
-          requestOptions.extra[kMultiPartFormData] as MultiPartFormDataModel?;
+          requestOptions.extra[kMultiPartFormData]
+              as MultiPartFormDataModelBase?;
       if (multiPartFormData != null) {
         final multiPartFile = await MultipartFile.fromFile(
           multiPartFormData.filePath,
