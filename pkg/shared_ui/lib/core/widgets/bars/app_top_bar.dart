@@ -69,8 +69,8 @@ List<ActionBase> appTopBarActions({
   ActionModel? chatActionModel,
 }) {
   return <ActionBase>[
-    if (userActionModel != null) UserAction(model: userActionModel),
     if (chatActionModel != null) ChatAction(model: chatActionModel),
+    if (userActionModel != null) UserAction(model: userActionModel),
   ];
 }
 
