@@ -42,13 +42,13 @@ dependencies:
   logger: ^2.4.0
   package_info_plus: ^8.0.2
   path_provider: ^2.1.4
-  pdfrx: ^1.0.87
+  pdfrx: ^1.1.1
   permission_handler: ^11.3.1
   pretty_dio_logger: ^1.4.0
   responsive_framework: ^1.5.1
   riverpod_annotation: ^2.6.1
   rxdart: ^0.28.0
-  share_plus: ^9.0.0
+  share_plus: ^10.1.4
   shimmer: ^3.0.0
   signals: ^5.5.0
   timezone: ^0.9.4
