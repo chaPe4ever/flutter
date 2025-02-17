@@ -32,7 +32,7 @@ extension DocumentSnapshotX<T extends Object?> on DocumentSnapshot<T> {
       ),
   };
 
-  T fromJsonOrCrash(T Function(Map<String, dynamic> json) fromJson) {
+  T fromJsonOrCrash<T>(T Function(Map<String, dynamic> json) fromJson) {
     return switch (this) {
       (final snapshot) when snapshot.existsAndDataNotNull => fromJson(
         (snapshot.data()! as Map<String, dynamic>)
