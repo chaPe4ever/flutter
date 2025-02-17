@@ -1,5 +1,7 @@
 // ignore_for_file: null_check_on_nullable_type_parameter
-import 'package:core/core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:core/exceptions/core_exceptions.dart';
+import 'package:core/extensions/primitive_types_extensions.dart';
 import 'package:flutter/material.dart';
 
 extension AsyncSnapshotX<T> on AsyncSnapshot<T> {
@@ -30,7 +32,7 @@ extension DocumentSnapshotX<T extends Object?> on DocumentSnapshot<T> {
       ),
   };
 
-  T fromJsonOrCrash<T>(T Function(Map<String, dynamic> json) fromJson) {
+  T fromJsonOrCrash(T Function(Map<String, dynamic> json) fromJson) {
     return switch (this) {
       (final snapshot) when snapshot.existsAndDataNotNull => fromJson(
         (snapshot.data()! as Map<String, dynamic>)
