@@ -32,7 +32,7 @@ openai/
 .pub/
 /build/
 pubspec.lock
-apps/gameroom_client/lib/firebase.json
+firebase.json
 
 # Symbolication related
 app.*.symbols

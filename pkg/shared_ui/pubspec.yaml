@@ -1,5 +1,5 @@
 name: shared_ui
-description: Gameroom UI shared pkg
+description: App UI shared pkg
 version: 1.0.0
 # homepage: ''
 publish_to: "none"

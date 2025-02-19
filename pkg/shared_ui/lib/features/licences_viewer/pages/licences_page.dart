@@ -18,7 +18,7 @@ class LicencesPage extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Assets.svg.gameroomLogo.svg(height: 16),
+              Assets.svg.appLogo.svg(height: 16),
               const SizedBox(width: AppSpacing.contentM),
               TextBody.m(
                 TransKeys.licences.tr(),

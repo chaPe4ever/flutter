@@ -33,8 +33,8 @@ final class PageNotFoundCoreException extends SharedUiEx {
   });
 }
 
-final class UnknownGameroomUiException extends SharedUiEx {
-  const UnknownGameroomUiException({
+final class UnknownSharedUiException extends SharedUiEx {
+  const UnknownSharedUiException({
     // TODO: Add message key
     super.messageKey = 'hardcoded',
     super.innerCode,
