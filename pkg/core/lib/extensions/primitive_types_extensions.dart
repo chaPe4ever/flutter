@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core/value_objects/unique_id.dart';
 
 /// List extension
@@ -59,4 +60,12 @@ extension DoubleExtensions on double {
 
 extension BoolExtensions on bool {
   bool get hardcoded => this;
+}
+
+extension ObjectX on Object {
+  CoreException toCoreException({CoreException? customEx}) =>
+      this == CoreException
+          ? this as CoreException
+          : customEx ??
+              UnknownCoreException(innerError: this, st: StackTrace.current);
 }
