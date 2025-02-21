@@ -121,6 +121,8 @@ extension BuildContextEx on BuildContext {
           ),
         );
 
+  void hideSnackbar() => ScaffoldMessenger.maybeOf(this)?.hideCurrentSnackBar();
+
   void showSnackBarError(
     CoreException e, {
     Duration duration = const Duration(seconds: 3),
