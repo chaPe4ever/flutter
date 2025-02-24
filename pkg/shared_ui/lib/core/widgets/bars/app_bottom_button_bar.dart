@@ -78,7 +78,7 @@ class AppBottomButtonBar extends StatelessWidget {
     Key? key,
   }) {
     return AppBottomButtonBar._(
-      AppButtonBarType.doubleMix,
+      AppButtonBarType.doubleSecondary,
       key: key,
       padding: padding,
       labelPrimary: labelSecond,
