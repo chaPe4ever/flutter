@@ -2,7 +2,12 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
-enum AppButtonBarType { singlePrimary, singleSecondary, double }
+enum AppButtonBarType {
+  singlePrimary,
+  singleSecondary,
+  doubleMix,
+  doubleSecondary
+}
 
 class AppBottomButtonBar extends StatelessWidget {
   const AppBottomButtonBar._(
@@ -45,7 +50,7 @@ class AppBottomButtonBar extends StatelessWidget {
     );
   }
 
-  factory AppBottomButtonBar.double({
+  factory AppBottomButtonBar.doubleMix({
     required String labelPrimary,
     required String labelSecondary,
     VoidCallback? onPrimaryTap,
@@ -54,13 +59,32 @@ class AppBottomButtonBar extends StatelessWidget {
     Key? key,
   }) {
     return AppBottomButtonBar._(
-      AppButtonBarType.double,
+      AppButtonBarType.doubleMix,
       key: key,
       padding: padding,
       labelPrimary: labelPrimary,
       labelSecondary: labelSecondary,
       onPrimaryTap: onPrimaryTap,
       onSecondaryTap: onSecondaryTap,
+    );
+  }
+
+  factory AppBottomButtonBar.doubleSecondary({
+    required String labelFirst,
+    required String labelSecond,
+    VoidCallback? onFirstTap,
+    VoidCallback? onSecondTap,
+    EdgeInsetsGeometry? padding,
+    Key? key,
+  }) {
+    return AppBottomButtonBar._(
+      AppButtonBarType.doubleMix,
+      key: key,
+      padding: padding,
+      labelPrimary: labelSecond,
+      labelSecondary: labelFirst,
+      onPrimaryTap: onSecondTap,
+      onSecondaryTap: onFirstTap,
     );
   }
 
@@ -81,7 +105,7 @@ class AppBottomButtonBar extends StatelessWidget {
             label: labelPrimary ?? '',
             onTap: onPrimaryTap,
           ),
-        AppButtonBarType.double => SpacedRow(
+        AppButtonBarType.doubleMix => SpacedRow(
             spacing: AppSpacing.sectionXS,
             children: [
               Expanded(
@@ -102,6 +126,24 @@ class AppBottomButtonBar extends StatelessWidget {
         AppButtonBarType.singleSecondary => AppButton.secondary(
             label: labelSecondary ?? '',
             onTap: onSecondaryTap,
+          ),
+        AppButtonBarType.doubleSecondary => SpacedRow(
+            spacing: AppSpacing.sectionXS,
+            children: [
+              Expanded(
+                child: AppButton.secondary(
+                  label: labelSecondary ?? '',
+                  onTap: onSecondaryTap,
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: AppButton.secondary(
+                  label: labelPrimary ?? '',
+                  onTap: onPrimaryTap,
+                ),
+              ),
+            ],
           ),
       },
     );
