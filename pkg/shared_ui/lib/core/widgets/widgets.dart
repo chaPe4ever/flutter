@@ -23,7 +23,5 @@ export 'fields/text_field_base.dart';
 export 'layout/app_startup_error_widget.dart';
 export 'layout/app_startup_loading_widget.dart';
 export 'loading/app_loading_indicator.dart';
-export 'modals/app_loading_indicator_modal.dart';
-export 'modals/no_connectivity_modal.dart';
 export 'texts/app_texts.dart';
 export 'texts/expandable_text_list_widget.dart';
