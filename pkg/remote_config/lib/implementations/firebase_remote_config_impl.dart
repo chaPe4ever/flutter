@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:core/core.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +10,7 @@ import 'package:remote_config/contracts/contracts.dart';
 import 'package:remote_config/exceptions/exceptions.dart';
 import 'package:remote_config/extensions/app_version_extensions.dart';
 import 'package:remote_config/helpers/app_version_helper.dart';
+import 'package:remote_config/models/app_maintenance_model.dart';
 import 'package:remote_config/models/app_version_model.dart';
 
 ///
@@ -69,6 +69,7 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
               buildNumber: 1,
               isOptional: false,
             ).toJson().toString(),
+        'app_maintenance': const AppMaintenanceModel(isActive: false).toJson(),
       });
       await _firebaseRemoteConfig.setConfigSettings(
         RemoteConfigSettings(
@@ -167,11 +168,66 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
   }
 
   @override
-  void versionUpdateListener({required VoidCallback onVersionUpdate}) {
-    _remoteConfigKeysSetController.stream.listen((config) {
+  void configUpdatesListener({
+    void Function(Either<CoreException, AppVersionUpdateModel> cb)?
+    onVersionUpdate,
+    void Function(Either<CoreException, AppMaintenanceModel> cb)?
+    onMaintenanceUpdate,
+  }) {
+    _remoteConfigKeysSetController.stream.listen((config) async {
+      if (onVersionUpdate != null || onMaintenanceUpdate != null) {
+        await fetchAndActivate();
+      }
+
       if (config.contains('app_version')) {
-        onVersionUpdate();
+        if (onVersionUpdate != null) {
+          final cb = await getAppUpdateStatus();
+          onVersionUpdate.call(cb);
+        }
+      }
+      if (config.contains('app_maintenance')) {
+        if (onMaintenanceUpdate != null) {
+          final cb = await getAppMaintenanceStatus();
+          onMaintenanceUpdate.call(cb);
+        }
       }
     });
+  }
+
+  @override
+  Future<Either<CoreException, AppMaintenanceModel>>
+  getAppMaintenanceStatus() async {
+    try {
+      final json = _firebaseRemoteConfig.getString('app_maintenance');
+
+      if (json.isEmpty) {
+        return left(
+          const RemoteConfigFirebaseException(
+            innerMessage:
+                kDebugMode
+                    ? 'The app_maintenance json is null, please '
+                        'check that your firebase setup is correct'
+                    : null,
+          ),
+        );
+      }
+
+      final remoteAppMaintenance = AppMaintenanceModel.fromMap(
+        jsonDecode(json) as Map<String, dynamic>,
+      );
+
+      return right(remoteAppMaintenance);
+    } on FirebaseException catch (e, st) {
+      return left(
+        RemoteConfigFirebaseException(
+          innerError: e,
+          innerCode: e.code,
+          innerMessage: e.message,
+          st: st,
+        ),
+      );
+    } catch (e, st) {
+      return left(RemoteConfigFirebaseException(innerError: e, st: st));
+    }
   }
 }

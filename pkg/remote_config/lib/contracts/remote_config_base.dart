@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:remote_config/models/app_maintenance_model.dart';
 import 'package:remote_config/models/app_version_model.dart';
 
 ///
@@ -30,8 +31,16 @@ abstract interface class RemoteConfigBase {
   ///
   bool get isFetchSucceeded;
 
-  /// Listens for remote app version updates and fetch and activate them
+  /// Listens for remote config updates
   ///
   /// Might throw [CoreException]
-  void versionUpdateListener({required VoidCallback onVersionUpdate});
+  void configUpdatesListener({
+    void Function(Either<CoreException, AppVersionUpdateModel> cb)?
+    onVersionUpdate,
+    void Function(Either<CoreException, AppMaintenanceModel> cb)?
+    onMaintenanceUpdate,
+  });
+
+  /// Might throw [CoreException]
+  Future<Either<CoreException, AppMaintenanceModel>> getAppMaintenanceStatus();
 }
