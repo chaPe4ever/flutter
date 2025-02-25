@@ -63,13 +63,8 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
     try {
       await _firebaseRemoteConfig.ensureInitialized();
       await _firebaseRemoteConfig.setDefaults({
-        'app_version':
-            const AppVersionRemoteModel(
-              version: '1.0.0',
-              buildNumber: 1,
-              isOptional: false,
-            ).toJson().toString(),
-        'app_maintenance': const AppMaintenanceModel(isActive: false).toJson(),
+        'app_version': AppVersionRemoteModel.def().toJson().toString(),
+        'app_maintenance': AppMaintenanceModel.def().toJson(),
       });
       await _firebaseRemoteConfig.setConfigSettings(
         RemoteConfigSettings(

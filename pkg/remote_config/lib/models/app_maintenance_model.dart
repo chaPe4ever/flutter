@@ -27,4 +27,7 @@ final class AppMaintenanceModel extends Equatable {
 
   factory AppMaintenanceModel.fromJson(String source) =>
       AppMaintenanceModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  factory AppMaintenanceModel.def() =>
+      const AppMaintenanceModel(isActive: false);
 }

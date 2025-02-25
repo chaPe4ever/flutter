@@ -32,6 +32,14 @@ final class AppVersionRemoteModel extends AppVersionModel with EquatableMixin {
     required this.isOptional,
   });
 
+  factory AppVersionRemoteModel.def() {
+    return const AppVersionRemoteModel(
+      version: '1.0.0',
+      buildNumber: 1,
+      isOptional: true,
+    );
+  }
+
   AppVersionRemoteModel.fromJson(super.json)
     : isOptional = json['is_optional'] as bool,
       super.fromJson();
@@ -68,6 +76,15 @@ final class AppVersionUpdateModel extends AppVersionRemoteModel
     required super.isOptional,
     required this.isUpdateAvailable,
   });
+
+  factory AppVersionUpdateModel.def() {
+    return const AppVersionUpdateModel(
+      version: '1.0.0',
+      buildNumber: 1,
+      isOptional: true,
+      isUpdateAvailable: false,
+    );
+  }
 
   AppVersionUpdateModel.fromJson(super.json)
     : isUpdateAvailable = json['is_update_available'] as bool,
