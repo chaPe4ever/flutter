@@ -30,7 +30,9 @@ extension AsyncValueUiX<T> on AsyncValue<T> {
           ? (error! as CoreException).messageKey.tr()
           : 'unknown_core_exception_failure'.tr();
 
-      await context.showCustomDialog(child: Text(customTitle ?? fallbackTitle));
+      await context.showCustomDialog<void>(
+        child: Text(customTitle ?? fallbackTitle),
+      );
     }
   }
 

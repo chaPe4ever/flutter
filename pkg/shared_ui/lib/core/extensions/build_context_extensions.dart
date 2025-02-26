@@ -11,9 +11,6 @@ extension BuildContextEx on BuildContext {
         Brightness.light => AppSemanticColors.light,
       };
 
-  @Deprecated(
-    'Use one of [showDialogPrimary, showDialogSecondary, showDialogDanger]',
-  )
   Future<T?> showCustomDialog<T>({
     required Widget child,
     bool barrierDismissible = true,
