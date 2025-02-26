@@ -5,6 +5,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:shared_ui/shared_ui.dart';
 
 abstract class AppEffectStyles {
   const AppEffectStyles._();
@@ -71,5 +72,19 @@ abstract class AppEffectStyles {
     color: Color(0x19000000),
     offset: Offset(0, 16),
     blurRadius: 32,
+  );
+
+  static const LinearGradient redLinearGradient = LinearGradient(
+    colors: [
+      AppPrimitiveColors.baseBrownRegular,
+      AppPrimitiveColors.baseRedDark,
+    ], // Define your gradient colors
+  );
+
+  static const LinearGradient blueLinearGradient = LinearGradient(
+    colors: [
+      AppPrimitiveColors.baseBlueRegular,
+      AppPrimitiveColors.baseBlueLight,
+    ], // Define your gradient colors
   );
 }

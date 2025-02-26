@@ -61,4 +61,29 @@ abstract class AppPrimitiveColors {
   /// hex: #f13b4d
   /// opacity: 1
   static const Color baseRedRegular = Color(0xfff13b4d);
+
+  /// baseRedDark figma style properties
+  /// hex: #6c1b14
+  /// opacity: 1
+  static const Color baseRedDark = Color(0xff6c1b14);
+
+  /// baseBlueRegular figma style properties
+  /// hex: #151f44
+  /// opacity: 1
+  static const Color baseBlueRegular = Color(0xff151f44);
+
+  /// baseBlueLight figma style properties
+  /// hex: #213358
+  /// opacity: 1
+  static const Color baseBlueLight = Color(0xff213358);
+
+  /// baseBrownRegular figma style properties
+  /// hex: #64382c
+  /// opacity: 1
+  static const Color baseBrownRegular = Color(0xff64382c);
+
+  /// baseYellowRegular figma style properties
+  /// hex: #e7d957
+  /// opacity: 1
+  static const Color baseYellowRegular = Color(0xffe7d957);
 }

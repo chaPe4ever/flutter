@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:shared_ui/theme/pallete/app_primitive_colors.dart';
 
@@ -48,6 +49,10 @@ abstract class AppSemanticColors {
     surface: AppPrimitiveColors.baseWhiteRegular,
     overlay50: AppPrimitiveColors.baseGrayExtraLight,
     overlay50Inverse: AppPrimitiveColors.baseBlackLight,
+    redGradient0: AppPrimitiveColors.baseBrownRegular,
+    redGradient1: AppPrimitiveColors.baseRedDark,
+    blueGradient0: AppPrimitiveColors.baseBlueRegular,
+    blueGradient1: AppPrimitiveColors.baseBlueLight,
   );
 
   static const SemanticColors dark = SemanticColors(
@@ -95,55 +100,63 @@ abstract class AppSemanticColors {
     surface: AppPrimitiveColors.baseBlackRegular,
     overlay50: AppPrimitiveColors.baseBlackLight,
     overlay50Inverse: AppPrimitiveColors.baseGrayExtraLight,
+    redGradient0: AppPrimitiveColors.baseBrownRegular,
+    redGradient1: AppPrimitiveColors.baseRedDark,
+    blueGradient0: AppPrimitiveColors.baseBlueRegular,
+    blueGradient1: AppPrimitiveColors.baseBlueLight,
   );
 }
 
 final class SemanticColors {
   const SemanticColors({
-    required this.borderSelected,
-    required this.borderNegative,
     required this.borderPrimary,
-    required this.borderDisabled,
-    required this.borderHovered,
-    required this.borderFocused,
     required this.borderInversed,
-    required this.borderBrand,
     required this.borderPressed,
-    required this.borderSecondary,
+    required this.borderBrand,
+    required this.borderDisabled,
+    required this.borderNegative,
+    required this.borderFocused,
+    required this.borderSelected,
+    required this.borderHovered,
     required this.borderEnabled,
     required this.borderSupport,
+    required this.borderSecondary,
     required this.contentSupport,
-    required this.contentButtonPrimary,
     required this.contentLink,
-    required this.contentPressed,
-    required this.contentFocused,
-    required this.contentLinkPressed,
     required this.contentLinkHover,
+    required this.contentLinkPressed,
+    required this.contentPrimary,
+    required this.contentInversed,
+    required this.contentPressed,
     required this.contentBrand,
     required this.contentDisabled,
-    required this.contentHovered,
-    required this.contentInversed,
-    required this.contentTertiary,
-    required this.contentSecondary,
-    required this.contentPrimary,
     required this.contentNegative,
+    required this.contentFocused,
     required this.contentSelected,
     required this.contentTabBarSelected,
-    required this.backgroundHovered,
+    required this.contentHovered,
+    required this.contentSecondary,
+    required this.contentTertiary,
+    required this.contentButtonPrimary,
     required this.backgroundPrimary,
-    required this.backgroundNegative,
     required this.backgroundInversed,
-    required this.backgroundDisabled,
-    required this.backgroundSelected,
     required this.backgroundPressed,
     required this.backgroundBrand,
+    required this.backgroundDisabled,
+    required this.backgroundNegative,
     required this.backgroundFocused,
+    required this.backgroundSelected,
+    required this.backgroundHovered,
     required this.backgroundSnackbar,
     required this.backgroundSelectedItem,
     required this.backgroundModalLoading,
     required this.surface,
     required this.overlay50Inverse,
     required this.overlay50,
+    required this.redGradient0,
+    required this.redGradient1,
+    required this.blueGradient0,
+    required this.blueGradient1,
   });
   final Color borderPrimary;
   final Color borderInversed;
@@ -189,4 +202,8 @@ final class SemanticColors {
   final Color surface;
   final Color overlay50Inverse;
   final Color overlay50;
+  final Color redGradient0;
+  final Color redGradient1;
+  final Color blueGradient0;
+  final Color blueGradient1;
 }
