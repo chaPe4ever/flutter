@@ -53,6 +53,7 @@ abstract class AppSemanticColors {
     redGradient1: AppPrimitiveColors.baseRedDark,
     blueGradient0: AppPrimitiveColors.baseBlueRegular,
     blueGradient1: AppPrimitiveColors.baseBlueLight,
+    positive: AppPrimitiveColors.baseGreenRegular,
   );
 
   static const SemanticColors dark = SemanticColors(
@@ -104,6 +105,7 @@ abstract class AppSemanticColors {
     redGradient1: AppPrimitiveColors.baseRedDark,
     blueGradient0: AppPrimitiveColors.baseBlueRegular,
     blueGradient1: AppPrimitiveColors.baseBlueLight,
+    positive: AppPrimitiveColors.baseGreenRegular,
   );
 }
 
@@ -157,6 +159,7 @@ final class SemanticColors {
     required this.redGradient1,
     required this.blueGradient0,
     required this.blueGradient1,
+    required this.positive,
   });
   final Color borderPrimary;
   final Color borderInversed;
@@ -206,4 +209,5 @@ final class SemanticColors {
   final Color redGradient1;
   final Color blueGradient0;
   final Color blueGradient1;
+  final Color positive;
 }

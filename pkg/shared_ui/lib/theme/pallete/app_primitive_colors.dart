@@ -86,4 +86,6 @@ abstract class AppPrimitiveColors {
   /// hex: #e7d957
   /// opacity: 1
   static const Color baseYellowRegular = Color(0xffe7d957);
+
+  static const Color baseGreenRegular = Color(0xff0BA51D);
 }
