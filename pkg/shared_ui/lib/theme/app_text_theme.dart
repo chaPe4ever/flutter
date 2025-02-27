@@ -105,6 +105,7 @@ class PlatformTextStyles {
     return PlatformTextStyles._(
       labelM: TextStyle.lerp(a.labelM, b.labelM, t)!,
       labelL: TextStyle.lerp(a.labelL, b.labelL, t)!,
+      bodyXS: TextStyle.lerp(a.bodyXS, b.bodyXS, t)!,
       bodyS: TextStyle.lerp(a.bodyS, b.bodyS, t)!,
       bodyM: TextStyle.lerp(a.bodyM, b.bodyM, t)!,
       bodyL: TextStyle.lerp(a.bodyL, b.bodyL, t)!,
@@ -127,6 +128,7 @@ class PlatformTextStyles {
   const PlatformTextStyles._({
     required this.labelM,
     required this.labelL,
+    required this.bodyXS,
     required this.bodyS,
     required this.bodyM,
     required this.bodyL,
@@ -202,6 +204,16 @@ class PlatformTextStyles {
         decoration: TextDecoration.none,
         color: primaryColor,
       ),
+      bodyXS: TextStyle(
+        fontSize: 10,
+        fontWeight: FontWeight.normal,
+        fontFamily: fontFamily,
+        height: 1.2,
+        letterSpacing: 0.4,
+        fontStyle: FontStyle.normal,
+        decoration: TextDecoration.none,
+        color: primaryColor,
+      ),
       titleL: TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.w500,
@@ -247,6 +259,7 @@ class PlatformTextStyles {
 
   final TextStyle labelM;
   final TextStyle labelL;
+  final TextStyle bodyXS;
   final TextStyle bodyS;
   final TextStyle bodyM;
   final TextStyle bodyL;
