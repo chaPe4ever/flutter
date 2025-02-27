@@ -87,5 +87,8 @@ abstract class AppPrimitiveColors {
   /// opacity: 1
   static const Color baseYellowRegular = Color(0xffe7d957);
 
-  static const Color baseGreenRegular = Color(0xff0BA51D);
+  /// baseGreenRegular figma style properties
+  /// hex: #0ba51d
+  /// opacity: 1
+  static const Color baseGreenRegular = Color(0xff0ba51d);
 }
