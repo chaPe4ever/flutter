@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_ui/shared_ui.dart';
 
-enum TextSizeEnum { s, m, l }
+enum TextSizeEnum { xs, s, m, l }
 
 abstract class AppText extends StatelessWidget {
   const AppText(
@@ -116,6 +116,9 @@ class TextHeadline extends AppText {
       TextSizeEnum.s => context.textStyles.headlineS.copyWith(color: color),
       TextSizeEnum.m => context.textStyles.headlineM.copyWith(color: color),
       TextSizeEnum.l => context.textStyles.headlineL.copyWith(color: color),
+      _ => throw UnknownCoreException(
+          innerMessage: 'Unknown TextSizeEnum: $_size',
+        ),
     };
   }
 }
@@ -198,6 +201,26 @@ class TextBody extends AppText {
     super.softWrap,
   });
 
+  factory TextBody.xs(
+    String text, {
+    Key? key,
+    Color? color,
+    TextAlign? textAlign,
+    TextOverflow? overflow,
+    int? maxLines,
+    bool? softWrap,
+  }) =>
+      TextBody._(
+        TextSizeEnum.xs,
+        softWrap: softWrap,
+        text: text,
+        maxLines: maxLines,
+        textAlign: textAlign,
+        key: key,
+        color: color,
+        overflow: overflow,
+      );
+
   factory TextBody.s(
     String text, {
     Key? key,
@@ -262,6 +285,7 @@ class TextBody extends AppText {
   @override
   TextStyle style(BuildContext context) {
     return switch (_size) {
+      TextSizeEnum.xs => context.textStyles.bodyXS.copyWith(color: color),
       TextSizeEnum.s => context.textStyles.bodyS.copyWith(color: color),
       TextSizeEnum.m => context.textStyles.bodyM.copyWith(color: color),
       TextSizeEnum.l => context.textStyles.bodyL.copyWith(color: color),
