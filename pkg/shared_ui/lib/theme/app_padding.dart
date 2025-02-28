@@ -11,7 +11,7 @@ abstract class AppPadding {
       const EdgeInsets.symmetric(horizontal: AppSpacing.sectionXS);
 
   static EdgeInsets button = const EdgeInsets.symmetric(
-    horizontal: AppSpacing.sectionS,
+    horizontal: AppSpacing.contentL,
     vertical: AppSpacing.contentM,
   );
 

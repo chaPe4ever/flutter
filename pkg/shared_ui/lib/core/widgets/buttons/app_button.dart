@@ -89,8 +89,7 @@ class AppButton extends ElevatedButtonBase {
 
   @override
   EdgeInsets? padding(BuildContext context) {
-    // return AppPadding.button;
-    return null;
+    return EdgeInsets.all(AppSpacing.contentMPlus);
   }
 
   @override

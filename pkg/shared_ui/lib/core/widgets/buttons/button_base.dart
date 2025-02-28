@@ -172,7 +172,7 @@ abstract class ButtonBase extends StatelessWidget {
         textStyle: WidgetStateProperty.resolveWith(
           (states) {
             return context.responsive(
-              context.textStyles.labelL,
+              context.textStyles.labelM,
               mobile: context.textStyles.labelL,
               tablet: context.textStyles.labelL,
               desktop: context.textStyles.labelL,

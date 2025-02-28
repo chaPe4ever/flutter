@@ -5,6 +5,7 @@ abstract class AppSpacing {
   static const contentXS = 2.0;
   static const contentS = 4.0;
   static const contentM = 8.0;
+  static const contentMPlus = 10.0;
   static const contentL = 12.0;
   static const contentXL = 16.0;
   // Section

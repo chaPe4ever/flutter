@@ -305,6 +305,26 @@ final class TextLabel extends AppText {
     super.softWrap,
   });
 
+  factory TextLabel.s(
+    String text, {
+    Key? key,
+    Color? color,
+    TextOverflow? overflow,
+    int? maxLines,
+    TextAlign? textAlign,
+    bool? softWrap,
+  }) =>
+      TextLabel._(
+        TextSizeEnum.s,
+        text: text,
+        maxLines: maxLines,
+        textAlign: textAlign,
+        key: key,
+        softWrap: softWrap,
+        color: color,
+        overflow: overflow,
+      );
+
   factory TextLabel.m(
     String text, {
     Key? key,
@@ -350,6 +370,7 @@ final class TextLabel extends AppText {
   @override
   TextStyle style(BuildContext context) {
     return switch (_size) {
+      TextSizeEnum.s => context.textStyles.labelS.copyWith(color: color),
       TextSizeEnum.m => context.textStyles.labelM.copyWith(color: color),
       TextSizeEnum.l => context.textStyles.labelL.copyWith(color: color),
       _ => throw UnknownCoreException(
