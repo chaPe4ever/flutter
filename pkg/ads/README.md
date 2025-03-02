@@ -7,6 +7,31 @@ This package makes use of the firebase crashlytics API wrapped around Riverpod
 
 ## Getting started
 
+Add the following to your AndroidManifest.xml and info.plist.
+More details [here](https://docs.flutter.dev/cookbook/plugins/google-mobile-ads)
+
+#### Android (android/app/src/main/AndroidManifest.xml)
+
+```
+<manifest>
+    <application>
+        ...
+
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>
+    </application>
+</manifest>
+```
+
+#### iOS (ios/Runner/Info.plist)
+
+```
+<key>GADApplicationIdentifier</key>
+<string>ca-app-pub-################~##########</string>
+```
+
 Initialise the pkg by calling this before starting your app:
 
 ```dart
