@@ -1,0 +1,17 @@
+targets:
+  $default:
+    builders:
+      riverpod_generator:
+        options:
+          provider_name_suffix: "Pod"
+          provider_family_name_suffix: "Pod"
+      json_serializable:
+        options:
+          explicit_to_json: true
+          generic_argument_factories: true
+          include_if_null: false
+      freezed:
+        options:
+          generic_argument_factories: true
+      index_generator:
+        enabled: true
