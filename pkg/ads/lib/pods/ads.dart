@@ -52,7 +52,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
 
     state = const AsyncLoading();
 
-    final newState = await AsyncValue.guard<void>(() async {
+    state = await AsyncValue.guard<void>(() async {
       final interstitialAd = await _loadInterstitialAd();
       interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
         onAdShowedFullScreenContent: (InterstitialAd ad) {
@@ -76,12 +76,8 @@ class Ads extends _$Ads with NotifierMountedMixin {
       );
 
       // Show the ad
-      await interstitialAd.show();
+      await Future.microtask(() async => interstitialAd.show());
     });
-
-    if (mounted) {
-      state = newState;
-    }
   }
 
   Future<InterstitialAd> _loadInterstitialAd() async {
