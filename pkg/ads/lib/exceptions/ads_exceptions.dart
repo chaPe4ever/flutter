@@ -1,4 +1,4 @@
-import 'package:ads/constants/crashlytics_constants.dart';
+import 'package:ads/constants/ads_constants.dart';
 import 'package:ads/constants/trans_keys_constants.dart';
 import 'package:core/core.dart';
 
