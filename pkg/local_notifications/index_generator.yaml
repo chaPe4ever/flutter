@@ -1,0 +1,16 @@
+index_generator:
+  exclude:
+    - "**.g.dart"
+    - "**.freezed.dart"
+    - "**.gen.dart"
+    - "**_keys_constants.dart"
+    - "{_,**/_}*.dart"
+  libraries:
+    - directory_path: lib/adapters
+    - directory_path: lib/constants
+    - directory_path: lib/contracts
+    - directory_path: lib/exceptions
+    - directory_path: lib/exports
+    - directory_path: lib/implementations
+    - directory_path: lib/pods
+    - directory_path: lib
