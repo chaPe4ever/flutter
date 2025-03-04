@@ -6,8 +6,12 @@ extension WidgetRefEX on WidgetRef {
   void listenAndShowSnackBarOnError<T>(
     ProviderListenable<AsyncValue<T>> provider, {
     BuildContext? context,
+    VoidCallback? onError,
   }) =>
       listen(provider, (previousState, state) {
+        if (state.hasError) {
+          onError?.call();
+        }
         if (!state.isLoading && state.hasError) {
           final e = state.error;
           context ??
