@@ -2,6 +2,7 @@ import 'package:core/core.dart' hide id;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:local_notifications/contracts/local_notifications_base.dart';
 import 'package:local_notifications/contracts/notification_action_base.dart';
+import 'package:local_notifications/contracts/notification_respponse_base.dart';
 import 'package:local_notifications/exceptions/local_notifications_exceptions.dart';
 import 'package:local_notifications/implementations/local_notifications_impl.dart';
 import 'package:local_notifications/pods/flutter_notification_plugin_pod.dart';
@@ -12,12 +13,20 @@ part 'local_notification_pod.g.dart';
 class LocalNotifications extends _$LocalNotifications {
   LocalNotificationsBase? _notifications;
   @override
-  Future<void> build() async {
+  Future<void> build({
+    void Function(NotificationResponseBase)?
+    onDidReceiveBackgroundNotificationResponse,
+    void Function(NotificationResponseBase)? onDidReceiveNotificationResponse,
+  }) async {
     try {
       _notifications = LocalNotificationsImpl(
         notifications: ref.watch(flutterLocalNotificationsPluginPod),
       );
-      await _notifications?.init();
+      await _notifications?.init(
+        onDidReceiveBackgroundNotificationResponse:
+            onDidReceiveBackgroundNotificationResponse,
+        onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
+      );
     } catch (e) {
       throw LocalNotificationsInitException(innerError: e);
     }
