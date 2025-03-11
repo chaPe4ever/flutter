@@ -75,6 +75,7 @@ abstract interface class AuthFacade {
 
   /// Self explained
   void authChangeObserver({
+    VoidCallback? onPreSignOut,
     VoidCallback? onSignOut,
     void Function(User user)? onSignIn,
   });

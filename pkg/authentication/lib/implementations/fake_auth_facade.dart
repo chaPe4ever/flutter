@@ -316,6 +316,7 @@ final class FakeAuthFacade implements AuthFacade {
 
   @override
   void authChangeObserver({
+    VoidCallback? onPreSignOut,
     VoidCallback? onSignOut,
     void Function(User user)? onSignIn,
   }) {
