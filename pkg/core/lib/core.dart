@@ -31,6 +31,7 @@ export 'package:core/value_objects/value_objects.dart';
 export 'package:core/widgets/widgets.dart';
 export 'package:custom_annotations/custom_annotations.dart';
 export 'package:dartz/dartz.dart' hide Order, State;
+export 'package:device_info_plus/device_info_plus.dart';
 export 'package:dio/dio.dart';
 export 'package:dio/src/cancel_token.dart';
 export 'package:easy_localization/easy_localization.dart'
