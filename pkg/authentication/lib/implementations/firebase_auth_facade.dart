@@ -22,6 +22,7 @@ final class FirebaseAuthFacade implements AuthFacade {
   final FirebaseAuth _firebaseAuth;
   final LoggerBase _logger;
   final StreamController<void> _priorSignOutController;
+  final Set<StreamSubscription<dynamic>> _subscriptions = {};
 
   // Methods
   @override
@@ -364,24 +365,34 @@ final class FirebaseAuthFacade implements AuthFacade {
   Stream<User?> authStateChanges() => _firebaseAuth.authStateChanges();
 
   @override
-  void authChangeListener({
+  void authChangeObserver({
+    VoidCallback? onPreSignOut,
     VoidCallback? onSignOut,
     void Function(User user)? onSignIn,
   }) {
-    _firebaseAuth.authStateChanges().listen((User? user) {
-      if (user == null) {
-        onSignOut?.call();
-      } else {
-        onSignIn?.call(user);
-      }
-    });
+    _subscriptions.addAll([
+      _firebaseAuth.authStateChanges().listen((User? user) {
+        if (user == null) {
+          onSignOut?.call();
+        } else {
+          onSignIn?.call(user);
+        }
+      }),
+      _priorSignOutController.stream.listen((_) {
+        onPreSignOut?.call();
+      }),
+    ]);
   }
 
   @override
-  Stream<void> priorSignOutListener() => _priorSignOutController.stream;
+  Stream<void> priorSignOutStream() => _priorSignOutController.stream;
 
   @override
   void dispose() {
+    for (final sub in _subscriptions) {
+      sub.cancel();
+    }
+    _subscriptions.clear();
     _priorSignOutController.close();
   }
 }

@@ -315,7 +315,7 @@ final class FakeAuthFacade implements AuthFacade {
   Stream<User?> authStateChanges() => _user.stream;
 
   @override
-  void authChangeListener({
+  void authChangeObserver({
     VoidCallback? onSignOut,
     void Function(User user)? onSignIn,
   }) {
@@ -334,7 +334,7 @@ final class FakeAuthFacade implements AuthFacade {
   }
 
   @override
-  Stream<void> priorSignOutListener() {
+  Stream<void> priorSignOutStream() {
     // TODO: implement priorSignOutListener
     throw UnimplementedError();
   }

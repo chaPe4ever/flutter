@@ -74,7 +74,7 @@ abstract interface class AuthFacade {
   Stream<User?> authStateChanges();
 
   /// Self explained
-  void authChangeListener({
+  void authChangeObserver({
     VoidCallback? onSignOut,
     void Function(User user)? onSignIn,
   });
@@ -103,7 +103,7 @@ abstract interface class AuthFacade {
     required String code,
   });
 
-  Stream<void> priorSignOutListener();
+  Stream<void> priorSignOutStream();
 
   void dispose();
 }
