@@ -93,7 +93,9 @@ class Ads extends _$Ads with NotifierMountedMixin {
         },
         onAdFailedToLoad: (LoadAdError error) {
           Log.error('InterstitialAd failed to load: $error');
-          _interstitialAdCompleter?.completeError(const AdsLoadException());
+          _interstitialAdCompleter?.completeError(
+            AdsLoadException(innerError: error),
+          );
           _interstitialAdCompleter = null;
         },
       ),
