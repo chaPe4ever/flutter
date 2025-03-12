@@ -14,11 +14,16 @@ extension WidgetRefEX on WidgetRef {
         }
         if (!state.isLoading && state.hasError) {
           final e = state.error;
+          final coreEx = e?.toCoreException() ?? UnknownCoreException();
+          final text = switch (FlavorHelper.currentFlavor) {
+            FlavorEnum.stg =>
+              coreEx.messageKey.tr().append('\nError: ${coreEx.innerError}'),
+            FlavorEnum.prod || FlavorEnum.dev => coreEx.messageKey.tr(),
+          };
+
           context ??
               this.context.showSnackBar(
-                    text: e is CoreException
-                        ? e.messageKey.tr()
-                        : 'unknown_core_exception_failure'.tr(),
+                    text: text,
                   );
         }
       });
