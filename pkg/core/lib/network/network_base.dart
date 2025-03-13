@@ -8,12 +8,12 @@ abstract interface class NetworkBase {
   /// Checks if the devices is connected to internet
   Future<bool> get isConnected;
 
-  /// Stream controller to listen to connection status changes
-  StreamController<NetworkStatus> get connectionStatusController;
+  Stream<NetworkStatus> get connectionStatusStream;
 
   /// Dispose the connection when there is no usage
   void dispose();
 
-  /// Network changes listener
-  void statusChangeListener({VoidCallback? onOnline, VoidCallback? onOffline});
+  /// Network changes  listeners
+  void addListener({VoidCallback? onOnline, VoidCallback? onOffline});
+  void removeListener({VoidCallback? onOnline, VoidCallback? onOffline});
 }

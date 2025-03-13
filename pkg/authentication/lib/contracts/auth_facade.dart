@@ -71,10 +71,15 @@ abstract interface class AuthFacade {
   Future<Either<AuthenticationEx, String>> get idToken;
 
   /// Self explained
-  Stream<User?> authStateChanges();
+  Stream<User?> authStateChangeStream();
 
   /// Self explained
-  void authChangeObserver({
+  void removeListener({
+    VoidCallback? onPreSignOut,
+    VoidCallback? onSignOut,
+    void Function(User user)? onSignIn,
+  });
+  void addListener({
     VoidCallback? onPreSignOut,
     VoidCallback? onSignOut,
     void Function(User user)? onSignIn,

@@ -22,7 +22,15 @@ final class FirebaseAuthFacade implements AuthFacade {
   final FirebaseAuth _firebaseAuth;
   final LoggerBase _logger;
   final StreamController<void> _priorSignOutController;
-  final Set<StreamSubscription<dynamic>> _subscriptions = {};
+
+  // Callback collections
+  final Set<VoidCallback> _onPreSignOutCallbacks = {};
+  final Set<VoidCallback> _onSignOutCallbacks = {};
+  final Set<void Function(User user)> _onSignInCallbacks = {};
+
+  // Subscriptions
+  StreamSubscription<User?>? _authStateSubscription;
+  StreamSubscription<void>? _priorSignOutSubscription;
 
   // Methods
   @override
@@ -362,26 +370,66 @@ final class FirebaseAuthFacade implements AuthFacade {
   }
 
   @override
-  Stream<User?> authStateChanges() => _firebaseAuth.authStateChanges();
+  Stream<User?> authStateChangeStream() => _firebaseAuth.authStateChanges();
 
   @override
-  void authChangeObserver({
+  void addListener({
     VoidCallback? onPreSignOut,
     VoidCallback? onSignOut,
     void Function(User user)? onSignIn,
   }) {
-    _subscriptions.addAll([
-      _firebaseAuth.authStateChanges().listen((User? user) {
-        if (user == null) {
-          onSignOut?.call();
-        } else {
-          onSignIn?.call(user);
+    assert(
+      onPreSignOut != null || onSignOut != null || onSignIn != null,
+      'At least one of onPreSignOut, onSignOut, or onSignIn must be provided',
+    );
+
+    // Add callbacks to appropriate sets
+    if (onPreSignOut != null) _onPreSignOutCallbacks.add(onPreSignOut);
+    if (onSignOut != null) _onSignOutCallbacks.add(onSignOut);
+    if (onSignIn != null) _onSignInCallbacks.add(onSignIn);
+
+    // Initialize the auth state subscription if it doesn't exist
+    _authStateSubscription ??= _firebaseAuth.authStateChanges().listen((
+      User? user,
+    ) {
+      if (user == null) {
+        for (final callback in _onSignOutCallbacks) {
+          callback();
         }
-      }),
-      _priorSignOutController.stream.listen((_) {
-        onPreSignOut?.call();
-      }),
-    ]);
+      } else {
+        for (final callback in _onSignInCallbacks) {
+          callback(user);
+        }
+      }
+    });
+
+    // Initialize the prior sign out subscription if it doesn't exist
+    _priorSignOutSubscription ??= _priorSignOutController.stream.listen((_) {
+      for (final callback in _onPreSignOutCallbacks) {
+        callback();
+      }
+    });
+  }
+
+  @override
+  void removeListener({
+    VoidCallback? onPreSignOut,
+    VoidCallback? onSignOut,
+    void Function(User user)? onSignIn,
+  }) {
+    if (onPreSignOut != null) _onPreSignOutCallbacks.remove(onPreSignOut);
+    if (onSignOut != null) _onSignOutCallbacks.remove(onSignOut);
+    if (onSignIn != null) _onSignInCallbacks.remove(onSignIn);
+
+    // Cancel subscriptions if no more callbacks
+    if (_onPreSignOutCallbacks.isEmpty &&
+        _onSignOutCallbacks.isEmpty &&
+        _onSignInCallbacks.isEmpty) {
+      _authStateSubscription?.cancel();
+      _authStateSubscription = null;
+      _priorSignOutSubscription?.cancel();
+      _priorSignOutSubscription = null;
+    }
   }
 
   @override
@@ -389,10 +437,16 @@ final class FirebaseAuthFacade implements AuthFacade {
 
   @override
   void dispose() {
-    for (final sub in _subscriptions) {
-      sub.cancel();
-    }
-    _subscriptions.clear();
+    // Cancel all subscriptions
+    _authStateSubscription?.cancel();
+    _priorSignOutSubscription?.cancel();
+
+    // Clear all callbacks
+    _onPreSignOutCallbacks.clear();
+    _onSignOutCallbacks.clear();
+    _onSignInCallbacks.clear();
+
+    // Close stream controller
     _priorSignOutController.close();
   }
 }

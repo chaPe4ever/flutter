@@ -18,7 +18,7 @@ abstract interface class RemoteConfigBase {
   });
 
   /// Stream controller to listen to remote config key changes
-  StreamController<Set<String>> get remoteConfigUpdatesController;
+  Stream<Set<String>> get configUpdatesStream;
 
   /// It force fetches and activates any updates from remote config
   ///
@@ -34,10 +34,17 @@ abstract interface class RemoteConfigBase {
   /// Listens for remote config updates
   ///
   /// Might throw [CoreException]
-  void configUpdatesListener({
-    void Function(Either<CoreException, AppVersionUpdateModel> cb)?
+  void addListener({
+    void Function(Either<CoreException, AppVersionUpdateModel>)?
     onVersionUpdate,
-    void Function(Either<CoreException, AppMaintenanceModel> cb)?
+    void Function(Either<CoreException, AppMaintenanceModel>)?
+    onMaintenanceUpdate,
+  });
+
+  void removeListener({
+    void Function(Either<CoreException, AppVersionUpdateModel>)?
+    onVersionUpdate,
+    void Function(Either<CoreException, AppMaintenanceModel>)?
     onMaintenanceUpdate,
   });
 

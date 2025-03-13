@@ -1,4 +1,3 @@
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:core/core.dart';
 
 part 'firebase_pod.g.dart';
@@ -16,19 +15,21 @@ FirebaseFirestore firestore(Ref ref) {
     ),
   );
 
-  final subscription = ref
-      .watch(networkPod)
-      .connectionStatusController
-      .stream
-      .listen((event) async {
-        if (event case NetworkStatus.offline) {
-          await FirebaseFirestore.instance.disableNetwork();
-        } else {
-          await FirebaseFirestore.instance.enableNetwork();
-        }
-      });
+  void onOnline() {
+    FirebaseFirestore.instance.enableNetwork();
+  }
 
-  ref.onDispose(subscription.cancel);
+  void onOffline() {
+    FirebaseFirestore.instance.disableNetwork();
+  }
+
+  ref.read(networkPod).addListener(onOnline: onOnline, onOffline: onOffline);
+
+  ref.onDispose(
+    () => ref
+        .read(networkPod)
+        .removeListener(onOnline: onOnline, onOffline: onOffline),
+  );
 
   return FirebaseFirestore.instance;
 }

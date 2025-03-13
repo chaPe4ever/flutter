@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:core/core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -20,22 +19,20 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
     : _firebaseRemoteConfig = firebaseRemoteConfig,
       _remoteConfigKeysSetController =
           StreamController<Set<String>>.broadcast() {
-    _subscription = _firebaseRemoteConfig.onConfigUpdated.distinct().listen(
+    _subscription = _firebaseRemoteConfig.onConfigUpdated.listen(
       (RemoteConfigUpdate result) {
         _remoteConfigKeysSetController.add(result.updatedKeys);
       },
       onError: (dynamic e, StackTrace st) {
-        // TODO(Everyone): Open Bug
+        //! Open bug
         //https://github.com/firebase/flutterfire/issues/10780
         if (e is PlatformException) {
-          log(
+          Log.error(
             e.message ?? e.details.toString(),
-            error: e,
-            stackTrace:
+            st:
                 e.stacktrace != null
                     ? StackTrace.fromString(e.stacktrace!)
                     : st,
-            level: 1000,
           );
         }
       },
@@ -46,6 +43,15 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
   final FirebaseRemoteConfig _firebaseRemoteConfig;
   late final StreamSubscription<RemoteConfigUpdate> _subscription;
   final StreamController<Set<String>> _remoteConfigKeysSetController;
+
+  // Callback collections
+  final Set<void Function(Either<CoreException, AppVersionUpdateModel>)>
+  _versionUpdateCallbacks = {};
+  final Set<void Function(Either<CoreException, AppMaintenanceModel>)>
+  _maintenanceUpdateCallbacks = {};
+
+  // Single subscription that notifies all callbacks
+  StreamSubscription<Set<String>>? _configListenerSubscription;
 
   // Getters
   @override
@@ -138,13 +144,26 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
 
   @override
   void dispose() {
+    // Clean up all config listeners
+    clearConfigListeners();
+
+    // Clean up main controller and subscription
     _remoteConfigKeysSetController.close();
     _subscription.cancel();
   }
 
+  // Remove all listeners
+  @visibleForTesting
+  void clearConfigListeners() {
+    _versionUpdateCallbacks.clear();
+    _maintenanceUpdateCallbacks.clear();
+    _configListenerSubscription?.cancel();
+    _configListenerSubscription = null;
+  }
+
   @override
-  StreamController<Set<String>> get remoteConfigUpdatesController =>
-      _remoteConfigKeysSetController;
+  Stream<Set<String>> get configUpdatesStream =>
+      _remoteConfigKeysSetController.stream;
 
   @override
   Future<void> fetchAndActivate() async {
@@ -163,30 +182,85 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
   }
 
   @override
-  void configUpdatesListener({
-    void Function(Either<CoreException, AppVersionUpdateModel> cb)?
+  void addListener({
+    void Function(Either<CoreException, AppVersionUpdateModel>)?
     onVersionUpdate,
-    void Function(Either<CoreException, AppMaintenanceModel> cb)?
+    void Function(Either<CoreException, AppMaintenanceModel>)?
     onMaintenanceUpdate,
   }) {
-    _remoteConfigKeysSetController.stream.listen((config) async {
-      if (onVersionUpdate != null || onMaintenanceUpdate != null) {
-        await fetchAndActivate();
-      }
+    assert(
+      onVersionUpdate != null || onMaintenanceUpdate != null,
+      'At least one of onVersionUpdate or onMaintenanceUpdate must be provided',
+    );
 
-      if (config.contains('app_version')) {
-        if (onVersionUpdate != null) {
-          final cb = await getAppUpdateStatus();
-          onVersionUpdate.call(cb);
-        }
+    // Add callbacks to appropriate sets
+    if (onVersionUpdate != null) _versionUpdateCallbacks.add(onVersionUpdate);
+    if (onMaintenanceUpdate != null) {
+      _maintenanceUpdateCallbacks.add(onMaintenanceUpdate);
+    }
+
+    // Initialize the single subscription if it doesn't exist
+    _configListenerSubscription ??= _remoteConfigKeysSetController.stream
+        .listen(handleConfigUpdates);
+  }
+
+  @override
+  void removeListener({
+    void Function(Either<CoreException, AppVersionUpdateModel>)?
+    onVersionUpdate,
+    void Function(Either<CoreException, AppMaintenanceModel>)?
+    onMaintenanceUpdate,
+  }) {
+    if (onVersionUpdate != null) {
+      _versionUpdateCallbacks.remove(onVersionUpdate);
+    }
+    if (onMaintenanceUpdate != null) {
+      _maintenanceUpdateCallbacks.remove(onMaintenanceUpdate);
+    }
+
+    // Cancel subscription if no more callbacks
+    if (_versionUpdateCallbacks.isEmpty &&
+        _maintenanceUpdateCallbacks.isEmpty) {
+      _configListenerSubscription?.cancel();
+      _configListenerSubscription = null;
+    }
+  }
+
+  // Internal method to handle config updates
+  @visibleForTesting
+  Future<void> handleConfigUpdates(Set<String> updatedKeys) async {
+    // Only continue if we have callbacks to invoke
+    if (_versionUpdateCallbacks.isEmpty &&
+        _maintenanceUpdateCallbacks.isEmpty) {
+      return;
+    }
+
+    // Fetch and activate if we have listeners
+    try {
+      await fetchAndActivate();
+    } catch (e) {
+      // Continue even if fetch fails - we'll use cached values
+    }
+
+    // Process version updates if needed
+    if (updatedKeys.contains('app_version') &&
+        _versionUpdateCallbacks.isNotEmpty) {
+      final versionResult = await getAppUpdateStatus();
+
+      for (final callback in _versionUpdateCallbacks) {
+        callback(versionResult);
       }
-      if (config.contains('app_maintenance')) {
-        if (onMaintenanceUpdate != null) {
-          final cb = await getAppMaintenanceStatus();
-          onMaintenanceUpdate.call(cb);
-        }
+    }
+
+    // Process maintenance updates if needed
+    if (updatedKeys.contains('app_maintenance') &&
+        _maintenanceUpdateCallbacks.isNotEmpty) {
+      final maintenanceResult = await getAppMaintenanceStatus();
+
+      for (final callback in _maintenanceUpdateCallbacks) {
+        callback(maintenanceResult);
       }
-    });
+    }
   }
 
   @override

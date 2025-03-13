@@ -312,22 +312,7 @@ final class FakeAuthFacade implements AuthFacade {
   }
 
   @override
-  Stream<User?> authStateChanges() => _user.stream;
-
-  @override
-  void authChangeObserver({
-    VoidCallback? onPreSignOut,
-    VoidCallback? onSignOut,
-    void Function(User user)? onSignIn,
-  }) {
-    _user.stream.listen((User? user) {
-      if (user == null) {
-        onSignOut?.call();
-      } else {
-        onSignIn?.call(user);
-      }
-    });
-  }
+  Stream<User?> authStateChangeStream() => _user.stream;
 
   @override
   void dispose() {
@@ -338,6 +323,24 @@ final class FakeAuthFacade implements AuthFacade {
   Stream<void> priorSignOutStream() {
     // TODO: implement priorSignOutListener
     throw UnimplementedError();
+  }
+
+  @override
+  void addListener({
+    VoidCallback? onPreSignOut,
+    VoidCallback? onSignOut,
+    void Function(User user)? onSignIn,
+  }) {
+    // TODO: implement addListener
+  }
+
+  @override
+  void removeListener({
+    VoidCallback? onPreSignOut,
+    VoidCallback? onSignOut,
+    void Function(User user)? onSignIn,
+  }) {
+    // TODO: implement removeListener
   }
 }
 
