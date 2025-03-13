@@ -247,8 +247,17 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
         _versionUpdateCallbacks.isNotEmpty) {
       final versionResult = await getAppUpdateStatus();
 
-      for (final callback in _versionUpdateCallbacks) {
-        callback(versionResult);
+      // Create a defensive copy to avoid concurrent modification
+      final callbacksCopy =
+          Set<void Function(Either<CoreException, AppVersionUpdateModel>)>.from(
+            _versionUpdateCallbacks,
+          );
+
+      for (final callback in callbacksCopy) {
+        // Check if the callback is still in the original set before calling
+        if (_versionUpdateCallbacks.contains(callback)) {
+          callback(versionResult);
+        }
       }
     }
 
@@ -257,8 +266,17 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
         _maintenanceUpdateCallbacks.isNotEmpty) {
       final maintenanceResult = await getAppMaintenanceStatus();
 
-      for (final callback in _maintenanceUpdateCallbacks) {
-        callback(maintenanceResult);
+      // Create a defensive copy to avoid concurrent modification
+      final callbacksCopy =
+          Set<void Function(Either<CoreException, AppMaintenanceModel>)>.from(
+            _maintenanceUpdateCallbacks,
+          );
+
+      for (final callback in callbacksCopy) {
+        // Check if the callback is still in the original set before calling
+        if (_maintenanceUpdateCallbacks.contains(callback)) {
+          callback(maintenanceResult);
+        }
       }
     }
   }

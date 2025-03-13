@@ -393,20 +393,35 @@ final class FirebaseAuthFacade implements AuthFacade {
       User? user,
     ) {
       if (user == null) {
-        for (final callback in _onSignOutCallbacks) {
-          callback();
+        // Create a defensive copy to avoid concurrent modification
+        final callbacksCopy = Set<VoidCallback>.from(_onSignOutCallbacks);
+        for (final callback in callbacksCopy) {
+          // Check if the callback is still in the original set before calling
+          if (_onSignOutCallbacks.contains(callback)) {
+            callback();
+          }
         }
       } else {
-        for (final callback in _onSignInCallbacks) {
-          callback(user);
+        // Create a defensive copy to avoid concurrent modification
+        final callbacksCopy = Set<void Function(User)>.from(_onSignInCallbacks);
+        for (final callback in callbacksCopy) {
+          // Check if the callback is still in the original set before calling
+          if (_onSignInCallbacks.contains(callback)) {
+            callback(user);
+          }
         }
       }
     });
 
     // Initialize the prior sign out subscription if it doesn't exist
     _priorSignOutSubscription ??= _priorSignOutController.stream.listen((_) {
-      for (final callback in _onPreSignOutCallbacks) {
-        callback();
+      // Create a defensive copy to avoid concurrent modification
+      final callbacksCopy = Set<VoidCallback>.from(_onPreSignOutCallbacks);
+      for (final callback in callbacksCopy) {
+        // Check if the callback is still in the original set before calling
+        if (_onPreSignOutCallbacks.contains(callback)) {
+          callback();
+        }
       }
     });
   }

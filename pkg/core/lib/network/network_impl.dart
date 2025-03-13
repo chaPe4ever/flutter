@@ -94,12 +94,22 @@ final class NetworkImpl implements NetworkBase {
       network,
     ) {
       if (network case NetworkStatus.offline) {
-        for (final callback in _offlineCallbacks) {
-          callback();
+        // Create a defensive copy to avoid concurrent modification
+        final callbacksCopy = Set<VoidCallback>.from(_offlineCallbacks);
+        for (final callback in callbacksCopy) {
+          // Check if the callback is still in the original set before calling
+          if (_offlineCallbacks.contains(callback)) {
+            callback();
+          }
         }
       } else {
-        for (final callback in _onlineCallbacks) {
-          callback();
+        // Create a defensive copy to avoid concurrent modification
+        final callbacksCopy = Set<VoidCallback>.from(_onlineCallbacks);
+        for (final callback in callbacksCopy) {
+          // Check if the callback is still in the original set before calling
+          if (_onlineCallbacks.contains(callback)) {
+            callback();
+          }
         }
       }
     });
