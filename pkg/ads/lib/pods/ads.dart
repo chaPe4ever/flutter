@@ -38,7 +38,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
   Future<void> showInterstitialAd({
     VoidCallback? onAdShowedFullScreenContent,
     VoidCallback? onAdDismissedFullScreenContent,
-    VoidCallback? onAdFailedToShowFullScreenContent,
+    void Function(CoreException error)? onAdFailedToShowFullScreenContent,
   }) async {
     if (_isIntitialsed == false) {
       throw const AdsInitException();
@@ -71,7 +71,8 @@ class Ads extends _$Ads with NotifierMountedMixin {
           Log.error('Interstitial ad failed to show: $error');
           ad.dispose();
           _interstitialAdCompleter = null;
-          onAdFailedToShowFullScreenContent?.call();
+          final ex = AdsShowException(innerError: error);
+          onAdFailedToShowFullScreenContent?.call(ex);
         },
       );
 

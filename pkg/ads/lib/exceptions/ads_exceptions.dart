@@ -38,3 +38,15 @@ final class AdsLoadException extends AdsEx {
     super.prefix,
   });
 }
+
+final class AdsShowException extends AdsEx {
+  ///
+  const AdsShowException({
+    super.messageKey = TransKeys.interstitialAdLoadFailedKey,
+    super.innerCode,
+    super.innerError,
+    super.innerMessage,
+    super.st,
+    super.prefix,
+  });
+}

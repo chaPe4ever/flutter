@@ -1,4 +1,5 @@
 {
    "ads_not_initialised_key": "Anzeigen-Dienst nicht initialisiert",
-  "interstitial_ad_load_failed_key":"Fehler beim Laden der Zwischenanzeige"
+  "interstitial_ad_load_failed_key":"Fehler beim Laden der Zwischenanzeige",
+  "interstitial_ad_show_failed_key":"Fehler beim Anzeigen der Zwischenanzeige"
 }
