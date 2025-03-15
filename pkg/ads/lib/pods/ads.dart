@@ -38,24 +38,37 @@ class Ads extends _$Ads with NotifierMountedMixin {
     AdRequest adRequest = const AdRequest(),
   }) async {
     if (!_isInitialized) {
+      Log.info('Initializing ad service with ID: $interstitialAdUnitId');
       _isInitialized = true;
       _adRequest = adRequest;
       _interstitialAdUnitId = interstitialAdUnitId;
-      final mobileAds = ref.read(mobileAdsPod);
-      await mobileAds.initialize();
 
-      // Pre-load an ad after initialization
-      await _preloadInterstitialAd();
+      try {
+        final mobileAds = ref.read(mobileAdsPod);
+        await mobileAds.initialize();
+        Log.info('Mobile ads initialized successfully');
+
+        // Wait a moment before preloading to ensure initialization is complete
+        await Future<void>.delayed(const Duration(milliseconds: 500));
+
+        // Pre-load an ad after initialization
+        await _preloadInterstitialAd();
+      } catch (e) {
+        Log.error('Error initializing ads: $e');
+        // Don't rethrow, just log - this allows the app to continue functioning even if ads fail
+      }
     }
   }
 
   Future<void> _preloadInterstitialAd() async {
     try {
       if (_isInitialized && _interstitialAdCompleter == null) {
+        Log.info('Preloading interstitial ad');
         await _loadInterstitialAd();
       }
     } catch (e) {
       Log.error('Failed to preload interstitial ad: $e');
+      // Don't rethrow, just log the error
     }
   }
 
@@ -155,7 +168,9 @@ class Ads extends _$Ads with NotifierMountedMixin {
     // Start loading a new ad
     _interstitialAdCompleter = Completer<InterstitialAd>();
 
+    // Make sure ad unit ID and ad request are not null
     if (_interstitialAdUnitId == null || _adRequest == null) {
+      Log.error('Ad unit ID or AdRequest is null');
       _interstitialAdCompleter?.completeError(
         const AdsInitException(innerMessage: 'Ad unit ID or AdRequest is null'),
       );
@@ -165,47 +180,43 @@ class Ads extends _$Ads with NotifierMountedMixin {
       );
     }
 
-    await InterstitialAd.load(
-      adUnitId: _interstitialAdUnitId!,
-      request: _adRequest!,
-      adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (InterstitialAd ad) {
-          Log.info('Interstitial ad loaded successfully');
-          ad.setImmersiveMode(true);
+    try {
+      await InterstitialAd.load(
+        adUnitId: _interstitialAdUnitId!,
+        request: _adRequest!,
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            Log.info('Interstitial ad loaded successfully');
+            ad.setImmersiveMode(true);
 
-          if (_interstitialAdCompleter?.isCompleted == false) {
-            _interstitialAdCompleter?.complete(ad);
-          } else {
-            // If for some reason the completer is no longer valid,
-            // cache the ad for next use
-            _cachedInterstitialAd = ad;
-          }
-          _interstitialAdCompleter = null;
-        },
-        onAdFailedToLoad: (LoadAdError error) {
-          Log.error('InterstitialAd failed to load: $error');
+            if (_interstitialAdCompleter?.isCompleted == false) {
+              _interstitialAdCompleter?.complete(ad);
+            } else {
+              // If for some reason the completer is no longer valid,
+              // cache the ad for next use
+              _cachedInterstitialAd = ad;
+            }
+            _interstitialAdCompleter = null;
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            Log.error('InterstitialAd failed to load: $error');
 
-          final exception = AdsLoadException(
-            innerError: error,
-            innerCode: error.code.toString(),
-            innerMessage: error.message,
-          );
-          if (_interstitialAdCompleter?.isCompleted == false) {
-            _interstitialAdCompleter?.completeError(exception);
-          }
-          _interstitialAdCompleter = null;
-
-          // Cancel existing timer if any
-          _adLoadRetryTimer?.cancel();
-
-          // Schedule a retry after some delay
-          _adLoadRetryTimer = Timer(
-            const Duration(seconds: 30),
-            _preloadInterstitialAd,
-          );
-        },
-      ),
-    );
+            final exception = AdsLoadException(innerError: error);
+            if (_interstitialAdCompleter?.isCompleted == false) {
+              _interstitialAdCompleter?.completeError(exception);
+            }
+            _interstitialAdCompleter = null;
+          },
+        ),
+      );
+    } catch (e) {
+      Log.error('Exception while loading ad: $e');
+      if (_interstitialAdCompleter?.isCompleted == false) {
+        _interstitialAdCompleter?.completeError(e);
+      }
+      _interstitialAdCompleter = null;
+      rethrow;
+    }
 
     try {
       return await _interstitialAdCompleter!.future;
