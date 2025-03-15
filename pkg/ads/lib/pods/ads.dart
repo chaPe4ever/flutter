@@ -39,9 +39,17 @@ class Ads extends _$Ads with NotifierMountedMixin {
     VoidCallback? onAdShowedFullScreenContent,
     VoidCallback? onAdDismissedFullScreenContent,
     void Function(CoreException error)? onAdFailedToShowFullScreenContent,
+    List<String> testDeviceIds = const [],
   }) async {
     if (_isIntitialsed == false) {
       throw const AdsInitException();
+    }
+    if (testDeviceIds.isNotEmpty) {
+      await ref
+          .read(mobileAdsPod)
+          .updateRequestConfiguration(
+            RequestConfiguration(testDeviceIds: testDeviceIds),
+          );
     }
 
     // Prevent multiple calls
