@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core/value_objects/unique_id.dart';
+import 'package:flutter/widgets.dart';
 
 /// List extension
 extension ListX<T> on List<T> {
@@ -68,4 +69,10 @@ extension ObjectX on Object {
           ? this as CoreException
           : customEx ??
               UnknownCoreException(innerError: this, st: StackTrace.current);
+}
+
+extension ValueNotifierX on ValueNotifier<bool> {
+  void toggle() {
+    value = !value;
+  }
 }
