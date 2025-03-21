@@ -1,4 +1,4 @@
-import 'package:core/exceptions/core_exception.dart';
+import 'package:core/contracts/core_exception.dart';
 import 'package:core/utils/tz_helper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:core/exceptions/core_exception.dart';
+import 'package:core/contracts/core_exception.dart';
 import 'package:dartz/dartz.dart';
 
 /// Use-case interface which every use-case class should implement

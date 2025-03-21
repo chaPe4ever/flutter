@@ -73,3 +73,8 @@ The current API is:
   /// Might throw [CoreException]
   void versionUpdateListener({required VoidCallback onVersionUpdate});
 ```
+
+
+## Translation keys
+
+- remote_config_firebase_exception_message_key

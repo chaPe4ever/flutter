@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:core/core.dart' show CoreException;
 
-import 'package:core/exceptions/core_exception.dart' show CoreException;
-
 ///
 abstract interface class CrashlyticsBase {
   /// Might throw [CoreException]

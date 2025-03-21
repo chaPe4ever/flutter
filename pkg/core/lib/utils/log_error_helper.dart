@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:core/exceptions/core_exception.dart';
+import 'package:core/contracts/core_exception.dart';
 import 'package:core/pods/logger_pod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

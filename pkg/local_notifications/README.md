@@ -96,3 +96,8 @@ The current API is:
 
   Future<void> cancelAllNotifications();
 ```
+
+## Translation keys
+
+- local_notifications_not_initialised_key
+- local_notifications_show_failed_key

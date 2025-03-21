@@ -160,3 +160,23 @@ The current API is:
 
   void dispose();
 ```
+
+
+## Translation keys
+- auth_canceled_by_user_exception_message_key
+- auth_server_error_exception_message_key
+- auth_email_already_in_use_exception_message_key
+- auth_invalid_email_and_password_combination_exception_message_key
+- invalid_password_exception_message_key
+- invalid_email_exception_message_key
+- sign_out_failed_exception_message_key
+- no_signed_in_user_exception_message_key
+- is_email_verified_failed_exception_message_key
+- reset_password_failed_exception_message_key
+- send_email_verification_failed_exception_message_key
+- user_email_is_null_auth_exception_message_key
+- unknown_auth_exception_message_key
+- no_signed_in_user_exception_message_key
+- firebase_auth_core_exception_message_key
+- user_signed_in_anonymously_exception_message_key
+- 

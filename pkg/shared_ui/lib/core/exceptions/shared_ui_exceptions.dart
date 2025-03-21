@@ -1,4 +1,4 @@
-import 'package:core/exceptions/core_exception.dart';
+import 'package:core/core.dart';
 
 sealed class SharedUiEx extends CoreException {
   const SharedUiEx({

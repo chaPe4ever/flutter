@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:core/configs/app_config.dart';
-import 'package:core/exceptions/core_exception.dart';
+import 'package:core/contracts/core_exception.dart';
 import 'package:core/exceptions/core_exceptions.dart';
 import 'package:core/logger/logger_base.dart';
 import 'package:core/network/network_base.dart';

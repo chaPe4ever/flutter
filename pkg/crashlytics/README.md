@@ -63,3 +63,8 @@ The current API is:
   /// Might throw [CoreException]
   Future<void> init();
 ```
+
+
+## Translation keys
+
+- unknown_crashlytics_exception_message_key

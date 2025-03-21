@@ -1,4 +1,4 @@
-import 'package:core/exceptions/core_exception.dart';
+import 'package:core/contracts/core_exception.dart';
 import 'package:core/exceptions/core_exceptions.dart';
 import 'package:dio/dio.dart';
 

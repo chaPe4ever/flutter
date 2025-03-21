@@ -15,7 +15,7 @@ final class EmailAddress extends ValueObject<String> {
   String? validator(String? value) {
     return EmailAddress._(
       validateEmailAddress(value),
-    ).value.fold((l) => l.messageKey, (r) => null);
+    ).value.fold((l) => l.messageKey.tr(), (r) => null);
   }
 
   @override
@@ -35,7 +35,7 @@ final class Password extends ValueObject<String> {
   String? validator(String? value) {
     return Password._(
       validatePassword(value),
-    ).value.fold((l) => l.messageKey, (r) => null);
+    ).value.fold((l) => l.messageKey.tr(), (r) => null);
   }
 
   @override

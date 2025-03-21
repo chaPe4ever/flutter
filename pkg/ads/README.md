@@ -87,3 +87,9 @@ The current API is:
     VoidCallback? onAdFailedToShowFullScreenContent,
   });
 ```
+
+
+## Translation keys
+
+- adsNotInitialisedKey
+- interstitialAdLoadFailedKey

@@ -17,7 +17,7 @@ final class UniqueId extends ValueObject<String> {
   String? validator(String? value) {
     return UniqueId._(
       validateId(value),
-    ).value.fold((l) => l.messageKey, (r) => null);
+    ).value.fold((l) => l.messageKey.tr(), (r) => null);
   }
 
   @override

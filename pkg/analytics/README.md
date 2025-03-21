@@ -90,3 +90,9 @@ Future<void> setUserId({String? id});
 Future<void> setCurrentScreen({required String? screenName});
 
 ```
+
+
+## Tranlsaltion keys
+
+- wrong_analytics_event_usage_exception_message_key
+- unknown_analytics_exception_message_key
