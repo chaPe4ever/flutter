@@ -65,7 +65,7 @@ extension BoolExtensions on bool {
 
 extension ObjectX on Object {
   CoreException toCoreException({CoreException? customEx}) =>
-      this == CoreException
+      this is CoreException
           ? this as CoreException
           : customEx ??
               UnknownCoreException(innerError: this, st: StackTrace.current);
