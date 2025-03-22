@@ -91,5 +91,6 @@ The current API is:
 
 ## Translation keys
 
-- adsNotInitialisedKey
-- interstitialAdLoadFailedKey
+- ads_not_initialised_key
+- interstitial_ad_load_failed_key
+- interstitial_ad_show_failed_key

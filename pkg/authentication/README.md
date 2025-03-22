@@ -179,4 +179,3 @@ The current API is:
 - no_signed_in_user_exception_message_key
 - firebase_auth_core_exception_message_key
 - user_signed_in_anonymously_exception_message_key
-- 
