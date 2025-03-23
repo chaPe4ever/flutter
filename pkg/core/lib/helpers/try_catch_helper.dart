@@ -261,16 +261,13 @@ Stream<T> streamTryCatch<T>(
 }) async* {
   if (await network.isConnected) {
     yield* cb().handleError((Object e, StackTrace st) {
-      Log.error(e, st: st);
-      throw e is CoreException
-          ? e
-          : UnknownCoreException(
-            innerError: e,
-            st: switch (st) {
-              StackTrace.empty => StackTrace.current,
-              _ => st,
-            },
-          );
+      final error = e.toCoreException();
+
+      Log.error(
+        'Error: $e, innerError: ${error.innerError}, inner msg: ${error.innerMessage}',
+        st: st,
+      );
+      throw error;
     });
   } else {
     throw const NoNetworkException();
