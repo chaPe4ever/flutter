@@ -2,8 +2,8 @@ import 'package:analytics/contracts/analytics_base.dart';
 import 'package:analytics/unions/analytics_event.dart';
 import 'package:core/core.dart';
 import 'package:in_app_review/in_app_review.dart';
-import 'package:in_app_rewiew/contracts/in_app_review_service_base.dart';
-import 'package:in_app_rewiew/exceptions/in_app_review_exceptions.dart';
+import 'package:inapp_review/contracts/in_app_review_service_base.dart';
+import 'package:inapp_review/exceptions/in_app_review_exceptions.dart';
 
 /// Implementation of the in-app review service
 final class InAppReviewServiceImpl implements InAppReviewServiceBase {

@@ -1,8 +1,8 @@
 import 'package:analytics/pods/analytics_pod.dart';
 import 'package:core/core.dart';
-import 'package:in_app_rewiew/contracts/in_app_review_service_base.dart';
-import 'package:in_app_rewiew/implementations/in_app_review_service_impl.dart';
-import 'package:in_app_rewiew/pods/in_app_review.dart';
+import 'package:inapp_review/contracts/in_app_review_service_base.dart';
+import 'package:inapp_review/implementations/in_app_review_service_impl.dart';
+import 'package:inapp_review/pods/in_app_review.dart';
 
 part 'in_app_review_service.g.dart';
 

@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
-import 'package:in_app_rewiew/constants/in_app_review_constants.dart';
-import 'package:in_app_rewiew/constants/trans_keys_constants.dart';
+import 'package:inapp_review/constants/in_app_review_constants.dart';
+import 'package:inapp_review/constants/trans_keys_constants.dart';
 
 ///
 sealed class InAppReviewEx extends CoreException {
