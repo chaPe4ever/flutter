@@ -7,7 +7,8 @@ part of 'trans_keys_constants.dart';
 // **************************************************************************
 
 class TransKeys {
-  static const adsNotInitialisedKey = "ads_not_initialised_key";
-  static const interstitialAdLoadFailedKey = "interstitial_ad_load_failed_key";
-  static const interstitialAdShowFailedKey = "interstitial_ad_show_failed_key";
+  static const inAppReviewNotSupportedDeviceKey =
+      "in_app_review_not_supported_device_key";
+  static const notInitialisedInAppReviewExceptionKey =
+      "not_initialised_in_app_review_exception_key";
 }

@@ -52,7 +52,6 @@ export 'package:gap/gap.dart';
 export 'package:go_router/go_router.dart';
 export 'package:google_fonts/google_fonts.dart';
 export 'package:hooks_riverpod/hooks_riverpod.dart';
-export 'package:in_app_review/in_app_review.dart';
 export 'package:json_annotation/json_annotation.dart';
 export 'package:logger/logger.dart';
 export 'package:package_info_plus/package_info_plus.dart';
