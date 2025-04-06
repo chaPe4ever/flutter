@@ -44,6 +44,10 @@ class Ads extends _$Ads with NotifierMountedMixin {
       _interstitialAdUnitId = interstitialAdUnitId;
 
       try {
+        // First, request consent information
+        await _requestConsentInfo();
+
+        // Then initialize the Mobile Ads SDK
         final mobileAds = ref.read(mobileAdsPod);
         await mobileAds.initialize();
         Log.info('Mobile ads initialized successfully');
@@ -57,18 +61,6 @@ class Ads extends _$Ads with NotifierMountedMixin {
         Log.error('Error initializing ads: $e');
         // Don't rethrow, just log - this allows the app to continue functioning even if ads fail
       }
-    }
-  }
-
-  Future<void> _preloadInterstitialAd() async {
-    try {
-      if (_isInitialized && _interstitialAdCompleter == null) {
-        Log.info('Preloading interstitial ad');
-        await _loadInterstitialAd();
-      }
-    } catch (e) {
-      Log.error('Failed to preload interstitial ad: $e');
-      // Don't rethrow, just log the error
     }
   }
 
@@ -152,6 +144,31 @@ class Ads extends _$Ads with NotifierMountedMixin {
     });
   }
 
+  /// Resets the user's consent choice and shows the consent form again
+  /// Can be called from app settings to let users update their choice
+  Future<void> resetConsent() async {
+    try {
+      Log.info('Resetting user consent');
+
+      // Check if form is available
+      final isFormAvailable =
+          await ConsentInformation.instance.isConsentFormAvailable();
+      if (!isFormAvailable) {
+        Log.info('Consent form is not available, cannot reset consent');
+        return;
+      }
+
+      // Reset the consent info
+      await ConsentInformation.instance.reset();
+      Log.info('Consent reset successfully');
+
+      // Request consent again
+      await _requestConsentInfo();
+    } catch (e) {
+      Log.error('Error resetting consent: $e');
+    }
+  }
+
   Future<InterstitialAd> _loadInterstitialAd() async {
     // If we already have a cached ad, return it
     if (_cachedInterstitialAd != null) {
@@ -181,9 +198,24 @@ class Ads extends _$Ads with NotifierMountedMixin {
     }
 
     try {
+      // Get consent status to determine non-personalized ads
+      final consentStatus =
+          await ConsentInformation.instance.getConsentStatus();
+      final useNonPersonalizedAds = consentStatus != ConsentStatus.obtained;
+
+      // Create an ad request with consent parameters
+      final request = AdRequest(
+        nonPersonalizedAds: useNonPersonalizedAds,
+        keywords: _adRequest?.keywords,
+        contentUrl: _adRequest?.contentUrl,
+        neighboringContentUrls: _adRequest?.neighboringContentUrls,
+        httpTimeoutMillis: _adRequest?.httpTimeoutMillis,
+        mediationExtras: _adRequest?.mediationExtras,
+        extras: _adRequest?.extras,
+      );
       await InterstitialAd.load(
         adUnitId: _interstitialAdUnitId!,
-        request: _adRequest!,
+        request: request,
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             Log.info('Interstitial ad loaded successfully');
@@ -224,6 +256,133 @@ class Ads extends _$Ads with NotifierMountedMixin {
       Log.error('Error waiting for ad to load: $e');
       _interstitialAdCompleter = null;
       rethrow;
+    }
+  }
+
+  Future<void> _loadAndShowConsentForm() async {
+    try {
+      Log.info('Loading consent form');
+
+      final formCompleter = Completer<void>();
+
+      ConsentForm.loadConsentForm(
+        (ConsentForm consentForm) async {
+          try {
+            Log.info('Consent form loaded, showing to user');
+            consentForm.show((formError) {
+              if (!formCompleter.isCompleted) {
+                if (formError != null) {
+                  Log.error('Consent form error: ${formError.message}');
+                  formCompleter.completeError(formError);
+                } else {
+                  Log.info('Consent form closed');
+                  formCompleter.complete();
+                }
+              }
+            });
+          } catch (e) {
+            Log.error('Error showing consent form: $e');
+            if (!formCompleter.isCompleted) {
+              formCompleter.completeError(e);
+            }
+          }
+        },
+        (formError) {
+          Log.error('Consent form load error: ${formError.message}');
+          if (!formCompleter.isCompleted) {
+            formCompleter.completeError(formError);
+          }
+        },
+      );
+
+      // Wait for the form to be closed
+      try {
+        await formCompleter.future;
+        Log.info('Consent process completed');
+      } catch (e) {
+        Log.error('Consent process error: $e');
+        // Continue with initialization even if consent fails
+      }
+    } catch (e) {
+      Log.error('Error in consent flow: $e');
+      // Continue with initialization even if consent fails
+    }
+  }
+
+  Future<void> _checkAndShowConsentForm() async {
+    try {
+      final status = await ConsentInformation.instance.getConsentStatus();
+      final required =
+          await ConsentInformation.instance.isConsentFormAvailable();
+
+      Log.info('Consent status: $status, Form required: $required');
+
+      if (required) {
+        await _loadAndShowConsentForm();
+      }
+    } catch (e) {
+      Log.error('Error checking consent status: $e');
+    }
+  }
+
+  Future<void> _requestConsentInfo() async {
+    try {
+      Log.info('Requesting consent information');
+
+      // For testing, you can use a test device and test in EEA
+      // final params = ConsentRequestParameters(
+      //   tagForUnderAgeOfConsent: false,
+      //   testIdentifiers: ['TEST-DEVICE-HASHED-ID'], // Test device ID
+      //   consentDebugSettings: ConsentDebugSettings(
+      //     debugGeography: DebugGeography.debugGeographyEEA,
+      //     testIdentifiers: ['TEST-DEVICE-HASHED-ID'],
+      //   ),
+      // );
+
+      // For production use:
+      final params = ConsentRequestParameters(tagForUnderAgeOfConsent: false);
+
+      // Create a completer to wait for the async callback
+      final completer = Completer<void>();
+
+      // Request latest consent info
+      ConsentInformation.instance.requestConsentInfoUpdate(
+        params,
+        () {
+          // Success callback
+          Log.info('Consent info updated successfully');
+          _checkAndShowConsentForm()
+              .then((_) => completer.complete())
+              .catchError((Object e) {
+                Log.error('Error in consent flow: $e');
+                completer
+                    .complete(); // Complete anyway to continue initialization
+              });
+        },
+        (FormError error) {
+          // Error callback
+          Log.error('Consent info update failed: ${error.message}');
+          completer.complete(); // Complete to continue initialization
+        },
+      );
+
+      // Wait for the consent flow to complete before continuing
+      await completer.future;
+    } catch (e) {
+      Log.error('Error requesting consent: $e');
+      // Continue with initialization even if consent fails
+    }
+  }
+
+  Future<void> _preloadInterstitialAd() async {
+    try {
+      if (_isInitialized && _interstitialAdCompleter == null) {
+        Log.info('Preloading interstitial ad');
+        await _loadInterstitialAd();
+      }
+    } catch (e) {
+      Log.error('Failed to preload interstitial ad: $e');
+      // Don't rethrow, just log the error
     }
   }
 }
