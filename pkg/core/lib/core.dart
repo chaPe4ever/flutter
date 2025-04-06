@@ -49,6 +49,7 @@ export 'package:flutter_svg/flutter_svg.dart';
 export 'package:flutter_timezone/flutter_timezone.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:gap/gap.dart';
+export 'package:get_storage/get_storage.dart';
 export 'package:go_router/go_router.dart';
 export 'package:google_fonts/google_fonts.dart';
 export 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -63,6 +64,7 @@ export 'package:pretty_dio_logger/pretty_dio_logger.dart';
 export 'package:riverpod_annotation/riverpod_annotation.dart';
 export 'package:rxdart/rxdart.dart';
 export 'package:share_plus/share_plus.dart';
+export 'package:shared_preferences/shared_preferences.dart';
 export 'package:shimmer/shimmer.dart';
 export 'package:signals/signals.dart' hide AsyncData, AsyncError, AsyncLoading;
 export 'package:signals/signals_flutter.dart'

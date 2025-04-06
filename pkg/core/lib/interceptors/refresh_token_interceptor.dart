@@ -32,11 +32,15 @@ class RefreshTokenInterceptor implements Interceptor {
   int maxRetries = 5;
 
   // Getters
-  String get accessToken => _localStorage.read<String>(kApiAuthTokenKey) ?? '';
+  Future<String?> get accessToken async =>
+      _localStorage.read<String>(kApiAuthTokenKey);
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers['Authorization'] = 'Bearer $accessToken';
+  Future<void> onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
+    options.headers['Authorization'] = 'Bearer ${await accessToken ?? ''}';
 
     return handler.next(options);
   }

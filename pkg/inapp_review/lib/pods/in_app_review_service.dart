@@ -13,7 +13,7 @@ class InAppReviewService extends _$InAppReviewService {
   @override
   InAppReviewServiceBase build() {
     final logger = ref.read(loggerPod);
-    final localStorage = ref.read(localStoragePod);
+    final localStorage = ref.read(localStoragePod.notifier);
     if (!localStorage.hasValue) {
       logger.e(
         'LocalStorage not initialized, make sure it is initialized before using'

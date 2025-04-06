@@ -56,11 +56,6 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
 
     await localStorage.write(maxPromptsKey, maxPrompts);
 
-    // Initialize prompt count if not already set
-    if (localStorage.read<int>(reviewPromptCountKey) == null) {
-      await localStorage.write(reviewPromptCountKey, 0);
-    }
-
     logger.d(
       'InAppReview initialized with frequency: $frequency, max prompts: $maxPrompts',
     );
@@ -68,7 +63,7 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
 
   @override
   Future<void> resetShowFrequency() => _executeWithErrorHandling(() async {
-    _checkInitialized();
+    await _checkInitialized();
     await localStorage.remove(lastReviewDateTimeKey);
     logger.d('InAppReview frequency reset');
   });
@@ -88,11 +83,11 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
   Future<bool> canShowReview() => _executeWithErrorHandling(() async {
     try {
       // Check if service is initialized
-      _checkInitialized();
+      await _checkInitialized();
 
       // Check if review is already completed
       final reviewCompleted =
-          localStorage.read<bool>(reviewCompletedKey) ?? false;
+          await localStorage.read<bool>(reviewCompletedKey) ?? false;
       if (reviewCompleted) {
         logger.d('InAppReview already completed by user');
         return false;
@@ -100,7 +95,7 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
 
       // Check prompt count
       final promptCount = await getPromptCount();
-      final maxPrompts = localStorage.read<int>(maxPromptsKey) ?? 3;
+      final maxPrompts = await localStorage.read<int>(maxPromptsKey) ?? 3;
       if (promptCount >= maxPrompts) {
         logger.d('InAppReview max prompts reached: $promptCount/$maxPrompts');
         return false;
@@ -121,13 +116,15 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
       }
 
       // Check timing frequency
-      final lastReviewDt = localStorage.read<String>(lastReviewDateTimeKey);
+      final lastReviewDt = await localStorage.read<String>(
+        lastReviewDateTimeKey,
+      );
       if (lastReviewDt == null) {
         // First time - don't show yet, just record the timestamp
         return false;
       } else {
         final lastAppReviewDt = DateTime.parse(lastReviewDt);
-        final durationFrequency = _getFrequencyDuration();
+        final durationFrequency = await _getFrequencyDuration();
         final nowUtc = getCurrentTime();
 
         // Check if enough time has passed
@@ -141,7 +138,7 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
 
   @override
   Future<void> forceShow() => _executeWithErrorHandling(() async {
-    _checkInitialized();
+    await _checkInitialized();
 
     // Check network
     final isConnected = await network.isConnected;
@@ -164,7 +161,7 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
     String? appStoreId,
     String? microsoftStoreId,
   }) => _executeWithErrorHandling(() async {
-    _checkInitialized();
+    await _checkInitialized();
 
     await inAppReview.openStoreListing(
       appStoreId: appStoreId,
@@ -180,7 +177,7 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
 
   @override
   Future<void> markReviewCompleted() => _executeWithErrorHandling(() async {
-    _checkInitialized();
+    await _checkInitialized();
 
     await localStorage.write(reviewCompletedKey, true);
     logger.i('InAppReview marked as completed');
@@ -193,8 +190,8 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
 
   @override
   Future<int> getPromptCount() => _executeWithErrorHandling(() async {
-    _checkInitialized();
-    return localStorage.read<int>(reviewPromptCountKey) ?? 0;
+    await _checkInitialized();
+    return await localStorage.read<int>(reviewPromptCountKey) ?? 0;
   });
 
   // PRIVATE METHODS
@@ -210,8 +207,8 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
   }
 
   /// Check if the service has been initialized
-  void _checkInitialized() {
-    final frequencyInMilis = localStorage.read<int>(
+  Future<void> _checkInitialized() async {
+    final frequencyInMilis = await localStorage.read<int>(
       durationMillisecondsFrequencyKey,
     );
 
@@ -221,9 +218,9 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
   }
 
   /// Get the configured frequency duration
-  Duration _getFrequencyDuration() {
+  Future<Duration> _getFrequencyDuration() async {
     final frequencyInMilis =
-        localStorage.read<int>(durationMillisecondsFrequencyKey) ??
+        await localStorage.read<int>(durationMillisecondsFrequencyKey) ??
         const Duration(days: 30).inMilliseconds;
 
     return Duration(milliseconds: frequencyInMilis);
@@ -234,7 +231,8 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
     final nowUtc = getCurrentTime();
 
     // Increment the prompt count
-    final currentCount = localStorage.read<int>(reviewPromptCountKey) ?? 0;
+    final currentCount =
+        await localStorage.read<int>(reviewPromptCountKey) ?? 0;
     await localStorage.write(reviewPromptCountKey, currentCount + 1);
 
     // Update the last review timestamp

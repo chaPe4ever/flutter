@@ -11,7 +11,7 @@ final class SettingsHelper {
     final settingsMap = {...?settingExtras};
     await Future.forEach(settingsMap.keys, (key) async {
       final value = settingsMap[key];
-      if (storage.read<dynamic>(key) == null) {
+      if (await storage.read<dynamic>(key) == null) {
         await storage.write(key, value);
       }
     });

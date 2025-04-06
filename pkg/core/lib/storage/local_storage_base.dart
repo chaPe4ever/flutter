@@ -9,7 +9,7 @@ abstract interface class LocalStorageBase {
 
   /// Get any saved data locally given a [key]
   /// It returns null if nothing has been saved to this key yet
-  T? read<T>(String key);
+  Future<T?> read<T>(String key);
 
   /// Remove any locally saved data for the provided [key]
   Future<void> remove(String key);
@@ -20,7 +20,4 @@ abstract interface class LocalStorageBase {
 
   /// Listen to any change for a given [key]
   VoidCallback listenKey(String key, ValueSetter<dynamic> callback);
-
-  /// Init the pkg async and get an instance of it as a cb
-  Future<LocalStorageBase> init();
 }
