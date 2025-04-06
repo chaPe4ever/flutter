@@ -33,20 +33,20 @@ final class LocalStorageSharedPreferenceImpl implements LocalStorageBase {
   }
 
   @override
-  Future<T?> read<T>(String key) {
+  Future<T?> read<T>(String key) async {
     if (T == String) {
-      return Future.value(SharedPreferencesAsync().getString(key) as T?);
+      return (await SharedPreferencesAsync().getString(key)) as T?;
     } else if (T == int) {
-      return Future.value(SharedPreferencesAsync().getInt(key) as T?);
+      return (await SharedPreferencesAsync().getInt(key)) as T?;
     } else if (T == bool) {
-      return Future.value(SharedPreferencesAsync().getBool(key) as T?);
+      return (await SharedPreferencesAsync().getBool(key)) as T?;
     } else if (T == double) {
-      return Future.value(SharedPreferencesAsync().getDouble(key) as T?);
+      return (await SharedPreferencesAsync().getDouble(key)) as T?;
     } else if (T == List<String>) {
-      return Future.value(SharedPreferencesAsync().getStringList(key) as T?);
+      return (await SharedPreferencesAsync().getStringList(key)) as T?;
     }
 
-    return Future.value();
+    return null;
   }
 
   @override
