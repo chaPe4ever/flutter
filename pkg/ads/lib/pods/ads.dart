@@ -36,6 +36,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
   Future<void> init({
     required String interstitialAdUnitId,
     AdRequest adRequest = const AdRequest(),
+    bool skipConsentForm = false,
   }) async {
     if (!_isInitialized) {
       Log.info('Initializing ad service with ID: $interstitialAdUnitId');
@@ -45,7 +46,9 @@ class Ads extends _$Ads with NotifierMountedMixin {
 
       try {
         // First, request consent information
-        await _requestConsentInfo();
+        if (!skipConsentForm) {
+          await _requestConsentInfo();
+        }
 
         // Then initialize the Mobile Ads SDK
         final mobileAds = ref.read(mobileAdsPod);
