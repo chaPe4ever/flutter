@@ -16,15 +16,16 @@ final class FirebaseAuthFacade implements AuthFacade {
     required LoggerBase loggerBase,
   }) : _firebaseAuth = firebaseAuth,
        _logger = loggerBase,
-       _priorSignOutController = StreamController<void>.broadcast();
+       _priorSignOutController =
+           StreamController<List<Future<void>>>.broadcast();
 
   // Fields
   final FirebaseAuth _firebaseAuth;
   final LoggerBase _logger;
-  final StreamController<void> _priorSignOutController;
+  final StreamController<List<Future<void>>> _priorSignOutController;
 
   // Callback collections
-  final Set<VoidCallback> _onPreSignOutCallbacks = {};
+  final Set<Future<void> Function()> _onPreSignOutCallbacks = {};
   final Set<VoidCallback> _onSignOutCallbacks = {};
   final Set<void Function(User user)> _onSignInCallbacks = {};
 
@@ -149,9 +150,25 @@ final class FirebaseAuthFacade implements AuthFacade {
   @override
   Future<Option<AuthenticationEx>> signOut() async => futureOptionAuthTryCatch(
     () async {
-      _priorSignOutController.add(null);
+      // Collect futures from all pre-signout callbacks
+      final preSignOutFutures =
+          _onPreSignOutCallbacks.map((callback) {
+            // Wrap each in try-catch so individual failures don't block signout
+            return callback().catchError((Object e) {
+              _logger.e('Pre-signout callback failed', e: e);
+              // Return completed future so Future.wait doesn't fail
+              return Future<void>.value();
+            });
+          }).toList();
 
-      // googleSignIn.signOut();
+      // Notify listeners with the futures for optional tracking
+      _priorSignOutController.add(preSignOutFutures);
+
+      // Wait for all pre-signout operations to complete
+      await Future.wait(preSignOutFutures);
+
+      // Now proceed with the actual sign out
+      // await googleSignIn.signOut();
       await _firebaseAuth.signOut();
       await _firebaseAuth.currentUser?.reload();
     },
@@ -374,7 +391,7 @@ final class FirebaseAuthFacade implements AuthFacade {
 
   @override
   void addListener({
-    VoidCallback? onPreSignOut,
+    Future<void> Function()? onPreSignOut,
     VoidCallback? onSignOut,
     void Function(User user)? onSignIn,
   }) {
@@ -415,20 +432,14 @@ final class FirebaseAuthFacade implements AuthFacade {
 
     // Initialize the prior sign out subscription if it doesn't exist
     _priorSignOutSubscription ??= _priorSignOutController.stream.listen((_) {
-      // Create a defensive copy to avoid concurrent modification
-      final callbacksCopy = Set<VoidCallback>.from(_onPreSignOutCallbacks);
-      for (final callback in callbacksCopy) {
-        // Check if the callback is still in the original set before calling
-        if (_onPreSignOutCallbacks.contains(callback)) {
-          callback();
-        }
-      }
+      // Stream now receives the list of futures, but we don't need to do anything
+      // with them here since they're already being awaited in the signOut method
     });
   }
 
   @override
   void removeListener({
-    VoidCallback? onPreSignOut,
+    Future<void> Function()? onPreSignOut,
     VoidCallback? onSignOut,
     void Function(User user)? onSignIn,
   }) {
@@ -448,7 +459,8 @@ final class FirebaseAuthFacade implements AuthFacade {
   }
 
   @override
-  Stream<void> priorSignOutStream() => _priorSignOutController.stream;
+  Stream<List<Future<void>>> priorSignOutStream() =>
+      _priorSignOutController.stream;
 
   @override
   void dispose() {

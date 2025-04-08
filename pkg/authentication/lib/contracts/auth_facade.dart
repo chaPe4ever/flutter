@@ -75,12 +75,12 @@ abstract interface class AuthFacade {
 
   /// Self explained
   void removeListener({
-    VoidCallback? onPreSignOut,
+    Future<void> Function()? onPreSignOut,
     VoidCallback? onSignOut,
     void Function(User user)? onSignIn,
   });
   void addListener({
-    VoidCallback? onPreSignOut,
+    Future<void> Function()? onPreSignOut,
     VoidCallback? onSignOut,
     void Function(User user)? onSignIn,
   });
