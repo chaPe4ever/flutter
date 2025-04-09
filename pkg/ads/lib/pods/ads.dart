@@ -79,6 +79,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
     }
     if (skip) {
       Log.info('Skipping ad display');
+      onAdDismissedFullScreenContent?.call();
       return;
     }
 
