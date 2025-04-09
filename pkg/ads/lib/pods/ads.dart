@@ -72,9 +72,14 @@ class Ads extends _$Ads with NotifierMountedMixin {
     VoidCallback? onAdDismissedFullScreenContent,
     void Function(CoreException error)? onAdFailedToShowFullScreenContent,
     List<String> testDeviceIds = const [],
+    bool skip = false,
   }) async {
     if (!_isInitialized) {
       throw const AdsInitException();
+    }
+    if (skip) {
+      Log.info('Skipping ad display');
+      return;
     }
 
     if (testDeviceIds.isNotEmpty) {
