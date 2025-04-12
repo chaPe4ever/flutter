@@ -94,12 +94,13 @@ Future<T> firestoreFutureTryCatch<T>(
 Future<T> functionsFutureTryCatch<T>(
   Future<T> Function() cb, {
   required LoggerBase logger,
+  String? errorMessageKey,
   T Function(CoreException e, StackTrace st)? onFunctionsCustomExCb,
 }) => cb().then(id).catchError((Object e, StackTrace st) {
   if (e is FirebaseFunctionsException) {
     logger.e(e.message ?? e.code, e: e, st: st);
     final functionsEx = FirestoreFunctionsException(
-      messageKey: e.message ?? e.code,
+      messageKey: errorMessageKey ?? e.message ?? e.code,
       innerMessage: e.message,
       innerCode: e.code,
       innerError: e,
