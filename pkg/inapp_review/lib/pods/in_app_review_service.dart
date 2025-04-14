@@ -1,7 +1,6 @@
 import 'package:analytics/pods/analytics_pod.dart';
 import 'package:core/core.dart';
 import 'package:inapp_review/contracts/in_app_review_service_base.dart';
-import 'package:inapp_review/exceptions/in_app_review_exceptions.dart';
 import 'package:inapp_review/implementations/in_app_review_service_impl.dart';
 import 'package:inapp_review/pods/in_app_review.dart';
 
@@ -12,22 +11,12 @@ part 'in_app_review_service.g.dart';
 class InAppReviewService extends _$InAppReviewService {
   @override
   InAppReviewServiceBase build() {
-    final logger = ref.read(loggerPod);
-    final localStorage = ref.read(localStoragePod);
-    if (!localStorage.hasValue) {
-      logger.e(
-        'LocalStorage not initialized, make sure it is initialized before using'
-        ' InAppReviewService',
-      );
-      throw const NotInitialisedInAppReviewException();
-    }
-
     // Create and return the implementation
     return InAppReviewServiceImpl(
       inAppReview: ref.read(inAppReviewPod),
-      localStorage: ref.read(localStoragePod.notifier).requireValue,
+      localStorage: ref.read(localStoragePod),
       network: ref.read(networkPod),
-      logger: logger,
+      logger: ref.read(loggerPod),
       analytics: ref.read(analyticsPod),
     );
   }
