@@ -3,11 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class GoogleFontsConfig implements Config {
+  const GoogleFontsConfig({
+    this.fontLicencesAbsPath,
+    this.allowRuntimeFetching = true,
+  });
+  final String? fontLicencesAbsPath;
+  final bool allowRuntimeFetching;
   @override
-  Future<void> init({
-    String? fontLicencesAbsPath,
-    bool allowRuntimeFetching = true,
-  }) async {
+  Future<void> init() async {
     // Assigning it to true means enable getting fonts using internet
     // conn. When false means get them offline from the google_fonts folder
     GoogleFonts.config.allowRuntimeFetching = allowRuntimeFetching;
