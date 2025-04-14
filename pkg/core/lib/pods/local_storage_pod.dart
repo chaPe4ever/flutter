@@ -12,11 +12,20 @@ enum StorageType { getStorage, sharedPreferences }
 @Riverpod(keepAlive: true)
 class LocalStorage extends _$LocalStorage {
   @override
-  FutureOr<LocalStorageBase> build({required StorageType type}) async {
-    return switch (type) {
-      StorageType.getStorage => await _initGetStorage(),
-      StorageType.sharedPreferences => await _initSharedPreferences(),
-    };
+  FutureOr<LocalStorageBase?> build() {
+    return Future.microtask(() {
+      return null;
+    });
+  }
+
+  Future<void> init({required StorageType type}) async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      return switch (type) {
+        StorageType.getStorage => await _initGetStorage(),
+        StorageType.sharedPreferences => await _initSharedPreferences(),
+      };
+    });
   }
 
   /// Initialize GetStorage implementation
@@ -34,7 +43,10 @@ class LocalStorage extends _$LocalStorage {
   }
 
   /// Get the local storage instance
-  LocalStorageBase get requireValue => state.requireValue;
+  LocalStorageBase get requireValue =>
+      state.valueOrNull == null
+          ? throw const StorageInitialisationException()
+          : state.requireValue!;
 
   /// Check if storage is initialized
   bool get hasValue => state.hasValue;
