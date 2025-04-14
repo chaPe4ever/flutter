@@ -8,63 +8,15 @@ part 'local_storage_pod.g.dart';
 /// Defines which storage implementation to use
 enum StorageType { getStorage, sharedPreferences }
 
-/// Initialization state for the storage provider
-sealed class LocalStorageState {
-  const LocalStorageState();
-}
-
-/// Storage service is not initialized yet
-final class UninitializedState extends LocalStorageState {
-  const UninitializedState();
-}
-
-/// Storage service is being initialized
-final class InitializingState extends LocalStorageState {
-  const InitializingState();
-}
-
-/// Storage service is initialized and ready to use
-final class InitializedState extends LocalStorageState {
-  const InitializedState(this.storage);
-  final LocalStorageBase storage;
-}
-
-/// Storage service failed to initialize
-final class ErrorState extends LocalStorageState {
-  const ErrorState(this.error);
-  final CoreException error;
-}
-
 /// Local storage pod that provides storage functionality
 @Riverpod(keepAlive: true)
 class LocalStorage extends _$LocalStorage {
   @override
-  LocalStorageState build() {
-    // Start in uninitialized state
-    return const UninitializedState();
-  }
-
-  /// Initialize the local storage with the specified implementation
-  Future<void> init(StorageType type) async {
-    // Skip if already initialized or initializing
-    if (state is InitializedState || state is InitializingState) return;
-
-    // Set initializing state
-    state = const InitializingState();
-
-    try {
-      final storageImpl = switch (type) {
-        StorageType.getStorage => await _initGetStorage(),
-        StorageType.sharedPreferences => await _initSharedPreferences(),
-      };
-
-      // Set initialized state with the implementation
-      state = InitializedState(storageImpl);
-    } catch (e) {
-      final exception = e is CoreException ? e : e.toCoreException();
-      state = ErrorState(exception);
-      throw exception;
-    }
+  FutureOr<LocalStorageBase> build({required StorageType type}) async {
+    return switch (type) {
+      StorageType.getStorage => await _initGetStorage(),
+      StorageType.sharedPreferences => await _initSharedPreferences(),
+    };
   }
 
   /// Initialize GetStorage implementation
@@ -82,30 +34,13 @@ class LocalStorage extends _$LocalStorage {
   }
 
   /// Get the local storage instance
-  LocalStorageBase get requireValue => switch (state) {
-    InitializedState(storage: final storage) => storage,
-    UninitializedState() =>
-      throw const StorageInitialisationException(
-        innerMessage: 'Local storage not initialized. Call init() first.',
-      ),
-    InitializingState() =>
-      throw const StorageInitialisationException(
-        innerMessage: 'Local storage initialization in progress.',
-      ),
-    ErrorState(error: final error) => throw error,
-  };
+  LocalStorageBase get requireValue => state.requireValue;
 
   /// Check if storage is initialized
-  bool get hasValue => state is InitializedState;
+  bool get hasValue => state.hasValue;
 
   /// Check if storage has an error
-  bool get hasError => state is ErrorState;
-
-  /// Get error if present
-  CoreException? get error => switch (state) {
-    ErrorState(error: final err) => err,
-    _ => null,
-  };
+  bool get hasError => state.hasError;
 
   // ---- Direct storage methods ----
 
