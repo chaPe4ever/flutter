@@ -49,7 +49,6 @@ export 'package:flutter_svg/flutter_svg.dart';
 export 'package:flutter_timezone/flutter_timezone.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:gap/gap.dart';
-export 'package:get_storage/get_storage.dart';
 export 'package:go_router/go_router.dart';
 export 'package:google_fonts/google_fonts.dart';
 export 'package:hooks_riverpod/hooks_riverpod.dart';

@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 part 'local_storage_pod.g.dart';
 
 /// Defines which storage implementation to use
-enum StorageType { getStorage, sharedPreferences }
+enum StorageType { sharedPreferences }
 
 /// Local storage pod that provides storage functionality
 @riverpod
