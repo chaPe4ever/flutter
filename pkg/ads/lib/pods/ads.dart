@@ -326,7 +326,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
 
       Log.info('Consent status: $status, Form required: $required');
 
-      if (required) {
+      if (required && status == ConsentStatus.required) {
         await _loadAndShowConsentForm();
       }
     } catch (e) {
