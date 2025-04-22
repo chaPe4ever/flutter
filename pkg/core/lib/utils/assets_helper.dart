@@ -7,14 +7,14 @@ import 'package:flutter/services.dart';
 /// Assets helper class
 class AssetsHelper {
   /// Get an asset list given the [path]. Path normally consists of
-  /// packageName and folderName like so: my_package/my_folder
+  /// packageName and folderName like so: packages/my_package/my_asset_folder
   static Future<List<String>> getAssetList({required String path}) async =>
       rootBundle
           .loadString('AssetManifest.json')
           .then(
             (manifestJsonStr) =>
                 (jsonDecode(manifestJsonStr) as Map<String, dynamic>?)?.keys
-                    .where((element) => element.contains('packages/$path'))
+                    .where((element) => element.contains(path))
                     .toList() ??
                 List.empty(),
           );
