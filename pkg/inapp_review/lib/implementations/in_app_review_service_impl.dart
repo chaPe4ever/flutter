@@ -55,6 +55,14 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
     );
 
     await localStorage.write(maxPromptsKey, maxPrompts);
+    final lastReviewDt = await localStorage.read<String>(lastReviewDateTimeKey);
+    if (lastReviewDt == null) {
+      // First time - set the last review date to now
+      await localStorage.write(
+        lastReviewDateTimeKey,
+        getCurrentTime().toIso8601String(),
+      );
+    }
 
     logger.d(
       'InAppReview initialized with frequency: $frequency, max prompts: $maxPrompts',
@@ -119,17 +127,18 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
       final lastReviewDt = await localStorage.read<String>(
         lastReviewDateTimeKey,
       );
-      if (lastReviewDt == null) {
-        // First time - don't show yet, just record the timestamp
-        return false;
-      } else {
+
+      if (lastReviewDt != null) {
         final lastAppReviewDt = DateTime.parse(lastReviewDt);
         final durationFrequency = await _getFrequencyDuration();
         final nowUtc = getCurrentTime();
 
         // Check if enough time has passed
-        return nowUtc.difference(lastAppReviewDt) >= durationFrequency;
+        final dtPassed =
+            nowUtc.difference(lastAppReviewDt) >= durationFrequency;
+        return dtPassed;
       }
+      return false;
     } catch (e) {
       logger.e('Error checking if review can be shown', e: e);
       return false;
