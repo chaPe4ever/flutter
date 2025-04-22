@@ -254,9 +254,9 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
         analyticsEvent: FirebaseAnalyticsEvent(
           name: 'app_review_prompted',
           parameters: {
-            'prompt_count': currentCount + 1,
-            'was_shown': true,
-            'forced': ignoreFrequency,
+            'prompt_count': (currentCount + 1).toString(),
+            'was_shown': true.toString(),
+            'forced': ignoreFrequency.toString(),
           },
         ),
       );

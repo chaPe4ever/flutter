@@ -10,5 +10,5 @@ final class FirebaseAnalyticsEvent extends AnalyticsEvent {
   final String name;
 
   ///
-  final Map<String, Object>? parameters;
+  final Map<String, String>? parameters;
 }
