@@ -153,6 +153,9 @@ class Ads extends _$Ads with NotifierMountedMixin {
     });
   }
 
+  Future<bool> get isConsetnFormAvailable =>
+      ConsentInformation.instance.isConsentFormAvailable();
+
   /// Resets the user's consent choice and shows the consent form again
   /// Can be called from app settings to let users update their choice
   Future<void> resetConsent() async {
@@ -164,7 +167,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
           await ConsentInformation.instance.isConsentFormAvailable();
       if (!isFormAvailable) {
         Log.info('Consent form is not available, cannot reset consent');
-        return;
+        throw const AdsConsentFormNotAvailable();
       }
 
       // Reset the consent info

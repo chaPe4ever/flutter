@@ -50,3 +50,15 @@ final class AdsShowException extends AdsEx {
     super.prefix,
   });
 }
+
+final class AdsConsentFormNotAvailable extends AdsEx {
+  ///
+  const AdsConsentFormNotAvailable({
+    super.messageKey = TransKeys.adsConsentFormNotAvailableKey,
+    super.innerCode,
+    super.innerError,
+    super.innerMessage,
+    super.st,
+    super.prefix,
+  });
+}
