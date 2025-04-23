@@ -159,26 +159,23 @@ class Ads extends _$Ads with NotifierMountedMixin {
   /// Resets the user's consent choice and shows the consent form again
   /// Can be called from app settings to let users update their choice
   Future<void> resetConsent() async {
-    try {
-      Log.info('Resetting user consent');
+    Log.info('Resetting user consent');
 
-      // Check if form is available
-      final isFormAvailable =
-          await ConsentInformation.instance.isConsentFormAvailable();
-      if (!isFormAvailable) {
-        Log.info('Consent form is not available, cannot reset consent');
-        throw const AdsConsentFormNotAvailable();
-      }
+    // Check if form is available
+    final isFormAvailable =
+        await ConsentInformation.instance.isConsentFormAvailable();
 
-      // Reset the consent info
-      await ConsentInformation.instance.reset();
-      Log.info('Consent reset successfully');
-
-      // Request consent again
-      await _requestConsentInfo();
-    } catch (e) {
-      Log.error('Error resetting consent: $e');
+    if (!isFormAvailable) {
+      Log.info('Consent form is not available, cannot reset consent');
+      throw const AdsConsentFormNotAvailable();
     }
+
+    // Reset the consent info
+    await ConsentInformation.instance.reset();
+    Log.info('Consent reset successfully');
+
+    // Request consent again
+    await _requestConsentInfo();
   }
 
   Future<InterstitialAd> _loadInterstitialAd() async {
