@@ -99,7 +99,9 @@ class Ads extends _$Ads with NotifierMountedMixin {
       try {
         interstitialAd = await _loadInterstitialAd();
       } catch (e) {
-        final error = e is CoreException ? e : AdsLoadException(innerError: e);
+        final error = e.toCoreException(
+          customEx: AdsLoadException(innerError: e),
+        );
         onAdFailedToShowFullScreenContent?.call(error);
         throw error;
       }
@@ -242,7 +244,11 @@ class Ads extends _$Ads with NotifierMountedMixin {
           onAdFailedToLoad: (LoadAdError error) {
             Log.error('InterstitialAd failed to load: $error');
 
-            final exception = AdsLoadException(innerError: error);
+            final exception = AdsLoadException(
+              innerError: error,
+              innerCode: error.code.toString(),
+              innerMessage: error.message,
+            );
             if (_interstitialAdCompleter?.isCompleted == false) {
               _interstitialAdCompleter?.completeError(exception);
             }
