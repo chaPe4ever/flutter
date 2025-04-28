@@ -75,9 +75,9 @@ final class AdsBlockerException extends AdsEx {
   });
 }
 
-final class AdsInventoryUnavailableException extends AdsEx {
+final class AdsNoFillException extends AdsEx {
   ///
-  const AdsInventoryUnavailableException({
+  const AdsNoFillException({
     super.messageKey = TransKeys.adsInventoryUnavailableKey,
     super.innerCode,
     super.innerError,

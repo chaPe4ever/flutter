@@ -293,7 +293,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
             Log.error('InterstitialAd failed to load: $error');
             CoreException? exception;
             if (error.code == 1) {
-              exception = AdsInventoryUnavailableException(
+              exception = AdsNoFillException(
                 innerError: error,
                 innerCode: error.code.toString(),
                 innerMessage: error.message,
