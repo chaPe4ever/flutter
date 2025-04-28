@@ -179,13 +179,35 @@ class Ads extends _$Ads with NotifierMountedMixin {
           Log.error('Interstitial ad failed to show: $error');
           ad.dispose();
           _cachedInterstitialAd = null;
+          CoreException? exception;
 
-          final ex = AdsShowException(
-            innerError: error,
-            innerCode: error.code.toString(),
-            innerMessage: error.message,
-          );
-          onAdFailedToShowFullScreenContent?.call(ex);
+          if (error.code == 1) {
+            exception = AdsNoFillException(
+              innerError: error,
+              innerCode: error.code.toString(),
+              innerMessage: error.message,
+            );
+          } else if (error.code == 2) {
+            exception = AdsBlockerException(
+              innerError: error,
+              innerCode: error.code.toString(),
+              innerMessage: error.message,
+            );
+          } else if (error.code == 3) {
+            exception = AdsConsentChoicesOptedOutException(
+              innerError: error,
+              innerCode: error.code.toString(),
+              innerMessage: error.message,
+            );
+          } else {
+            exception = AdsShowException(
+              innerError: error,
+              innerCode: error.code.toString(),
+              innerMessage: error.message,
+            );
+          }
+
+          onAdFailedToShowFullScreenContent?.call(exception);
 
           // Cancel existing timer if any
           _adLoadRetryTimer?.cancel();
