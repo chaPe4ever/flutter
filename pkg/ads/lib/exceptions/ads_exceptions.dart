@@ -62,3 +62,39 @@ final class AdsConsentFormNotAvailable extends AdsEx {
     super.prefix,
   });
 }
+
+final class AdsBlockerException extends AdsEx {
+  ///
+  const AdsBlockerException({
+    super.messageKey = TransKeys.adsBlockerExceptionKey,
+    super.innerCode,
+    super.innerError,
+    super.innerMessage,
+    super.st,
+    super.prefix,
+  });
+}
+
+final class AdsInventoryUnavailableException extends AdsEx {
+  ///
+  const AdsInventoryUnavailableException({
+    super.messageKey = TransKeys.adsInventoryUnavailableKey,
+    super.innerCode,
+    super.innerError,
+    super.innerMessage,
+    super.st,
+    super.prefix,
+  });
+}
+
+final class AdsConsentChoicesOptedOutException extends AdsEx {
+  ///
+  const AdsConsentChoicesOptedOutException({
+    super.messageKey = TransKeys.adsConsentChoicesOptedOutKey,
+    super.innerCode,
+    super.innerError,
+    super.innerMessage,
+    super.st,
+    super.prefix,
+  });
+}

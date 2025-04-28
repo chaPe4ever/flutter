@@ -2,5 +2,8 @@
   "ads_not_initialised_key": "Ads serice not initialised",
   "interstitial_ad_load_failed_key":"Failed to load interstitial ad",
   "interstitial_ad_show_failed_key":"Failed to show interstitial ad",
-  "ads_consent_form_not_available_key":"Ads consent form not available"
+  "ads_consent_form_not_available_key":"Ads consent form not available",
+  "ads_blocker_exception_key":"Ads failed to load due to ad blocker",
+  "ads_inventory_unavailable_key":"Ads inventory unavailable (probably due to app hasn't been approved yet)",
+  "ads_consent_choices_opted_out_key":"User opted out of all ads"
 }

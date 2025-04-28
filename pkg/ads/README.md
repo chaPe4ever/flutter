@@ -95,3 +95,6 @@ The current API is:
 - interstitial_ad_load_failed_key
 - interstitial_ad_show_failed_key
 - ads_consent_form_not_available_key
+- ads_blocker_exception_key
+- ads_inventory_unavailable_key
+- ads_consent_choices_opted_out_key
