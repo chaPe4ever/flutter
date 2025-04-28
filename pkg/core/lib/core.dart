@@ -2,7 +2,7 @@
 /// contain only functionality that is globally used
 library core;
 
-export 'package:async/async.dart';
+export 'package:async/async.dart' hide Result;
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'package:cloud_functions/cloud_functions.dart';
