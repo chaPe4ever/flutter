@@ -12,25 +12,39 @@ part 'local_notification_pod.g.dart';
 @Riverpod(keepAlive: true)
 class LocalNotifications extends _$LocalNotifications {
   LocalNotificationsBase? _notifications;
+  bool _isInitialized = false;
   @override
-  Future<void> build({
+  FutureOr<void> build() {
+    _notifications = LocalNotificationsImpl(
+      notifications: ref.watch(flutterLocalNotificationsPluginPod),
+    );
+  }
+
+  Future<void> init({
     void Function(NotificationResponseBase)?
     onDidReceiveBackgroundNotificationResponse,
     void Function(NotificationResponseBase)? onDidReceiveNotificationResponse,
   }) async {
-    try {
-      _notifications = LocalNotificationsImpl(
-        notifications: ref.watch(flutterLocalNotificationsPluginPod),
-      );
-      await _notifications?.init(
-        onDidReceiveBackgroundNotificationResponse:
-            onDidReceiveBackgroundNotificationResponse,
-        onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
-      );
-    } catch (e) {
-      throw LocalNotificationsInitException(innerError: e);
+    if (_isInitialized) {
+      return;
     }
-    return;
+    _isInitialized = true;
+
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard<void>(() async {
+      try {
+        if (_notifications == null) {
+          throw const LocalNotificationsInitException(
+            innerError: 'LocalNotifications is not initialized',
+          );
+        }
+        await _notifications?.init();
+      } catch (e) {
+        throw e.toCoreException(
+          customEx: LocalNotificationsInitException(innerError: e),
+        );
+      }
+    });
   }
 
   Future<void> showNotification({
@@ -47,6 +61,11 @@ class LocalNotifications extends _$LocalNotifications {
     state = const AsyncValue.loading();
 
     state = await AsyncValue.guard<void>(() async {
+      if (!_isInitialized) {
+        throw const LocalNotificationsInitException(
+          innerError: 'LocalNotifications is not initialized',
+        );
+      }
       try {
         await _notifications?.showNotification(
           id: id,
@@ -69,6 +88,11 @@ class LocalNotifications extends _$LocalNotifications {
     state = const AsyncValue.loading();
 
     state = await AsyncValue.guard<void>(() async {
+      if (!_isInitialized) {
+        throw const LocalNotificationsInitException(
+          innerError: 'LocalNotifications is not initialized',
+        );
+      }
       await _notifications?.cancelNotification(id: id);
     });
   }
@@ -77,6 +101,11 @@ class LocalNotifications extends _$LocalNotifications {
     state = const AsyncValue.loading();
 
     state = await AsyncValue.guard<void>(() async {
+      if (!_isInitialized) {
+        throw const LocalNotificationsInitException(
+          innerError: 'LocalNotifications is not initialized',
+        );
+      }
       await _notifications?.cancelAllNotifications();
     });
   }
