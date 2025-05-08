@@ -357,7 +357,13 @@ class Ads extends _$Ads with NotifierMountedMixin {
     }
 
     try {
-      return await _interstitialAdCompleter!.future;
+      if (_interstitialAdCompleter != null) {
+        return _interstitialAdCompleter!.future;
+      } else {
+        throw const AdsLoadException(
+          innerMessage: 'Interstitial ad load failed',
+        );
+      }
     } catch (e) {
       Log.error('Error waiting for ad to load: $e');
       _interstitialAdCompleter = null;
