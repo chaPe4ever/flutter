@@ -7,7 +7,7 @@ part of 'local_notification_pod.dart';
 // **************************************************************************
 
 String _$localNotificationsHash() =>
-    r'e6cb3529504246af6eef9917156599949fd68f93';
+    r'ddc02b1ab18119b0b8c7a17845f80b39ba13965b';
 
 /// See also [LocalNotifications].
 @ProviderFor(LocalNotifications)

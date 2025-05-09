@@ -38,7 +38,11 @@ class LocalNotifications extends _$LocalNotifications {
             innerError: 'LocalNotifications is not initialized',
           );
         }
-        await _notifications?.init();
+        await _notifications?.init(
+          onDidReceiveBackgroundNotificationResponse:
+              onDidReceiveBackgroundNotificationResponse,
+          onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
+        );
       } catch (e) {
         throw e.toCoreException(
           customEx: LocalNotificationsInitException(innerError: e),
