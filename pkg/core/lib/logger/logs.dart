@@ -1,7 +1,6 @@
 import 'dart:developer' as developer;
 
 import 'package:core/core.dart';
-import 'package:flutter/foundation.dart';
 
 enum Logs {
   api,
@@ -9,22 +8,81 @@ enum Logs {
   goRouter,
   analytics,
   push,
-  riverpod;
+  info,
+  warning,
+  riverpod,
+  error;
 
+  // Setter to enable/disable individual logs
+  set enabled(bool value) {
+    switch (this) {
+      case Logs.api:
+        _apiEnabled = value;
+      case Logs.signal:
+        _signalEnabled = value;
+      case Logs.goRouter:
+        _goRouterEnabled = value;
+      case Logs.analytics:
+        _analyticsEnabled = value;
+      case Logs.push:
+        _pushEnabled = value;
+      case Logs.riverpod:
+        _riverpodEnabled = value;
+      case Logs.error:
+        _errorEnabled = value;
+      case Logs.info:
+        _infoEnabled = value;
+      case Logs.warning:
+        _warningEnabled = value;
+    }
+  }
+
+  // Static method to enable multiple logs at once
+  static void enable(List<Logs> logs) {
+    for (final log in logs) {
+      log.enabled = true;
+    }
+  }
+
+  // Static method to disable multiple logs at once
+  static void disable(List<Logs> logs) {
+    for (final log in logs) {
+      log.enabled = false;
+    }
+  }
+
+  // Static fields to store the enabled state
+  static bool _apiEnabled = false;
+  static bool _signalEnabled = false;
+  static bool _goRouterEnabled = false;
+  static bool _analyticsEnabled = false;
+  static bool _pushEnabled = false;
+  static bool _riverpodEnabled = false;
+  static bool _errorEnabled = false;
+  static bool _infoEnabled = false;
+  static bool _warningEnabled = false;
+
+  // Override the isEnabled getter to use the static fields
   bool get isEnabled {
     switch (this) {
       case Logs.api:
-        return false;
+        return _apiEnabled;
       case Logs.signal:
-        return false;
+        return _signalEnabled;
       case Logs.goRouter:
-        return false;
+        return _goRouterEnabled;
       case Logs.analytics:
-        return false;
+        return _analyticsEnabled;
       case Logs.push:
-        return false;
+        return _pushEnabled;
       case Logs.riverpod:
-        return kDebugMode;
+        return _riverpodEnabled;
+      case Logs.error:
+        return _errorEnabled;
+      case Logs.info:
+        return _infoEnabled;
+      case Logs.warning:
+        return _warningEnabled;
     }
   }
 }
@@ -49,8 +107,10 @@ enum _Logger {
 
 class Log {
   static void error(Object error, {StackTrace? st}) {
-    _Logger.red.log(error);
-    _Logger.red.log(st);
+    if (Logs.error.isEnabled) {
+      _Logger.red.log(error);
+      _Logger.red.log(st);
+    }
   }
 
   static void analytics(String text) {
@@ -60,11 +120,15 @@ class Log {
   }
 
   static void info(String text) {
-    _Logger.cyan.log(text);
+    if (Logs.info.isEnabled) {
+      _Logger.cyan.log(text);
+    }
   }
 
   static void warning(String text) {
-    _Logger.yellow.log(text);
+    if (Logs.warning.isEnabled) {
+      _Logger.yellow.log(text);
+    }
   }
 
   static void api(String text) {
