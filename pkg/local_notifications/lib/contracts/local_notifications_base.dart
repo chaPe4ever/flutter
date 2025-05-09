@@ -6,7 +6,7 @@ abstract interface class LocalNotificationsBase {
   Future<void> showNotification({
     required String title,
     required String body,
-    required int id,
+    int id = 0,
     String? payload,
     List<NotificationActionBase>? actions,
     String? channelId,
