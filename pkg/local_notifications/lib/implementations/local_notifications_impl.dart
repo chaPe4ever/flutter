@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart'
     show TargetPlatform, defaultTargetPlatform;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -6,9 +8,28 @@ import 'package:local_notifications/contracts/notification_action_base.dart';
 import 'package:local_notifications/pods/local_notification_pod.dart';
 
 class LocalNotificationsImpl implements LocalNotificationsBase {
-  const LocalNotificationsImpl({required this.notifications});
+  LocalNotificationsImpl({required this.notifications})
+    : fgNotificationController = StreamController<NotificationResponse>(),
+      bgNotificationController = StreamController<NotificationResponse>();
 
   final FlutterLocalNotificationsPlugin notifications;
+  @override
+  StreamController<NotificationResponse>? fgNotificationController;
+  @override
+  StreamController<NotificationResponse>? bgNotificationController;
+
+  StreamSubscription<NotificationResponse>? _fgNotificationSubscription;
+  StreamSubscription<NotificationResponse>? _bgNotificationSubscription;
+
+  @override
+  void dispose() {
+    fgNotificationController?.close();
+    bgNotificationController?.close();
+    _fgNotificationSubscription?.cancel();
+    _fgNotificationSubscription = null;
+    _bgNotificationSubscription?.cancel();
+    _bgNotificationSubscription = null;
+  }
 
   @override
   Future<void> init({
@@ -73,8 +94,8 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
   Future<void> showNotification({
     required String title,
     required String body,
-    required int id,
-    String gorupKey = 'com.gameroom/local_notifications',
+    int id = 0,
+    String gorupKey = 'ai.gameroom.client/local_notifications',
     String? payload,
     List<NotificationActionBase>? actions,
     String? channelId,
@@ -139,7 +160,7 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
   }
 
   @override
-  Future<void> cancelNotification({required int id}) async {
+  Future<void> cancelNotification({int id = 0}) async {
     await notifications.cancel(id);
   }
 }

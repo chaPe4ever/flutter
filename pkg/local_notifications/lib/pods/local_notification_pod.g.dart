@@ -7,12 +7,12 @@ part of 'local_notification_pod.dart';
 // **************************************************************************
 
 String _$localNotificationsHash() =>
-    r'e163dade87af9efdb4711333394dca22b6486011';
+    r'02ebec78777a1d1eb7a4cfbde306282c0dbfd15b';
 
 /// See also [LocalNotifications].
 @ProviderFor(LocalNotifications)
 final localNotificationsPod =
-    AsyncNotifierProvider<LocalNotifications, void>.internal(
+    NotifierProvider<LocalNotifications, LocalNotificationsBase>.internal(
   LocalNotifications.new,
   name: r'localNotificationsPod',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,6 +22,6 @@ final localNotificationsPod =
   allTransitiveDependencies: null,
 );
 
-typedef _$LocalNotifications = AsyncNotifier<void>;
+typedef _$LocalNotifications = Notifier<LocalNotificationsBase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

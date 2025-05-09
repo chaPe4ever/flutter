@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:local_notifications/local_notifications.dart';
 
 abstract class LocalNotificationsBase {
@@ -21,4 +23,9 @@ abstract class LocalNotificationsBase {
 
   Future<void> cancelNotification({required int id});
   Future<void> cancelAllNotifications();
+
+  StreamController<NotificationResponse>? fgNotificationController;
+  StreamController<NotificationResponse>? bgNotificationController;
+
+  void dispose();
 }
