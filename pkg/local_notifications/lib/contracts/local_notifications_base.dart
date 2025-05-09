@@ -28,4 +28,10 @@ abstract interface class LocalNotificationsBase {
   StreamController<NotificationResponse>? bgNotificationController;
 
   void dispose();
+
+  /// Handle incoming messages
+  Future<void> messageHanlder({
+    void Function(NotificationResponse message)? onFgMessage,
+    void Function(NotificationResponse message)? onBgMessage,
+  });
 }

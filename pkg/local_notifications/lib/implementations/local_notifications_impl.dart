@@ -163,4 +163,23 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
   Future<void> cancelNotification({int id = 0}) async {
     await notifications.cancel(id);
   }
+
+  @override
+  Future<void> messageHanlder({
+    void Function(NotificationResponse message)? onFgMessage,
+    void Function(NotificationResponse message)? onBgMessage,
+  }) async {
+    await _fgNotificationSubscription?.cancel();
+    _fgNotificationSubscription = fgNotificationController?.stream.listen((
+      message,
+    ) {
+      onFgMessage?.call(message);
+    });
+    await _bgNotificationSubscription?.cancel();
+    _bgNotificationSubscription = bgNotificationController?.stream.listen((
+      message,
+    ) {
+      onBgMessage?.call(message);
+    });
+  }
 }
