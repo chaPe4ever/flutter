@@ -6,9 +6,13 @@ import 'package:flutter/services.dart';
 
 /// Lock the orientations you want your device to have.
 /// It requires to write code in iOS plarform in order to work
-class OrientationHelper {
+abstract class OrientationHelper {
   // Fields
-  static const _platform = MethodChannel('game_room/orientation');
+  static late MethodChannel _platform;
+
+  static void init({String channelName = 'core/orientation'}) {
+    _platform = MethodChannel(channelName);
+  }
 
   ///
   // Methods
