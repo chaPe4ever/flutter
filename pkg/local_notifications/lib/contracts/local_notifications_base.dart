@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:local_notifications/local_notifications.dart';
 
-abstract class LocalNotificationsBase {
+abstract interface class LocalNotificationsBase {
   Future<void> showNotification({
     required String title,
     required String body,
@@ -21,7 +21,7 @@ abstract class LocalNotificationsBase {
     void Function(NotificationResponse)? onDidReceiveNotificationResponse,
   });
 
-  Future<void> cancelNotification({required int id});
+  Future<void> cancelNotification({int id = 0});
   Future<void> cancelAllNotifications();
 
   StreamController<NotificationResponse>? fgNotificationController;

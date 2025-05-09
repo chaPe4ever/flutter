@@ -42,7 +42,7 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
               onDidReceiveNotificationResponse != null ||
           onDidReceiveBackgroundNotificationResponse == null &&
               onDidReceiveNotificationResponse == null,
-      ' onDidReceiveBackgroundNotificationResponse and onDidReceiveNotificationResponse must be null or not null at the same time',
+      'onDidReceiveBackgroundNotificationResponse and onDidReceiveNotificationResponse must be null or not null at the same time',
     );
     const initAndroidSettings = AndroidInitializationSettings(
       '@mipmap/ic_launcher',
