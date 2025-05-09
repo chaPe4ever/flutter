@@ -1,5 +1,4 @@
-import 'package:local_notifications/contracts/notification_action_base.dart';
-import 'package:local_notifications/contracts/notification_respponse_base.dart';
+import 'package:local_notifications/local_notifications.dart';
 
 abstract class LocalNotificationsBase {
   Future<void> showNotification({
@@ -15,9 +14,9 @@ abstract class LocalNotificationsBase {
   });
 
   Future<void> init({
-    void Function(NotificationResponseBase)?
+    void Function(NotificationResponse)?
     onDidReceiveBackgroundNotificationResponse,
-    void Function(NotificationResponseBase)? onDidReceiveNotificationResponse,
+    void Function(NotificationResponse)? onDidReceiveNotificationResponse,
   });
 
   Future<void> cancelNotification({required int id});

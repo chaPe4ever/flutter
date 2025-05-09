@@ -1,11 +1,8 @@
-import 'package:core/value_objects/unique_id.dart';
 import 'package:flutter/foundation.dart'
     show TargetPlatform, defaultTargetPlatform;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:local_notifications/adapters/notification_response_adapter.dart';
 import 'package:local_notifications/contracts/local_notifications_base.dart';
 import 'package:local_notifications/contracts/notification_action_base.dart';
-import 'package:local_notifications/contracts/notification_respponse_base.dart';
 import 'package:local_notifications/pods/local_notification_pod.dart';
 
 class LocalNotificationsImpl implements LocalNotificationsBase {
@@ -15,10 +12,17 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
 
   @override
   Future<void> init({
-    void Function(NotificationResponseBase)?
+    void Function(NotificationResponse)?
     onDidReceiveBackgroundNotificationResponse,
-    void Function(NotificationResponseBase)? onDidReceiveNotificationResponse,
+    void Function(NotificationResponse)? onDidReceiveNotificationResponse,
   }) async {
+    assert(
+      onDidReceiveBackgroundNotificationResponse != null &&
+              onDidReceiveNotificationResponse != null ||
+          onDidReceiveBackgroundNotificationResponse == null &&
+              onDidReceiveNotificationResponse == null,
+      ' onDidReceiveBackgroundNotificationResponse and onDidReceiveNotificationResponse must be null or not null at the same time',
+    );
     const initAndroidSettings = AndroidInitializationSettings(
       '@mipmap/ic_launcher',
     );
@@ -32,25 +36,17 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
       iOS: initIosSettings,
       macOS: initMacOSSettings,
     );
-    await notifications.initialize(
-      initializationSettings,
-      onDidReceiveBackgroundNotificationResponse:
-          onDidReceiveBackgroundNotificationResponse == null
-              ? null
-              : (details) {
-                onDidReceiveBackgroundNotificationResponse.call(
-                  NotificationResponseAdapter.adapt(details),
-                );
-              },
-      onDidReceiveNotificationResponse:
-          onDidReceiveNotificationResponse == null
-              ? null
-              : (details) {
-                onDidReceiveNotificationResponse.call(
-                  NotificationResponseAdapter.adapt(details),
-                );
-              },
-    );
+    if (onDidReceiveBackgroundNotificationResponse != null &&
+        onDidReceiveNotificationResponse != null) {
+      await notifications.initialize(
+        initializationSettings,
+        onDidReceiveBackgroundNotificationResponse:
+            onDidReceiveBackgroundNotificationResponse,
+        onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
+      );
+    } else {
+      await notifications.initialize(initializationSettings);
+    }
 
     final _ = switch (defaultTargetPlatform) {
       TargetPlatform.android =>
@@ -86,7 +82,7 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
     int? badgeNumber,
   }) async {
     final androidDetails = AndroidNotificationDetails(
-      channelId ?? UniqueId().requireValue,
+      channelId ?? 'high_importance_channel',
       'High Importance Notifications',
       channelDescription: 'This channel is used for important notifications',
       groupKey: gorupKey,

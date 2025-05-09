@@ -2,7 +2,6 @@ import 'package:core/core.dart' hide id;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:local_notifications/contracts/local_notifications_base.dart';
 import 'package:local_notifications/contracts/notification_action_base.dart';
-import 'package:local_notifications/contracts/notification_respponse_base.dart';
 import 'package:local_notifications/exceptions/local_notifications_exceptions.dart';
 import 'package:local_notifications/implementations/local_notifications_impl.dart';
 import 'package:local_notifications/pods/flutter_notification_plugin_pod.dart';
@@ -21,9 +20,9 @@ class LocalNotifications extends _$LocalNotifications {
   }
 
   Future<void> init({
-    void Function(NotificationResponseBase)?
+    void Function(NotificationResponse)?
     onDidReceiveBackgroundNotificationResponse,
-    void Function(NotificationResponseBase)? onDidReceiveNotificationResponse,
+    void Function(NotificationResponse)? onDidReceiveNotificationResponse,
   }) async {
     if (_isInitialized) {
       return;
