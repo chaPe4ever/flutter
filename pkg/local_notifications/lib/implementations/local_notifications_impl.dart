@@ -87,8 +87,8 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
   }) async {
     final androidDetails = AndroidNotificationDetails(
       channelId ?? UniqueId().requireValue,
-      'channelName',
-      channelDescription: 'channelDescription',
+      'High Importance Notifications',
+      channelDescription: 'This channel is used for important notifications',
       groupKey: gorupKey,
       importance: Importance.max,
       priority: Priority.high,
