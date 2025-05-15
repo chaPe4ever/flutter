@@ -33,8 +33,7 @@ enum BreakpointEnum {
         _ => false,
       } &&
       context.shortestSize >= 600 &&
-      context.width >= m.start &&
-      context.width <= m.end;
+      context.width >= m.start;
 
   static bool isDesktop() =>
       !kIsWeb &&
