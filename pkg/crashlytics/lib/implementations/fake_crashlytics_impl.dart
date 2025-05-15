@@ -5,9 +5,6 @@ final class FakeCrashlyticsImpl implements CrashlyticsBase {
   Future<void> init() => Future.value();
 
   @override
-  Future<void> log({required String message}) => Future.value();
-
-  @override
   Future<void> setCrashlytics({required bool enabled}) => Future.value();
 
   @override
@@ -15,4 +12,16 @@ final class FakeCrashlyticsImpl implements CrashlyticsBase {
 
   @override
   void testCrash() {}
+
+  @override
+  Future<void> captureException(dynamic error, {StackTrace? stackTrace}) {
+    // TODO: implement captureException
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> logEvent({required String message}) {
+    // TODO: implement logEvent
+    throw UnimplementedError();
+  }
 }

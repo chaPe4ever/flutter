@@ -11,7 +11,9 @@ abstract interface class CrashlyticsBase {
   void testCrash();
 
   /// Might throw [CoreException]
-  Future<void> log({required String message});
+  Future<void> logEvent({required String message});
+
+  Future<void> captureException(dynamic error, {StackTrace? stackTrace});
 
   /// Might throw [CoreException]
   Future<void> setUserId({required String userId});

@@ -13,15 +13,6 @@ final class FirebaseCrashlyticsImpl implements CrashlyticsBase {
   final FirebaseCrashlytics _crashlytics;
 
   @override
-  Future<void> log({required String message}) {
-    try {
-      return _crashlytics.log(message);
-    } catch (e, st) {
-      throw UnknownCrashlyticsException(innerError: e, st: st);
-    }
-  }
-
-  @override
   Future<void> setCrashlytics({required bool enabled}) async {
     try {
       return _crashlytics.setCrashlyticsCollectionEnabled(enabled);
@@ -70,6 +61,24 @@ final class FirebaseCrashlyticsImpl implements CrashlyticsBase {
           );
         }).sendPort,
       );
+    } catch (e, st) {
+      throw UnknownCrashlyticsException(innerError: e, st: st);
+    }
+  }
+
+  @override
+  Future<void> captureException(dynamic error, {StackTrace? stackTrace}) {
+    try {
+      return _crashlytics.recordError(error, stackTrace, fatal: true);
+    } catch (e, st) {
+      throw UnknownCrashlyticsException(innerError: e, st: st);
+    }
+  }
+
+  @override
+  Future<void> logEvent({required String message}) {
+    try {
+      return _crashlytics.log(message);
     } catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
