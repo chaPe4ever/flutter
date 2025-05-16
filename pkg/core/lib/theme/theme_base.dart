@@ -9,8 +9,8 @@ abstract class ThemeBase {
   ColorScheme get colorSchemeDark;
 
   /// The light theme data of the app
-  ThemeData get light;
+  ThemeData light(BuildContext context);
 
   /// The dark theme data of the app
-  ThemeData get dark;
+  ThemeData dark(BuildContext context);
 }
