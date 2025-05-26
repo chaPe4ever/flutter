@@ -5,31 +5,42 @@ part 'firebase_pod.g.dart';
 /// Keep the pod singleton
 @Riverpod(keepAlive: true)
 FirebaseFirestore firestore(Ref ref) {
-  FirebaseFirestore.instance.settings = const Settings(
-    cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
-    persistenceEnabled: true,
-    sslEnabled: true,
-    webExperimentalForceLongPolling: true,
-    webExperimentalLongPollingOptions: WebExperimentalLongPollingOptions(
-      timeoutDuration: Duration(seconds: 30),
-    ),
-  );
+  final useEmulator =
+      bool.tryParse(const String.fromEnvironment('USE_FIREBASE_EMULATORS')) ??
+      false;
 
-  void onOnline() {
-    FirebaseFirestore.instance.enableNetwork();
+  if (useEmulator) {
+    FirebaseFirestore.instance.settings = const Settings(
+      persistenceEnabled: false,
+      sslEnabled: false,
+    );
+  } else {
+    FirebaseFirestore.instance.settings = const Settings(
+      cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
+      persistenceEnabled: true,
+      sslEnabled: true,
+      webExperimentalForceLongPolling: true,
+      webExperimentalLongPollingOptions: WebExperimentalLongPollingOptions(
+        timeoutDuration: Duration(seconds: 30),
+      ),
+    );
+
+    void onOnline() {
+      FirebaseFirestore.instance.enableNetwork();
+    }
+
+    void onOffline() {
+      FirebaseFirestore.instance.disableNetwork();
+    }
+
+    ref.read(networkPod).addListener(onOnline: onOnline, onOffline: onOffline);
+
+    ref.onDispose(
+      () => ref
+          .read(networkPod)
+          .removeListener(onOnline: onOnline, onOffline: onOffline),
+    );
   }
-
-  void onOffline() {
-    FirebaseFirestore.instance.disableNetwork();
-  }
-
-  ref.read(networkPod).addListener(onOnline: onOnline, onOffline: onOffline);
-
-  ref.onDispose(
-    () => ref
-        .read(networkPod)
-        .removeListener(onOnline: onOnline, onOffline: onOffline),
-  );
 
   return FirebaseFirestore.instance;
 }

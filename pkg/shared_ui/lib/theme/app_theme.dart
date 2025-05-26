@@ -84,7 +84,7 @@ class AppTheme extends ThemeBase {
       );
 
   @override
-  ThemeData get light => ThemeData(
+  ThemeData light(BuildContext context) => ThemeData(
         snackBarTheme: SnackBarThemes.light(),
         searchBarTheme: SearchbarThemes.light(),
         dropdownMenuTheme: DropdownMenuThemes.light(),
@@ -129,7 +129,7 @@ class AppTheme extends ThemeBase {
       );
 
   @override
-  ThemeData get dark => ThemeData(
+  ThemeData dark(BuildContext context) => ThemeData(
         snackBarTheme: SnackBarThemes.dark(),
         searchBarTheme: SearchbarThemes.dark(),
         dropdownMenuTheme: DropdownMenuThemes.dark(),

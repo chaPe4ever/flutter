@@ -6,7 +6,7 @@ part of 'firebase_pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firestoreHash() => r'235f307656cd568658800cc3db03a73039aacc71';
+String _$firestoreHash() => r'ea545ab322745f4c35e7f3eade2beca7dd8e0b85';
 
 /// Keep the pod singleton
 ///
