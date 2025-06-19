@@ -6,7 +6,7 @@ part of 'crashlytics_pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$crashlyticsHash() => r'55da27f71394f0a39c433709fa63a43cb55f565d';
+String _$crashlyticsHash() => r'4ac36cdeb0aba8b7e2868d38f376a36c656cc2ec';
 
 ///
 ///

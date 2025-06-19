@@ -24,7 +24,7 @@ final firestorePod = Provider<FirebaseFirestore>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FirestoreRef = ProviderRef<FirebaseFirestore>;
-String _$functionsHash() => r'ca653b80ab5e6cdbd28dd377efe48a749bb5e060';
+String _$functionsHash() => r'a2dae6af90be9cac3b601637cfd5e8200f29b171';
 
 /// Copied from Dart SDK
 class _SystemHash {
