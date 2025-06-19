@@ -8,4 +8,9 @@ part 'remote_storage_pod.g.dart';
 ///
 @Riverpod(keepAlive: true)
 RemoteStorageBase remoteStorage(Ref ref) =>
-    FirebaseRemoteStorageImpl(firebaseStorage: FirebaseStorage.instance);
+    FirebaseRemoteStorageImpl(firebaseStorage: ref.watch(firebaseStoragePod));
+
+@Riverpod(keepAlive: true)
+FirebaseStorage firebaseStorage(Ref ref) {
+  return FirebaseStorage.instance;
+}
