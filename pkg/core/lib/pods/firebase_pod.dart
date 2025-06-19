@@ -47,8 +47,11 @@ FirebaseFirestore firestore(Ref ref) {
 
 /// Keep the pod singleton
 @Riverpod(keepAlive: true)
-FirebaseFunctions functions(Ref ref, {String region = 'europe-west3'}) =>
-    FirebaseFunctions.instanceFor(region: region);
+FirebaseFunctions functions(Ref ref, {String region = 'europe-west3'}) {
+  final app = FirebaseFunctions.instance.app;
+
+  return FirebaseFunctions.instanceFor(app: app, region: region);
+}
 
 /// Keep the pod singleton
 @Riverpod(keepAlive: true)
