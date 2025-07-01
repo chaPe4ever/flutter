@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 class CardThemes {
-  static CardTheme light() {
-    return CardTheme(
+  static CardThemeData light() {
+    return CardThemeData(
       shadowColor: AppSemanticColors.light.overlay50,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(AppRadius.xs),
@@ -12,8 +12,8 @@ class CardThemes {
     );
   }
 
-  static CardTheme dark() {
-    return CardTheme(
+  static CardThemeData dark() {
+    return CardThemeData(
       shadowColor: AppSemanticColors.light.overlay50,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(AppRadius.xs),

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 class TabBarThemes {
-  static TabBarTheme light() {
-    return TabBarTheme(
+  static TabBarThemeData light() {
+    return TabBarThemeData(
       dividerHeight: 0.5,
       overlayColor: WidgetStateColor.transparent,
       splashFactory: NoSplash.splashFactory,
@@ -19,8 +19,8 @@ class TabBarThemes {
     );
   }
 
-  static TabBarTheme dark() {
-    return TabBarTheme(
+  static TabBarThemeData dark() {
+    return TabBarThemeData(
       dividerHeight: 0.5,
       overlayColor: WidgetStateColor.transparent,
       splashFactory: NoSplash.splashFactory,
