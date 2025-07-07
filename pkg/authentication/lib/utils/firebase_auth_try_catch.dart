@@ -11,13 +11,12 @@ Future<Option<AuthenticationEx>> futureOptionAuthTryCatch(
   return cb()
       .then((_) => none<AuthenticationEx>())
       .catchError(
-        (Object e, StackTrace st) =>
-            _eitherErrorHandlerCb<Unit>(
-              e,
-              st,
-              customException: customException,
-              logger: logger,
-            ).swap().toOption(),
+        (Object e, StackTrace st) => _eitherErrorHandlerCb<Unit>(
+          e,
+          st,
+          customException: customException,
+          logger: logger,
+        ).swap().toOption(),
       );
 }
 

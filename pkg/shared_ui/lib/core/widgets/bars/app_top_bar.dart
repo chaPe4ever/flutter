@@ -28,8 +28,14 @@ class AppTopBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isParentPage = context
-            .goRouter.routeInformationProvider.value.uri.pathSegments.length <=
+    final isParentPage =
+        context
+            .goRouter
+            .routeInformationProvider
+            .value
+            .uri
+            .pathSegments
+            .length <=
         1;
 
     final leadingFallback = this.isParentPage ?? isParentPage
@@ -81,11 +87,13 @@ class UserAction extends ActionBase {
   Widget build(BuildContext context) {
     return TouchableWidget(
       onTap: model?.onTap ?? () {},
-      child: model?.icon ??
+      child:
+          model?.icon ??
           Assets.svg.person.svgFromUIPkg(
             context,
-            color:
-                model?.onTap == null ? context.colors.backgroundDisabled : null,
+            color: model?.onTap == null
+                ? context.colors.backgroundDisabled
+                : null,
           ),
     );
   }
@@ -97,11 +105,13 @@ final class ChatAction extends ActionBase {
   Widget build(BuildContext context) {
     return TouchableWidget(
       onTap: model?.onTap ?? () {},
-      child: model?.icon ??
+      child:
+          model?.icon ??
           Assets.svg.chat.svgFromUIPkg(
             context,
-            color:
-                model?.onTap == null ? context.colors.backgroundDisabled : null,
+            color: model?.onTap == null
+                ? context.colors.backgroundDisabled
+                : null,
           ),
     );
   }

@@ -24,15 +24,14 @@ class AppDialog extends StatelessWidget {
     String? content,
     VoidCallback? onPrimaryTap,
     Key? key,
-  }) =>
-      AppDialog._(
-        key: key,
-        AppDialogType.primary,
-        title: title,
-        content: content,
-        primaryText: primaryText,
-        onPrimaryTap: onPrimaryTap,
-      );
+  }) => AppDialog._(
+    key: key,
+    AppDialogType.primary,
+    title: title,
+    content: content,
+    primaryText: primaryText,
+    onPrimaryTap: onPrimaryTap,
+  );
 
   factory AppDialog.secondary({
     required String title,
@@ -42,17 +41,16 @@ class AppDialog extends StatelessWidget {
     VoidCallback? onPrimaryTap,
     VoidCallback? onSecondaryTap,
     Key? key,
-  }) =>
-      AppDialog._(
-        key: key,
-        AppDialogType.secondary,
-        title: title,
-        content: content,
-        primaryText: primaryText,
-        onPrimaryTap: onPrimaryTap,
-        secondaryText: secondaryText,
-        onSecondaryTap: onSecondaryTap,
-      );
+  }) => AppDialog._(
+    key: key,
+    AppDialogType.secondary,
+    title: title,
+    content: content,
+    primaryText: primaryText,
+    onPrimaryTap: onPrimaryTap,
+    secondaryText: secondaryText,
+    onSecondaryTap: onSecondaryTap,
+  );
 
   factory AppDialog.danger({
     required String title,
@@ -62,17 +60,16 @@ class AppDialog extends StatelessWidget {
     VoidCallback? onSecondaryTap,
     VoidCallback? onDangerTap,
     Key? key,
-  }) =>
-      AppDialog._(
-        key: key,
-        AppDialogType.danger,
-        title: title,
-        content: content,
-        secondaryText: secondaryText,
-        dangerText: dangerText,
-        onSecondaryTap: onSecondaryTap,
-        onDangerTap: onDangerTap,
-      );
+  }) => AppDialog._(
+    key: key,
+    AppDialogType.danger,
+    title: title,
+    content: content,
+    secondaryText: secondaryText,
+    dangerText: dangerText,
+    onSecondaryTap: onSecondaryTap,
+    onDangerTap: onDangerTap,
+  );
 
   final String title;
   final String? content;
@@ -95,36 +92,36 @@ class AppDialog extends StatelessWidget {
           spacing: AppSpacing.contentM,
           children: switch (_type) {
             AppDialogType.primary => [
-                if (primaryText != null)
-                  AppButton.primary(
-                    onTap: onPrimaryTap ?? context.navigatorPop,
-                    label: primaryText ?? '',
-                  ),
-              ],
+              if (primaryText != null)
+                AppButton.primary(
+                  onTap: onPrimaryTap ?? context.navigatorPop,
+                  label: primaryText ?? '',
+                ),
+            ],
             AppDialogType.secondary => [
-                if (secondaryText != null && primaryText != null) ...[
-                  AppButton.secondary(
-                    onTap: onSecondaryTap ?? context.navigatorPop,
-                    label: secondaryText ?? '',
-                  ),
-                  AppButton.primary(
-                    onTap: onPrimaryTap ?? context.navigatorPop,
-                    label: primaryText ?? '',
-                  ),
-                ],
+              if (secondaryText != null && primaryText != null) ...[
+                AppButton.secondary(
+                  onTap: onSecondaryTap ?? context.navigatorPop,
+                  label: secondaryText ?? '',
+                ),
+                AppButton.primary(
+                  onTap: onPrimaryTap ?? context.navigatorPop,
+                  label: primaryText ?? '',
+                ),
               ],
+            ],
             AppDialogType.danger => [
-                if (dangerText != null && secondaryText != null) ...[
-                  AppButton.danger(
-                    onTap: onDangerTap ?? context.navigatorPop,
-                    label: dangerText ?? '',
-                  ),
-                  AppButton.secondary(
-                    onTap: onSecondaryTap ?? context.navigatorPop,
-                    label: secondaryText ?? '',
-                  ),
-                ],
+              if (dangerText != null && secondaryText != null) ...[
+                AppButton.danger(
+                  onTap: onDangerTap ?? context.navigatorPop,
+                  label: dangerText ?? '',
+                ),
+                AppButton.secondary(
+                  onTap: onSecondaryTap ?? context.navigatorPop,
+                  label: secondaryText ?? '',
+                ),
               ],
+            ],
           },
         ),
       ],

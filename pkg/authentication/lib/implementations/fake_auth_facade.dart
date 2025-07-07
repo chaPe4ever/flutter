@@ -208,13 +208,13 @@ final class FakeAuthFacade implements AuthFacade {
       return e.code == 'requires-recent-login'
           ? some(const RequiresRecentLoginException())
           : some(
-            FirebaseAuthRawException(
-              innerError: e,
-              innerMessage: e.message,
-              innerCode: e.code,
-              st: st,
-            ),
-          );
+              FirebaseAuthRawException(
+                innerError: e,
+                innerMessage: e.message,
+                innerCode: e.code,
+                st: st,
+              ),
+            );
     }
   }
 
@@ -237,13 +237,13 @@ final class FakeAuthFacade implements AuthFacade {
       return e.code == 'requires-recent-login'
           ? some(const RequiresRecentLoginException())
           : some(
-            FirebaseAuthRawException(
-              innerError: e,
-              innerMessage: e.message,
-              innerCode: e.code,
-              st: st,
-            ),
-          );
+              FirebaseAuthRawException(
+                innerError: e,
+                innerMessage: e.message,
+                innerCode: e.code,
+                st: st,
+              ),
+            );
     }
   }
 
@@ -278,11 +278,11 @@ final class FakeAuthFacade implements AuthFacade {
         (e.code == 'wrong-password')
             ? const InvalidPasswordException()
             : FirebaseAuthRawException(
-              innerError: e,
-              innerMessage: e.message,
-              innerCode: e.code,
-              st: st,
-            ),
+                innerError: e,
+                innerMessage: e.message,
+                innerCode: e.code,
+                st: st,
+              ),
       );
     }
   }

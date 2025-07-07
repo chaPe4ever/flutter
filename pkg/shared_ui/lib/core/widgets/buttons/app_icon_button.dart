@@ -117,19 +117,19 @@ class AppIconButton extends IconButtonBase {
   double? size(BuildContext context) {
     return switch (type) {
       IconButtonType.back => context.responsive(
-          AppSpacing.sectionS,
-          s: AppSpacing.sectionS,
-          m: AppSpacing.sectionS,
-          l: AppSpacing.sectionM,
-          xl: AppSpacing.sectionM,
-        ),
+        AppSpacing.sectionS,
+        s: AppSpacing.sectionS,
+        m: AppSpacing.sectionS,
+        l: AppSpacing.sectionM,
+        xl: AppSpacing.sectionM,
+      ),
       _ => context.responsive(
-          AppSpacing.contentXL,
-          s: AppSpacing.contentXL,
-          m: AppSpacing.contentXL,
-          l: AppSpacing.sectionS,
-          xl: AppSpacing.sectionS,
-        ),
+        AppSpacing.contentXL,
+        s: AppSpacing.contentXL,
+        m: AppSpacing.contentXL,
+        l: AppSpacing.sectionS,
+        xl: AppSpacing.sectionS,
+      ),
     };
   }
 

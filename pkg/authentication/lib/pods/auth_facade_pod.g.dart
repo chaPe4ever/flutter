@@ -15,8 +15,9 @@ String _$authFacadeHash() => r'dc96f2ed6b0af6d0e46b891390e6cbaf0d53ba33';
 final authFacadePod = Provider<AuthFacade>.internal(
   authFacade,
   name: r'authFacadePod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$authFacadeHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authFacadeHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -31,8 +32,9 @@ String _$firebaseAuthHash() => r'cb440927c3ab863427fd4b052a8ccba4c024c863';
 final firebaseAuthPod = Provider<FirebaseAuth>.internal(
   firebaseAuth,
   name: r'firebaseAuthPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$firebaseAuthHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$firebaseAuthHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

@@ -66,9 +66,9 @@ extension BoolExtensions on bool {
 extension ObjectX on Object {
   CoreException toCoreException({CoreException? customEx}) =>
       this is CoreException
-          ? this as CoreException
-          : customEx ??
-              UnknownCoreException(innerError: this, st: StackTrace.current);
+      ? this as CoreException
+      : customEx ??
+            UnknownCoreException(innerError: this, st: StackTrace.current);
 }
 
 extension ValueNotifierX on ValueNotifier<bool> {

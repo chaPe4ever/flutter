@@ -1,6 +1,6 @@
 /// This is the core library used for all projects and thus should
 /// contain only functionality that is globally used
-library core;
+library;
 
 export 'package:async/async.dart' hide Result;
 export 'package:cached_network_image/cached_network_image.dart';
@@ -56,7 +56,7 @@ export 'package:json_annotation/json_annotation.dart';
 export 'package:logger/logger.dart';
 export 'package:package_info_plus/package_info_plus.dart';
 export 'package:path_provider/path_provider.dart';
-export 'package:pdfrx/pdfrx.dart' hide MapExtension;
+export 'package:pdfrx/pdfrx.dart';
 export 'package:permission_handler/permission_handler.dart';
 export 'package:pretty_dio_logger/pretty_dio_logger.dart';
 // ignore: invalid_export_of_internal_element
@@ -65,7 +65,6 @@ export 'package:rxdart/rxdart.dart';
 export 'package:share_plus/share_plus.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:shimmer/shimmer.dart';
-export 'package:signals/signals.dart' hide AsyncData, AsyncError, AsyncLoading;
 export 'package:signals/signals_flutter.dart'
     hide AsyncData, AsyncError, AsyncLoading;
 export 'package:timezone/timezone.dart';

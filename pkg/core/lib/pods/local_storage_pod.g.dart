@@ -14,13 +14,14 @@ String _$localStorageHash() => r'd307670e7d021c789781302b1e69b085331d2c91';
 @ProviderFor(LocalStorage)
 final localStoragePod =
     AutoDisposeNotifierProvider<LocalStorage, LocalStorageBase>.internal(
-  LocalStorage.new,
-  name: r'localStoragePod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$localStorageHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      LocalStorage.new,
+      name: r'localStoragePod',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$localStorageHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$LocalStorage = AutoDisposeNotifier<LocalStorageBase>;
 // ignore_for_file: type=lint

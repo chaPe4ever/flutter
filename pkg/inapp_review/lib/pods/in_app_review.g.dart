@@ -15,8 +15,9 @@ String _$inAppReviewHash() => r'55f9d081d3567d1f94e18bd68dd81deb208c8bb4';
 final inAppReviewPod = Provider<InAppReview>.internal(
   inAppReview,
   name: r'inAppReviewPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$inAppReviewHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$inAppReviewHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

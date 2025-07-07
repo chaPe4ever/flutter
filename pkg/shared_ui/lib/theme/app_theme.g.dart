@@ -13,8 +13,9 @@ String _$themeHash() => r'5acefb10ef5243bd03eeafa6eccb3ff884f703d9';
 final themePod = Provider<ThemeBase>.internal(
   theme,
   name: r'themePod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$themeHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$themeHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

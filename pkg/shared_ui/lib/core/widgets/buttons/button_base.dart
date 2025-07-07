@@ -72,125 +72,125 @@ abstract class ButtonBase extends StatelessWidget {
   BorderSide disabledBorder(BuildContext context) => BorderSide.none;
 
   ButtonStyle buttonStyle(BuildContext context) => ButtonStyle(
-        elevation: WidgetStateProperty.all(0),
-        splashFactory: NoSplash.splashFactory,
-        shape: WidgetStateProperty.resolveWith(
-          (states) {
-            const shape = RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(AppRadius.pill),
-            );
+    elevation: WidgetStateProperty.all(0),
+    splashFactory: NoSplash.splashFactory,
+    shape: WidgetStateProperty.resolveWith(
+      (states) {
+        const shape = RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(AppRadius.pill),
+        );
 
-            if (states.contains(WidgetState.disabled)) {
-              return shape.copyWith(side: disabledBorder(context));
-            }
+        if (states.contains(WidgetState.disabled)) {
+          return shape.copyWith(side: disabledBorder(context));
+        }
 
-            if (states.contains(WidgetState.focused)) {
-              return shape.copyWith(side: focusedBorder(context));
-            }
+        if (states.contains(WidgetState.focused)) {
+          return shape.copyWith(side: focusedBorder(context));
+        }
 
-            if (states.contains(WidgetState.hovered)) {
-              return shape.copyWith(side: hoverBorder(context));
-            }
+        if (states.contains(WidgetState.hovered)) {
+          return shape.copyWith(side: hoverBorder(context));
+        }
 
-            if (states.contains(WidgetState.pressed)) {
-              return shape.copyWith(side: focusedBorder(context));
-            }
+        if (states.contains(WidgetState.pressed)) {
+          return shape.copyWith(side: focusedBorder(context));
+        }
 
-            return shape.copyWith(side: defaultBorder(context));
-          },
-        ),
-        overlayColor: WidgetStateProperty.resolveWith(
-          (states) {
-            if (states.contains(WidgetState.disabled)) {
-              return disabledColor(context);
-            }
+        return shape.copyWith(side: defaultBorder(context));
+      },
+    ),
+    overlayColor: WidgetStateProperty.resolveWith(
+      (states) {
+        if (states.contains(WidgetState.disabled)) {
+          return disabledColor(context);
+        }
 
-            if (states.contains(WidgetState.hovered)) {
-              return hoverColor(context);
-            }
+        if (states.contains(WidgetState.hovered)) {
+          return hoverColor(context);
+        }
 
-            if (states.contains(WidgetState.focused)) {
-              return focusColor(context);
-            }
+        if (states.contains(WidgetState.focused)) {
+          return focusColor(context);
+        }
 
-            if (states.contains(WidgetState.pressed)) {
-              return pressedColor(context);
-            }
+        if (states.contains(WidgetState.pressed)) {
+          return pressedColor(context);
+        }
 
-            if (states.contains(WidgetState.error)) {
-              return errorColor(context);
-            }
+        if (states.contains(WidgetState.error)) {
+          return errorColor(context);
+        }
 
-            if (states.contains(WidgetState.selected)) {
-              return selectedColor(context);
-            }
+        if (states.contains(WidgetState.selected)) {
+          return selectedColor(context);
+        }
 
-            return backgroundColor(context);
-          },
-        ),
-        backgroundColor: WidgetStateProperty.resolveWith(
-          (states) {
-            if (states.contains(WidgetState.disabled)) {
-              return disabledColor(context);
-            }
+        return backgroundColor(context);
+      },
+    ),
+    backgroundColor: WidgetStateProperty.resolveWith(
+      (states) {
+        if (states.contains(WidgetState.disabled)) {
+          return disabledColor(context);
+        }
 
-            if (states.contains(WidgetState.hovered)) {
-              return hoverColor(context);
-            }
+        if (states.contains(WidgetState.hovered)) {
+          return hoverColor(context);
+        }
 
-            if (states.contains(WidgetState.focused)) {
-              return focusColor(context);
-            }
+        if (states.contains(WidgetState.focused)) {
+          return focusColor(context);
+        }
 
-            if (states.contains(WidgetState.pressed)) {
-              return pressedColor(context);
-            }
+        if (states.contains(WidgetState.pressed)) {
+          return pressedColor(context);
+        }
 
-            if (states.contains(WidgetState.error)) {
-              return errorColor(context);
-            }
+        if (states.contains(WidgetState.error)) {
+          return errorColor(context);
+        }
 
-            if (states.contains(WidgetState.selected)) {
-              return selectedColor(context);
-            }
+        if (states.contains(WidgetState.selected)) {
+          return selectedColor(context);
+        }
 
-            return backgroundColor(context);
-          },
-        ),
-        foregroundColor: WidgetStateProperty.resolveWith(
-          (states) {
-            if (states.contains(WidgetState.disabled)) {
-              return disabledChildElementColor(context);
-            }
-            if (states.contains(WidgetState.hovered)) {
-              return hoverChildElementColor(context);
-            }
+        return backgroundColor(context);
+      },
+    ),
+    foregroundColor: WidgetStateProperty.resolveWith(
+      (states) {
+        if (states.contains(WidgetState.disabled)) {
+          return disabledChildElementColor(context);
+        }
+        if (states.contains(WidgetState.hovered)) {
+          return hoverChildElementColor(context);
+        }
 
-            return childElementColor(context);
-          },
-        ),
-        textStyle: WidgetStateProperty.resolveWith(
-          (states) {
-            return context.responsive(
-              context.textStyles.labelM,
-              mobile: context.textStyles.labelL,
-              tablet: context.textStyles.labelL,
-              desktop: context.textStyles.labelL,
-            );
-          },
-        ),
-        iconSize: WidgetStateProperty.resolveWith(
-          (states) {
-            return context.responsive(
-              AppSpacing.contentXL,
-              s: AppSpacing.contentXL,
-              m: AppSpacing.contentXL,
-              l: AppSpacing.sectionS,
-              xl: AppSpacing.sectionS,
-            );
-          },
-        ),
-      );
+        return childElementColor(context);
+      },
+    ),
+    textStyle: WidgetStateProperty.resolveWith(
+      (states) {
+        return context.responsive(
+          context.textStyles.labelM,
+          mobile: context.textStyles.labelL,
+          tablet: context.textStyles.labelL,
+          desktop: context.textStyles.labelL,
+        );
+      },
+    ),
+    iconSize: WidgetStateProperty.resolveWith(
+      (states) {
+        return context.responsive(
+          AppSpacing.contentXL,
+          s: AppSpacing.contentXL,
+          m: AppSpacing.contentXL,
+          l: AppSpacing.sectionS,
+          xl: AppSpacing.sectionS,
+        );
+      },
+    ),
+  );
 }
 
 abstract class ElevatedButtonBase extends ButtonBase {
@@ -368,9 +368,9 @@ abstract class IconButtonBase extends ButtonBase {
     this.onTap,
     this.fixedSize,
   }) : assert(
-          svg != null || icon != null,
-          'Either svg or icon must be provided',
-        );
+         svg != null || icon != null,
+         'Either svg or icon must be provided',
+       );
 
   /// The svg for the icon button.
   final SvgPicture? svg;
@@ -406,7 +406,8 @@ abstract class IconButtonBase extends ButtonBase {
             : MaterialTapTargetSize.padded,
       ),
       onPressed: createDebouncedCallback(onTap, debounce: _debounce),
-      icon: svg?.copyWith(
+      icon:
+          svg?.copyWith(
             color: onTap != null
                 ? childElementColor(context)
                 : disabledChildElementColor(context),

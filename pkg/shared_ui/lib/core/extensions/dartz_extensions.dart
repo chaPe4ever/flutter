@@ -10,16 +10,15 @@ extension EitherEx<T> on Either<CoreException, T> {
   Widget whenDataElseSnackbar(
     Widget Function(T) data, {
     required BuildContext context,
-  }) =>
-      fold(
-        (l) {
-          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-            context.showSnackBar(text: l.messageKey.tr());
-          });
-          return const SizedBox();
-        },
-        (r) => data(r),
-      );
+  }) => fold(
+    (l) {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        context.showSnackBar(text: l.messageKey.tr());
+      });
+      return const SizedBox();
+    },
+    (r) => data(r),
+  );
 
   /// A cb fnction that handles the data and error, and shows a snackbar in
   /// case of an error.
@@ -27,16 +26,15 @@ extension EitherEx<T> on Either<CoreException, T> {
     FutureOr<void> Function(T) data, {
     required BuildContext context,
     FutureOr<void> Function(CoreException l)? onError,
-  }) async =>
-      fold(
-        (l) async {
-          await onError?.call(l);
-          SchedulerBinding.instance.addPostFrameCallback((_) {
-            if (context.mounted) {
-              context.showSnackBar(text: l.messageKey.tr());
-            }
-          });
-        },
-        (r) async => data(r),
-      );
+  }) async => fold(
+    (l) async {
+      await onError?.call(l);
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (context.mounted) {
+          context.showSnackBar(text: l.messageKey.tr());
+        }
+      });
+    },
+    (r) async => data(r),
+  );
 }

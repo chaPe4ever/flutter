@@ -1,3 +1,4 @@
+// dart format width=80
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -9,185 +10,154 @@ part of 'file_model.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-FileModel _$FileModelFromJson(Map<String, dynamic> json) {
-  return _FileModel.fromJson(json);
-}
-
 /// @nodoc
-mixin _$FileModel {
-  String get fileName => throw _privateConstructorUsedError;
-  String get base64FileBytes => throw _privateConstructorUsedError;
+mixin _$FileModel implements DiagnosticableTreeMixin {
+
+ String get fileName; String get base64FileBytes;
+/// Create a copy of FileModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$FileModelCopyWith<FileModel> get copyWith => _$FileModelCopyWithImpl<FileModel>(this as FileModel, _$identity);
 
   /// Serializes this FileModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson();
 
-  /// Create a copy of FileModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $FileModelCopyWith<FileModel> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'FileModel'))
+    ..add(DiagnosticsProperty('fileName', fileName))..add(DiagnosticsProperty('base64FileBytes', base64FileBytes));
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FileModel&&(identical(other.fileName, fileName) || other.fileName == fileName)&&(identical(other.base64FileBytes, base64FileBytes) || other.base64FileBytes == base64FileBytes));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,fileName,base64FileBytes);
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'FileModel(fileName: $fileName, base64FileBytes: $base64FileBytes)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $FileModelCopyWith<$Res> {
-  factory $FileModelCopyWith(FileModel value, $Res Function(FileModel) then) =
-      _$FileModelCopyWithImpl<$Res, FileModel>;
-  @useResult
-  $Res call({String fileName, String base64FileBytes});
-}
+abstract mixin class $FileModelCopyWith<$Res>  {
+  factory $FileModelCopyWith(FileModel value, $Res Function(FileModel) _then) = _$FileModelCopyWithImpl;
+@useResult
+$Res call({
+ String fileName, String base64FileBytes
+});
 
+
+
+
+}
 /// @nodoc
-class _$FileModelCopyWithImpl<$Res, $Val extends FileModel>
+class _$FileModelCopyWithImpl<$Res>
     implements $FileModelCopyWith<$Res> {
-  _$FileModelCopyWithImpl(this._value, this._then);
+  _$FileModelCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final FileModel _self;
+  final $Res Function(FileModel) _then;
 
-  /// Create a copy of FileModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? fileName = null,
-    Object? base64FileBytes = null,
-  }) {
-    return _then(_value.copyWith(
-      fileName: null == fileName
-          ? _value.fileName
-          : fileName // ignore: cast_nullable_to_non_nullable
-              as String,
-      base64FileBytes: null == base64FileBytes
-          ? _value.base64FileBytes
-          : base64FileBytes // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
+/// Create a copy of FileModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? fileName = null,Object? base64FileBytes = null,}) {
+  return _then(_self.copyWith(
+fileName: null == fileName ? _self.fileName : fileName // ignore: cast_nullable_to_non_nullable
+as String,base64FileBytes: null == base64FileBytes ? _self.base64FileBytes : base64FileBytes // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-abstract class _$$FileModelImplCopyWith<$Res>
-    implements $FileModelCopyWith<$Res> {
-  factory _$$FileModelImplCopyWith(
-          _$FileModelImpl value, $Res Function(_$FileModelImpl) then) =
-      __$$FileModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String fileName, String base64FileBytes});
 }
 
-/// @nodoc
-class __$$FileModelImplCopyWithImpl<$Res>
-    extends _$FileModelCopyWithImpl<$Res, _$FileModelImpl>
-    implements _$$FileModelImplCopyWith<$Res> {
-  __$$FileModelImplCopyWithImpl(
-      _$FileModelImpl _value, $Res Function(_$FileModelImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of FileModel
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? fileName = null,
-    Object? base64FileBytes = null,
-  }) {
-    return _then(_$FileModelImpl(
-      fileName: null == fileName
-          ? _value.fileName
-          : fileName // ignore: cast_nullable_to_non_nullable
-              as String,
-      base64FileBytes: null == base64FileBytes
-          ? _value.base64FileBytes
-          : base64FileBytes // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
 
 /// @nodoc
 @JsonSerializable()
-class _$FileModelImpl with DiagnosticableTreeMixin implements _FileModel {
-  const _$FileModelImpl(
-      {required this.fileName, required this.base64FileBytes});
 
-  factory _$FileModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$FileModelImplFromJson(json);
+class _FileModel with DiagnosticableTreeMixin implements FileModel {
+  const _FileModel({required this.fileName, required this.base64FileBytes});
+  factory _FileModel.fromJson(Map<String, dynamic> json) => _$FileModelFromJson(json);
 
-  @override
-  final String fileName;
-  @override
-  final String base64FileBytes;
+@override final  String fileName;
+@override final  String base64FileBytes;
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FileModel(fileName: $fileName, base64FileBytes: $base64FileBytes)';
-  }
+/// Create a copy of FileModel
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$FileModelCopyWith<_FileModel> get copyWith => __$FileModelCopyWithImpl<_FileModel>(this, _$identity);
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'FileModel'))
-      ..add(DiagnosticsProperty('fileName', fileName))
-      ..add(DiagnosticsProperty('base64FileBytes', base64FileBytes));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$FileModelImpl &&
-            (identical(other.fileName, fileName) ||
-                other.fileName == fileName) &&
-            (identical(other.base64FileBytes, base64FileBytes) ||
-                other.base64FileBytes == base64FileBytes));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, fileName, base64FileBytes);
-
-  /// Create a copy of FileModel
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$FileModelImplCopyWith<_$FileModelImpl> get copyWith =>
-      __$$FileModelImplCopyWithImpl<_$FileModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$FileModelImplToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$FileModelToJson(this, );
+}
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'FileModel'))
+    ..add(DiagnosticsProperty('fileName', fileName))..add(DiagnosticsProperty('base64FileBytes', base64FileBytes));
 }
 
-abstract class _FileModel implements FileModel {
-  const factory _FileModel(
-      {required final String fileName,
-      required final String base64FileBytes}) = _$FileModelImpl;
-
-  factory _FileModel.fromJson(Map<String, dynamic> json) =
-      _$FileModelImpl.fromJson;
-
-  @override
-  String get fileName;
-  @override
-  String get base64FileBytes;
-
-  /// Create a copy of FileModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FileModelImplCopyWith<_$FileModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FileModel&&(identical(other.fileName, fileName) || other.fileName == fileName)&&(identical(other.base64FileBytes, base64FileBytes) || other.base64FileBytes == base64FileBytes));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,fileName,base64FileBytes);
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'FileModel(fileName: $fileName, base64FileBytes: $base64FileBytes)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$FileModelCopyWith<$Res> implements $FileModelCopyWith<$Res> {
+  factory _$FileModelCopyWith(_FileModel value, $Res Function(_FileModel) _then) = __$FileModelCopyWithImpl;
+@override @useResult
+$Res call({
+ String fileName, String base64FileBytes
+});
+
+
+
+
+}
+/// @nodoc
+class __$FileModelCopyWithImpl<$Res>
+    implements _$FileModelCopyWith<$Res> {
+  __$FileModelCopyWithImpl(this._self, this._then);
+
+  final _FileModel _self;
+  final $Res Function(_FileModel) _then;
+
+/// Create a copy of FileModel
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? fileName = null,Object? base64FileBytes = null,}) {
+  return _then(_FileModel(
+fileName: null == fileName ? _self.fileName : fileName // ignore: cast_nullable_to_non_nullable
+as String,base64FileBytes: null == base64FileBytes ? _self.base64FileBytes : base64FileBytes // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+// dart format on

@@ -39,13 +39,15 @@ class _AppDropdownButtonState extends State<AppDropdownButton> {
         errorTextSignal.value = error ?? widget.errorText ?? '';
         return error;
       },
-      decoration: widget.decoration(context)?.copyWith(
+      decoration: widget
+          .decoration(context)
+          ?.copyWith(
             labelStyle: context.textStyles.bodyS.copyWith(
               color: errorTextSignal.watch(context).isNotEmpty
                   ? context.colors.contentNegative
                   : widget.helperText != null
-                      ? context.colors.contentSupport
-                      : context.colors.contentPrimary,
+                  ? context.colors.contentSupport
+                  : context.colors.contentPrimary,
             ),
           ),
       icon: Icon(

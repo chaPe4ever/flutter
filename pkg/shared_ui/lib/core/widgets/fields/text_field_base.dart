@@ -7,24 +7,24 @@ abstract class TextFieldBase extends StatefulWidget {
   const TextFieldBase({super.key});
 
   TextStyle style(BuildContext context) => WidgetStateTextStyle.resolveWith(
-        (states) {
-          late final Color textColor;
+    (states) {
+      late final Color textColor;
 
-          if (states.contains(WidgetState.error)) {
-            textColor = context.colors.contentNegative;
-          } else if (states.contains(WidgetState.focused)) {
-            textColor = context.colors.borderFocused;
-          } else if (states.contains(WidgetState.disabled)) {
-            textColor = context.colors.contentDisabled;
-          } else {
-            textColor = context.colors.contentPrimary;
-          }
+      if (states.contains(WidgetState.error)) {
+        textColor = context.colors.contentNegative;
+      } else if (states.contains(WidgetState.focused)) {
+        textColor = context.colors.borderFocused;
+      } else if (states.contains(WidgetState.disabled)) {
+        textColor = context.colors.contentDisabled;
+      } else {
+        textColor = context.colors.contentPrimary;
+      }
 
-          return context.textStyles.bodyS.copyWith(
-            color: textColor,
-          );
-        },
+      return context.textStyles.bodyS.copyWith(
+        color: textColor,
       );
+    },
+  );
 }
 
 abstract class OutlineTextFieldBase<T extends Object> extends TextFieldBase {
@@ -209,8 +209,8 @@ class _OutlineTextFieldBaseState extends State<OutlineTextFieldBase> {
           color: errorText.watch(context).isNotEmpty
               ? context.colors.contentNegative
               : widget.helperText != null
-                  ? context.colors.contentSupport
-                  : context.colors.contentPrimary,
+              ? context.colors.contentSupport
+              : context.colors.contentPrimary,
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
@@ -230,11 +230,12 @@ class _OutlineTextFieldBaseState extends State<OutlineTextFieldBase> {
                   color: context.colors.contentPrimary,
                 ),
                 onTap: () =>
-                    Future.sync(() => widget.onClearButtonPressed?.call())
-                        .then((_) {
-                  tfText.value = '';
-                  textController.clear();
-                }),
+                    Future.sync(() => widget.onClearButtonPressed?.call()).then(
+                      (_) {
+                        tfText.value = '';
+                        textController.clear();
+                      },
+                    ),
               ),
             ),
             Visibility(

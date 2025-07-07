@@ -4,8 +4,10 @@ import 'package:shared_ui/shared_ui.dart';
 class ButtonThemes {
   static const Duration _animationDuration = Duration(milliseconds: 260);
 
-  static const Size _minimumButtonSize =
-      Size(AppSpacing.sectionS, AppSpacing.sectionS);
+  static const Size _minimumButtonSize = Size(
+    AppSpacing.sectionS,
+    AppSpacing.sectionS,
+  );
   static const EdgeInsets _padding = EdgeInsets.all(AppSpacing.contentXL);
 
   static const BorderRadius _borderRadius = BorderRadius.all(
@@ -43,9 +45,9 @@ class ButtonThemes {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textStyle: WidgetStateProperty.all(
           TextThemes.light().bodyLarge?.copyWith(
-                color: AppSemanticColors.light.contentPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppSemanticColors.light.contentPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         animationDuration: _animationDuration,
         backgroundColor: WidgetStateProperty.resolveWith((states) {
@@ -71,9 +73,9 @@ class ButtonThemes {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textStyle: WidgetStateProperty.all(
           TextThemes.light().bodyLarge?.copyWith(
-                color: AppSemanticColors.dark.contentPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppSemanticColors.dark.contentPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         animationDuration: _animationDuration,
         backgroundColor: WidgetStateProperty.resolveWith((states) {
@@ -94,9 +96,9 @@ class ButtonThemes {
         ),
         textStyle: WidgetStateProperty.all(
           TextThemes.light().bodyLarge?.copyWith(
-                color: AppSemanticColors.light.contentPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppSemanticColors.light.contentPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         padding: WidgetStateProperty.all<EdgeInsetsGeometry>(_padding),
         animationDuration: _animationDuration,
@@ -121,9 +123,9 @@ class ButtonThemes {
         ),
         textStyle: WidgetStateProperty.all(
           TextThemes.dark().bodyLarge?.copyWith(
-                color: AppSemanticColors.dark.contentPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppSemanticColors.dark.contentPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         padding: WidgetStateProperty.all<EdgeInsetsGeometry>(_padding),
         animationDuration: _animationDuration,
@@ -157,9 +159,9 @@ class ButtonThemes {
         shadowColor: WidgetStateProperty.all(AppSemanticColors.light.overlay50),
         textStyle: WidgetStateProperty.all(
           TextThemes.light().bodyLarge?.copyWith(
-                color: AppSemanticColors.light.contentPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppSemanticColors.light.contentPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         animationDuration: _animationDuration,
         overlayColor: WidgetStatePropertyAll(AppSemanticColors.light.overlay50),
@@ -192,9 +194,9 @@ class ButtonThemes {
         shadowColor: WidgetStateProperty.all(AppSemanticColors.dark.overlay50),
         textStyle: WidgetStateProperty.all(
           TextThemes.light().bodyLarge?.copyWith(
-                color: AppSemanticColors.light.contentPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppSemanticColors.light.contentPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         animationDuration: _animationDuration,
         overlayColor: WidgetStatePropertyAll(AppSemanticColors.dark.overlay50),
@@ -226,9 +228,9 @@ class ButtonThemes {
         minimumSize: WidgetStateProperty.all(_minimumButtonSize),
         textStyle: WidgetStateProperty.all(
           TextThemes.light().bodyLarge?.copyWith(
-                color: AppSemanticColors.light.contentPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppSemanticColors.light.contentPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         animationDuration: _animationDuration,
       ),
@@ -251,9 +253,9 @@ class ButtonThemes {
         minimumSize: WidgetStateProperty.all(_minimumButtonSize),
         textStyle: WidgetStateProperty.all(
           TextThemes.light().bodyLarge?.copyWith(
-                color: AppSemanticColors.dark.contentPrimary,
-                fontWeight: FontWeight.w600,
-              ),
+            color: AppSemanticColors.dark.contentPrimary,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         animationDuration: _animationDuration,
       ),

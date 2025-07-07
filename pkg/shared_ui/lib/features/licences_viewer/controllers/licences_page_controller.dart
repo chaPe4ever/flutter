@@ -5,10 +5,12 @@ part 'licences_page_controller.g.dart';
 
 @riverpod
 Future<List<LicenseEntry>> fetchLicences(Ref ref) {
-  return LicenseRegistry.licenses.fold<List<LicenseEntry>>([], (prev, licence) {
-    prev.add(licence);
-    return prev;
-  }).then(combineLicenseEntries);
+  return LicenseRegistry.licenses
+      .fold<List<LicenseEntry>>([], (prev, licence) {
+        prev.add(licence);
+        return prev;
+      })
+      .then(combineLicenseEntries);
 }
 
 @visibleForTesting
@@ -30,8 +32,9 @@ List<LicenseEntry> combineLicenseEntries(List<LicenseEntry> entries) {
   }
 
   // Convert the map back into a list of LicenseEntry, with unique packages.
-  final List<LicenseEntry> combinedEntries =
-      packageParagraphsMap.entries.map((e) {
+  final List<LicenseEntry> combinedEntries = packageParagraphsMap.entries.map((
+    e,
+  ) {
     return LicenseEntryWithLineBreaks([e.key], e.value);
   }).toList();
 

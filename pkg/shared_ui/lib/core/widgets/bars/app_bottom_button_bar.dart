@@ -6,7 +6,7 @@ enum AppButtonBarType {
   singlePrimary,
   singleSecondary,
   doubleMix,
-  doubleSecondary
+  doubleSecondary,
 }
 
 class AppBottomButtonBar extends StatelessWidget {
@@ -102,49 +102,49 @@ class AppBottomButtonBar extends StatelessWidget {
       padding: padding ?? AppPadding.buttonBar,
       child: switch (_type) {
         AppButtonBarType.singlePrimary => AppButton.primary(
-            label: labelPrimary ?? '',
-            onTap: onPrimaryTap,
-          ),
+          label: labelPrimary ?? '',
+          onTap: onPrimaryTap,
+        ),
         AppButtonBarType.doubleMix => SpacedRow(
-            spacing: AppSpacing.sectionXS,
-            children: [
-              Expanded(
-                child: AppButton.secondary(
-                  label: labelSecondary ?? '',
-                  onTap: onSecondaryTap,
-                ),
+          spacing: AppSpacing.sectionXS,
+          children: [
+            Expanded(
+              child: AppButton.secondary(
+                label: labelSecondary ?? '',
+                onTap: onSecondaryTap,
               ),
-              Expanded(
-                flex: 2,
-                child: AppButton.primary(
-                  label: labelPrimary ?? '',
-                  onTap: onPrimaryTap,
-                ),
+            ),
+            Expanded(
+              flex: 2,
+              child: AppButton.primary(
+                label: labelPrimary ?? '',
+                onTap: onPrimaryTap,
               ),
-            ],
-          ),
+            ),
+          ],
+        ),
         AppButtonBarType.singleSecondary => AppButton.secondary(
-            label: labelSecondary ?? '',
-            onTap: onSecondaryTap,
-          ),
+          label: labelSecondary ?? '',
+          onTap: onSecondaryTap,
+        ),
         AppButtonBarType.doubleSecondary => SpacedRow(
-            spacing: AppSpacing.sectionXS,
-            children: [
-              Expanded(
-                child: AppButton.secondary(
-                  label: labelSecondary ?? '',
-                  onTap: onSecondaryTap,
-                ),
+          spacing: AppSpacing.sectionXS,
+          children: [
+            Expanded(
+              child: AppButton.secondary(
+                label: labelSecondary ?? '',
+                onTap: onSecondaryTap,
               ),
-              Expanded(
-                flex: 2,
-                child: AppButton.secondary(
-                  label: labelPrimary ?? '',
-                  onTap: onPrimaryTap,
-                ),
+            ),
+            Expanded(
+              flex: 2,
+              child: AppButton.secondary(
+                label: labelPrimary ?? '',
+                onTap: onPrimaryTap,
               ),
-            ],
-          ),
+            ),
+          ],
+        ),
       },
     );
   }

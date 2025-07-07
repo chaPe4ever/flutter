@@ -26,16 +26,15 @@ class AppButton extends ElevatedButtonBase {
     IconBuilder? leading,
     IconBuilder? trailing,
     Size? fixedSize,
-  }) =>
-      AppButton._(
-        label: label,
-        type: AppButtonType.primary,
-        key: key,
-        onTap: onTap,
-        leading: leading,
-        trailing: trailing,
-        fixedSize: fixedSize,
-      );
+  }) => AppButton._(
+    label: label,
+    type: AppButtonType.primary,
+    key: key,
+    onTap: onTap,
+    leading: leading,
+    trailing: trailing,
+    fixedSize: fixedSize,
+  );
 
   factory AppButton.secondary({
     required String label,
@@ -44,16 +43,15 @@ class AppButton extends ElevatedButtonBase {
     IconBuilder? leading,
     IconBuilder? trailing,
     Size? fixedSize,
-  }) =>
-      AppButton._(
-        label: label,
-        type: AppButtonType.secondary,
-        key: key,
-        onTap: onTap,
-        leading: leading,
-        trailing: trailing,
-        fixedSize: fixedSize,
-      );
+  }) => AppButton._(
+    label: label,
+    type: AppButtonType.secondary,
+    key: key,
+    onTap: onTap,
+    leading: leading,
+    trailing: trailing,
+    fixedSize: fixedSize,
+  );
 
   factory AppButton.danger({
     required String label,
@@ -62,28 +60,26 @@ class AppButton extends ElevatedButtonBase {
     IconBuilder? leading,
     IconBuilder? trailing,
     Size? fixedSize,
-  }) =>
-      AppButton._(
-        label: label,
-        type: AppButtonType.danger,
-        key: key,
-        onTap: onTap,
-        fixedSize: fixedSize,
-        leading: leading,
-        trailing: trailing,
-      );
+  }) => AppButton._(
+    label: label,
+    type: AppButtonType.danger,
+    key: key,
+    onTap: onTap,
+    fixedSize: fixedSize,
+    leading: leading,
+    trailing: trailing,
+  );
 
   factory AppButton.text({
     required String label,
     Key? key,
     VoidCallback? onTap,
-  }) =>
-      AppButton._(
-        label: label,
-        type: AppButtonType.text,
-        key: key,
-        onTap: onTap,
-      );
+  }) => AppButton._(
+    label: label,
+    type: AppButtonType.text,
+    key: key,
+    onTap: onTap,
+  );
 
   final AppButtonType type;
 
@@ -196,11 +192,10 @@ class AppButton extends ElevatedButtonBase {
     return switch (type) {
       AppButtonType.primary ||
       AppButtonType.danger ||
-      AppButtonType.text =>
-        super.defaultBorder(context),
+      AppButtonType.text => super.defaultBorder(context),
       AppButtonType.secondary => BorderSide(
-          color: context.colors.borderSecondary,
-        ),
+        color: context.colors.borderSecondary,
+      ),
     };
   }
 
@@ -209,11 +204,10 @@ class AppButton extends ElevatedButtonBase {
     return switch (type) {
       AppButtonType.primary ||
       AppButtonType.danger ||
-      AppButtonType.text =>
-        super.focusedBorder(context),
+      AppButtonType.text => super.focusedBorder(context),
       AppButtonType.secondary => BorderSide(
-          color: context.colors.borderBrand,
-        ),
+        color: context.colors.borderBrand,
+      ),
     };
   }
 
@@ -222,12 +216,12 @@ class AppButton extends ElevatedButtonBase {
     return switch (type) {
       AppButtonType.primary => super.hoverBorder(context),
       AppButtonType.secondary => BorderSide(
-          color: context.colors.contentFocused,
-        ),
+        color: context.colors.contentFocused,
+      ),
       AppButtonType.danger => BorderSide(
-          color: context.colors.borderNegative,
-        ),
-      AppButtonType.text => BorderSide.none
+        color: context.colors.borderNegative,
+      ),
+      AppButtonType.text => BorderSide.none,
     };
   }
 
@@ -235,12 +229,11 @@ class AppButton extends ElevatedButtonBase {
   BorderSide disabledBorder(BuildContext context) {
     return switch (type) {
       AppButtonType.primary ||
-      AppButtonType.danger =>
-        super.disabledBorder(context),
+      AppButtonType.danger => super.disabledBorder(context),
       AppButtonType.secondary => BorderSide(
-          color: context.colors.borderDisabled,
-        ),
-      AppButtonType.text => BorderSide.none
+        color: context.colors.borderDisabled,
+      ),
+      AppButtonType.text => BorderSide.none,
     };
   }
 }

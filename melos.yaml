@@ -22,6 +22,10 @@ scripts:
     run: melos exec -- flutter analyze .
     description: "Analyze all packages"
 
+  pub_upgrade:
+    run: melos exec -- dart pub upgrade
+    description: "Upgrade all packages"
+
   build_runner_build: melos exec -- dart run build_runner build -d
-  build_runner_clean: melos exec -- pub run build_runner clean
+  build_runner_clean: melos exec -- dart run build_runner clean
   build_runner_watch: melos exec -- dart run build_runner watch -d

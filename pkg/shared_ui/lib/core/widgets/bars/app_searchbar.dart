@@ -50,8 +50,8 @@ class _AppSearchbarState extends State<AppSearchbar> {
                     ),
                     onTap: () =>
                         Future.sync(() => widget.onClearTap?.call()).then((_) {
-                      controller.clear();
-                    }),
+                          controller.clear();
+                        }),
                   )
                 : Padding(
                     padding: const EdgeInsets.only(right: AppSpacing.contentS),

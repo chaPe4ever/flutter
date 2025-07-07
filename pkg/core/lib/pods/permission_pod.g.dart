@@ -15,8 +15,9 @@ String _$permissionHash() => r'1958ed36fc8f8c26314172ef7439b6813ff34456';
 final permissionPod = Provider<PermissionBase>.internal(
   permission,
   name: r'permissionPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$permissionHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$permissionHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

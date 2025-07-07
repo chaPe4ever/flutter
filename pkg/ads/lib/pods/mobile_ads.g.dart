@@ -13,8 +13,9 @@ String _$mobileAdsHash() => r'0cc041e53bf308d5384483868fc2a8d2cfc21f02';
 final mobileAdsPod = Provider<MobileAds>.internal(
   mobileAds,
   name: r'mobileAdsPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$mobileAdsHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$mobileAdsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

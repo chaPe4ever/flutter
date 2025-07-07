@@ -26,8 +26,12 @@ class GoogleFontsConfig implements Config {
       LicenseRegistry.addLicense(() async* {
         for (final licencePath in licencePaths) {
           final licence = await rootBundle.loadString(licencePath);
-          final licenceName =
-              licencePath.split('/').toList().last.split('.').first;
+          final licenceName = licencePath
+              .split('/')
+              .toList()
+              .last
+              .split('.')
+              .first;
 
           yield LicenseEntryWithLineBreaks([licenceName], licence);
         }

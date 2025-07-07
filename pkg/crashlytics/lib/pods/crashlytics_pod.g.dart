@@ -15,8 +15,9 @@ String _$crashlyticsHash() => r'4ac36cdeb0aba8b7e2868d38f376a36c656cc2ec';
 final crashlyticsPod = Provider<CrashlyticsBase>.internal(
   crashlytics,
   name: r'crashlyticsPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$crashlyticsHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$crashlyticsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

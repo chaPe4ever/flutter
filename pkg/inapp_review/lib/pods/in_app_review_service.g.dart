@@ -13,16 +13,19 @@ String _$inAppReviewServiceHash() =>
 ///
 /// Copied from [InAppReviewService].
 @ProviderFor(InAppReviewService)
-final inAppReviewServicePod = AutoDisposeNotifierProvider<InAppReviewService,
-    InAppReviewServiceBase>.internal(
-  InAppReviewService.new,
-  name: r'inAppReviewServicePod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$inAppReviewServiceHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final inAppReviewServicePod =
+    AutoDisposeNotifierProvider<
+      InAppReviewService,
+      InAppReviewServiceBase
+    >.internal(
+      InAppReviewService.new,
+      name: r'inAppReviewServicePod',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$inAppReviewServiceHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$InAppReviewService = AutoDisposeNotifier<InAppReviewServiceBase>;
 // ignore_for_file: type=lint

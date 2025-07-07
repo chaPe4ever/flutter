@@ -13,4 +13,5 @@ linter:
   rules:
     one_member_abstracts: false
     public_member_api_docs: false
+    unnecessary_library_name: false
     unnecessary_library_directive: false

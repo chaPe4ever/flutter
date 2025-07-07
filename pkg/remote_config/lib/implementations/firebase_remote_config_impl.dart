@@ -29,10 +29,9 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
         if (e is PlatformException) {
           Log.error(
             e.message ?? e.details.toString(),
-            st:
-                e.stacktrace != null
-                    ? StackTrace.fromString(e.stacktrace!)
-                    : st,
+            st: e.stacktrace != null
+                ? StackTrace.fromString(e.stacktrace!)
+                : st,
           );
         }
       },
@@ -63,8 +62,9 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
   Future<void> init({
     required NetworkBase network,
     Duration fetchTimeout = const Duration(minutes: 1),
-    Duration minimumFetchInterval =
-        kDebugMode ? Duration.zero : const Duration(hours: 1),
+    Duration minimumFetchInterval = kDebugMode
+        ? Duration.zero
+        : const Duration(hours: 1),
   }) async {
     try {
       await _firebaseRemoteConfig.ensureInitialized();
@@ -102,11 +102,10 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
       if (json.isEmpty) {
         return left(
           const RemoteConfigFirebaseException(
-            innerMessage:
-                kDebugMode
-                    ? 'The app_version json is null, please '
-                        'check that your firebase setup is correct'
-                    : null,
+            innerMessage: kDebugMode
+                ? 'The app_version json is null, please '
+                      'check that your firebase setup is correct'
+                : null,
           ),
         );
       }
@@ -290,11 +289,10 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
       if (json.isEmpty) {
         return left(
           const RemoteConfigFirebaseException(
-            innerMessage:
-                kDebugMode
-                    ? 'The app_maintenance json is null, please '
-                        'check that your firebase setup is correct'
-                    : null,
+            innerMessage: kDebugMode
+                ? 'The app_maintenance json is null, please '
+                      'check that your firebase setup is correct'
+                : null,
           ),
         );
       }

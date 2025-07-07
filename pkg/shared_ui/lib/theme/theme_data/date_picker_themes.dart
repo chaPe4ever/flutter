@@ -11,8 +11,9 @@ class DatePickerThemes {
             ? AppSemanticColors.light.backgroundPrimary
             : AppSemanticColors.light.backgroundBrand,
       ),
-      dayBackgroundColor:
-          WidgetStatePropertyAll(AppSemanticColors.light.backgroundBrand),
+      dayBackgroundColor: WidgetStatePropertyAll(
+        AppSemanticColors.light.backgroundBrand,
+      ),
     );
   }
 
@@ -25,8 +26,9 @@ class DatePickerThemes {
             ? AppSemanticColors.dark.backgroundPrimary
             : AppSemanticColors.dark.backgroundBrand,
       ),
-      dayBackgroundColor:
-          WidgetStatePropertyAll(AppSemanticColors.dark.backgroundBrand),
+      dayBackgroundColor: WidgetStatePropertyAll(
+        AppSemanticColors.dark.backgroundBrand,
+      ),
     );
   }
 }

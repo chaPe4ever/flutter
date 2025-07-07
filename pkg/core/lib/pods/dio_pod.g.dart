@@ -15,8 +15,9 @@ String _$cancelTokenHash() => r'f52bec7e869dea808949c38ee8608cf104babf51';
 final cancelTokenPod = AutoDisposeProvider<CancelToken>.internal(
   cancelToken,
   name: r'cancelTokenPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$cancelTokenHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$cancelTokenHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -65,21 +66,13 @@ class DioFamily extends Family<Dio> {
   /// The default dio http client
   ///
   /// Copied from [dio].
-  DioProvider call({
-    required String baseUrl,
-  }) {
-    return DioProvider(
-      baseUrl: baseUrl,
-    );
+  DioProvider call({required String baseUrl}) {
+    return DioProvider(baseUrl: baseUrl);
   }
 
   @override
-  DioProvider getProviderOverride(
-    covariant DioProvider provider,
-  ) {
-    return call(
-      baseUrl: provider.baseUrl,
-    );
+  DioProvider getProviderOverride(covariant DioProvider provider) {
+    return call(baseUrl: provider.baseUrl);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -104,21 +97,18 @@ class DioProvider extends AutoDisposeProvider<Dio> {
   /// The default dio http client
   ///
   /// Copied from [dio].
-  DioProvider({
-    required String baseUrl,
-  }) : this._internal(
-          (ref) => dio(
-            ref as DioRef,
-            baseUrl: baseUrl,
-          ),
-          from: dioPod,
-          name: r'dioPod',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product') ? null : _$dioHash,
-          dependencies: DioFamily._dependencies,
-          allTransitiveDependencies: DioFamily._allTransitiveDependencies,
-          baseUrl: baseUrl,
-        );
+  DioProvider({required String baseUrl})
+    : this._internal(
+        (ref) => dio(ref as DioRef, baseUrl: baseUrl),
+        from: dioPod,
+        name: r'dioPod',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$dioHash,
+        dependencies: DioFamily._dependencies,
+        allTransitiveDependencies: DioFamily._allTransitiveDependencies,
+        baseUrl: baseUrl,
+      );
 
   DioProvider._internal(
     super._createNotifier, {
@@ -133,9 +123,7 @@ class DioProvider extends AutoDisposeProvider<Dio> {
   final String baseUrl;
 
   @override
-  Override overrideWith(
-    Dio Function(DioRef provider) create,
-  ) {
+  Override overrideWith(Dio Function(DioRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: DioProvider._internal(
@@ -203,21 +191,13 @@ class DioRetryFamily extends Family<Dio> {
   /// The dio http client used only for retrying the call inside interceptor
   ///
   /// Copied from [dioRetry].
-  DioRetryProvider call({
-    required String baseUrl,
-  }) {
-    return DioRetryProvider(
-      baseUrl: baseUrl,
-    );
+  DioRetryProvider call({required String baseUrl}) {
+    return DioRetryProvider(baseUrl: baseUrl);
   }
 
   @override
-  DioRetryProvider getProviderOverride(
-    covariant DioRetryProvider provider,
-  ) {
-    return call(
-      baseUrl: provider.baseUrl,
-    );
+  DioRetryProvider getProviderOverride(covariant DioRetryProvider provider) {
+    return call(baseUrl: provider.baseUrl);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -242,23 +222,18 @@ class DioRetryProvider extends AutoDisposeProvider<Dio> {
   /// The dio http client used only for retrying the call inside interceptor
   ///
   /// Copied from [dioRetry].
-  DioRetryProvider({
-    required String baseUrl,
-  }) : this._internal(
-          (ref) => dioRetry(
-            ref as DioRetryRef,
-            baseUrl: baseUrl,
-          ),
-          from: dioRetryPod,
-          name: r'dioRetryPod',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$dioRetryHash,
-          dependencies: DioRetryFamily._dependencies,
-          allTransitiveDependencies: DioRetryFamily._allTransitiveDependencies,
-          baseUrl: baseUrl,
-        );
+  DioRetryProvider({required String baseUrl})
+    : this._internal(
+        (ref) => dioRetry(ref as DioRetryRef, baseUrl: baseUrl),
+        from: dioRetryPod,
+        name: r'dioRetryPod',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$dioRetryHash,
+        dependencies: DioRetryFamily._dependencies,
+        allTransitiveDependencies: DioRetryFamily._allTransitiveDependencies,
+        baseUrl: baseUrl,
+      );
 
   DioRetryProvider._internal(
     super._createNotifier, {
@@ -273,9 +248,7 @@ class DioRetryProvider extends AutoDisposeProvider<Dio> {
   final String baseUrl;
 
   @override
-  Override overrideWith(
-    Dio Function(DioRetryRef provider) create,
-  ) {
+  Override overrideWith(Dio Function(DioRetryRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: DioRetryProvider._internal(
@@ -344,21 +317,13 @@ class DioTokenFamily extends Family<Dio> {
   /// The dio http client used only for making token requests
   ///
   /// Copied from [dioToken].
-  DioTokenProvider call({
-    required String baseUrl,
-  }) {
-    return DioTokenProvider(
-      baseUrl: baseUrl,
-    );
+  DioTokenProvider call({required String baseUrl}) {
+    return DioTokenProvider(baseUrl: baseUrl);
   }
 
   @override
-  DioTokenProvider getProviderOverride(
-    covariant DioTokenProvider provider,
-  ) {
-    return call(
-      baseUrl: provider.baseUrl,
-    );
+  DioTokenProvider getProviderOverride(covariant DioTokenProvider provider) {
+    return call(baseUrl: provider.baseUrl);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -383,23 +348,18 @@ class DioTokenProvider extends AutoDisposeProvider<Dio> {
   /// The dio http client used only for making token requests
   ///
   /// Copied from [dioToken].
-  DioTokenProvider({
-    required String baseUrl,
-  }) : this._internal(
-          (ref) => dioToken(
-            ref as DioTokenRef,
-            baseUrl: baseUrl,
-          ),
-          from: dioTokenPod,
-          name: r'dioTokenPod',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$dioTokenHash,
-          dependencies: DioTokenFamily._dependencies,
-          allTransitiveDependencies: DioTokenFamily._allTransitiveDependencies,
-          baseUrl: baseUrl,
-        );
+  DioTokenProvider({required String baseUrl})
+    : this._internal(
+        (ref) => dioToken(ref as DioTokenRef, baseUrl: baseUrl),
+        from: dioTokenPod,
+        name: r'dioTokenPod',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$dioTokenHash,
+        dependencies: DioTokenFamily._dependencies,
+        allTransitiveDependencies: DioTokenFamily._allTransitiveDependencies,
+        baseUrl: baseUrl,
+      );
 
   DioTokenProvider._internal(
     super._createNotifier, {
@@ -414,9 +374,7 @@ class DioTokenProvider extends AutoDisposeProvider<Dio> {
   final String baseUrl;
 
   @override
-  Override overrideWith(
-    Dio Function(DioTokenRef provider) create,
-  ) {
+  Override overrideWith(Dio Function(DioTokenRef provider) create) {
     return ProviderOverride(
       origin: this,
       override: DioTokenProvider._internal(
@@ -464,5 +422,6 @@ class _DioTokenProviderElement extends AutoDisposeProviderElement<Dio>
   @override
   String get baseUrl => (origin as DioTokenProvider).baseUrl;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

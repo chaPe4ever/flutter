@@ -15,8 +15,9 @@ String _$loggerHash() => r'9fb86b5374d690f708313d1b9504b4bbdaaddc3a';
 final loggerPod = Provider<LoggerBase>.internal(
   logger,
   name: r'loggerPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$loggerHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$loggerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

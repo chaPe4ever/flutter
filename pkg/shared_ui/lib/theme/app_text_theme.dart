@@ -25,44 +25,44 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
   });
 
   AppTextTheme.light()
-      : this(
-          android: PlatformTextStyles.light(
-            primaryColor: AppSemanticColors.light.contentPrimary,
-            fontFamily: 'Roboto',
-          ),
-          ios: PlatformTextStyles.light(
-            primaryColor: AppSemanticColors.light.contentPrimary,
-            fontFamily: 'Roboto',
-          ),
-          desktop: PlatformTextStyles.light(
-            primaryColor: AppSemanticColors.light.contentPrimary,
-            fontFamily: 'Roboto',
-          ),
-          web: PlatformTextStyles.light(
-            primaryColor: AppSemanticColors.light.contentPrimary,
-            fontFamily: 'Inter',
-          ),
-        );
+    : this(
+        android: PlatformTextStyles.light(
+          primaryColor: AppSemanticColors.light.contentPrimary,
+          fontFamily: 'Roboto',
+        ),
+        ios: PlatformTextStyles.light(
+          primaryColor: AppSemanticColors.light.contentPrimary,
+          fontFamily: 'Roboto',
+        ),
+        desktop: PlatformTextStyles.light(
+          primaryColor: AppSemanticColors.light.contentPrimary,
+          fontFamily: 'Roboto',
+        ),
+        web: PlatformTextStyles.light(
+          primaryColor: AppSemanticColors.light.contentPrimary,
+          fontFamily: 'Inter',
+        ),
+      );
 
   AppTextTheme.dark()
-      : this(
-          android: PlatformTextStyles.dark(
-            primaryColor: AppSemanticColors.dark.contentPrimary,
-            fontFamily: 'Roboto',
-          ),
-          ios: PlatformTextStyles.dark(
-            primaryColor: AppSemanticColors.dark.contentPrimary,
-            fontFamily: 'Roboto',
-          ),
-          desktop: PlatformTextStyles.dark(
-            primaryColor: AppSemanticColors.dark.contentPrimary,
-            fontFamily: 'Roboto',
-          ),
-          web: PlatformTextStyles.dark(
-            primaryColor: AppSemanticColors.dark.contentPrimary,
-            fontFamily: 'Inter',
-          ),
-        );
+    : this(
+        android: PlatformTextStyles.dark(
+          primaryColor: AppSemanticColors.dark.contentPrimary,
+          fontFamily: 'Roboto',
+        ),
+        ios: PlatformTextStyles.dark(
+          primaryColor: AppSemanticColors.dark.contentPrimary,
+          fontFamily: 'Roboto',
+        ),
+        desktop: PlatformTextStyles.dark(
+          primaryColor: AppSemanticColors.dark.contentPrimary,
+          fontFamily: 'Roboto',
+        ),
+        web: PlatformTextStyles.dark(
+          primaryColor: AppSemanticColors.dark.contentPrimary,
+          fontFamily: 'Inter',
+        ),
+      );
   final PlatformTextStyles android;
   final PlatformTextStyles ios;
   final PlatformTextStyles web;

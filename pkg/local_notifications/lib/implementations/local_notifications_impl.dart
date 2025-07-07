@@ -76,16 +76,18 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
               AndroidFlutterLocalNotificationsPlugin
             >()
             ?.requestNotificationsPermission(),
-      TargetPlatform.iOS => await notifications
-          .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin
-          >()
-          ?.requestPermissions(alert: true, badge: true, sound: true),
-      TargetPlatform.macOS => await notifications
-          .resolvePlatformSpecificImplementation<
-            MacOSFlutterLocalNotificationsPlugin
-          >()
-          ?.requestPermissions(alert: true, badge: true, sound: true),
+      TargetPlatform.iOS =>
+        await notifications
+            .resolvePlatformSpecificImplementation<
+              IOSFlutterLocalNotificationsPlugin
+            >()
+            ?.requestPermissions(alert: true, badge: true, sound: true),
+      TargetPlatform.macOS =>
+        await notifications
+            .resolvePlatformSpecificImplementation<
+              MacOSFlutterLocalNotificationsPlugin
+            >()
+            ?.requestPermissions(alert: true, badge: true, sound: true),
       _ => throw UnimplementedError(),
     };
   }
@@ -111,11 +113,10 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
       priority: Priority.high,
       ticker: 'ticker',
       sound: sound == null ? null : RawResourceAndroidNotificationSound(sound),
-      actions:
-          actions
-              ?.cast<AndroidNotificationActionAdapter>()
-              .map((action) => action.adapt())
-              .toList(),
+      actions: actions
+          ?.cast<AndroidNotificationActionAdapter>()
+          .map((action) => action.adapt())
+          .toList(),
     );
     final iosDetails = DarwinNotificationDetails(
       presentAlert: true,

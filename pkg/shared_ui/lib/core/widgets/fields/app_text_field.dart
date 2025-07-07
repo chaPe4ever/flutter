@@ -1,11 +1,11 @@
-import 'package:core/core.dart';
+import 'package:core/core.dart' hide ValueNotifierX;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 enum TextFieldType { primary }
 
-final _isObscured = signal<bool>(true);
+final FlutterSignal<bool> _isObscured = signal<bool>(true);
 
 class AppTextField extends OutlineTextFieldBase {
   factory AppTextField({

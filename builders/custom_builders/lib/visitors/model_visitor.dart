@@ -1,20 +1,18 @@
-// ignore_for_file: depend_on_referenced_packages
+import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/visitor2.dart';
 
-import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/visitor.dart';
-
-class ModelVisitor extends SimpleElementVisitor<void> {
+class ModelVisitor extends SimpleElementVisitor2<void> {
   String className = '';
   Map<String, dynamic> fields = {};
 
   @override
-  void visitConstructorElement(ConstructorElement element) {
+  void visitConstructorElement(ConstructorElement2 element) {
     final returnType = element.returnType.toString();
     className = returnType.replaceFirst('*', '');
   }
 
   @override
-  void visitFieldElement(FieldElement element) {
-    fields[element.name] = element.type.toString().replaceFirst('*', '');
+  void visitFieldElement(FieldElement2 element) {
+    fields[element.displayName] = element.type.toString().replaceFirst('*', '');
   }
 }

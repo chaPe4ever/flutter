@@ -5,10 +5,12 @@ import 'package:shared_ui/theme/app_spacing.dart';
 
 abstract class AppPadding {
   const AppPadding._();
-  static EdgeInsetsGeometry mobilePage =
-      const EdgeInsets.symmetric(horizontal: AppSpacing.sectionXS);
-  static EdgeInsetsGeometry webPage =
-      const EdgeInsets.symmetric(horizontal: AppSpacing.sectionXS);
+  static EdgeInsetsGeometry mobilePage = const EdgeInsets.symmetric(
+    horizontal: AppSpacing.sectionXS,
+  );
+  static EdgeInsetsGeometry webPage = const EdgeInsets.symmetric(
+    horizontal: AppSpacing.sectionXS,
+  );
 
   static EdgeInsets button = const EdgeInsets.symmetric(
     horizontal: AppSpacing.contentL,

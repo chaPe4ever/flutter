@@ -51,7 +51,11 @@ class ResponsiveTwoColumnLayout extends StatelessWidget {
           return Column(
             mainAxisAlignment: columnMainAxisAlignment,
             crossAxisAlignment: columnCrossAxisAlignment,
-            children: [startContent, SizedBox(height: spacing), endContent],
+            children: [
+              startContent,
+              SizedBox(height: spacing),
+              endContent,
+            ],
           );
         }
       },
@@ -560,11 +564,8 @@ class AppResponsiveBreakpoints extends ResponsiveBreakpoints {
   }
 
   static ResponsiveBreakpointsData of(BuildContext context) {
-    final data =
-        context
-            .dependOnInheritedWidgetOfExactType<
-              InheritedResponsiveBreakpoints
-            >();
+    final data = context
+        .dependOnInheritedWidgetOfExactType<InheritedResponsiveBreakpoints>();
     if (data != null) return data.data;
     throw FlutterError.fromParts(<DiagnosticsNode>[
       ErrorSummary(

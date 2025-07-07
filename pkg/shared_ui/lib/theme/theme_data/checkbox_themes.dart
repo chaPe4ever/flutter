@@ -4,8 +4,9 @@ import 'package:shared_ui/shared_ui.dart';
 class CheckboxThemes {
   static CheckboxThemeData light() {
     return CheckboxThemeData(
-      checkColor:
-          WidgetStateProperty.all(AppSemanticColors.light.backgroundPrimary),
+      checkColor: WidgetStateProperty.all(
+        AppSemanticColors.light.backgroundPrimary,
+      ),
       fillColor: WidgetStateProperty.resolveWith(
         (states) => states.contains(WidgetState.selected)
             ? AppSemanticColors.dark.backgroundBrand
@@ -19,8 +20,9 @@ class CheckboxThemes {
 
   static CheckboxThemeData dark() {
     return CheckboxThemeData(
-      checkColor:
-          WidgetStateProperty.all(AppSemanticColors.dark.backgroundInversed),
+      checkColor: WidgetStateProperty.all(
+        AppSemanticColors.dark.backgroundInversed,
+      ),
       fillColor: WidgetStateProperty.resolveWith(
         (states) => states.contains(WidgetState.selected)
             ? AppSemanticColors.dark.backgroundBrand

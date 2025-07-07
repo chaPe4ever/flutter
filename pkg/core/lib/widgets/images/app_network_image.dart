@@ -25,10 +25,10 @@ class AppNetworkImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: url,
-      placeholder:
-          (context, url) => placeholder ?? const CircularProgressIndicator(),
-      errorWidget:
-          (context, url, error) => errorWidget ?? const Icon(Icons.error),
+      placeholder: (context, url) =>
+          placeholder ?? const CircularProgressIndicator(),
+      errorWidget: (context, url, error) =>
+          errorWidget ?? const Icon(Icons.error),
       width: width,
       height: height,
       fit: fit,

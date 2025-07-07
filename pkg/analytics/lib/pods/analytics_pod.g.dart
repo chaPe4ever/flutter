@@ -15,8 +15,9 @@ String _$analyticsHash() => r'080a01462709556363c7d9fc5ef3f7c75d1de6a2';
 final analyticsPod = Provider<AnalyticsBase>.internal(
   analytics,
   name: r'analyticsPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$analyticsHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$analyticsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

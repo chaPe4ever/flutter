@@ -25,11 +25,10 @@ extension DocumentSnapshotX<T extends Object?> on DocumentSnapshot<T> {
 
   T getDataOrCrash() => switch (this) {
     (final snapshot) when snapshot.existsAndDataNotNull => snapshot.data()!,
-    (_) =>
-      throw FirestoreNullDocumentSnapshotException(
-        innerMessage:
-            'The snapshot: $this does not exist or it is null | ID: $id | parrent ID: ${reference.parent.id}',
-      ),
+    (_) => throw FirestoreNullDocumentSnapshotException(
+      innerMessage:
+          'The snapshot: $this does not exist or it is null | ID: $id | parrent ID: ${reference.parent.id}',
+    ),
   };
 
   T fromJsonOrCrash<T>(T Function(Map<String, dynamic> json) fromJson) {
@@ -38,11 +37,10 @@ extension DocumentSnapshotX<T extends Object?> on DocumentSnapshot<T> {
         (snapshot.data()! as Map<String, dynamic>)
           ..update('id', (_) => id, ifAbsent: () => id),
       ),
-      (_) =>
-        throw FirestoreNullDocumentSnapshotException(
-          innerMessage:
-              'The snapshot: $this does not exist or it is null | | ID: $id | parrent ID: ${reference.parent.id}',
-        ),
+      (_) => throw FirestoreNullDocumentSnapshotException(
+        innerMessage:
+            'The snapshot: $this does not exist or it is null | | ID: $id | parrent ID: ${reference.parent.id}',
+      ),
     };
   }
 }
@@ -56,20 +54,18 @@ extension QuerySnapshotX<T extends Object?> on QuerySnapshot<T> {
   DocumentReference<T> getFirstRefOrCrash() => switch (this) {
     (final snapshot) when snapshot.docs.firstOrNull != null =>
       snapshot.docs.first.reference,
-    (_) =>
-      throw FirestoreNullDocumentSnapshotException(
-        innerMessage:
-            "The document: $this doesn't exist or it's' null | ID: ${docs.firstOrNull?.id}",
-      ),
+    (_) => throw FirestoreNullDocumentSnapshotException(
+      innerMessage:
+          "The document: $this doesn't exist or it's' null | ID: ${docs.firstOrNull?.id}",
+    ),
   };
 
   T getFirstFromDataListOrCrash() => switch (this) {
     (final snapshot) when snapshot.docs.firstOrNull != null =>
       snapshot.docs.first.data()!,
-    (_) =>
-      throw FirestoreNullDocumentSnapshotException(
-        innerMessage:
-            'The snapshot: $this found null | ID: ${docs.firstOrNull?.id}',
-      ),
+    (_) => throw FirestoreNullDocumentSnapshotException(
+      innerMessage:
+          'The snapshot: $this found null | ID: ${docs.firstOrNull?.id}',
+    ),
   };
 }

@@ -13,18 +13,18 @@ String _$flutterLocalNotificationsPluginHash() =>
 @ProviderFor(flutterLocalNotificationsPlugin)
 final flutterLocalNotificationsPluginPod =
     Provider<FlutterLocalNotificationsPlugin>.internal(
-  flutterLocalNotificationsPlugin,
-  name: r'flutterLocalNotificationsPluginPod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$flutterLocalNotificationsPluginHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      flutterLocalNotificationsPlugin,
+      name: r'flutterLocalNotificationsPluginPod',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$flutterLocalNotificationsPluginHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef FlutterLocalNotificationsPluginRef
-    = ProviderRef<FlutterLocalNotificationsPlugin>;
+typedef FlutterLocalNotificationsPluginRef =
+    ProviderRef<FlutterLocalNotificationsPlugin>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

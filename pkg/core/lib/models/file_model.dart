@@ -6,7 +6,8 @@ part 'file_model.g.dart';
 part 'file_model.freezed.dart';
 
 @freezed
-class FileModel with _$FileModel {
+@immutable
+abstract class FileModel with _$FileModel {
   const factory FileModel({
     required String fileName,
     required String base64FileBytes,

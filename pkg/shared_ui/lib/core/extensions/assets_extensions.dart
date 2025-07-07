@@ -52,8 +52,9 @@ extension SvgPictureX on SvgPicture {
       height: height ?? this.height,
       fit: fit ?? this.fit,
       alignment: alignment,
-      colorFilter:
-          color != null ? ColorFilter.mode(color, blendMode) : colorFilter,
+      colorFilter: color != null
+          ? ColorFilter.mode(color, blendMode)
+          : colorFilter,
       semanticsLabel: semanticsLabel ?? this.semanticsLabel,
       matchTextDirection: matchTextDirection,
       allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
@@ -71,13 +72,12 @@ extension AssetGenImageX on AssetGenImage {
     Color? color,
     BoxFit? fit,
     Alignment alignment = Alignment.center,
-  }) =>
-      image(
-        package: kSharedUiPkgName,
-        height: height,
-        width: width,
-        color: context.appImgTheme.copyWith(color: color).color,
-        fit: fit,
-        alignment: alignment,
-      );
+  }) => image(
+    package: kSharedUiPkgName,
+    height: height,
+    width: width,
+    color: context.appImgTheme.copyWith(color: color).color,
+    fit: fit,
+    alignment: alignment,
+  );
 }

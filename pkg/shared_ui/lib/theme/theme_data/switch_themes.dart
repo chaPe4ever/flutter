@@ -4,8 +4,9 @@ import 'package:shared_ui/shared_ui.dart';
 class SwitchThemes {
   static SwitchThemeData light() {
     return SwitchThemeData(
-      trackOutlineColor:
-          WidgetStateProperty.all(AppSemanticColors.light.backgroundDisabled),
+      trackOutlineColor: WidgetStateProperty.all(
+        AppSemanticColors.light.backgroundDisabled,
+      ),
       trackColor: WidgetStateProperty.resolveWith(
         (states) => states.contains(WidgetState.selected)
             ? AppSemanticColors.light.contentBrand
@@ -21,8 +22,9 @@ class SwitchThemes {
 
   static SwitchThemeData dark() {
     return SwitchThemeData(
-      trackOutlineColor:
-          WidgetStateProperty.all(AppSemanticColors.dark.backgroundDisabled),
+      trackOutlineColor: WidgetStateProperty.all(
+        AppSemanticColors.dark.backgroundDisabled,
+      ),
       trackColor: WidgetStateProperty.resolveWith(
         (states) => states.contains(WidgetState.selected)
             ? AppSemanticColors.dark.contentBrand

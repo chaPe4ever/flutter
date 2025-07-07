@@ -131,24 +131,31 @@ abstract class OrientationHelper {
             DeviceOrientation.portraitDown,
           ].every((item) => orientations.toSet().contains(item))) {
             await _platform.invokeMethod('setOrientation', 'portraitAll');
-          } else if ([DeviceOrientation.portraitUp].every((item) => orientations.toSet().contains(item))) {
+          } else if ([
+            DeviceOrientation.portraitUp,
+          ].every((item) => orientations.toSet().contains(item))) {
             await _platform.invokeMethod('setOrientation', 'portraitUp');
-          } else if ([DeviceOrientation.portraitDown].every((item) => orientations.toSet().contains(item))) {
+          } else if ([
+            DeviceOrientation.portraitDown,
+          ].every((item) => orientations.toSet().contains(item))) {
             await _platform.invokeMethod('setOrientation', 'portraitDown');
-          } else if ([DeviceOrientation.landscapeRight].every((item) => orientations.toSet().contains(item))) {
+          } else if ([
+            DeviceOrientation.landscapeRight,
+          ].every((item) => orientations.toSet().contains(item))) {
             await _platform.invokeMethod('setOrientation', 'landscapeRight');
-          } else if ([DeviceOrientation.landscapeLeft].every((item) => orientations.toSet().contains(item))) {
+          } else if ([
+            DeviceOrientation.landscapeLeft,
+          ].every((item) => orientations.toSet().contains(item))) {
             await _platform.invokeMethod('setOrientation', 'landscapeLeft');
           }
         }
       } else {
         return some(
           UnknownCoreException(
-            innerMessage:
-                kDebugMode
-                    ? 'The orientation is not supported '
-                        'for the targetPlatform :$defaultTargetPlatform'
-                    : null,
+            innerMessage: kDebugMode
+                ? 'The orientation is not supported '
+                      'for the targetPlatform :$defaultTargetPlatform'
+                : null,
           ),
         );
       }

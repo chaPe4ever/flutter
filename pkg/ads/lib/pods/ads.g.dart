@@ -13,8 +13,9 @@ String _$adsHash() => r'2a1a76de3e108fae559eb00842df9c0aa43081c0';
 final adsPod = AsyncNotifierProvider<Ads, void>.internal(
   Ads.new,
   name: r'adsPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$adsHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$adsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

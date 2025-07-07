@@ -15,8 +15,9 @@ String _$firestoreHash() => r'ea545ab322745f4c35e7f3eade2beca7dd8e0b85';
 final firestorePod = Provider<FirebaseFirestore>.internal(
   firestore,
   name: r'firestorePod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$firestoreHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$firestoreHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -65,21 +66,13 @@ class FunctionsFamily extends Family<FirebaseFunctions> {
   /// Keep the pod singleton
   ///
   /// Copied from [functions].
-  FunctionsProvider call({
-    String region = 'europe-west3',
-  }) {
-    return FunctionsProvider(
-      region: region,
-    );
+  FunctionsProvider call({String region = 'europe-west3'}) {
+    return FunctionsProvider(region: region);
   }
 
   @override
-  FunctionsProvider getProviderOverride(
-    covariant FunctionsProvider provider,
-  ) {
-    return call(
-      region: provider.region,
-    );
+  FunctionsProvider getProviderOverride(covariant FunctionsProvider provider) {
+    return call(region: provider.region);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -104,23 +97,18 @@ class FunctionsProvider extends Provider<FirebaseFunctions> {
   /// Keep the pod singleton
   ///
   /// Copied from [functions].
-  FunctionsProvider({
-    String region = 'europe-west3',
-  }) : this._internal(
-          (ref) => functions(
-            ref as FunctionsRef,
-            region: region,
-          ),
-          from: functionsPod,
-          name: r'functionsPod',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$functionsHash,
-          dependencies: FunctionsFamily._dependencies,
-          allTransitiveDependencies: FunctionsFamily._allTransitiveDependencies,
-          region: region,
-        );
+  FunctionsProvider({String region = 'europe-west3'})
+    : this._internal(
+        (ref) => functions(ref as FunctionsRef, region: region),
+        from: functionsPod,
+        name: r'functionsPod',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$functionsHash,
+        dependencies: FunctionsFamily._dependencies,
+        allTransitiveDependencies: FunctionsFamily._allTransitiveDependencies,
+        region: region,
+      );
 
   FunctionsProvider._internal(
     super._createNotifier, {
@@ -195,8 +183,9 @@ String _$firebaseDbHash() => r'737e827007fc303773f8048e130da8adf247dbf7';
 final firebaseDbPod = Provider<FirebaseDatabase>.internal(
   firebaseDb,
   name: r'firebaseDbPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$firebaseDbHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$firebaseDbHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

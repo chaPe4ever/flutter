@@ -13,14 +13,14 @@ String _$prettyDioLoggerInterceptorHash() =>
 @ProviderFor(prettyDioLoggerInterceptor)
 final prettyDioLoggerInterceptorPod =
     AutoDisposeProvider<PrettyDioLogger>.internal(
-  prettyDioLoggerInterceptor,
-  name: r'prettyDioLoggerInterceptorPod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$prettyDioLoggerInterceptorHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      prettyDioLoggerInterceptor,
+      name: r'prettyDioLoggerInterceptorPod',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$prettyDioLoggerInterceptorHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

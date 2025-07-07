@@ -11,10 +11,9 @@ part 'logger_pod.g.dart';
 @Riverpod(keepAlive: true)
 LoggerBase logger(Ref ref) {
   final isIos = defaultTargetPlatform == TargetPlatform.iOS;
-  final printer =
-      isIos
-          ? PrefixPrinter(PrettyPrinter(lineLength: 80, colors: false))
-          : PrettyPrinter(lineLength: 80, printTime: true);
+  final printer = isIos
+      ? PrefixPrinter(PrettyPrinter(lineLength: 80, colors: false))
+      : PrettyPrinter(lineLength: 80, printTime: true);
 
   final logger = LoggerImpl(
     logger: Logger(

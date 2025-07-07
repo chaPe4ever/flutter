@@ -13,14 +13,14 @@ String _$localNotificationsHash() =>
 @ProviderFor(LocalNotifications)
 final localNotificationsPod =
     NotifierProvider<LocalNotifications, LocalNotificationsBase>.internal(
-  LocalNotifications.new,
-  name: r'localNotificationsPod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$localNotificationsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      LocalNotifications.new,
+      name: r'localNotificationsPod',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$localNotificationsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$LocalNotifications = Notifier<LocalNotificationsBase>;
 // ignore_for_file: type=lint

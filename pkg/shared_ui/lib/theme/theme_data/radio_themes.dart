@@ -5,16 +5,18 @@ class RadioThemes {
   static RadioThemeData light() {
     return RadioThemeData(
       splashRadius: 0,
-      fillColor:
-          WidgetStateProperty.all(AppSemanticColors.light.backgroundBrand),
+      fillColor: WidgetStateProperty.all(
+        AppSemanticColors.light.backgroundBrand,
+      ),
     );
   }
 
   static RadioThemeData dark() {
     return RadioThemeData(
       splashRadius: 0,
-      fillColor:
-          WidgetStateProperty.all(AppSemanticColors.dark.backgroundBrand),
+      fillColor: WidgetStateProperty.all(
+        AppSemanticColors.dark.backgroundBrand,
+      ),
     );
   }
 }

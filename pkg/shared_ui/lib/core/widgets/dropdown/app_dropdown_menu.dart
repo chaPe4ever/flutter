@@ -48,8 +48,8 @@ class _AppDropdownMenuState extends State<AppDropdownMenu> {
           color: errorTextSignal.watch(context).isNotEmpty
               ? context.colors.contentNegative
               : widget.helperText != null
-                  ? context.colors.contentSupport
-                  : context.colors.contentPrimary,
+              ? context.colors.contentSupport
+              : context.colors.contentPrimary,
         ),
         trailingIcon: Icon(
           errorTextSignal.watch(context).isNotEmpty

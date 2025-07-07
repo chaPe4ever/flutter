@@ -151,15 +151,14 @@ final class FirebaseAuthFacade implements AuthFacade {
   Future<Option<AuthenticationEx>> signOut() async => futureOptionAuthTryCatch(
     () async {
       // Collect futures from all pre-signout callbacks
-      final preSignOutFutures =
-          _onPreSignOutCallbacks.map((callback) {
-            // Wrap each in try-catch so individual failures don't block signout
-            return callback().catchError((Object e) {
-              _logger.e('Pre-signout callback failed', e: e);
-              // Return completed future so Future.wait doesn't fail
-              return Future<void>.value();
-            });
-          }).toList();
+      final preSignOutFutures = _onPreSignOutCallbacks.map((callback) {
+        // Wrap each in try-catch so individual failures don't block signout
+        return callback().catchError((Object e) {
+          _logger.e('Pre-signout callback failed', e: e);
+          // Return completed future so Future.wait doesn't fail
+          return Future<void>.value();
+        });
+      }).toList();
 
       // Notify listeners with the futures for optional tracking
       _priorSignOutController.add(preSignOutFutures);
@@ -283,13 +282,13 @@ final class FirebaseAuthFacade implements AuthFacade {
       return e.code == 'requires-recent-login'
           ? some(const RequiresRecentLoginException())
           : some(
-            FirebaseAuthRawException(
-              innerError: e,
-              innerMessage: e.message,
-              innerCode: e.code,
-              st: st,
-            ),
-          );
+              FirebaseAuthRawException(
+                innerError: e,
+                innerMessage: e.message,
+                innerCode: e.code,
+                st: st,
+              ),
+            );
     }
   }
 
@@ -312,13 +311,13 @@ final class FirebaseAuthFacade implements AuthFacade {
       return e.code == 'requires-recent-login'
           ? some(const RequiresRecentLoginException())
           : some(
-            FirebaseAuthRawException(
-              innerError: e,
-              innerMessage: e.message,
-              innerCode: e.code,
-              st: st,
-            ),
-          );
+              FirebaseAuthRawException(
+                innerError: e,
+                innerMessage: e.message,
+                innerCode: e.code,
+                st: st,
+              ),
+            );
     }
   }
 
@@ -353,11 +352,11 @@ final class FirebaseAuthFacade implements AuthFacade {
         (e.code == 'wrong-password')
             ? const InvalidPasswordException()
             : FirebaseAuthRawException(
-              innerError: e,
-              innerMessage: e.message,
-              innerCode: e.code,
-              st: st,
-            ),
+                innerError: e,
+                innerMessage: e.message,
+                innerCode: e.code,
+                st: st,
+              ),
       );
     }
   }

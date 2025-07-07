@@ -7,26 +7,26 @@ extension WidgetRefEX on WidgetRef {
     ProviderListenable<AsyncValue<T>> provider, {
     BuildContext? context,
     VoidCallback? onError,
-  }) =>
-      listen(provider, (previousState, state) {
-        if (state.hasError) {
-          onError?.call();
-        }
-        if (!state.isLoading && state.hasError) {
-          final e = state.error;
-          final coreEx = e?.toCoreException() ?? UnknownCoreException();
-          final text = switch (FlavorHelper.currentFlavor) {
-            FlavorEnum.stg =>
-              coreEx.messageKey.tr().append('\nError: ${coreEx.innerError}'),
-            FlavorEnum.prod || FlavorEnum.dev => coreEx.messageKey.tr(),
-          };
+  }) => listen(provider, (previousState, state) {
+    if (state.hasError) {
+      onError?.call();
+    }
+    if (!state.isLoading && state.hasError) {
+      final e = state.error;
+      final coreEx = e?.toCoreException() ?? UnknownCoreException();
+      final text = switch (FlavorHelper.currentFlavor) {
+        FlavorEnum.stg => coreEx.messageKey.tr().append(
+          '\nError: ${coreEx.innerError}',
+        ),
+        FlavorEnum.prod || FlavorEnum.dev => coreEx.messageKey.tr(),
+      };
 
-          context ??
-              this.context.showSnackBar(
-                    text: text,
-                  );
-        }
-      });
+      context ??
+          this.context.showSnackBar(
+            text: text,
+          );
+    }
+  });
 }
 
 extension AsyncValueUiX<T> on AsyncValue<T> {

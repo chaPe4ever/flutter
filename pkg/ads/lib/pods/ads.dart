@@ -234,8 +234,8 @@ class Ads extends _$Ads with NotifierMountedMixin {
     Log.info('Resetting user consent');
 
     // Check if form is available
-    final isFormAvailable =
-        await ConsentInformation.instance.isConsentFormAvailable();
+    final isFormAvailable = await ConsentInformation.instance
+        .isConsentFormAvailable();
 
     if (!isFormAvailable) {
       Log.info('Consent form is not available, cannot reset consent');
@@ -280,8 +280,8 @@ class Ads extends _$Ads with NotifierMountedMixin {
 
     try {
       // Get consent status to determine non-personalized ads
-      final consentStatus =
-          await ConsentInformation.instance.getConsentStatus();
+      final consentStatus = await ConsentInformation.instance
+          .getConsentStatus();
       final useNonPersonalizedAds = consentStatus != ConsentStatus.obtained;
 
       // Create an ad request with consent parameters
@@ -424,8 +424,8 @@ class Ads extends _$Ads with NotifierMountedMixin {
   Future<void> _checkAndShowConsentForm() async {
     try {
       final status = await ConsentInformation.instance.getConsentStatus();
-      final required =
-          await ConsentInformation.instance.isConsentFormAvailable();
+      final required = await ConsentInformation.instance
+          .isConsentFormAvailable();
 
       Log.info('Consent status: $status, Form required: $required');
 

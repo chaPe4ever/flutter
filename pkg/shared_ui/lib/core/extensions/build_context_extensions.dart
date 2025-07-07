@@ -7,21 +7,20 @@ extension BuildContextEx on BuildContext {
       themeData.extension<AppTextTheme>()!.textStyles;
 
   SemanticColors get colors => switch (themeBrightness) {
-        Brightness.dark => AppSemanticColors.dark,
-        Brightness.light => AppSemanticColors.light,
-      };
+    Brightness.dark => AppSemanticColors.dark,
+    Brightness.light => AppSemanticColors.light,
+  };
 
   Future<T?> showCustomDialog<T>({
     required Widget child,
     bool barrierDismissible = true,
     Key? key,
-  }) async =>
-      showDialog<T?>(
-        context: this,
-        barrierDismissible: barrierDismissible,
-        routeSettings: const RouteSettings(name: 'AppDialog'),
-        builder: (BuildContext context) => child,
-      );
+  }) async => showDialog<T?>(
+    context: this,
+    barrierDismissible: barrierDismissible,
+    routeSettings: const RouteSettings(name: 'AppDialog'),
+    builder: (BuildContext context) => child,
+  );
 
   Future<T?> showDialogPrimary<T>({
     required String title,
@@ -30,19 +29,18 @@ extension BuildContextEx on BuildContext {
     String? content,
     bool barrierDismissible = true,
     Key? key,
-  }) async =>
-      showDialog<T?>(
-        context: this,
-        barrierDismissible: barrierDismissible,
-        routeSettings: const RouteSettings(name: 'AppDialog.primary'),
-        builder: (BuildContext context) => AppDialog.primary(
-          key: key,
-          title: title,
-          content: content,
-          primaryText: primaryText,
-          onPrimaryTap: onPrimaryTap,
-        ),
-      );
+  }) async => showDialog<T?>(
+    context: this,
+    barrierDismissible: barrierDismissible,
+    routeSettings: const RouteSettings(name: 'AppDialog.primary'),
+    builder: (BuildContext context) => AppDialog.primary(
+      key: key,
+      title: title,
+      content: content,
+      primaryText: primaryText,
+      onPrimaryTap: onPrimaryTap,
+    ),
+  );
 
   Future<T?> showDialogSecondary<T>({
     required String title,
@@ -53,21 +51,20 @@ extension BuildContextEx on BuildContext {
     String? content,
     bool barrierDismissible = true,
     Key? key,
-  }) async =>
-      showDialog<T?>(
-        context: this,
-        barrierDismissible: barrierDismissible,
-        routeSettings: const RouteSettings(name: 'AppDialog.secondary'),
-        builder: (BuildContext context) => AppDialog.secondary(
-          key: key,
-          title: title,
-          content: content,
-          primaryText: primaryText,
-          onPrimaryTap: onPrimaryTap,
-          secondaryText: secondaryText,
-          onSecondaryTap: onSecondaryTap,
-        ),
-      );
+  }) async => showDialog<T?>(
+    context: this,
+    barrierDismissible: barrierDismissible,
+    routeSettings: const RouteSettings(name: 'AppDialog.secondary'),
+    builder: (BuildContext context) => AppDialog.secondary(
+      key: key,
+      title: title,
+      content: content,
+      primaryText: primaryText,
+      onPrimaryTap: onPrimaryTap,
+      secondaryText: secondaryText,
+      onSecondaryTap: onSecondaryTap,
+    ),
+  );
 
   Future<T?> showDialogDanger<T>({
     required String title,
@@ -78,21 +75,20 @@ extension BuildContextEx on BuildContext {
     String? content,
     bool barrierDismissible = true,
     Key? key,
-  }) async =>
-      showDialog<T?>(
-        context: this,
-        barrierDismissible: barrierDismissible,
-        routeSettings: const RouteSettings(name: 'AppDialog.danger'),
-        builder: (BuildContext context) => AppDialog.danger(
-          key: key,
-          title: title,
-          content: content,
-          dangerText: dangerText,
-          onDangerTap: onDangerTap,
-          secondaryText: secondaryText,
-          onSecondaryTap: onSecondaryTap,
-        ),
-      );
+  }) async => showDialog<T?>(
+    context: this,
+    barrierDismissible: barrierDismissible,
+    routeSettings: const RouteSettings(name: 'AppDialog.danger'),
+    builder: (BuildContext context) => AppDialog.danger(
+      key: key,
+      title: title,
+      content: content,
+      dangerText: dangerText,
+      onDangerTap: onDangerTap,
+      secondaryText: secondaryText,
+      onSecondaryTap: onSecondaryTap,
+    ),
+  );
 
   void showSnackBar({
     required String text,
@@ -100,23 +96,22 @@ extension BuildContextEx on BuildContext {
     String? actionLabel,
     VoidCallback? onActionTap,
     Key? key,
-  }) =>
-      ScaffoldMessenger.maybeOf(this)
-        ?..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            behavior: SnackBarBehavior.floating,
-            action: actionLabel == null || onActionTap == null
-                ? null
-                : SnackBarAction(
-                    label: actionLabel,
-                    onPressed: onActionTap,
-                  ),
-            content: TextBody.m(text, color: colors.backgroundSnackbar),
-            duration: duration,
-            key: key,
-          ),
-        );
+  }) => ScaffoldMessenger.maybeOf(this)
+    ?..hideCurrentSnackBar()
+    ..showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        action: actionLabel == null || onActionTap == null
+            ? null
+            : SnackBarAction(
+                label: actionLabel,
+                onPressed: onActionTap,
+              ),
+        content: TextBody.m(text, color: colors.backgroundSnackbar),
+        duration: duration,
+        key: key,
+      ),
+    );
 
   void hideSnackbar() => ScaffoldMessenger.maybeOf(this)?.hideCurrentSnackBar();
 
@@ -126,24 +121,25 @@ extension BuildContextEx on BuildContext {
     String? actionLabel,
     VoidCallback? onActionTap,
     Key? key,
-  }) =>
-      ScaffoldMessenger.maybeOf(this)
-        ?..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            behavior: SnackBarBehavior.floating,
-            action: actionLabel == null || onActionTap == null
-                ? null
-                : SnackBarAction(
-                    label: actionLabel,
-                    onPressed: onActionTap,
-                  ),
-            content:
-                TextBody.m(e.messageKey.tr(), color: colors.backgroundSnackbar),
-            duration: duration,
-            key: key,
-          ),
-        );
+  }) => ScaffoldMessenger.maybeOf(this)
+    ?..hideCurrentSnackBar()
+    ..showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        action: actionLabel == null || onActionTap == null
+            ? null
+            : SnackBarAction(
+                label: actionLabel,
+                onPressed: onActionTap,
+              ),
+        content: TextBody.m(
+          e.messageKey.tr(),
+          color: colors.backgroundSnackbar,
+        ),
+        duration: duration,
+        key: key,
+      ),
+    );
 
   Future<T?> showBottomSheet<T>({
     required Widget child,

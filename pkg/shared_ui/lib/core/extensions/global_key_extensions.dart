@@ -8,21 +8,20 @@ extension GlobalKeyX on GlobalKey<ScaffoldMessengerState> {
     String? actionLabel,
     VoidCallback? onActionTap,
     Key? key,
-  }) =>
-      currentState
-        ?..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(
-            behavior: SnackBarBehavior.floating,
-            action: actionLabel == null || onActionTap == null
-                ? null
-                : SnackBarAction(
-                    label: actionLabel,
-                    onPressed: onActionTap,
-                  ),
-            content: TextBody.m(text),
-            duration: duration,
-            key: key,
-          ),
-        );
+  }) => currentState
+    ?..hideCurrentSnackBar()
+    ..showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        action: actionLabel == null || onActionTap == null
+            ? null
+            : SnackBarAction(
+                label: actionLabel,
+                onPressed: onActionTap,
+              ),
+        content: TextBody.m(text),
+        duration: duration,
+        key: key,
+      ),
+    );
 }

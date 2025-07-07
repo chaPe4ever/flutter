@@ -13,8 +13,9 @@ abstract interface class RemoteConfigBase {
   Future<void> init({
     required NetworkBase network,
     Duration fetchTimeout = const Duration(minutes: 1),
-    Duration minimumFetchInterval =
-        kDebugMode ? Duration.zero : const Duration(hours: 1),
+    Duration minimumFetchInterval = kDebugMode
+        ? Duration.zero
+        : const Duration(hours: 1),
   });
 
   /// Stream controller to listen to remote config key changes

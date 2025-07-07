@@ -34,8 +34,9 @@ class _ExpandableTextListWidgetState extends State<ExpandableTextListWidget> {
                 : widget.texts,
           ),
           secondChild: _buildList(widget.texts),
-          crossFadeState:
-              _expanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+          crossFadeState: _expanded
+              ? CrossFadeState.showSecond
+              : CrossFadeState.showFirst,
         ),
         if (widget.texts.length > 3)
           AnimatedCrossFade(

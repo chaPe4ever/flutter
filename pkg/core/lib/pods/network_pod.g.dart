@@ -15,8 +15,9 @@ String _$networkHash() => r'f4f41546ff017fd7827f60527de7ddaaf7dfdf75';
 final networkPod = Provider<NetworkBase>.internal(
   network,
   name: r'networkPod',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$networkHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$networkHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

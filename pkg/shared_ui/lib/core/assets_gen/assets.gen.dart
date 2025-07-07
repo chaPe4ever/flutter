@@ -294,98 +294,98 @@ class $GoogleFontsGen {
 
   /// List of all assets
   List<String> get values => [
-        interItalicVariableFontOpszWght,
-        interVariableFontOpszWght,
-        inter18ptBlack,
-        inter18ptBlackItalic,
-        inter18ptBold,
-        inter18ptBoldItalic,
-        inter18ptExtraBold,
-        inter18ptExtraBoldItalic,
-        inter18ptExtraLight,
-        inter18ptExtraLightItalic,
-        inter18ptItalic,
-        inter18ptLight,
-        inter18ptLightItalic,
-        inter18ptMedium,
-        inter18ptMediumItalic,
-        inter18ptRegular,
-        inter18ptSemiBold,
-        inter18ptSemiBoldItalic,
-        inter18ptThin,
-        inter18ptThinItalic,
-        inter24ptBlack,
-        inter24ptBlackItalic,
-        inter24ptBold,
-        inter24ptBoldItalic,
-        inter24ptExtraBold,
-        inter24ptExtraBoldItalic,
-        inter24ptExtraLight,
-        inter24ptExtraLightItalic,
-        inter24ptItalic,
-        inter24ptLight,
-        inter24ptLightItalic,
-        inter24ptMedium,
-        inter24ptMediumItalic,
-        inter24ptRegular,
-        inter24ptSemiBold,
-        inter24ptSemiBoldItalic,
-        inter24ptThin,
-        inter24ptThinItalic,
-        inter28ptBlack,
-        inter28ptBlackItalic,
-        inter28ptBold,
-        inter28ptBoldItalic,
-        inter28ptExtraBold,
-        inter28ptExtraBoldItalic,
-        inter28ptExtraLight,
-        inter28ptExtraLightItalic,
-        inter28ptItalic,
-        inter28ptLight,
-        inter28ptLightItalic,
-        inter28ptMedium,
-        inter28ptMediumItalic,
-        inter28ptRegular,
-        inter28ptSemiBold,
-        inter28ptSemiBoldItalic,
-        inter28ptThin,
-        inter28ptThinItalic,
-        robotoBlack,
-        robotoBlackItalic,
-        robotoBold,
-        robotoBoldItalic,
-        robotoItalic,
-        robotoLight,
-        robotoLightItalic,
-        robotoMedium,
-        robotoMediumItalic,
-        robotoRegular,
-        robotoThin,
-        robotoThinItalic,
-        urbanistBlack,
-        urbanistBlackItalic,
-        urbanistBold,
-        urbanistBoldItalic,
-        urbanistExtraBold,
-        urbanistExtraBoldItalic,
-        urbanistExtraLight,
-        urbanistExtraLightItalic,
-        urbanistItalicVariableFontWght,
-        urbanistItalic,
-        urbanistLightCopy,
-        urbanistLight,
-        urbanistLightItalic,
-        urbanistMedium,
-        urbanistMediumItalic,
-        urbanistRegularCopy,
-        urbanistRegular,
-        urbanistSemiBoldCopy,
-        urbanistSemiBold,
-        urbanistSemiBoldItalic,
-        urbanistThin,
-        urbanistThinItalic,
-        urbanistVariableFontWght
-      ];
+    interItalicVariableFontOpszWght,
+    interVariableFontOpszWght,
+    inter18ptBlack,
+    inter18ptBlackItalic,
+    inter18ptBold,
+    inter18ptBoldItalic,
+    inter18ptExtraBold,
+    inter18ptExtraBoldItalic,
+    inter18ptExtraLight,
+    inter18ptExtraLightItalic,
+    inter18ptItalic,
+    inter18ptLight,
+    inter18ptLightItalic,
+    inter18ptMedium,
+    inter18ptMediumItalic,
+    inter18ptRegular,
+    inter18ptSemiBold,
+    inter18ptSemiBoldItalic,
+    inter18ptThin,
+    inter18ptThinItalic,
+    inter24ptBlack,
+    inter24ptBlackItalic,
+    inter24ptBold,
+    inter24ptBoldItalic,
+    inter24ptExtraBold,
+    inter24ptExtraBoldItalic,
+    inter24ptExtraLight,
+    inter24ptExtraLightItalic,
+    inter24ptItalic,
+    inter24ptLight,
+    inter24ptLightItalic,
+    inter24ptMedium,
+    inter24ptMediumItalic,
+    inter24ptRegular,
+    inter24ptSemiBold,
+    inter24ptSemiBoldItalic,
+    inter24ptThin,
+    inter24ptThinItalic,
+    inter28ptBlack,
+    inter28ptBlackItalic,
+    inter28ptBold,
+    inter28ptBoldItalic,
+    inter28ptExtraBold,
+    inter28ptExtraBoldItalic,
+    inter28ptExtraLight,
+    inter28ptExtraLightItalic,
+    inter28ptItalic,
+    inter28ptLight,
+    inter28ptLightItalic,
+    inter28ptMedium,
+    inter28ptMediumItalic,
+    inter28ptRegular,
+    inter28ptSemiBold,
+    inter28ptSemiBoldItalic,
+    inter28ptThin,
+    inter28ptThinItalic,
+    robotoBlack,
+    robotoBlackItalic,
+    robotoBold,
+    robotoBoldItalic,
+    robotoItalic,
+    robotoLight,
+    robotoLightItalic,
+    robotoMedium,
+    robotoMediumItalic,
+    robotoRegular,
+    robotoThin,
+    robotoThinItalic,
+    urbanistBlack,
+    urbanistBlackItalic,
+    urbanistBold,
+    urbanistBoldItalic,
+    urbanistExtraBold,
+    urbanistExtraBoldItalic,
+    urbanistExtraLight,
+    urbanistExtraLightItalic,
+    urbanistItalicVariableFontWght,
+    urbanistItalic,
+    urbanistLightCopy,
+    urbanistLight,
+    urbanistLightItalic,
+    urbanistMedium,
+    urbanistMediumItalic,
+    urbanistRegularCopy,
+    urbanistRegular,
+    urbanistSemiBoldCopy,
+    urbanistSemiBold,
+    urbanistSemiBoldItalic,
+    urbanistThin,
+    urbanistThinItalic,
+    urbanistVariableFontWght,
+  ];
 }
 
 class $AssetsLicencesGen {
@@ -454,8 +454,19 @@ class $AssetsSvgGen {
   String get path => 'packages/shared_ui/assets/svg';
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [appLogo, arrowDown, bomb, chat, dog, friendsList, homeFilled, homeOutline, person, setupFilled, setupOutline];
+  List<SvgGenImage> get values => [
+    appLogo,
+    arrowDown,
+    bomb,
+    chat,
+    dog,
+    friendsList,
+    homeFilled,
+    homeOutline,
+    person,
+    setupFilled,
+    setupOutline,
+  ];
 }
 
 class Assets {
@@ -470,11 +481,7 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  });
+  const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
 
   final String _assetName;
 
@@ -540,11 +547,7 @@ class AssetGenImage {
     AssetBundle? bundle,
     @Deprecated('Do not specify package for a generated library asset') String? package = package,
   }) {
-    return AssetImage(
-      _assetName,
-      bundle: bundle,
-      package: package,
-    );
+    return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
   String get path => _assetName;
@@ -553,17 +556,9 @@ class AssetGenImage {
 }
 
 class SvgGenImage {
-  const SvgGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = false;
+  const SvgGenImage(this._assetName, {this.size, this.flavors = const {}}) : _isVecFormat = false;
 
-  const SvgGenImage.vec(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  }) : _isVecFormat = true;
+  const SvgGenImage.vec(this._assetName, {this.size, this.flavors = const {}}) : _isVecFormat = true;
 
   final String _assetName;
   final Size? size;
@@ -594,18 +589,9 @@ class SvgGenImage {
   }) {
     final _svg.BytesLoader loader;
     if (_isVecFormat) {
-      loader = _vg.AssetBytesLoader(
-        _assetName,
-        assetBundle: bundle,
-        packageName: package,
-      );
+      loader = _vg.AssetBytesLoader(_assetName, assetBundle: bundle, packageName: package);
     } else {
-      loader = _svg.SvgAssetLoader(
-        _assetName,
-        assetBundle: bundle,
-        packageName: package,
-        theme: theme,
-      );
+      loader = _svg.SvgAssetLoader(_assetName, assetBundle: bundle, packageName: package, theme: theme);
     }
     return _svg.SvgPicture(
       loader,

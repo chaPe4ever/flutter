@@ -52,32 +52,30 @@ class AsyncValueWidget<T> extends StatelessWidget {
       skipLoadingOnRefresh: true, // skipLoadingOnRefresh,
       skipError: skipError,
       data: data,
-      loading:
-          () =>
-              loadingWidget ?? const Center(child: CircularProgressIndicator()),
+      loading: () =>
+          loadingWidget ?? const Center(child: CircularProgressIndicator()),
       error:
           errorWidgetCb ??
-          (e, st) =>
-              kDebugMode
-                  ? Scaffold(
-                    body: Center(
-                      child: Container(
-                        margin: const EdgeInsets.all(15),
-                        padding: const EdgeInsets.all(3),
-                        height: context.height * 0.5,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.red, width: 2),
-                        ),
-                        child: SingleChildScrollView(
-                          child: Text(
-                            'ERROR_MESSAGE: ${e is CoreException ? e.messageKey.tr() : e}\nSTACKTRACE: ${e is CoreException ? e.st : st}',
-                            style: const TextStyle(color: Colors.red),
-                          ),
+          (e, st) => kDebugMode
+              ? Scaffold(
+                  body: Center(
+                    child: Container(
+                      margin: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(3),
+                      height: context.height * 0.5,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.red, width: 2),
+                      ),
+                      child: SingleChildScrollView(
+                        child: Text(
+                          'ERROR_MESSAGE: ${e is CoreException ? e.messageKey.tr() : e}\nSTACKTRACE: ${e is CoreException ? e.st : st}',
+                          style: const TextStyle(color: Colors.red),
                         ),
                       ),
                     ),
-                  )
-                  : const SizedBox(),
+                  ),
+                )
+              : const SizedBox(),
     );
   }
 }
