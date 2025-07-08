@@ -55,11 +55,8 @@ class Ads extends _$Ads with NotifierMountedMixin {
         await mobileAds.initialize();
         Log.info('Mobile ads initialized successfully');
 
-        // Wait a moment before preloading to ensure initialization is complete
-        await Future<void>.delayed(const Duration(milliseconds: 500));
-
         // Pre-load an ad after initialization
-        await _preloadInterstitialAd();
+        unawaited(_preloadInterstitialAd());
       } catch (e) {
         Log.error('Error initializing ads: $e');
         // Don't rethrow, just log - this allows the app to continue functioning even if ads fail

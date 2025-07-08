@@ -5,7 +5,7 @@ import 'package:shared_ui/shared_ui.dart';
 
 enum TextFieldType { primary }
 
-final FlutterSignal<bool> _isObscured = signal<bool>(true);
+final Signal<bool> _isObscured = signal<bool>(true);
 
 class AppTextField extends OutlineTextFieldBase {
   factory AppTextField({
