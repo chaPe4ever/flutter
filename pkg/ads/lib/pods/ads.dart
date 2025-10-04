@@ -178,7 +178,9 @@ class Ads extends _$Ads with NotifierMountedMixin {
           _cachedInterstitialAd = null;
           CoreException? exception;
 
-          if (error.code == 1) {
+          if (error.code == 1 ||
+              (error.code == 3 &&
+                  error.message.toLowerCase().contains('no fill'))) {
             exception = AdsNoFillException(
               innerError: error,
               innerCode: error.code.toString(),
@@ -311,7 +313,9 @@ class Ads extends _$Ads with NotifierMountedMixin {
           onAdFailedToLoad: (LoadAdError error) {
             Log.error('InterstitialAd failed to load: $error');
             CoreException? exception;
-            if (error.code == 1) {
+            if (error.code == 1 ||
+                (error.code == 3 &&
+                    error.message.toLowerCase().contains('no fill'))) {
               exception = AdsNoFillException(
                 innerError: error,
                 innerCode: error.code.toString(),
