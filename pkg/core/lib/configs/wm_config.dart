@@ -4,7 +4,7 @@ import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class WmConfig implements Config {
+class WmConfig implements ConfigBase {
   @override
   Future<void> init({
     double? minScreenWidth,

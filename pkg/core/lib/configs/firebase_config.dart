@@ -1,7 +1,6 @@
 import 'package:core/core.dart';
-import 'package:firebase_core/firebase_core.dart';
 
-class FirebaseConfig implements Config {
+class FirebaseConfig implements ConfigBase {
   FirebaseConfig({required this.firebaseOptions});
 
   final FirebaseOptions firebaseOptions;

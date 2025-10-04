@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-class GoogleFontsConfig implements Config {
+class GoogleFontsConfig implements ConfigBase {
   const GoogleFontsConfig({
     this.fontLicencesAbsPath,
     this.allowRuntimeFetching = true,

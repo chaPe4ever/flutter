@@ -1,5 +1,5 @@
 /// Config interface
-abstract interface class Config {
+abstract interface class ConfigBase {
   /// initialisation method of any config derivative
   Future<void> init();
 }

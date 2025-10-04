@@ -5,7 +5,7 @@ import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
-class WebConfig implements Config {
+class WebConfig implements ConfigBase {
   @override
   Future<void> init() async {
     usePathUrlStrategy();
