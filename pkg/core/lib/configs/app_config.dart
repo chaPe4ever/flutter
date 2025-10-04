@@ -1,4 +1,4 @@
-import 'package:core/configs/config.dart';
+import 'package:core/configs/config_base.dart';
 
 /// App config class
 final class AppConfig implements ConfigBase {
