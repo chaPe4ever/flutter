@@ -1,11 +1,11 @@
 # Seed instructions (from `patterns/` and `setup/` folders)
 
 Purpose  
-Provide a concise, repeatable process to seed data and project setup using the repository folders `patterns/` and `setup/`. These instructions assume template files are plain-text formats commonly used in repos (JSON, YAML, or .md documentation files).
+Provide a concise, repeatable process to seed data and project setup using the repository folders `patterns/`, `setup/`, `breaking/`, `aliases/` and `commands/`. These instructions assume template files are plain-text formats commonly used in repos (JSON, YAML, or .md documentation files).
 
 ## Assumptions
-- Project root contains `patterns/` and `setup/` folders.
-- Seed runners read templates from `patterns/` and use `setup/` for configuration and execution.
+- Project root contains `patterns/`, `setup/`, `breaking/`, `aliases/` and `commands/` folders.
+- Seed runners read templates on parallel the above folders
 
 ## Typical folder layout that should be read before processing
 ai/toolkit/
