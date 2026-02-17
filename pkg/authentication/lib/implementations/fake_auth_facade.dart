@@ -61,7 +61,9 @@ final class FakeAuthFacade implements AuthFacade {
   }
 
   @override
-  Future<Option<AuthenticationEx>> signInWithApple() async {
+  Future<Either<AuthenticationEx, User?>> signInWithApple({
+    String locale = 'en',
+  }) async {
     throw UnimplementedError();
   }
 
@@ -115,11 +117,13 @@ final class FakeAuthFacade implements AuthFacade {
   );
 
   @override
-  Future<Option<AuthenticationEx>> signInWithGoogle() async {
+  Future<Either<AuthenticationEx, User?>> signInWithGoogle({
+    String locale = 'en',
+  }) async {
     try {
-      return none();
+      return right(null);
     } on FirebaseAuthException {
-      return some(const AuthServerErrorException());
+      return left(const AuthServerErrorException());
     }
   }
 
@@ -642,19 +646,21 @@ extension FakeUserCredentialFactory on FakeUserCredential {
   }
 }
 
-final fakeGoogleUserCredential = FakeUserCredentialFactory.google(
-  uid: faker.guid.guid(),
-  email: faker.internet.email(),
-  displayName: faker.person.name(),
-  photoURL: faker.internet.httpsUrl(),
-  idToken: faker.jwt.valid(),
-  accessToken: faker.jwt.valid(),
-  isNewUser: true,
-);
+final FakeUserCredential fakeGoogleUserCredential =
+    FakeUserCredentialFactory.google(
+      uid: faker.guid.guid(),
+      email: faker.internet.email(),
+      displayName: faker.person.name(),
+      photoURL: faker.internet.httpsUrl(),
+      idToken: faker.jwt.valid(),
+      accessToken: faker.jwt.valid(),
+      isNewUser: true,
+    );
 
-final fakePhoneUserCredential = FakeUserCredentialFactory.phone(
-  uid: faker.guid.guid(),
-  phoneNumber: faker.phoneNumber.us(),
-  verificationId: 'fake-verification-id',
-  smsCode: '123456',
-);
+final FakeUserCredential fakePhoneUserCredential =
+    FakeUserCredentialFactory.phone(
+      uid: faker.guid.guid(),
+      phoneNumber: faker.phoneNumber.us(),
+      verificationId: 'fake-verification-id',
+      smsCode: '123456',
+    );

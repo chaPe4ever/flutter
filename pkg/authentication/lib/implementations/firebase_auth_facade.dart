@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:authentication/contracts/auth_facade.dart';
 import 'package:authentication/exceptions/auth_exceptions.dart';
 import 'package:authentication/utils/firebase_auth_try_catch.dart';
+import 'package:authentication/utils/helpers.dart';
 import 'package:authentication/utils/value_objects.dart';
 import 'package:core/core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart' hide generateNonce;
 
 /// Firebase authentication facade implementation
 final class FirebaseAuthFacade implements AuthFacade {
@@ -61,9 +63,96 @@ final class FirebaseAuthFacade implements AuthFacade {
   }
 
   @override
-  Future<Option<AuthenticationEx>> signInWithApple() async {
-    // TODO(Petros): implement signInWithApple
-    throw UnimplementedError();
+  Future<Either<AuthenticationEx, User?>> signInWithApple({
+    String locale = 'en',
+  }) async {
+    try {
+      // To prevent replay attacks with the credential returned from Apple, we
+      // include a nonce in the credential request. When signing in with
+      // Firebase, the nonce in the id token returned by Apple, is expected to
+      // match the sha256 hash of `rawNonce`.
+      final rawNonce = generateNonce();
+      final nonce = sha256ofString(rawNonce);
+
+      // Request credential for the currently signed in Apple account.
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: AppleIDAuthorizationScopes.values,
+        nonce: nonce,
+      );
+
+      // Validate identityToken
+      if (appleCredential.identityToken == null ||
+          appleCredential.identityToken!.isEmpty) {
+        _logger.e('Apple sign in failed: identityToken is null or empty');
+        return left(const AuthServerErrorException());
+      }
+
+      // Create an `OAuthCredential` from the credential returned by Apple.
+      final oauthCredential = OAuthProvider('apple.com').credential(
+        idToken: appleCredential.identityToken,
+        rawNonce: rawNonce,
+        accessToken: appleCredential.authorizationCode,
+      );
+
+      // Sign in the user with Firebase. If the nonce we generated earlier does
+      // not match the nonce in `appleCredential.identityToken`, sign in will fail.
+      final userCredential = await _firebaseAuth.signInWithCredential(
+        oauthCredential,
+      );
+      final user = userCredential.user;
+
+      // Check if this is a new user (first sign-in)
+      final isNewUser = userCredential.additionalUserInfo?.isNewUser ?? false;
+      if (user != null) {
+        // Apple only provides email/name on FIRST sign-in
+        // On subsequent sign-ins, Firebase already has them stored from the first sign-in
+
+        // Update displayName only if:
+        // 1. We have name data from Apple (first sign-in)
+        // 2. AND Firebase user doesn't have displayName yet
+        if ((appleCredential.givenName != null ||
+                appleCredential.familyName != null) &&
+            user.displayName == null) {
+          final displayName =
+              '${appleCredential.givenName ?? ''} ${appleCredential.familyName ?? ''}'
+                  .trim();
+          if (displayName.isNotEmpty) {
+            await user.updateDisplayName(displayName);
+          }
+        }
+
+        // Email is automatically stored by Firebase from the first sign-in
+        // On subsequent sign-ins, even though Apple doesn't provide email,
+        // Firebase user.email will still have the email from the first sign-in
+        // (or the private relay email if user chose "Hide My Email")
+
+        // Reload to ensure we have the latest user data
+        await user.reload();
+
+        _logger.d(
+          'Apple sign-in successful - uid: ${user.uid}, email: ${user.email}, displayName: ${user.displayName}, isNewUser: $isNewUser',
+        );
+      }
+
+      return right(isNewUser ? _firebaseAuth.currentUser : null);
+    } on SignInWithAppleAuthorizationException catch (e) {
+      if (e.code == AuthorizationErrorCode.canceled ||
+          e.code == AuthorizationErrorCode.unknown) {
+        return left(const AuthCanceledByUserException());
+      }
+      _logger.e('Apple sign in failed: ${e.message}', e: e);
+      return left(const AuthServerErrorException());
+    } on FirebaseAuthException catch (e, st) {
+      _logger.e(
+        'Firebase auth error: ${e.message ?? ''}, code: ${e.code}',
+        e: e,
+        st: st,
+      );
+      if (e.code == 'canceled' || e.code == 'user-cancelled') {
+        return left(const AuthCanceledByUserException());
+      }
+      return left(const AuthServerErrorException());
+    }
   }
 
   @override
@@ -121,26 +210,33 @@ final class FirebaseAuthFacade implements AuthFacade {
   );
 
   @override
-  Future<Option<AuthenticationEx>> signInWithGoogle() async {
+  Future<Either<AuthenticationEx, User?>> signInWithGoogle({
+    String locale = 'en',
+  }) async {
     try {
-      // final googleUser = await _googleSignIn.signIn();
-      // if (googleUser == null) {
-      //   return some(const AuthCanceledByUserException());
-      // }
+      final googleProvider = GoogleAuthProvider()
+        //  tells Google’s OAuth to show the account selection screen every time
+        // instead of auto-signing with the last account.
+        ..setCustomParameters({'prompt': 'select_account', 'locale': locale});
 
-      // final googleAuthentication = await googleUser.authentication;
+      final userCredential = await _firebaseAuth.signInWithProvider(
+        googleProvider,
+      );
 
-      // final authCredential = GoogleAuthProvider.credential(
-      //   idToken: googleAuthentication.idToken,
-      //   accessToken: googleAuthentication.accessToken,
-      // );
+      // Check if this is a new user (first sign-in)
+      final isNewUser = userCredential.additionalUserInfo?.isNewUser ?? false;
+      await _firebaseAuth.currentUser?.reload();
 
-      // await _firebaseAuth.signInWithCredential(authCredential);
-      return none();
+      return right(isNewUser ? _firebaseAuth.currentUser : null);
     } on FirebaseAuthException catch (e, st) {
       _logger.e(e.message ?? '', e: e, st: st);
+      if (e.code == 'web-context-canceled' ||
+          e.code == 'web-context-cancelled' ||
+          e.code == 'popup-closed-by-user') {
+        return left(const AuthCanceledByUserException());
+      }
 
-      return some(const AuthServerErrorException());
+      return left(const AuthServerErrorException());
     }
   }
 
@@ -167,7 +263,6 @@ final class FirebaseAuthFacade implements AuthFacade {
       await Future.wait(preSignOutFutures);
 
       // Now proceed with the actual sign out
-      // await googleSignIn.signOut();
       await _firebaseAuth.signOut();
       await _firebaseAuth.currentUser?.reload();
     },

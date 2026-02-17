@@ -16,7 +16,10 @@ dependencies:
   firebase_auth: ^5.6.2
   flutter:
     sdk: flutter
-  # google_sign_in: ^6.2.1
+  # Add if there is a special need for extra scopes etc.
+  # google_sign_in: ^7.2.0
+  sign_in_with_apple: ^3.0.0
+  crypto: ^3.0.1
 
 dev_dependencies:
   build_runner: ^2.4.15

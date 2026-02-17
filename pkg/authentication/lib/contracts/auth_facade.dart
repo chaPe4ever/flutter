@@ -28,10 +28,10 @@ abstract interface class AuthFacade {
   });
 
   /// Sign in user using his google account
-  Future<Option<AuthenticationEx>> signInWithGoogle();
+  Future<Either<AuthenticationEx, User?>> signInWithGoogle({String locale = 'en'});
 
   /// Sign in user using his apple account
-  Future<Option<AuthenticationEx>> signInWithApple();
+  Future<Either<AuthenticationEx, User?>> signInWithApple({String locale = 'en'});
 
   /// Sign in user using his facebook account
   Future<Option<AuthenticationEx>> signInWithFacebook();
