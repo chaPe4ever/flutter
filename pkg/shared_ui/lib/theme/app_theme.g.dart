@@ -6,22 +6,46 @@ part of 'app_theme.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$themeHash() => r'5acefb10ef5243bd03eeafa6eccb3ff884f703d9';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [theme].
 @ProviderFor(theme)
-final themePod = Provider<ThemeBase>.internal(
-  theme,
-  name: r'themePod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$themeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final themePod = ThemeProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef ThemeRef = ProviderRef<ThemeBase>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class ThemeProvider
+    extends $FunctionalProvider<ThemeBase, ThemeBase, ThemeBase>
+    with $Provider<ThemeBase> {
+  ThemeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'themePod',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$themeHash();
+
+  @$internal
+  @override
+  $ProviderElement<ThemeBase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  ThemeBase create(Ref ref) {
+    return theme(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(ThemeBase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<ThemeBase>(value),
+    );
+  }
+}
+
+String _$themeHash() => r'5acefb10ef5243bd03eeafa6eccb3ff884f703d9';

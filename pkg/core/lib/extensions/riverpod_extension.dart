@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:core/core.dart';
 import 'package:flutter/widgets.dart';
 
-extension RiverpodX on Ref<Object?> {
+extension RiverpodX on Ref {
   /// Cache can be used to cache data for a provided [duration] for an
   /// autoDisposed pod. The return type is of the same type of [cb]. If there
   /// is a request that being involved on the process, you can pass an

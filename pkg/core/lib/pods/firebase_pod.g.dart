@@ -6,192 +6,199 @@ part of 'firebase_pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// Keep the pod singleton
+
+@ProviderFor(firestore)
+final firestorePod = FirestoreProvider._();
+
+/// Keep the pod singleton
+
+final class FirestoreProvider
+    extends
+        $FunctionalProvider<
+          FirebaseFirestore,
+          FirebaseFirestore,
+          FirebaseFirestore
+        >
+    with $Provider<FirebaseFirestore> {
+  /// Keep the pod singleton
+  FirestoreProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'firestorePod',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$firestoreHash();
+
+  @$internal
+  @override
+  $ProviderElement<FirebaseFirestore> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  FirebaseFirestore create(Ref ref) {
+    return firestore(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(FirebaseFirestore value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<FirebaseFirestore>(value),
+    );
+  }
+}
+
 String _$firestoreHash() => r'ea545ab322745f4c35e7f3eade2beca7dd8e0b85';
 
 /// Keep the pod singleton
-///
-/// Copied from [firestore].
-@ProviderFor(firestore)
-final firestorePod = Provider<FirebaseFirestore>.internal(
-  firestore,
-  name: r'firestorePod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$firestoreHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FirestoreRef = ProviderRef<FirebaseFirestore>;
-String _$functionsHash() => r'a2dae6af90be9cac3b601637cfd5e8200f29b171';
-
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
-
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
-  }
-
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
-  }
-}
-
-/// Keep the pod singleton
-///
-/// Copied from [functions].
 @ProviderFor(functions)
-const functionsPod = FunctionsFamily();
+final functionsPod = FunctionsFamily._();
 
 /// Keep the pod singleton
-///
-/// Copied from [functions].
-class FunctionsFamily extends Family<FirebaseFunctions> {
-  /// Keep the pod singleton
-  ///
-  /// Copied from [functions].
-  const FunctionsFamily();
 
+final class FunctionsProvider
+    extends
+        $FunctionalProvider<
+          FirebaseFunctions,
+          FirebaseFunctions,
+          FirebaseFunctions
+        >
+    with $Provider<FirebaseFunctions> {
   /// Keep the pod singleton
-  ///
-  /// Copied from [functions].
-  FunctionsProvider call({String region = 'europe-west3'}) {
-    return FunctionsProvider(region: region);
+  FunctionsProvider._({
+    required FunctionsFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'functionsPod',
+         isAutoDispose: false,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$functionsHash();
+
+  @override
+  String toString() {
+    return r'functionsPod'
+        ''
+        '($argument)';
   }
 
+  @$internal
   @override
-  FunctionsProvider getProviderOverride(covariant FunctionsProvider provider) {
-    return call(region: provider.region);
+  $ProviderElement<FirebaseFunctions> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  FirebaseFunctions create(Ref ref) {
+    final argument = this.argument as String;
+    return functions(ref, region: argument);
   }
 
-  static const Iterable<ProviderOrFamily>? _dependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
-
-  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
-
-  @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
-      _allTransitiveDependencies;
-
-  @override
-  String? get name => r'functionsPod';
-}
-
-/// Keep the pod singleton
-///
-/// Copied from [functions].
-class FunctionsProvider extends Provider<FirebaseFunctions> {
-  /// Keep the pod singleton
-  ///
-  /// Copied from [functions].
-  FunctionsProvider({String region = 'europe-west3'})
-    : this._internal(
-        (ref) => functions(ref as FunctionsRef, region: region),
-        from: functionsPod,
-        name: r'functionsPod',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$functionsHash,
-        dependencies: FunctionsFamily._dependencies,
-        allTransitiveDependencies: FunctionsFamily._allTransitiveDependencies,
-        region: region,
-      );
-
-  FunctionsProvider._internal(
-    super._createNotifier, {
-    required super.name,
-    required super.dependencies,
-    required super.allTransitiveDependencies,
-    required super.debugGetCreateSourceHash,
-    required super.from,
-    required this.region,
-  }) : super.internal();
-
-  final String region;
-
-  @override
-  Override overrideWith(
-    FirebaseFunctions Function(FunctionsRef provider) create,
-  ) {
-    return ProviderOverride(
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(FirebaseFunctions value) {
+    return $ProviderOverride(
       origin: this,
-      override: FunctionsProvider._internal(
-        (ref) => create(ref as FunctionsRef),
-        from: from,
-        name: null,
-        dependencies: null,
-        allTransitiveDependencies: null,
-        debugGetCreateSourceHash: null,
-        region: region,
-      ),
+      providerOverride: $SyncValueProvider<FirebaseFunctions>(value),
     );
   }
 
   @override
-  ProviderElement<FirebaseFunctions> createElement() {
-    return _FunctionsProviderElement(this);
-  }
-
-  @override
   bool operator ==(Object other) {
-    return other is FunctionsProvider && other.region == region;
+    return other is FunctionsProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, region.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-mixin FunctionsRef on ProviderRef<FirebaseFunctions> {
-  /// The parameter `region` of this provider.
-  String get region;
-}
+String _$functionsHash() => r'a2dae6af90be9cac3b601637cfd5e8200f29b171';
 
-class _FunctionsProviderElement extends ProviderElement<FirebaseFunctions>
-    with FunctionsRef {
-  _FunctionsProviderElement(super.provider);
+/// Keep the pod singleton
+
+final class FunctionsFamily extends $Family
+    with $FunctionalFamilyOverride<FirebaseFunctions, String> {
+  FunctionsFamily._()
+    : super(
+        retry: null,
+        name: r'functionsPod',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: false,
+      );
+
+  /// Keep the pod singleton
+
+  FunctionsProvider call({String region = 'europe-west3'}) =>
+      FunctionsProvider._(argument: region, from: this);
 
   @override
-  String get region => (origin as FunctionsProvider).region;
+  String toString() => r'functionsPod';
+}
+
+/// Keep the pod singleton
+
+@ProviderFor(firebaseDb)
+final firebaseDbPod = FirebaseDbProvider._();
+
+/// Keep the pod singleton
+
+final class FirebaseDbProvider
+    extends
+        $FunctionalProvider<
+          FirebaseDatabase,
+          FirebaseDatabase,
+          FirebaseDatabase
+        >
+    with $Provider<FirebaseDatabase> {
+  /// Keep the pod singleton
+  FirebaseDbProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'firebaseDbPod',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$firebaseDbHash();
+
+  @$internal
+  @override
+  $ProviderElement<FirebaseDatabase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  FirebaseDatabase create(Ref ref) {
+    return firebaseDb(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(FirebaseDatabase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<FirebaseDatabase>(value),
+    );
+  }
 }
 
 String _$firebaseDbHash() => r'737e827007fc303773f8048e130da8adf247dbf7';
-
-/// Keep the pod singleton
-///
-/// Copied from [firebaseDb].
-@ProviderFor(firebaseDb)
-final firebaseDbPod = Provider<FirebaseDatabase>.internal(
-  firebaseDb,
-  name: r'firebaseDbPod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$firebaseDbHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FirebaseDbRef = ProviderRef<FirebaseDatabase>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

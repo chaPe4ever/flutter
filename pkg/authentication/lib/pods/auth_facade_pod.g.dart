@@ -6,41 +6,91 @@ part of 'auth_facade_pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+///
+
+@ProviderFor(authFacade)
+final authFacadePod = AuthFacadeProvider._();
+
+///
+
+final class AuthFacadeProvider
+    extends $FunctionalProvider<AuthFacade, AuthFacade, AuthFacade>
+    with $Provider<AuthFacade> {
+  ///
+  AuthFacadeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'authFacadePod',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$authFacadeHash();
+
+  @$internal
+  @override
+  $ProviderElement<AuthFacade> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  AuthFacade create(Ref ref) {
+    return authFacade(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AuthFacade value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AuthFacade>(value),
+    );
+  }
+}
+
 String _$authFacadeHash() => r'dc96f2ed6b0af6d0e46b891390e6cbaf0d53ba33';
 
-///
-///
-/// Copied from [authFacade].
-@ProviderFor(authFacade)
-final authFacadePod = Provider<AuthFacade>.internal(
-  authFacade,
-  name: r'authFacadePod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$authFacadeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AuthFacadeRef = ProviderRef<AuthFacade>;
-String _$firebaseAuthHash() => r'cb440927c3ab863427fd4b052a8ccba4c024c863';
-
-/// See also [firebaseAuth].
 @ProviderFor(firebaseAuth)
-final firebaseAuthPod = Provider<FirebaseAuth>.internal(
-  firebaseAuth,
-  name: r'firebaseAuthPod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$firebaseAuthHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final firebaseAuthPod = FirebaseAuthProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FirebaseAuthRef = ProviderRef<FirebaseAuth>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class FirebaseAuthProvider
+    extends $FunctionalProvider<FirebaseAuth, FirebaseAuth, FirebaseAuth>
+    with $Provider<FirebaseAuth> {
+  FirebaseAuthProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'firebaseAuthPod',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$firebaseAuthHash();
+
+  @$internal
+  @override
+  $ProviderElement<FirebaseAuth> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  FirebaseAuth create(Ref ref) {
+    return firebaseAuth(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(FirebaseAuth value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<FirebaseAuth>(value),
+    );
+  }
+}
+
+String _$firebaseAuthHash() => r'cb440927c3ab863427fd4b052a8ccba4c024c863';

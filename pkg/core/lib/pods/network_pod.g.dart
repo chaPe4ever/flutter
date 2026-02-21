@@ -6,24 +6,50 @@ part of 'network_pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$networkHash() => r'f4f41546ff017fd7827f60527de7ddaaf7dfdf75';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// Network connection pod
+
+@ProviderFor(network)
+final networkPod = NetworkProvider._();
 
 /// Network connection pod
-///
-/// Copied from [network].
-@ProviderFor(network)
-final networkPod = Provider<NetworkBase>.internal(
-  network,
-  name: r'networkPod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$networkHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef NetworkRef = ProviderRef<NetworkBase>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class NetworkProvider
+    extends $FunctionalProvider<NetworkBase, NetworkBase, NetworkBase>
+    with $Provider<NetworkBase> {
+  /// Network connection pod
+  NetworkProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'networkPod',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$networkHash();
+
+  @$internal
+  @override
+  $ProviderElement<NetworkBase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  NetworkBase create(Ref ref) {
+    return network(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(NetworkBase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<NetworkBase>(value),
+    );
+  }
+}
+
+String _$networkHash() => r'f4f41546ff017fd7827f60527de7ddaaf7dfdf75';

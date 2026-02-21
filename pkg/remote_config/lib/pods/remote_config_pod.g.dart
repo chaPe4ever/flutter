@@ -6,24 +6,55 @@ part of 'remote_config_pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$remoteConfigHash() => r'9cd2108368f98a1785e6a75d1be86847164a7231';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+///
 
-///
-///
-/// Copied from [remoteConfig].
 @ProviderFor(remoteConfig)
-final remoteConfigPod = Provider<RemoteConfigBase>.internal(
-  remoteConfig,
-  name: r'remoteConfigPod',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$remoteConfigHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final remoteConfigPod = RemoteConfigProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef RemoteConfigRef = ProviderRef<RemoteConfigBase>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+///
+
+final class RemoteConfigProvider
+    extends
+        $FunctionalProvider<
+          RemoteConfigBase,
+          RemoteConfigBase,
+          RemoteConfigBase
+        >
+    with $Provider<RemoteConfigBase> {
+  ///
+  RemoteConfigProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'remoteConfigPod',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$remoteConfigHash();
+
+  @$internal
+  @override
+  $ProviderElement<RemoteConfigBase> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  RemoteConfigBase create(Ref ref) {
+    return remoteConfig(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(RemoteConfigBase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<RemoteConfigBase>(value),
+    );
+  }
+}
+
+String _$remoteConfigHash() => r'9cd2108368f98a1785e6a75d1be86847164a7231';

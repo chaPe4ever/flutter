@@ -6,27 +6,64 @@ part of 'in_app_review_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// Provider for the InAppReviewService
+
+@ProviderFor(InAppReviewService)
+final inAppReviewServicePod = InAppReviewServiceProvider._();
+
+/// Provider for the InAppReviewService
+final class InAppReviewServiceProvider
+    extends $NotifierProvider<InAppReviewService, InAppReviewServiceBase> {
+  /// Provider for the InAppReviewService
+  InAppReviewServiceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'inAppReviewServicePod',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$inAppReviewServiceHash();
+
+  @$internal
+  @override
+  InAppReviewService create() => InAppReviewService();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(InAppReviewServiceBase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<InAppReviewServiceBase>(value),
+    );
+  }
+}
+
 String _$inAppReviewServiceHash() =>
     r'af6919ec6108b9217abb58f61fa445832f499b1c';
 
 /// Provider for the InAppReviewService
-///
-/// Copied from [InAppReviewService].
-@ProviderFor(InAppReviewService)
-final inAppReviewServicePod =
-    AutoDisposeNotifierProvider<
-      InAppReviewService,
-      InAppReviewServiceBase
-    >.internal(
-      InAppReviewService.new,
-      name: r'inAppReviewServicePod',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$inAppReviewServiceHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
 
-typedef _$InAppReviewService = AutoDisposeNotifier<InAppReviewServiceBase>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+abstract class _$InAppReviewService extends $Notifier<InAppReviewServiceBase> {
+  InAppReviewServiceBase build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final ref =
+        this.ref as $Ref<InAppReviewServiceBase, InAppReviewServiceBase>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<InAppReviewServiceBase, InAppReviewServiceBase>,
+              InAppReviewServiceBase,
+              Object?,
+              Object?
+            >;
+    element.handleCreate(ref, build);
+  }
+}

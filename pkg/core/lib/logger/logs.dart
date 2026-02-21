@@ -178,14 +178,13 @@ class SignalsLogger extends LoggingSignalsObserver {
   }
 }
 
-class RiverpodLogger extends ProviderObserver {
+base class RiverpodLogger extends ProviderObserver {
   const RiverpodLogger();
   @override
   void didUpdateProvider(
-    ProviderBase<Object?> provider,
+    ProviderObserverContext context,
     Object? previousValue,
     Object? newValue,
-    ProviderContainer container,
   ) {
     if (newValue is AsyncError) {
       final error = newValue.error;
@@ -201,7 +200,7 @@ class RiverpodLogger extends ProviderObserver {
     }
 
     Log.riverpod(
-      providerName: 'Provider: ${provider.name ?? provider.runtimeType}',
+      providerName: 'Provider: ${context.provider}',
     );
     Log.riverpod(
       info: 'previousValueType: ${previousValue.runtimeType}',
@@ -216,7 +215,7 @@ class RiverpodLogger extends ProviderObserver {
       info: 'newValueType: ${newValue.runtimeType}',
       verboseCb: ({required bool isActive}) {
         if (isActive) {
-          return 'newValue: $previousValue';
+          return 'newValue: $newValue';
         }
         return null;
       },

@@ -570,4 +570,20 @@ final class FirebaseAuthFacade implements AuthFacade {
     // Close stream controller
     _priorSignOutController.close();
   }
+
+  @override
+  bool get isOAuthUser {
+    final user = _firebaseAuth.currentUser;
+    if (user == null) return false;
+    return user.isOAuth;
+  }
+}
+
+extension UserX on User {
+  bool get isOAuth {
+    const emailPasswordProviderId = 'password';
+    return providerData.any(
+      (info) => info.providerId != emailPasswordProviderId,
+    );
+  }
 }

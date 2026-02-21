@@ -6,25 +6,56 @@ part of 'flutter_notification_plugin_pod.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$flutterLocalNotificationsPluginHash() =>
-    r'5012bb087ba16f70c0b479f4f83169aed9e1b683';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [flutterLocalNotificationsPlugin].
 @ProviderFor(flutterLocalNotificationsPlugin)
 final flutterLocalNotificationsPluginPod =
-    Provider<FlutterLocalNotificationsPlugin>.internal(
-      flutterLocalNotificationsPlugin,
-      name: r'flutterLocalNotificationsPluginPod',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$flutterLocalNotificationsPluginHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+    FlutterLocalNotificationsPluginProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef FlutterLocalNotificationsPluginRef =
-    ProviderRef<FlutterLocalNotificationsPlugin>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class FlutterLocalNotificationsPluginProvider
+    extends
+        $FunctionalProvider<
+          FlutterLocalNotificationsPlugin,
+          FlutterLocalNotificationsPlugin,
+          FlutterLocalNotificationsPlugin
+        >
+    with $Provider<FlutterLocalNotificationsPlugin> {
+  FlutterLocalNotificationsPluginProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'flutterLocalNotificationsPluginPod',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$flutterLocalNotificationsPluginHash();
+
+  @$internal
+  @override
+  $ProviderElement<FlutterLocalNotificationsPlugin> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  FlutterLocalNotificationsPlugin create(Ref ref) {
+    return flutterLocalNotificationsPlugin(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(FlutterLocalNotificationsPlugin value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<FlutterLocalNotificationsPlugin>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$flutterLocalNotificationsPluginHash() =>
+    r'5012bb087ba16f70c0b479f4f83169aed9e1b683';

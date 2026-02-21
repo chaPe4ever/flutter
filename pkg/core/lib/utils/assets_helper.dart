@@ -8,16 +8,11 @@ import 'package:flutter/services.dart';
 class AssetsHelper {
   /// Get an asset list given the [path]. Path normally consists of
   /// packageName and folderName like so: packages/my_package/my_asset_folder
-  static Future<List<String>> getAssetList({required String path}) async =>
-      rootBundle
-          .loadString('AssetManifest.json')
-          .then(
-            (manifestJsonStr) =>
-                (jsonDecode(manifestJsonStr) as Map<String, dynamic>?)?.keys
-                    .where((element) => element.contains(path))
-                    .toList() ??
-                List.empty(),
-          );
+  static Future<List<String>> getAssetList({required String path}) async {
+    final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
+    final allAssets = assetManifest.listAssets();
+    return allAssets.where((asset) => asset.contains(path)).toList();
+  }
 
   /// Populates translations based on the [pkgAssetTransNames] provided
   static Future<Map<String, dynamic>> populatePkgTrans({

@@ -346,6 +346,9 @@ final class FakeAuthFacade implements AuthFacade {
   }) {
     // TODO: implement removeListener
   }
+
+  @override
+  bool get isOAuthUser => false;
 }
 
 class FakeUser implements User {

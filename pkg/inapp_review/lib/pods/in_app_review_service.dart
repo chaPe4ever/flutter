@@ -1,4 +1,4 @@
-import 'package:analytics/pods/analytics_pod.dart';
+import 'package:analytics/analytics.dart';
 import 'package:core/core.dart';
 import 'package:inapp_review/contracts/in_app_review_service_base.dart';
 import 'package:inapp_review/implementations/in_app_review_service_impl.dart';

@@ -6,24 +6,48 @@ part of 'pretty_dio_logger_interceptor.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(prettyDioLoggerInterceptor)
+final prettyDioLoggerInterceptorPod = PrettyDioLoggerInterceptorProvider._();
+
+final class PrettyDioLoggerInterceptorProvider
+    extends
+        $FunctionalProvider<PrettyDioLogger, PrettyDioLogger, PrettyDioLogger>
+    with $Provider<PrettyDioLogger> {
+  PrettyDioLoggerInterceptorProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'prettyDioLoggerInterceptorPod',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$prettyDioLoggerInterceptorHash();
+
+  @$internal
+  @override
+  $ProviderElement<PrettyDioLogger> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  PrettyDioLogger create(Ref ref) {
+    return prettyDioLoggerInterceptor(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(PrettyDioLogger value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<PrettyDioLogger>(value),
+    );
+  }
+}
+
 String _$prettyDioLoggerInterceptorHash() =>
     r'c71dc4aa11aab3c211a1f96450a5b5c4d23ca864';
-
-/// See also [prettyDioLoggerInterceptor].
-@ProviderFor(prettyDioLoggerInterceptor)
-final prettyDioLoggerInterceptorPod =
-    AutoDisposeProvider<PrettyDioLogger>.internal(
-      prettyDioLoggerInterceptor,
-      name: r'prettyDioLoggerInterceptorPod',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$prettyDioLoggerInterceptorHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef PrettyDioLoggerInterceptorRef = AutoDisposeProviderRef<PrettyDioLogger>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

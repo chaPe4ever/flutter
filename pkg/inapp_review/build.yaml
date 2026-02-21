@@ -13,5 +13,5 @@ targets:
       freezed:
         options:
           generic_argument_factories: true
-      index_generator:
-        enabled: true
+      # index_generator: Commented out - builder not recognized with current build_runner version
+      #   enabled: true
