@@ -28,8 +28,7 @@ dev_dependencies:
       url: https://github.com/chaPe4ever/flutter
       ref: main
       path: builders/custom_builders
-    # custom_lint: ^0.8.1  # Incompatible with riverpod_generator 4.x (analyzer 9 vs 8)
-  custom_lint: ^0.7.5
+  # custom_lint: ^0.8.1  # Incompatible with riverpod_generator 4.x (analyzer 9 vs 8)
   flutter_driver:
     sdk: flutter
   flutter_test:

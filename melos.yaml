@@ -26,6 +26,15 @@ scripts:
     run: melos exec -- dart pub upgrade
     description: "Upgrade all packages"
 
-  build_runner_build: melos exec -- dart run build_runner build -d
+  clean:
+    run: melos exec -- flutter clean
+    description: "Clean all packages"
+
+  # Build core first so its .g.dart exist, then build rest in dependency order.
+  build_runner_build: >
+    melos exec --scope=core -- dart run build_runner build -d
+    && melos exec --order-dependents -c 1 -- dart run build_runner build -d
+
   build_runner_clean: melos exec -- dart run build_runner clean
-  build_runner_watch: melos exec -- dart run build_runner watch -d
+
+  build_runner_watch: melos exec --order-dependents -- dart run build_runner watch -d
