@@ -42,31 +42,33 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
               onDidReceiveNotificationResponse != null ||
           onDidReceiveBackgroundNotificationResponse == null &&
               onDidReceiveNotificationResponse == null,
-      'onDidReceiveBackgroundNotificationResponse and onDidReceiveNotificationResponse must be null or not null at the same time',
+      'onDidReceiveBackgroundNotificationResponse and '
+      'onDidReceiveNotificationResponse must be null or not null '
+      'at the same time',
     );
     const initAndroidSettings = AndroidInitializationSettings(
       '@mipmap/ic_launcher',
     );
 
-    const initIosSettings = DarwinInitializationSettings();
-
-    const initMacOSSettings = DarwinInitializationSettings();
+    // With flutter_local_notifications 21.x, Darwin initialization covers
+    // both iOS and macOS with configurable defaults and permission flags.
+    const initDarwinSettings = DarwinInitializationSettings();
 
     const initializationSettings = InitializationSettings(
       android: initAndroidSettings,
-      iOS: initIosSettings,
-      macOS: initMacOSSettings,
+      iOS: initDarwinSettings,
+      macOS: initDarwinSettings,
     );
     if (onDidReceiveBackgroundNotificationResponse != null &&
         onDidReceiveNotificationResponse != null) {
       await notifications.initialize(
-        initializationSettings,
+        settings: initializationSettings,
         onDidReceiveBackgroundNotificationResponse:
             onDidReceiveBackgroundNotificationResponse,
         onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
       );
     } else {
-      await notifications.initialize(initializationSettings);
+      await notifications.initialize(settings: initializationSettings);
     }
 
     final _ = switch (defaultTargetPlatform) {
@@ -147,10 +149,10 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
       macOS: macosDetails,
     );
     await notifications.show(
-      id,
-      title,
-      body,
-      notificationDetails,
+      id: id,
+      title: title,
+      body: body,
+      notificationDetails: notificationDetails,
       payload: payload,
     );
   }
@@ -162,7 +164,7 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
 
   @override
   Future<void> cancelNotification({int id = 0}) async {
-    await notifications.cancel(id);
+    await notifications.cancel(id: id);
   }
 
   @override
