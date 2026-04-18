@@ -55,6 +55,11 @@ final class NetworkImpl implements NetworkBase {
   Future<bool> get isConnected async {
     try {
       final connectivityResults = await _connectivity.checkConnectivity();
+      // Empty list: treat as unknown, not offline — `.any` on [] is false and
+      // caused false [NoNetworkException] while the user was connected.
+      if (connectivityResults.isEmpty) {
+        return true;
+      }
       return connectivityResults.any(
         (result) => result != ConnectivityResult.none,
       );

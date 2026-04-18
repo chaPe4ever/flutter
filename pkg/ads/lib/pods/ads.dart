@@ -119,13 +119,13 @@ class Ads extends _$Ads with NotifierMountedMixin {
     List<String> testDeviceIds = const [],
     bool skip = false,
   }) async {
-    if (!_isInitialized) {
-      throw const AdsInitException();
-    }
-    if (skip) {
+    if (skip || kIsWeb) {
       Log.info('Skipping ad display');
       onAdDismissedFullScreenContent?.call();
       return;
+    }
+    if (!_isInitialized) {
+      throw const AdsInitException();
     }
 
     if (testDeviceIds.isNotEmpty) {
@@ -227,26 +227,27 @@ class Ads extends _$Ads with NotifierMountedMixin {
   Future<bool> get isConsetnFormAvailable =>
       ConsentInformation.instance.isConsentFormAvailable();
 
-  /// Resets the user's consent choice and shows the consent form again
-  /// Can be called from app settings to let users update their choice
+  /// Resets the user's consent choice and shows the consent form again when
+  /// the UMP SDK offers one (e.g. EEA). Elsewhere the form is often reported
+  /// as unavailable even though clearing storage still makes sense, so we
+  /// always call reset first and only then optionally run the consent UI flow.
   Future<void> resetConsent() async {
     Log.info('Resetting user consent');
 
-    // Check if form is available
+    await ConsentInformation.instance.reset();
+    Log.info('Consent reset applied in storage');
+
     final isFormAvailable = await ConsentInformation.instance
         .isConsentFormAvailable();
 
-    if (!isFormAvailable) {
-      Log.info('Consent form is not available, cannot reset consent');
-      throw const AdsConsentFormNotAvailable();
+    if (isFormAvailable) {
+      await _requestConsentInfo();
+    } else {
+      Log.info(
+        'Consent form not available after reset (e.g. non-EEA); '
+        'storage reset is complete',
+      );
     }
-
-    // Reset the consent info
-    await ConsentInformation.instance.reset();
-    Log.info('Consent reset successfully');
-
-    // Request consent again
-    await _requestConsentInfo();
   }
 
   Future<InterstitialAd> _loadInterstitialAd() async {
