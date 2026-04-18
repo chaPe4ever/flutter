@@ -79,6 +79,7 @@ final class NetworkImpl implements NetworkBase {
       ConnectivityResult.bluetooth ||
       ConnectivityResult.ethernet ||
       ConnectivityResult.vpn ||
+      ConnectivityResult.satellite ||
       ConnectivityResult.other => NetworkStatus.other,
     };
   }
