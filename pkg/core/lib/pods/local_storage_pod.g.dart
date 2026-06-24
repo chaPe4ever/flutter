@@ -52,7 +52,7 @@ abstract class _$LocalStorage extends $Notifier<LocalStorageBase> {
   LocalStorageBase build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref = this.ref as $Ref<LocalStorageBase, LocalStorageBase>;
     final element =
         ref.element
@@ -62,6 +62,6 @@ abstract class _$LocalStorage extends $Notifier<LocalStorageBase> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }

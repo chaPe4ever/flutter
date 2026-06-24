@@ -48,7 +48,7 @@ abstract class _$LocalNotifications extends $Notifier<LocalNotificationsBase> {
   LocalNotificationsBase build();
   @$mustCallSuper
   @override
-  void runBuild() {
+  WhenComplete runBuild() {
     final ref =
         this.ref as $Ref<LocalNotificationsBase, LocalNotificationsBase>;
     final element =
@@ -59,6 +59,6 @@ abstract class _$LocalNotifications extends $Notifier<LocalNotificationsBase> {
               Object?,
               Object?
             >;
-    element.handleCreate(ref, build);
+    return element.handleCreate(ref, build);
   }
 }

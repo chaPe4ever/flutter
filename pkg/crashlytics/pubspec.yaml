@@ -25,7 +25,7 @@ dev_dependencies:
       url: https://github.com/chaPe4ever/flutter
       ref: main
       path: builders/custom_builders
-  # custom_lint: ^0.8.1  # Incompatible with riverpod_generator 4.x (analyzer 9 vs 8)
+  # custom_lint: ^0.8.1  # Incompatible with riverpod_generator 4.x (analyzer 12 vs 8)
   flutter_driver:
     sdk: flutter
   flutter_test:
@@ -35,7 +35,7 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^6.9.5
   mockito: ^5.4.6
-  riverpod_generator: ^4.0.3
+  riverpod_generator: ^4.0.4
   riverpod_lint: ^3.1.0
   very_good_analysis: ^9.0.0
 

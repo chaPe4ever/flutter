@@ -7,7 +7,6 @@ environment:
   sdk: ^3.10.0
 
 dependencies:
-  analyzer: "^9.0.0"
   build: ^4.0.0
   custom_annotations:
     git:

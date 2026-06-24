@@ -1,0 +1,10 @@
+# melos_managed_dependency_overrides: analytics,core,custom_annotations,custom_builders
+dependency_overrides:
+  analytics:
+    path: ../analytics
+  core:
+    path: ../core
+  custom_annotations:
+    path: ../../builders/custom_annotations
+  custom_builders:
+    path: ../../builders/custom_builders
