@@ -40,7 +40,7 @@ dev_dependencies:
   json_serializable: ^6.9.5
   mockito: ^5.4.6
   riverpod_generator: ^4.0.4
-  riverpod_lint: ^3.1.0
+  riverpod_lint: ^3.1.4
   very_good_analysis: ^9.0.0
 
 flutter:
