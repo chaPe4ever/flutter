@@ -1,8 +1,4 @@
-import 'package:cloud_functions/cloud_functions.dart';
 import 'package:core/core.dart';
-import 'package:core/helpers/dio_interceptors_helper.dart';
-import 'package:dio/dio.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 /// A generic try catch helper function.
 ///
@@ -91,14 +87,31 @@ Future<T> firestoreFutureTryCatch<T>(
 /// A generic try catch helper function.
 ///
 /// Might throw [CoreException]
+///
+/// When [FirebaseFunctionsException.code] is `unauthenticated`, invokes
+/// [FunctionsAuthFailureHandler.onUnauthenticated] (if registered) before
+/// rethrowing so clients can clear a stale Firebase Auth session.
 Future<T> functionsFutureTryCatch<T>(
   Future<T> Function() cb, {
   required LoggerBase logger,
   String? errorMessageKey,
   T Function(CoreException e, StackTrace st)? onFunctionsCustomExCb,
-}) => cb().then(id).catchError((Object e, StackTrace st) {
-  if (e is FirebaseFunctionsException) {
+}) async {
+  try {
+    return await cb();
+  } on FirebaseFunctionsException catch (e, st) {
     logger.e(e.message ?? e.code, e: e, st: st);
+    if (e.code == 'unauthenticated') {
+      try {
+        await FunctionsAuthFailureHandler.onUnauthenticated?.call();
+      } on Object catch (handlerError, handlerSt) {
+        logger.e(
+          'FunctionsAuthFailureHandler failed',
+          e: handlerError,
+          st: handlerSt,
+        );
+      }
+    }
     final functionsEx = FirestoreFunctionsException(
       messageKey: errorMessageKey ?? e.message ?? e.code,
       innerMessage: e.message,
@@ -110,10 +123,10 @@ Future<T> functionsFutureTryCatch<T>(
       return onFunctionsCustomExCb(functionsEx, st);
     }
     throw functionsEx;
-  } else if (e is CoreException) {
+  } on CoreException catch (e, st) {
     logger.e(e.messageKey.tr(), e: e, st: st);
-    throw e;
-  } else {
+    rethrow;
+  } catch (e, st) {
     logger.e(
       StackTraceLoggerHelper.st(st).toString(),
       e: e,
@@ -130,7 +143,7 @@ Future<T> functionsFutureTryCatch<T>(
       },
     );
   }
-});
+}
 
 /// Future Option try catch helper function.
 Future<Option<CoreException>> futureOptionTryCatch(
@@ -265,7 +278,8 @@ Stream<T> streamTryCatch<T>(
       final error = e.toCoreException();
 
       Log.error(
-        'Error: $e, innerError: ${error.innerError}, inner msg: ${error.innerMessage}',
+        'Error: $e, innerError: ${error.innerError}, '
+        'inner msg: ${error.innerMessage}',
         st: st,
       );
       throw error;
