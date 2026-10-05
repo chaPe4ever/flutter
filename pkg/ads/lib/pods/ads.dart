@@ -11,6 +11,7 @@ part 'ads.g.dart';
 @Riverpod(keepAlive: true)
 class Ads extends _$Ads with NotifierMountedMixin {
   bool _isInitialized = false;
+  bool _skipConsentForm = false;
   String? _interstitialAdUnitId;
   AdRequest? _adRequest;
   Completer<InterstitialAd>? _interstitialAdCompleter;
@@ -41,13 +42,16 @@ class Ads extends _$Ads with NotifierMountedMixin {
     if (!_isInitialized) {
       Log.info('Initializing ad service with ID: $interstitialAdUnitId');
       _isInitialized = true;
+      _skipConsentForm = skipConsentForm;
       _adRequest = adRequest;
       _interstitialAdUnitId = interstitialAdUnitId;
 
       try {
         // First, request consent information
-        if (!skipConsentForm) {
+        if (!_skipConsentForm) {
           await _requestConsentInfo();
+        } else {
+          Log.info('Skipping UMP consent form (skipConsentForm=true)');
         }
 
         // Then initialize the Mobile Ads SDK
@@ -257,6 +261,11 @@ class Ads extends _$Ads with NotifierMountedMixin {
 
     await ConsentInformation.instance.reset();
     Log.info('Consent reset applied in storage');
+
+    if (_skipConsentForm) {
+      Log.info('Skipping UMP consent form after reset (skipConsentForm=true)');
+      return;
+    }
 
     final isFormAvailable = await ConsentInformation.instance
         .isConsentFormAvailable();
