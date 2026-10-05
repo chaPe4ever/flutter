@@ -1,4 +1,3 @@
-// ignore_for_file: avoid_print, depend_on_referenced_packages
 import 'dart:async';
 
 import 'package:core/core.dart';

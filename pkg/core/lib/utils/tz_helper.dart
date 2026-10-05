@@ -2,16 +2,14 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-import 'package:timezone/timezone.dart';
 
 /// Time zone helper class
 final class TzHelper {
   TzHelper._();
 
-  static tz.Location? _tzLocation;
+  static late tz.Location _tzLocation;
 
   /// Init once at the app start
   static Future<void> init() async {
@@ -20,7 +18,7 @@ final class TzHelper {
 
   /// Get the datTime.now based on the preferred timezone [tzLocationName]
   static DateTime? now(String tzLocationName) => _tryCatchSetLocation(
-    () => tz.TZDateTime.now(_tzLocation!),
+    () => tz.TZDateTime.now(_tzLocation),
     tzLocationName: tzLocationName,
   );
 
@@ -38,9 +36,9 @@ final class TzHelper {
   }) {
     try {
       _setLocation(tzLocationName);
-      final dtNow = tz.TZDateTime.now(_tzLocation!);
+      final dtNow = tz.TZDateTime.now(_tzLocation);
       return right(dtNow);
-    } catch (ex, st) {
+    } on Exception catch (ex, st) {
       final e = UnknownCoreException(
         innerMessage: switch (ex) {
           final TimeZoneInitException e => e.msg,
@@ -58,7 +56,7 @@ final class TzHelper {
   /// [other]
   static DateTime? from(DateTime other, {required String tzLocationName}) =>
       _tryCatchSetLocation(
-        () => tz.TZDateTime.from(other, _tzLocation!),
+        () => tz.TZDateTime.from(other, _tzLocation),
         tzLocationName: tzLocationName,
       );
 
@@ -77,9 +75,9 @@ final class TzHelper {
   }) {
     try {
       _setLocation(tzLocationName);
-      final dtNow = tz.TZDateTime.from(other, _tzLocation!);
+      final dtNow = tz.TZDateTime.from(other, _tzLocation);
       return right(dtNow);
-    } catch (ex, st) {
+    } on Exception catch (ex, st) {
       final e = UnknownCoreException(
         innerMessage: switch (ex) {
           final TimeZoneInitException e => e.msg,
@@ -98,7 +96,7 @@ final class TzHelper {
     String formattedString, {
     required String tzLocationName,
   }) => _tryCatchSetLocation(
-    () => tz.TZDateTime.parse(_tzLocation!, formattedString),
+    () => tz.TZDateTime.parse(_tzLocation, formattedString),
     tzLocationName: tzLocationName,
   );
 
@@ -117,9 +115,9 @@ final class TzHelper {
   }) {
     try {
       _setLocation(tzLocationName);
-      final dtNow = tz.TZDateTime.parse(_tzLocation!, formattedString);
+      final dtNow = tz.TZDateTime.parse(_tzLocation, formattedString);
       return right(dtNow);
-    } catch (ex, st) {
+    } on Exception catch (ex, st) {
       final e = UnknownCoreException(
         innerMessage: switch (ex) {
           final TimeZoneInitException e => e.msg,
@@ -146,10 +144,11 @@ final class TzHelper {
       final appLocation = tz.local;
 
       // Check if the device timezone is same with the application's timezone
-      final deviceTzMatchLocationTz = deviceTimezone == appLocation.name;
+      final deviceTzMatchLocationTz =
+          deviceTimezone.identifier == appLocation.name;
 
       return right(deviceTzMatchLocationTz);
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       debugPrintStack(stackTrace: st);
       return left(UnknownCoreException(innerError: e));
     }
@@ -164,7 +163,7 @@ final class TzHelper {
     try {
       _setLocation(tzLocationName);
       return cb();
-    } catch (_, st) {
+    } on Exception catch (_, st) {
       debugPrintStack(stackTrace: st);
       return null;
     }
@@ -173,6 +172,6 @@ final class TzHelper {
   /// Set the preferred timeZone [tzLocationName]
   static void _setLocation(String tzLocationName) {
     _tzLocation = tz.getLocation(tzLocationName);
-    tz.setLocalLocation(_tzLocation!);
+    tz.setLocalLocation(_tzLocation);
   }
 }

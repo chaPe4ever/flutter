@@ -45,7 +45,7 @@ final class NetworkImpl implements NetworkBase {
       } else {
         _connectionStatusController.add(NetworkStatus.offline);
       }
-    } catch (e) {
+    } on Exception catch (e) {
       debugPrint('Error checking initial connectivity: $e');
       _connectionStatusController.add(NetworkStatus.offline);
     }
@@ -63,7 +63,7 @@ final class NetworkImpl implements NetworkBase {
       return connectivityResults.any(
         (result) => result != ConnectivityResult.none,
       );
-    } catch (e) {
+    } on Exception catch (e) {
       debugPrint('Error checking connectivity: $e');
       return false;
     }
@@ -96,7 +96,8 @@ final class NetworkImpl implements NetworkBase {
     if (onOffline != null) _offlineCallbacks.add(onOffline);
 
     // Initialize the single subscription if it doesn't exist
-    _statusSubscription ??= _connectionStatusController.stream.distinct().listen(
+    _statusSubscription ??=
+        _connectionStatusController.stream.distinct().listen(
       (network) {
         if (network case NetworkStatus.offline) {
           // Create a defensive copy to avoid concurrent modification

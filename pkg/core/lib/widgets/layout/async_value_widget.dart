@@ -68,7 +68,9 @@ class AsyncValueWidget<T> extends StatelessWidget {
                       ),
                       child: SingleChildScrollView(
                         child: Text(
-                          'ERROR_MESSAGE: ${e is CoreException ? e.messageKey.tr() : e}\nSTACKTRACE: ${e is CoreException ? e.st : st}',
+                          'ERROR_MESSAGE: '
+                          '${e is CoreException ? e.messageKey.tr() : e}'
+                          '\nSTACKTRACE: ${e is CoreException ? e.st : st}',
                           style: const TextStyle(color: Colors.red),
                         ),
                       ),

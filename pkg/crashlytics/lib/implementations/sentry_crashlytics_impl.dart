@@ -15,7 +15,7 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
       if (!enabled) {
         Sentry.bindClient(SentryClient(SentryOptions(dsn: '')));
       }
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }
@@ -23,8 +23,8 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
   @override
   Future<void> setUserId({required String userId}) async {
     try {
-      // TODO: Check if this is the right way to set user id in Sentry
-    } catch (e, st) {
+      // TODOCheck if this is the right way to set user id in Sentry
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }
@@ -72,7 +72,7 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
           Sentry.captureException(error, stackTrace: stack);
         }).sendPort,
       );
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }
@@ -88,7 +88,7 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
       await Sentry.captureEvent(
         SentryEvent(message: SentryMessage(message), level: SentryLevel.info),
       );
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }

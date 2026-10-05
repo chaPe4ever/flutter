@@ -88,7 +88,7 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
         innerMessage: e.message,
         st: st,
       );
-    } catch (e) {
+    } on Exception catch (e) {
       throw RemoteConfigFirebaseException(innerError: e);
     }
   }
@@ -136,7 +136,7 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
           st: st,
         ),
       );
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       return left(RemoteConfigFirebaseException(innerError: e, st: st));
     }
   }
@@ -175,7 +175,7 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
         innerMessage: e.message,
         st: st,
       );
-    } catch (e) {
+    } on Exception catch (e) {
       throw RemoteConfigFirebaseException(innerError: e);
     }
   }
@@ -237,7 +237,7 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
     // Fetch and activate if we have listeners
     try {
       await fetchAndActivate();
-    } catch (e) {
+    } on Exception catch (_) {
       // Continue even if fetch fails - we'll use cached values
     }
 
@@ -311,7 +311,7 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
           st: st,
         ),
       );
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       return left(RemoteConfigFirebaseException(innerError: e, st: st));
     }
   }

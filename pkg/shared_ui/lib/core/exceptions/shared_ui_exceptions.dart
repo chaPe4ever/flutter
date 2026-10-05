@@ -13,7 +13,7 @@ sealed class SharedUiEx extends CoreException {
 
 final class NoteException extends SharedUiEx {
   const NoteException({
-    // TODO: Add message key
+    // TODOAdd message key
     super.messageKey = 'hardcoded',
     super.innerCode,
     super.innerMessage,
@@ -24,7 +24,7 @@ final class NoteException extends SharedUiEx {
 
 final class PageNotFoundCoreException extends SharedUiEx {
   const PageNotFoundCoreException({
-    // TODO: Add message key
+    // TODOAdd message key
     super.messageKey = 'hardcoded',
     super.innerCode,
     super.innerMessage,
@@ -35,7 +35,7 @@ final class PageNotFoundCoreException extends SharedUiEx {
 
 final class UnknownSharedUiException extends SharedUiEx {
   const UnknownSharedUiException({
-    // TODO: Add message key
+    // TODOAdd message key
     super.messageKey = 'hardcoded',
     super.innerCode,
     super.innerMessage,

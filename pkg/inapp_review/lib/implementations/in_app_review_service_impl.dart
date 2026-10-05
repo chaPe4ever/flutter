@@ -65,7 +65,8 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
     }
 
     logger.d(
-      'InAppReview initialized with frequency: $frequency, max prompts: $maxPrompts',
+      'InAppReview initialized with frequency: $frequency, '
+      'max prompts: $maxPrompts',
     );
   });
 
@@ -139,7 +140,7 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
         return dtPassed;
       }
       return false;
-    } catch (e) {
+    } on Exception catch (e) {
       logger.e('Error checking if review can be shown', e: e);
       return false;
     }
@@ -209,7 +210,7 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
   Future<T> _executeWithErrorHandling<T>(Future<T> Function() action) async {
     try {
       return await action();
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       logger.e('InAppReview caught exception', e: e, st: st);
       throw e.toCoreException();
     }

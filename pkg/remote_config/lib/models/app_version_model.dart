@@ -25,7 +25,7 @@ final class AppVersionModel extends Equatable {
   List<Object?> get props => [version, buildNumber];
 }
 
-final class AppVersionRemoteModel extends AppVersionModel with EquatableMixin {
+final class AppVersionRemoteModel extends AppVersionModel {
   const AppVersionRemoteModel({
     required super.version,
     required super.buildNumber,
@@ -68,8 +68,7 @@ final class AppVersionRemoteModel extends AppVersionModel with EquatableMixin {
   List<Object?> get props => [version, buildNumber, isOptional];
 }
 
-final class AppVersionUpdateModel extends AppVersionRemoteModel
-    with EquatableMixin {
+final class AppVersionUpdateModel extends AppVersionRemoteModel {
   const AppVersionUpdateModel({
     required super.version,
     required super.buildNumber,

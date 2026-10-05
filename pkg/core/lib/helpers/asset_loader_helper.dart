@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
@@ -45,7 +46,7 @@ class AssetLoaderHelper extends AssetLoader {
       }
 
       return result;
-    } catch (e) {
+    } on Exception catch (e) {
       Log.error('Error loading translations: $e');
       return {};
     }

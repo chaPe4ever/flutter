@@ -22,7 +22,7 @@ final class SentryAndFirebaseCrashlyticsImpl implements CrashlyticsBase {
     try {
       await _sentryCrashlytics.logEvent(message: message);
       await _firebaseCrashlytics.logEvent(message: message);
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }
@@ -32,7 +32,7 @@ final class SentryAndFirebaseCrashlyticsImpl implements CrashlyticsBase {
     try {
       await _sentryCrashlytics.setCrashlytics(enabled: enabled);
       await _firebaseCrashlytics.setCrashlytics(enabled: enabled);
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }
@@ -42,7 +42,7 @@ final class SentryAndFirebaseCrashlyticsImpl implements CrashlyticsBase {
     try {
       await _sentryCrashlytics.setUserId(userId: userId);
       await _firebaseCrashlytics.setUserId(userId: userId);
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }
@@ -88,12 +88,12 @@ final class SentryAndFirebaseCrashlyticsImpl implements CrashlyticsBase {
           final error = pair.first;
           final stack = StackTrace.fromString(pair.last as String);
 
-          // original handler—in Sentry’s zone—has already been wired to isolates,
-          // so we just forward to Crashlytics here
+          // original handler—in Sentry’s zone—has already been wired to
+          // isolates, so we just forward to Crashlytics here
           fbCrashlytics.recordError(error, stack, fatal: true);
         }).sendPort,
       );
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }
@@ -106,7 +106,7 @@ final class SentryAndFirebaseCrashlyticsImpl implements CrashlyticsBase {
         error,
         stackTrace: stackTrace,
       );
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }

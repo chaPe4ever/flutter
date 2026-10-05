@@ -1,7 +1,6 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/core/assets_gen/assets.gen.dart';
-import 'package:shared_ui/shared_ui.dart';
 
 extension SvgGenImageX on SvgGenImage {
   SvgPicture svgFromUIPkg(
@@ -9,14 +8,11 @@ extension SvgGenImageX on SvgGenImage {
     Color? color,
     double height = 24,
     double width = 24,
-    AlignmentGeometry alignment = Alignment.center,
     BoxFit fit = BoxFit.contain,
   }) {
     return this.svg(
-      package: kSharedUiPkgName,
       height: height,
       width: width,
-      alignment: alignment,
       colorFilter: ColorFilter.mode(
         context.appImgTheme.copyWith(color: color).color,
         BlendMode.srcIn,
@@ -36,7 +32,7 @@ extension SvgPictureX on SvgPicture {
     double? width,
     double? height,
     BoxFit? fit,
-    AlignmentGeometry alignment = Alignment.center,
+    AlignmentGeometry? alignment,
     Color? color,
     BlendMode blendMode = BlendMode.srcIn,
     String? semanticsLabel,
@@ -51,7 +47,7 @@ extension SvgPictureX on SvgPicture {
       width: width ?? this.width,
       height: height ?? this.height,
       fit: fit ?? this.fit,
-      alignment: alignment,
+      alignment: alignment ?? this.alignment,
       colorFilter: color != null
           ? ColorFilter.mode(color, blendMode)
           : colorFilter,
@@ -71,13 +67,10 @@ extension AssetGenImageX on AssetGenImage {
     double width = 16.0,
     Color? color,
     BoxFit? fit,
-    Alignment alignment = Alignment.center,
   }) => image(
-    package: kSharedUiPkgName,
     height: height,
     width: width,
     color: context.appImgTheme.copyWith(color: color).color,
     fit: fit,
-    alignment: alignment,
   );
 }

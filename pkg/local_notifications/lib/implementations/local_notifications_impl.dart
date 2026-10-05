@@ -20,15 +20,20 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
 
   StreamSubscription<NotificationResponse>? _fgNotificationSubscription;
   StreamSubscription<NotificationResponse>? _bgNotificationSubscription;
+  bool _disposed = false;
 
   @override
   void dispose() {
-    fgNotificationController?.close();
-    bgNotificationController?.close();
+    if (_disposed) {
+      return;
+    }
+    _disposed = true;
     _fgNotificationSubscription?.cancel();
     _fgNotificationSubscription = null;
     _bgNotificationSubscription?.cancel();
     _bgNotificationSubscription = null;
+    fgNotificationController?.close();
+    bgNotificationController?.close();
   }
 
   @override
@@ -172,6 +177,9 @@ class LocalNotificationsImpl implements LocalNotificationsBase {
     void Function(NotificationResponse message)? onFgMessage,
     void Function(NotificationResponse message)? onBgMessage,
   }) async {
+    if (_disposed) {
+      return;
+    }
     await _fgNotificationSubscription?.cancel();
     _fgNotificationSubscription = fgNotificationController?.stream.listen((
       message,

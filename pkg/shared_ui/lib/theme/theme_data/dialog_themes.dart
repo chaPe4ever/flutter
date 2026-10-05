@@ -16,7 +16,9 @@ class DialogThemes {
   static DialogThemeData dark() {
     return DialogThemeData(
       backgroundColor: AppSemanticColors.dark.backgroundPrimary,
-      barrierColor: AppSemanticColors.dark.overlay50Inverse.withOpacity(0.1),
+      barrierColor: AppSemanticColors.dark.overlay50Inverse.withValues(
+        alpha: 0.1,
+      ),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(AppRadius.l),
       ),

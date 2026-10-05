@@ -165,7 +165,7 @@ abstract class OrientationHelper {
       return some(
         UnknownCoreException(innerMessage: kDebugMode ? e.message : null),
       );
-    } catch (e) {
+    } on Exception catch (e) {
       return some(
         UnknownCoreException(innerMessage: kDebugMode ? e.toString() : null),
       );

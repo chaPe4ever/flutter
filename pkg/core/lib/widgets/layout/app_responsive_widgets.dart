@@ -2,7 +2,6 @@ import 'package:core/enums/breakpoint_enum.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-// ignore: implementation_imports
 
 /// Responsive layout that shows two child widgets side by side if there is
 /// enough space, or vertically stacked if there is not enough space.
@@ -504,8 +503,7 @@ extension AppConditionalX on AppConditional {
 /// A conditional value provider.
 ///
 /// Provides the [value] when the [condition] is active.
-/// Compare conditions by setting either [breakpoint] or
-/// [name] values.
+/// Compare conditions by setting either breakpoint or name values.
 class AppCondition<T> extends Condition<T> {
   AppCondition.equals({required super.name, super.value, super.landscapeValue})
     : super.equals();
@@ -569,12 +567,14 @@ class AppResponsiveBreakpoints extends ResponsiveBreakpoints {
     if (data != null) return data.data;
     throw FlutterError.fromParts(<DiagnosticsNode>[
       ErrorSummary(
-        'ResponsiveBreakpoints.of() called with a context that does not contain ResponsiveBreakpoints.',
+        'ResponsiveBreakpoints.of() called with a context that does not '
+        'contain ResponsiveBreakpoints.',
       ),
       ErrorDescription(
-        'No Responsive ancestor could be found starting from the context that was passed '
-        'to ResponsiveBreakpoints.of(). Place a ResponsiveBreakpoints at the root of the app '
-        'or supply a ResponsiveBreakpoints.builder.',
+        'No Responsive ancestor could be found starting from the context '
+        'that was passed to ResponsiveBreakpoints.of(). Place a '
+        'ResponsiveBreakpoints at the root of the app or supply a '
+        'ResponsiveBreakpoints.builder.',
       ),
       context.describeElement('The context used was'),
     ]);

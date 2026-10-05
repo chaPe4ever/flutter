@@ -30,15 +30,17 @@ class AppRadioButton<T> extends StatelessWidget {
               offset: context.responsive(
                 const Offset(-15, 0),
               ),
-              child: Radio(
-                fillColor: WidgetStateProperty.all(
-                  context.colors.backgroundBrand,
-                ),
-                visualDensity: VisualDensity.compact,
-                splashRadius: 0,
-                value: value,
+              child: RadioGroup<T>(
                 groupValue: groupValue,
                 onChanged: onChanged,
+                child: Radio<T>(
+                  fillColor: WidgetStateProperty.all(
+                    context.colors.backgroundBrand,
+                  ),
+                  visualDensity: VisualDensity.compact,
+                  splashRadius: 0,
+                  value: value,
+                ),
               ),
             ),
           ),

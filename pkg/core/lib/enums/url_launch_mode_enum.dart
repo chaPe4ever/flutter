@@ -4,7 +4,8 @@ enum UrlLaunchModeEnum {
   /// Loads the URL in an in-app web view (e.g., Android WebView).
   inAppWebView,
 
-  /// Loads the URL in an in-app web view (e.g., Android Custom Tabs, SFSafariViewController).
+  /// Loads the URL in an in-app web view (e.g., Android Custom Tabs,
+  /// SFSafariViewController).
   inAppBrowserView,
 
   /// Passes the URL to the OS to be handled by another application.

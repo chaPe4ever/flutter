@@ -58,7 +58,7 @@ class _AppDropdownButtonState extends State<AppDropdownButton> {
             ? context.colors.contentNegative
             : context.colors.contentSecondary,
       ),
-      value: widget.value,
+      initialValue: widget.value,
       items: widget.items
           .map(
             (item) => DropdownMenuItem<String>(

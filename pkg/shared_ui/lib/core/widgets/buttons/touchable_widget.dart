@@ -20,7 +20,7 @@ class TouchableWidget extends StatefulWidget {
 
 class _TouchableWidgetState extends State<TouchableWidget> {
   final debounce = const Debounce();
-  late final isBusy = signal(false);
+  late final Signal<bool> isBusy = signal(false);
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:core/value_objects/unique_id.dart';
 import 'package:flutter/widgets.dart';
 
 /// List extension

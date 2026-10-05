@@ -15,8 +15,8 @@ final class FirebaseCrashlyticsImpl implements CrashlyticsBase {
   @override
   Future<void> setCrashlytics({required bool enabled}) async {
     try {
-      return _crashlytics.setCrashlyticsCollectionEnabled(enabled);
-    } catch (e, st) {
+      return await _crashlytics.setCrashlyticsCollectionEnabled(enabled);
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }
@@ -25,7 +25,7 @@ final class FirebaseCrashlyticsImpl implements CrashlyticsBase {
   Future<void> setUserId({required String userId}) {
     try {
       return _crashlytics.setUserIdentifier(userId);
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }
@@ -61,7 +61,7 @@ final class FirebaseCrashlyticsImpl implements CrashlyticsBase {
           );
         }).sendPort,
       );
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }
@@ -70,7 +70,7 @@ final class FirebaseCrashlyticsImpl implements CrashlyticsBase {
   Future<void> captureException(dynamic error, {StackTrace? stackTrace}) {
     try {
       return _crashlytics.recordError(error, stackTrace, fatal: true);
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }
@@ -79,7 +79,7 @@ final class FirebaseCrashlyticsImpl implements CrashlyticsBase {
   Future<void> logEvent({required String message}) {
     try {
       return _crashlytics.log(message);
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
   }

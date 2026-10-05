@@ -66,7 +66,7 @@ final class FlavorHelper {
         );
       }
       return right(_currentFlavor);
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       return left(UnInitialisedFlavorException(innerError: e, st: st));
     }
   }

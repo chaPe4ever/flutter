@@ -27,7 +27,7 @@ index_generator:
         - package: package:shared_ui/core/extensions/extensions.dart
         - package: package:shared_ui/core/widgets/widgets.dart
         - package: package:shared_ui/theme/theme.dart
-      comments: |
-        ignore_for_file: invalid_export_of_internal_element
+      # comments: |
+      #   ignore_for_file: invalid_export_of_internal_element
   library:
     - shared_ui

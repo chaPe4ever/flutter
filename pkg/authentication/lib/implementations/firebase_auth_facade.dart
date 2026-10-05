@@ -95,7 +95,8 @@ final class FirebaseAuthFacade implements AuthFacade {
       );
 
       // Sign in the user with Firebase. If the nonce we generated earlier does
-      // not match the nonce in `appleCredential.identityToken`, sign in will fail.
+      // not match the nonce in `appleCredential.identityToken`, sign in will
+      // fail.
       final userCredential = await _firebaseAuth.signInWithCredential(
         oauthCredential,
       );
@@ -105,7 +106,8 @@ final class FirebaseAuthFacade implements AuthFacade {
       final isNewUser = userCredential.additionalUserInfo?.isNewUser ?? false;
       if (user != null) {
         // Apple only provides email/name on FIRST sign-in
-        // On subsequent sign-ins, Firebase already has them stored from the first sign-in
+        // On subsequent sign-ins, Firebase already has them stored from the
+        //first sign-in
 
         // Update displayName only if:
         // 1. We have name data from Apple (first sign-in)
@@ -130,7 +132,8 @@ final class FirebaseAuthFacade implements AuthFacade {
         await user.reload();
 
         _logger.d(
-          'Apple sign-in successful - uid: ${user.uid}, email: ${user.email}, displayName: ${user.displayName}, isNewUser: $isNewUser',
+          'Apple sign-in successful - uid: ${user.uid}, email: ${user.email}, '
+          'displayName: ${user.displayName}, isNewUser: $isNewUser',
         );
       }
 
@@ -190,13 +193,13 @@ final class FirebaseAuthFacade implements AuthFacade {
 
   @override
   Future<Option<AuthenticationEx>> signInWithFacebook() {
-    // TODO(Petros): implement signInWithFacebook
+    // TODO: implement signInWithFacebook
     throw UnimplementedError();
   }
 
   @override
   Future<Option<AuthenticationEx>> signInWithGithub() {
-    // TODO(Petros): implement signInWithGithub
+    // TODO: implement signInWithGithub
     throw UnimplementedError();
   }
 
@@ -526,8 +529,10 @@ final class FirebaseAuthFacade implements AuthFacade {
 
     // Initialize the prior sign out subscription if it doesn't exist
     _priorSignOutSubscription ??= _priorSignOutController.stream.listen((_) {
-      // Stream now receives the list of futures, but we don't need to do anything
-      // with them here since they're already being awaited in the signOut method
+      // Stream now receives the list of futures, but we don't need to do
+      // anything
+      // with them here since they're already being awaited in the signOut
+      // method
     });
   }
 

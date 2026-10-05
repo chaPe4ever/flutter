@@ -5,14 +5,14 @@ import 'package:core/core.dart' show CoreException;
 abstract interface class AnalyticsBase {
   /// For FirebaseAnalytics:
   /// Logs a custom Flutter Analytics event with the given
-  /// [AnalyticsEvent.firebase.name] and event
-  /// [AnalyticsEvent.firebase.parameters].
+  /// (AnalyticsEvent.firebase.name) and event
+  /// (AnalyticsEvent.firebase.parameters).
   ///
-  /// The event can have up to 25 [AnalyticsEvent.firebase.parameters].
-  /// Events with the same [AnalyticsEvent.firebase.name] must have the same
-  /// [AnalyticsEvent.firebase.parameters]. Up to 500 event names are supported.
+  /// The event can have up to 25 (AnalyticsEvent.firebase.parameters).
+  /// Events with the same (AnalyticsEvent.firebase.name) must have the same
+  /// (AnalyticsEvent.firebase.parameters). Up to 500 event names are supported.
   ///
-  /// The [AnalyticsEvent.firebase.name] of the event. Should contain
+  /// The (AnalyticsEvent.firebase.name) of the event. Should contain
   /// 1 to 40 alphanumeric characters or underscores. The name must start
   /// with an alphabetic character. Some event names are reserved.
   /// The "firebase_", "google_" and "ga_" prefixes are reserved and should
@@ -20,7 +20,7 @@ abstract interface class AnalyticsBase {
   /// two events whose names differ only in case will result in two distinct
   /// events.
   ///
-  /// The map of event [AnalyticsEvent.firebase.parameters]. Passing null
+  /// The map of event (AnalyticsEvent.firebase.parameters). Passing null
   /// indicates that the event has no parameters. Parameter names can be up
   /// to 40 characters long and must start with an alphabetic character and
   /// contain only alphanumeric characters and underscores. String, long and

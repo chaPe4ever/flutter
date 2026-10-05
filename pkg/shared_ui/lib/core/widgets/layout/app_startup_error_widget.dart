@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
-// TODO: Customize it according to the app's design
+// TODOCustomize it according to the app's design
 /// A widget to display when the app is starting up and an error occurs.
 class AppStartupErrorWidget extends StatelessWidget {
   /// Ctr

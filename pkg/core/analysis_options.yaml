@@ -6,6 +6,12 @@ analyzer:
     - "**.g.dart"
     - "**.gr.dart"
     - "**/generated_plugin_registrant.dart"
+    - build/**
+  errors:
+    # Re-exporting riverpod_annotation is required so @riverpod and generated
+    # $ types resolve from package:core/core.dart. Those generated symbols are
+    # marked internal.
+    invalid_export_of_internal_element: ignore
   # plugins:
   #   - custom_lint
 

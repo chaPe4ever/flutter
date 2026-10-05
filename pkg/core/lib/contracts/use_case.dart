@@ -2,9 +2,9 @@ import 'package:core/contracts/core_exception.dart';
 import 'package:dartz/dartz.dart';
 
 /// Use-case interface which every use-case class should implement
-abstract interface class FutureEitherUseCase<Type, Param> {
+abstract interface class FutureEitherUseCase<T, Param> {
   /// A way to enable the dart callables to the derived classes
-  Future<Either<CoreException, Type>> call(Param param);
+  Future<Either<CoreException, T>> call(Param param);
 }
 
 /// Use-case interface which every use-case class should implement
@@ -14,15 +14,15 @@ abstract interface class FutureOptionUseCase<Param> {
 }
 
 /// Use-case interface which every use-case class should implement
-abstract interface class StreamEitherUseCase<Type, Param> {
+abstract interface class StreamEitherUseCase<T, Param> {
   /// A way to enable the dart callables to the derived classes
-  Stream<Either<CoreException, Type>> call(Param param);
+  Stream<Either<CoreException, T>> call(Param param);
 }
 
 ///
-abstract interface class FutureEitherNoParamUseCase<Type> {
+abstract interface class FutureEitherNoParamUseCase<T> {
   /// A way to enable the dart callables to the derived classes
-  Future<Either<CoreException, Type>> call();
+  Future<Either<CoreException, T>> call();
 }
 
 ///
@@ -32,37 +32,37 @@ abstract interface class FutureOptionNoParamUseCase {
 }
 
 ///
-abstract interface class StreamEitherNoParamUseCase<Type> {
+abstract interface class StreamEitherNoParamUseCase<T> {
   /// A way to enable the dart callables to the derived classes
-  Stream<Either<CoreException, Type>> call();
+  Stream<Either<CoreException, T>> call();
 }
 
 ///
-abstract interface class StreamEitherOptionalParamUseCases<Type, Param> {
+abstract interface class StreamEitherOptionalParamUseCases<T, Param> {
   /// A way to enable the dart callables to the derived classes
-  Stream<Either<CoreException, Type>> call([Param param]);
+  Stream<Either<CoreException, T>> call([Param param]);
 }
 
 ///
-abstract interface class FutureNoParamUseCase<Type> {
+abstract interface class FutureNoParamUseCase<T> {
   /// A way to enable the dart callables to the derived classes
-  Future<Type> call();
+  Future<T> call();
 }
 
 ///
-abstract interface class FutureParamUseCase<Type, Param> {
+abstract interface class FutureParamUseCase<T, Param> {
   /// A way to enable the dart callables to the derived classes
-  Future<Type> call(Param param);
+  Future<T> call(Param param);
 }
 
 /// Use-case interface which every use-case class should implement
-abstract interface class StreamUseCase<Type, Param> {
+abstract interface class StreamUseCase<T, Param> {
   /// A way to enable the dart callables to the derived classes
-  Stream<Type> call(Param param);
+  Stream<T> call(Param param);
 }
 
 /// Use-case interface which every use-case class should implement
-abstract interface class StreamNoParamUseCase<Type> {
+abstract interface class StreamNoParamUseCase<T> {
   /// A way to enable the dart callables to the derived classes
-  Stream<Type> call();
+  Stream<T> call();
 }

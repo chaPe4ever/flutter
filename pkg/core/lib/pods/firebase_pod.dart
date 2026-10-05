@@ -33,12 +33,12 @@ FirebaseFirestore firestore(Ref ref) {
       FirebaseFirestore.instance.disableNetwork();
     }
 
-    ref.read(networkPod).addListener(onOnline: onOnline, onOffline: onOffline);
+    // Capture before onDispose — Ref.read is illegal inside dispose callbacks.
+    final network = ref.read(networkPod)
+      ..addListener(onOnline: onOnline, onOffline: onOffline);
 
     ref.onDispose(
-      () => ref
-          .read(networkPod)
-          .removeListener(onOnline: onOnline, onOffline: onOffline),
+      () => network.removeListener(onOnline: onOnline, onOffline: onOffline),
     );
   }
 

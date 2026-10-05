@@ -59,7 +59,7 @@ final class Core {
     } on CoreException catch (e) {
       container.read(loggerPod).e(e.messageKey, e: e, st: e.st);
       return left(e);
-    } catch (e, st) {
+    } on Exception catch (e, st) {
       final error = UnknownCoreException(innerError: e, st: st);
       container.read(loggerPod).e(error.messageKey, e: error, st: error.st);
       return left(error);

@@ -73,7 +73,9 @@ class AsyncValueSliverWidget<T> extends StatelessWidget {
                         ),
                         child: SingleChildScrollView(
                           child: Text(
-                            'ERROR_MESSAGE: ${e is CoreException ? e.messageKey.tr() : e}\n\nSTACKTRACE: $st',
+                            'ERROR_MESSAGE: '
+                            '${e is CoreException ? e.messageKey.tr() : e}'
+                            '\n\nSTACKTRACE: $st',
                             style: const TextStyle(color: Colors.red),
                           ),
                         ),

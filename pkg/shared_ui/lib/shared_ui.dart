@@ -1,7 +1,3 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
-
-// ignore_for_file: invalid_export_of_internal_element
-
 library shared_ui;
 
 export 'package:shared_ui/core/constants/constants.dart';

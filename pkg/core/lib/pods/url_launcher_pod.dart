@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:core/enums/url_launch_mode_enum.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
@@ -37,8 +36,9 @@ class UrlLauncher {
       }
       return none();
     } on PlatformException catch (e, st) {
-      // e.g. PlatformException from url_launcher_ios when SFSafariViewController
-      // fails to load (e.g. App Store URLs), or other platform errors
+      // e.g. PlatformException from url_launcher_ios when
+      // SFSafariViewController fails to load (e.g. App Store URLs), or
+      // other platform errors
       final message = e.message ?? 'Could not launch $url';
       return some(
         LaunchUrlException(

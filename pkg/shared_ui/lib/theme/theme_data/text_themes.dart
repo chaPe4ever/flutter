@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 class TextThemes {
-  static final _tsLight = AppTextTheme.light().textStyles;
-  static final _tsDark = AppTextTheme.dark().textStyles;
+  static final PlatformTextStyles _tsLight = AppTextTheme.light().textStyles;
+  static final PlatformTextStyles _tsDark = AppTextTheme.dark().textStyles;
 
   static TextTheme light() {
     return TextTheme(

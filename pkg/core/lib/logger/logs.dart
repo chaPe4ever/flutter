@@ -13,6 +13,8 @@ enum Logs {
   riverpod,
   error;
 
+  bool get enabled => isEnabled;
+
   // Setter to enable/disable individual logs
   set enabled(bool value) {
     switch (this) {
@@ -87,9 +89,7 @@ enum Logs {
   }
 }
 
-// ignore_for_file: unused_field
 enum _Logger {
-  black('30'),
   red('31'),
   green('32'),
   yellow('33'),

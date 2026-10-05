@@ -325,7 +325,7 @@ final class FakeAuthFacade implements AuthFacade {
 
   @override
   Stream<void> priorSignOutStream() {
-    // TODO: implement priorSignOutListener
+    // TODOpriorSignOutListener
     throw UnimplementedError();
   }
 
@@ -335,7 +335,7 @@ final class FakeAuthFacade implements AuthFacade {
     VoidCallback? onSignOut,
     void Function(User user)? onSignIn,
   }) {
-    // TODO: implement addListener
+    // TODOaddListener
   }
 
   @override
@@ -344,7 +344,7 @@ final class FakeAuthFacade implements AuthFacade {
     VoidCallback? onSignOut,
     void Function(User user)? onSignIn,
   }) {
-    // TODO: implement removeListener
+    // TODOremoveListener
   }
 
   @override
@@ -538,7 +538,8 @@ class FakeUserCredential implements UserCredential {
 
   @override
   String toString() {
-    return 'FakeUserCredential(user: $user, additionalUserInfo: $additionalUserInfo, credential: $credential)';
+    return 'FakeUserCredential(user: $user, additionalUserInfo: '
+        '$additionalUserInfo, credential: $credential)';
   }
 }
 
@@ -566,7 +567,8 @@ class FakeAdditionalUserInfo implements AdditionalUserInfo {
 
   @override
   String toString() {
-    return 'FakeAdditionalUserInfo(isNewUser: $isNewUser, providerId: $providerId, profile: $profile, username: $username)';
+    return 'FakeAdditionalUserInfo(isNewUser: $isNewUser, providerId: '
+        '$providerId, profile: $profile, username: $username)';
   }
 
   @override

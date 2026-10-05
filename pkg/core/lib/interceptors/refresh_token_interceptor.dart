@@ -66,9 +66,9 @@ class RefreshTokenInterceptor implements Interceptor {
         return handler.resolve(await _retry(err.requestOptions));
       } on DioException catch (e) {
         handler.reject(e);
-      } catch (er) {
+      } on Exception catch (e) {
         handler.reject(
-          DioException(requestOptions: err.requestOptions, error: er),
+          DioException(requestOptions: err.requestOptions, error: e),
         );
       }
     } else {

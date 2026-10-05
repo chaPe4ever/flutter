@@ -57,9 +57,10 @@ class Ads extends _$Ads with NotifierMountedMixin {
 
         // Pre-load an ad after initialization
         unawaited(_preloadInterstitialAd());
-      } catch (e) {
+      } on Exception catch (e) {
         Log.error('Error initializing ads: $e');
-        // Don't rethrow, just log - this allows the app to continue functioning even if ads fail
+        // Don't rethrow, just log - this allows the app to continue
+        // functioning even if ads fail
       }
     }
   }
@@ -72,44 +73,64 @@ class Ads extends _$Ads with NotifierMountedMixin {
   /// - `onAdShowedFullScreenContent`: Called when the ad is shown.
   /// - `onAdDismissedFullScreenContent`: Called when the ad is dismissed.
   /// - `onAdFailedToShowFullScreenContent`: Called when the ad fails to show.
-  /// The `testDeviceIds` parameter allows you to specify test device IDs for testing purposes.
-  /// The `skip` parameter allows you to skip showing the ad for testing or other purposes.
+  /// The `testDeviceIds` parameter allows you to specify test device IDs
+  /// for testing purposes.
+  /// The `skip` parameter allows you to skip showing the ad for testing or
+  /// other purposes.
   /// Error codes:
   /// General Errors (0-19)
-  /// 0: kGADErrorInvalidRequest - The ad request is invalid (wrong parameters or formatting)
-  /// 1: kGADErrorNoFill - No ad available to be served (inventory unavailable)
-  /// 2: kGADErrorNetworkError - Network connectivity or server communication error
-  /// 3: kGADErrorServerError - Ad server experienced an error while processing the request
-  /// 4: kGADErrorOSVersionTooLow - The operating system version is lower than required
+  /// 0: kGADErrorInvalidRequest - The ad request is invalid (wrong
+  /// parameters or formatting)
+  /// 1: kGADErrorNoFill - No ad available to be served (inventory
+  /// unavailable)
+  /// 2: kGADErrorNetworkError - Network connectivity or server
+  /// communication error
+  /// 3: kGADErrorServerError - Ad server experienced an error while
+  /// processing the request
+  /// 4: kGADErrorOSVersionTooLow - The operating system version is lower
+  /// than required
   /// 5: kGADErrorTimeout - The ad request timed out
-  /// 6: kGADErrorInterstitialAlreadyUsed - The interstitial object was already used (cannot be reused)
+  /// 6: kGADErrorInterstitialAlreadyUsed - The interstitial object was
+  /// already used (cannot be reused)
   /// 7: kGADErrorMediationDataError - Error in the mediation response data
-  /// 8: kGADErrorMediationAdapterError - Adapter failed during mediation flow
+  /// 8: kGADErrorMediationAdapterError - Adapter failed during mediation
+  /// flow
   /// 9: kGADErrorMediationNoFill - No fill from mediation adapter
-  /// 10: kGADErrorMediationInvalidAdSize - Invalid ad size used in mediation
+  /// 10: kGADErrorMediationInvalidAdSize - Invalid ad size used in
+  /// mediation
   /// 11: kGADErrorInternalError - Internal SDK error
   /// 12: kGADErrorInvalidArgument - Invalid argument passed to a method
-  /// 13: kGADErrorReceivedInvalidResponse - Ad server returned an invalid response
-  /// 14: kGADErrorRewardedAdAlreadyUsed - Rewarded ad was already used (cannot be reused)
+  /// 13: kGADErrorReceivedInvalidResponse - Ad server returned an invalid
+  /// response
+  /// 14: kGADErrorRewardedAdAlreadyUsed - Rewarded ad was already used
+  /// (cannot be reused)
   /// Adaptive Banner Errors (20-29)
-  /// 20: kGADErrorAdaptiveBannerSizeError - Invalid or unsupported adaptive banner size
+  /// 20: kGADErrorAdaptiveBannerSizeError - Invalid or unsupported adaptive
+  /// banner size
   /// GDPR and Consent Errors (30-39)
-  /// 30: kGADErrorNotInitialized - SDK not initialized (call startWithCompletionHandler first)
-  /// 31: kGADErrorConsentInfoUpdateFailure - Failed to update user consent information
-  /// 32: kGADErrorConsentInfoUpdateNotRequired - Consent information update not required
+  /// 30: kGADErrorNotInitialized - SDK not initialized (call
+  /// startWithCompletionHandler first)
+  /// 31: kGADErrorConsentInfoUpdateFailure - Failed to update user consent
+  /// information
+  /// 32: kGADErrorConsentInfoUpdateNotRequired - Consent information update
+  /// not required
   /// App Open Ad Errors (40-49)
-  /// 40: kGADErrorAppOpenAdAlreadyUsed - App open ad was already used (cannot be reused)
+  /// 40: kGADErrorAppOpenAdAlreadyUsed - App open ad was already used
+  /// (cannot be reused)
   /// Failed to Receive Ad Errors (50-59)
   /// 50: kGADErrorAdRequestError - Error while making the ad request
   /// 51: kGADErrorAdLoadAlreadyInProgress - Ad is already being loaded
   /// Native Ad Errors (60-69)
-  /// 60: kGADErrorNativeAdResponseValidationFailure - Native ad response validation failed
+  /// 60: kGADErrorNativeAdResponseValidationFailure - Native ad response
+  /// validation failed
   /// 61: kGADErrorNativeAdNoAssetsToLoad - No native ad assets to load
   /// MARK: Ad Storage Errors (70-79)
   /// 70: kGADErrorStorageError - Error accessing or modifying ad storage
   /// Mediation Adapter Configuration Errors (80-89)
-  /// 80: kGADErrorMediationAdapterClassRequiredServerParameters - Adapter requires server parameters but none provided
-  /// 81: kGADErrorInvalidMediationCredentials - Invalid credentials provided for mediation
+  /// 80: kGADErrorMediationAdapterClassRequiredServerParameters -
+  /// Adapter requires server parameters but none provided
+  /// 81: kGADErrorInvalidMediationCredentials - Invalid credentials
+  /// provided for mediation
   /// Unknown Errors
   /// -1: kGADErrorUnknown - Unknown or unspecified error occurred
   Future<void> showInterstitialAd({
@@ -143,7 +164,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
 
       try {
         interstitialAd = await _loadInterstitialAd();
-      } catch (e) {
+      } on Exception catch (e) {
         final error = e.toCoreException(
           customEx: AdsLoadException(innerError: e),
         );
@@ -349,7 +370,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
           },
         ),
       );
-    } catch (e) {
+    } on Exception catch (e) {
       Log.error('Exception while loading ad: $e');
       if (_interstitialAdCompleter?.isCompleted == false) {
         _interstitialAdCompleter?.completeError(e);
@@ -360,13 +381,13 @@ class Ads extends _$Ads with NotifierMountedMixin {
 
     try {
       if (_interstitialAdCompleter != null) {
-        return _interstitialAdCompleter!.future;
+        return await _interstitialAdCompleter!.future;
       } else {
         throw const AdsLoadException(
           innerMessage: 'Interstitial ad load failed',
         );
       }
-    } catch (e) {
+    } on Exception catch (e) {
       Log.error('Error waiting for ad to load: $e');
       _interstitialAdCompleter = null;
       rethrow;
@@ -394,7 +415,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
                 }
               }
             });
-          } catch (e) {
+          } on Exception catch (e) {
             Log.error('Error showing consent form: $e');
             if (!formCompleter.isCompleted) {
               formCompleter.completeError(e);
@@ -413,11 +434,11 @@ class Ads extends _$Ads with NotifierMountedMixin {
       try {
         await formCompleter.future;
         Log.info('Consent process completed');
-      } catch (e) {
+      } on Exception catch (e) {
         Log.error('Consent process error: $e');
         // Continue with initialization even if consent fails
       }
-    } catch (e) {
+    } on Exception catch (e) {
       Log.error('Error in consent flow: $e');
       // Continue with initialization even if consent fails
     }
@@ -434,7 +455,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
       if (required && status == ConsentStatus.required) {
         await _loadAndShowConsentForm();
       }
-    } catch (e) {
+    } on Exception catch (e) {
       Log.error('Error checking consent status: $e');
     }
   }
@@ -482,7 +503,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
 
       // Wait for the consent flow to complete before continuing
       await completer.future;
-    } catch (e) {
+    } on Exception catch (e) {
       Log.error('Error requesting consent: $e');
       // Continue with initialization even if consent fails
     }
@@ -494,7 +515,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
         Log.info('Preloading interstitial ad');
         await _loadInterstitialAd();
       }
-    } catch (e) {
+    } on Exception catch (e) {
       Log.error('Failed to preload interstitial ad: $e');
       // Don't rethrow, just log the error
     }
