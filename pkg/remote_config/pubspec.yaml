@@ -13,7 +13,7 @@ dependencies:
       url: https://github.com/chaPe4ever/flutter
       ref: main
       path: pkg/core
-  firebase_remote_config: ^5.4.7
+  firebase_remote_config: ^6.6.0
   flutter:
     sdk: flutter
 

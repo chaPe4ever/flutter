@@ -9,9 +9,10 @@ environment:
 
 dependencies:
   async: ^2.13.0
-  cached_network_image: ^3.4.1
-  cloud_firestore: ^5.6.11
-  cloud_functions: ^5.6.1
+  cached_network_image: ^4.0.0
+  cloud_firestore: ^6.9.0
+  cloud_functions: ^6.4.0
+  collection: ^1.19.1
   connectivity_plus: ^6.1.4
   custom_annotations:
     git:
@@ -19,35 +20,37 @@ dependencies:
       ref: main
       path: builders/custom_annotations
   dartz: ^0.10.1
-  device_info_plus: ^11.5.0
+  device_info_plus: ^13.2.0
   dio: ^5.8.0+1
   easy_localization: ^3.0.7
   equatable: ^2.0.7
   faker: ^2.2.0
-  firebase_core: ^3.15.1
-  firebase_database: ^11.3.9
+  firebase_core: ^4.14.0
+  firebase_database: ^12.5.0
   flutter:
     sdk: flutter
   flutter_hooks: ^0.21.2
   flutter_pdfview: ^1.4.1
   flutter_svg: ^2.2.0
-  flutter_timezone: ^4.1.1
+  flutter_timezone: ^5.1.0
+  flutter_web_plugins:
+    sdk: flutter
   freezed_annotation: ^3.1.0
   gap: ^3.0.1
   go_router: ^16.0.0
-  google_fonts: ^6.2.1
+  google_fonts: ^8.2.1
   hooks_riverpod: ^3.3.2
   json_annotation: ^4.9.0
   logger: ^2.6.0
-  package_info_plus: ^8.3.0
+  package_info_plus: ^10.2.1
   path_provider: ^2.1.5
-  pdfrx: ^1.3.1
+  pdfrx: ^2.5.0
   permission_handler: ^12.0.1
   pretty_dio_logger: ^1.4.0
   responsive_framework: ^1.5.1
   riverpod_annotation: ^4.0.2
   rxdart: ^0.28.0
-  share_plus: ^11.0.0
+  share_plus: ^13.3.0
   shared_preferences: ^2.5.3
   shimmer: ^3.0.0
   signals: ^6.0.2

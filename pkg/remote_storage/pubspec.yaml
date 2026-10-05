@@ -13,7 +13,12 @@ dependencies:
       url: https://github.com/chaPe4ever/flutter
       ref: main
       path: pkg/core
-  firebase_storage: ^12.4.9
+  custom_annotations:
+    git:
+      url: https://github.com/chaPe4ever/flutter
+      ref: main
+      path: builders/custom_annotations
+  firebase_storage: ^13.5.0
   flutter:
     sdk: flutter
 
