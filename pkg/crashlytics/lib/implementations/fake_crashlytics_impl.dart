@@ -14,14 +14,9 @@ final class FakeCrashlyticsImpl implements CrashlyticsBase {
   void testCrash() {}
 
   @override
-  Future<void> captureException(dynamic error, {StackTrace? stackTrace}) {
-    // TODO: implement captureException
-    throw UnimplementedError();
-  }
+  Future<void> captureException(dynamic error, {StackTrace? stackTrace}) =>
+      Future.value();
 
   @override
-  Future<void> logEvent({required String message}) {
-    // TODO: implement logEvent
-    throw UnimplementedError();
-  }
+  Future<void> logEvent({required String message}) => Future.value();
 }

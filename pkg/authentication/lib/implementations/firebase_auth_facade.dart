@@ -115,9 +115,9 @@ final class FirebaseAuthFacade implements AuthFacade {
         if ((appleCredential.givenName != null ||
                 appleCredential.familyName != null) &&
             user.displayName == null) {
-          final displayName =
-              '${appleCredential.givenName ?? ''} ${appleCredential.familyName ?? ''}'
-                  .trim();
+          final givenName = appleCredential.givenName ?? '';
+          final familyName = appleCredential.familyName ?? '';
+          final displayName = '$givenName $familyName'.trim();
           if (displayName.isNotEmpty) {
             await user.updateDisplayName(displayName);
           }
@@ -193,13 +193,13 @@ final class FirebaseAuthFacade implements AuthFacade {
 
   @override
   Future<Option<AuthenticationEx>> signInWithFacebook() {
-    // TODO: implement signInWithFacebook
+    // TODOimplement signInWithFacebook
     throw UnimplementedError();
   }
 
   @override
   Future<Option<AuthenticationEx>> signInWithGithub() {
-    // TODO: implement signInWithGithub
+    // TODOimplement signInWithGithub
     throw UnimplementedError();
   }
 

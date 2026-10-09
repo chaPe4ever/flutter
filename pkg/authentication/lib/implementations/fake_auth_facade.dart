@@ -320,7 +320,7 @@ final class FakeAuthFacade implements AuthFacade {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    // TODOimplement dispose
   }
 
   @override
@@ -419,11 +419,6 @@ class FakeUser implements User {
   @override
   Future<String> getIdToken([bool forceRefresh = false]) async {
     return faker.guid.guid(); // Return a fake token
-  }
-
-  @override
-  Future<void> updateEmail(String newEmail) async {
-    // Simulate email update
   }
 
   @override
