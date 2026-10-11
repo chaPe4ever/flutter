@@ -10,6 +10,7 @@ class ResponsiveScaffold extends StatelessWidget {
     this.appBar,
     this.bottomNavigationBar,
     this.floatingActionButton,
+    this.horizontalPadding = 20,
     super.key,
   });
 
@@ -18,13 +19,16 @@ class ResponsiveScaffold extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget? floatingActionButton;
 
+  /// Horizontal inset of the page body. Zero lets a header span the screen.
+  final double horizontalPadding;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: floatingActionButton,
       appBar: appBar,
       bottomNavigationBar: bottomNavigationBar,
-      body: ResponsiveSafeArea(child: child),
+      body: ResponsiveSafeArea(hPadding: horizontalPadding, child: child),
     );
   }
 }
