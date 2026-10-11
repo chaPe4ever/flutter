@@ -164,14 +164,30 @@ class Ads extends _$Ads with NotifierMountedMixin {
     state = const AsyncLoading();
 
     state = await AsyncValue.guard<void>(() async {
+      // UMP may require a form after paywall (or when consent expired). Show it
+      // before load so we never treat a consent-gated miss as inventory no-fill
+      // and proceed without an interstitial.
+      await _ensureConsentAllowsAdsOrThrow();
+
       InterstitialAd? interstitialAd;
 
       try {
         interstitialAd = await _loadInterstitialAd();
       } on Exception catch (e) {
-        final error = e.toCoreException(
+        var error = e.toCoreException(
           customEx: AdsLoadException(innerError: e),
         );
+        // Consent-gated load failures are often reported as no-fill (code 1/3).
+        if (error is AdsNoFillException && !_skipConsentForm) {
+          final canRequest = await ConsentInformation.instance.canRequestAds();
+          if (!canRequest) {
+            error = AdsConsentChoicesOptedOutException(
+              innerError: e,
+              innerMessage: error.innerMessage,
+              innerCode: error.innerCode,
+            );
+          }
+        }
         onAdFailedToShowFullScreenContent?.call(error);
         throw error;
       }
@@ -400,6 +416,36 @@ class Ads extends _$Ads with NotifierMountedMixin {
       Log.error('Error waiting for ad to load: $e');
       _interstitialAdCompleter = null;
       rethrow;
+    }
+  }
+
+  /// Shows the UMP form when required, then fails if ads still cannot be
+  /// requested (user opted out / consent not obtained).
+  Future<void> _ensureConsentAllowsAdsOrThrow() async {
+    if (_skipConsentForm) {
+      return;
+    }
+
+    try {
+      await ConsentForm.loadAndShowConsentFormIfRequired((formError) {
+        if (formError != null) {
+          Log.error(
+            'Consent form (if required) dismissed with error: '
+            '${formError.message}',
+          );
+        } else {
+          Log.info('Consent form (if required) dismissed');
+        }
+      });
+    } on Exception catch (e) {
+      Log.error('Error showing consent form before interstitial: $e');
+    }
+
+    final canRequest = await ConsentInformation.instance.canRequestAds();
+    if (!canRequest) {
+      throw const AdsConsentChoicesOptedOutException(
+        innerMessage: 'Ads cannot be requested until consent allows it',
+      );
     }
   }
 
