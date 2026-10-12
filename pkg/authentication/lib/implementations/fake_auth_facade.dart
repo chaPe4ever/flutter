@@ -8,17 +8,19 @@ import 'package:flutter/foundation.dart';
 /// Firebase authentication facade implementation
 final class FakeAuthFacade implements AuthFacade {
   /// Constructor
-  FakeAuthFacade()
-    : _user = InMemoryStore<User?>(
-        FakeUser(
-          metadata: UserMetadata(0, 0),
-          uid: faker.guid.guid(),
-          email: faker.internet.email(),
-          displayName: faker.person.name(),
-          photoURL: faker.internet.httpsUrl(),
-          phoneNumber: faker.phoneNumber.us(),
-        ),
-      );
+  FakeAuthFacade() : this.withUser(_defaultFakeUser());
+
+  @visibleForTesting
+  FakeAuthFacade.withUser(FakeUser user) : _user = InMemoryStore<User?>(user);
+
+  static FakeUser _defaultFakeUser() => FakeUser(
+    metadata: UserMetadata(0, 0),
+    uid: faker.guid.guid(),
+    email: faker.internet.email(),
+    displayName: faker.person.name(),
+    photoURL: faker.internet.httpsUrl(),
+    phoneNumber: faker.phoneNumber.us(),
+  );
 
   // Fields
 
@@ -31,33 +33,25 @@ final class FakeAuthFacade implements AuthFacade {
     required EmailAddress email,
     required Password password,
   }) async {
-    try {
-      _user.value = FakeUser(
-        metadata: UserMetadata(0, 0),
-        uid: faker.guid.guid(),
-        email: email.requireValue,
-        displayName: faker.person.name(),
-        photoURL: faker.internet.httpsUrl(),
-        phoneNumber: faker.phoneNumber.us(),
-      );
+    _user.value = FakeUser(
+      metadata: UserMetadata(0, 0),
+      uid: faker.guid.guid(),
+      email: email.requireValue,
+      displayName: faker.person.name(),
+      photoURL: faker.internet.httpsUrl(),
+      phoneNumber: faker.phoneNumber.us(),
+    );
 
-      return right(
-        FakeUserCredentialFactory.email(
-          user: _user.value!,
-          credential: EmailAuthProvider.credential(
-            email: email.requireValue,
-            password: password.requireValue,
-          ),
-          isNewUser: true,
+    return right(
+      FakeUserCredentialFactory.email(
+        user: _user.value!,
+        credential: EmailAuthProvider.credential(
+          email: email.requireValue,
+          password: password.requireValue,
         ),
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code.contains('email-already-in-use')) {
-        return left(const AuthEmailAlreadyInUseException());
-      } else {
-        return left(const AuthServerErrorException());
-      }
-    }
+        isNewUser: true,
+      ),
+    );
   }
 
   @override
@@ -120,11 +114,7 @@ final class FakeAuthFacade implements AuthFacade {
   Future<Either<AuthenticationEx, User?>> signInWithGoogle({
     String locale = 'en',
   }) async {
-    try {
-      return right(null);
-    } on FirebaseAuthException {
-      return left(const AuthServerErrorException());
-    }
+    return right(null);
   }
 
   @override
@@ -354,11 +344,11 @@ final class FakeAuthFacade implements AuthFacade {
 class FakeUser implements User {
   const FakeUser({
     required this.uid,
-    required this.email,
     required this.displayName,
     required this.photoURL,
     required this.phoneNumber,
     required this.metadata,
+    this.email,
     this.emailVerified = true,
     this.isAnonymous = false,
     this.tenantId,
@@ -368,7 +358,7 @@ class FakeUser implements User {
   final String uid;
 
   @override
-  final String email;
+  final String? email;
 
   @override
   final String displayName;
