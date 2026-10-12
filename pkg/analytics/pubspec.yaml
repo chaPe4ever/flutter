@@ -6,6 +6,7 @@ publish_to: "none"
 
 environment:
   sdk: ^3.10.0
+resolution: workspace
 
 dependencies:
   core:
@@ -25,6 +26,7 @@ dev_dependencies:
       ref: main
       path: builders/custom_builders
   # custom_lint: ^0.8.1  # Incompatible with riverpod_generator 4.x (analyzer 12 vs 8)
+  firebase_core_platform_interface: ^8.1.1
   flutter_driver:
     sdk: flutter
   flutter_test:

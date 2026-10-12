@@ -20,7 +20,7 @@ flutter/
 │   ├── remote_config/ # Remote configuration
 │   ├── remote_storage/ # Remote storage functionality
 │   └── shared_ui/     # Shared UI components
-└── melos.yaml         # Melos workspace configuration
+└── pubspec.yaml       # Pub workspace + Melos configuration
 ```
 
 ## Key Technologies & Patterns
@@ -62,22 +62,25 @@ flutter/
 ## Build System Configuration
 
 ### Melos Commands
+Workspace + Melos config lives in the root `pubspec.yaml` (Melos 8 / pub workspaces).
+Run Melos via `dart run melos …` (or a global `melos` that matches the lockfile).
+
 ```bash
 # Bootstrap all packages
-melos bootstrap
+dart run melos bootstrap
 
-# Run tests
-melos test                    # All packages
-melos test_changed           # Only changed packages
+# Run tests (100% coverage via very_good_cli)
+dart run melos run test --no-select
+dart run melos run test_changed --no-select
 
 # Code quality
-melos format                 # Format all code
-melos analyze                # Analyze all packages
+dart run melos run format
+dart run melos run analyze --no-select   # dart analyze --fatal-infos
 
 # Build runner
-melos build_runner_build     # Build all generated code
-melos build_runner_clean     # Clean generated files
-melos build_runner_watch     # Watch for changes
+dart run melos run build_runner_build
+dart run melos run build_runner_clean
+dart run melos run build_runner_watch
 ```
 
 ### Package-Specific Build Runner

@@ -6,6 +6,7 @@ publish_to: "none"
 
 environment:
   sdk: ^3.10.0
+resolution: workspace
 
 dependencies:
   core:
@@ -24,6 +25,9 @@ dev_dependencies:
       url: https://github.com/chaPe4ever/flutter
       ref: main
       path: builders/custom_builders
+  firebase_core: ^4.14.0
+  firebase_core_platform_interface: ^8.1.1
+  firebase_remote_config_platform_interface: ^3.0.0
   # custom_lint: ^0.8.1  # Incompatible with riverpod_generator 4.x (analyzer 12 vs 8)
   flutter_driver:
     sdk: flutter
@@ -34,6 +38,7 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^6.9.5
   mockito: ^5.4.6
+  mocktail: ^1.0.4
   riverpod_generator: ^4.0.4
   riverpod_lint: ^3.1.4
   very_good_analysis: ^9.0.0

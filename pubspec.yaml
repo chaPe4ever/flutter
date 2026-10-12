@@ -2,10 +2,97 @@ name: my_workspace
 publish_to: none
 
 environment:
-  sdk: ^3.8.1
+  sdk: ^3.10.0
+
+workspace:
+  - pkg/ads
+  - pkg/analytics
+  - pkg/authentication
+  - pkg/core
+  - pkg/crashlytics
+  - pkg/inapp_review
+  - pkg/local_notifications
+  - pkg/remote_config
+  - pkg/remote_storage
+  - pkg/shared_ui
+  - builders/custom_annotations
+  - builders/custom_builders
 
 dev_dependencies:
-  melos: ^6.3.2
+  melos: ^8.9.0
 
 melos:
   repository: https://github.com/chaPe4ever/flutter
+
+  scripts:
+    analyze:
+      description: Analyze all packages (dart analyze --fatal-infos)
+      exec: dart analyze --fatal-infos
+
+    test:
+      description: >
+        Run very_good tests with 100% coverage across packages that have a
+        test/ directory
+      packageFilters:
+        dirExists: test
+      exec: >
+        very_good test --coverage -r --min-coverage 100 --show-uncovered
+        --test-randomize-ordering-seed random --fail-fast
+        --exclude-coverage "**/*.g.dart **/*.freezed.dart **/*.gr.dart **/*.gen.dart"
+        --exclude-tags golden
+
+    test_changed:
+      description: Run tests only for packages changed since origin/main
+      packageFilters:
+        dirExists: test
+        diff: origin/main
+      exec: >
+        very_good test --coverage -r --min-coverage 100 --show-uncovered
+        --test-randomize-ordering-seed random --fail-fast
+        --exclude-coverage "**/*.g.dart **/*.freezed.dart **/*.gr.dart **/*.gen.dart"
+        --exclude-tags golden
+
+    format:
+      description: Format all packages and fail if files would change
+      exec: dart format --set-exit-if-changed .
+
+    pub_upgrade:
+      description: Upgrade dependencies in all packages
+      exec: dart pub upgrade
+
+    clean:
+      description: Clean all packages
+      exec: flutter clean
+
+    build_runner_build_core:
+      private: true
+      description: Generate code in the core package
+      packageFilters:
+        scope: core
+      exec: dart run build_runner build -d
+
+    build_runner_build_rest:
+      private: true
+      description: Generate code in dependency order across packages
+      exec:
+        command: dart run build_runner build -d
+        concurrency: 1
+        orderDependents: true
+
+    build_runner_build:
+      description: >
+        Build core first so its .g.dart exist, then build the rest in
+        dependency order
+      steps:
+        - build_runner_build_core
+        - build_runner_build_rest
+
+    build_runner_clean:
+      description: Clean build_runner outputs in all packages
+      exec: dart run build_runner clean
+
+    build_runner_watch:
+      description: Watch and rebuild generated code in dependency order
+      exec:
+        command: dart run build_runner watch -d
+        orderDependents: true

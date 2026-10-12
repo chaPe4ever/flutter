@@ -31,8 +31,11 @@ openai/
 .pub-cache/
 .pub/
 /build/
-pubspec.lock
+# Package-level locks are unused under pub workspaces; keep the root lock.
+**/pubspec.lock
+!/pubspec.lock
 firebase.json
+pubspec_overrides.yaml
 
 # Symbolication related
 app.*.symbols
