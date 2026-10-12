@@ -8,6 +8,53 @@ part of 'firebase_pod.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// Whether Firestore should use emulator settings (overridable in tests).
+
+@ProviderFor(useFirebaseEmulators)
+final useFirebaseEmulatorsPod = UseFirebaseEmulatorsProvider._();
+
+/// Whether Firestore should use emulator settings (overridable in tests).
+
+final class UseFirebaseEmulatorsProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  /// Whether Firestore should use emulator settings (overridable in tests).
+  UseFirebaseEmulatorsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'useFirebaseEmulatorsPod',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$useFirebaseEmulatorsHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return useFirebaseEmulators(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$useFirebaseEmulatorsHash() =>
+    r'b8b965d919652e87a3e9e175c39f582cc9544ed0';
+
 /// Keep the pod singleton
 
 @ProviderFor(firestore)
@@ -58,7 +105,7 @@ final class FirestoreProvider
   }
 }
 
-String _$firestoreHash() => r'ea545ab322745f4c35e7f3eade2beca7dd8e0b85';
+String _$firestoreHash() => r'28b0578a8be161f8287015722d824e8dfbf701d5';
 
 /// Keep the pod singleton
 

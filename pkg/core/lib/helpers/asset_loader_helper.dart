@@ -14,12 +14,20 @@ class AssetLoaderHelper extends AssetLoader {
   static bool isInitialLoadComplete = false;
 
   // Create a notification stream for translation loads
-  static final StreamController<Locale> _onTranslationsLoaded =
+  static StreamController<Locale> _onTranslationsLoaded =
       StreamController<Locale>.broadcast();
 
   // Public stream that others can listen to
-  static Stream<Locale> get onTranslationsLoaded =>
-      _onTranslationsLoaded.stream;
+  static Stream<Locale> get onTranslationsLoaded {
+    _ensureController();
+    return _onTranslationsLoaded.stream;
+  }
+
+  static void _ensureController() {
+    if (_onTranslationsLoaded.isClosed) {
+      _onTranslationsLoaded = StreamController<Locale>.broadcast();
+    }
+  }
 
   @override
   Future<Map<String, dynamic>?> load(String path, Locale locale) async {
@@ -38,6 +46,7 @@ class AssetLoaderHelper extends AssetLoader {
       );
 
       // Notify listeners of loaded translations
+      _ensureController();
       _onTranslationsLoaded.add(locale);
 
       // Set initial load flag if it's the first time
@@ -46,7 +55,7 @@ class AssetLoaderHelper extends AssetLoader {
       }
 
       return result;
-    } on Exception catch (e) {
+    } on Object catch (e) {
       Log.error('Error loading translations: $e');
       return {};
     }
@@ -54,6 +63,8 @@ class AssetLoaderHelper extends AssetLoader {
 
   // Call this method when disposing the app
   static void dispose() {
-    _onTranslationsLoaded.close();
+    if (!_onTranslationsLoaded.isClosed) {
+      _onTranslationsLoaded.close();
+    }
   }
 }

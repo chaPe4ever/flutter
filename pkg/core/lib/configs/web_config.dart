@@ -9,13 +9,23 @@ class WebConfig implements ConfigBase {
   Future<void> init() async {
     usePathUrlStrategy();
     GoRouter.optionURLReflectsImperativeAPIs = true;
-    if (kIsWeb) {
-      FlutterError.onError = (FlutterErrorDetails details) {
-        // Print the error details to the console
-        if (!kReleaseMode) {
-          Log.error(details.exceptionAsString(), st: details.stack);
-        }
-      };
-    }
+    configureWebFlutterErrorHandling();
   }
+}
+
+/// Installs web-only Flutter error logging (overridable in tests).
+void configureWebFlutterErrorHandling({
+  bool isWeb = kIsWeb,
+  bool releaseMode = kReleaseMode,
+  void Function(String message, {StackTrace? st})? logError,
+}) {
+  if (!isWeb) {
+    return;
+  }
+  final logger = logError ?? Log.error;
+  FlutterError.onError = (FlutterErrorDetails details) {
+    if (!releaseMode) {
+      logger(details.exceptionAsString(), st: details.stack);
+    }
+  };
 }

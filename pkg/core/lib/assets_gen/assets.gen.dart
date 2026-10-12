@@ -40,9 +40,7 @@ class $AssetsSvgGen {
   List<SvgGenImage> get values => [arrowDown];
 }
 
-class Assets {
-  const Assets._();
-
+abstract final class Assets {
   static const String package = 'core';
 
   static const $AssetsPngGen png = $AssetsPngGen();

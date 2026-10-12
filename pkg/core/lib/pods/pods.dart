@@ -1,5 +1,6 @@
 export 'package:core/pods/dio_pod.dart';
 export 'package:core/pods/firebase_pod.dart';
+export 'package:core/pods/firestore_network_gateway.dart';
 export 'package:core/pods/local_storage_pod.dart';
 export 'package:core/pods/logger_pod.dart';
 export 'package:core/pods/network_pod.dart';

@@ -2,12 +2,19 @@ import 'package:core/core.dart';
 
 part 'firebase_pod.g.dart';
 
+/// Whether Firestore should use emulator settings (overridable in tests).
+@Riverpod(keepAlive: true)
+bool useFirebaseEmulators(Ref ref) {
+  return bool.tryParse(
+        const String.fromEnvironment('USE_FIREBASE_EMULATORS'),
+      ) ??
+      false;
+}
+
 /// Keep the pod singleton
 @Riverpod(keepAlive: true)
 FirebaseFirestore firestore(Ref ref) {
-  final useEmulator =
-      bool.tryParse(const String.fromEnvironment('USE_FIREBASE_EMULATORS')) ??
-      false;
+  final useEmulator = ref.watch(useFirebaseEmulatorsPod);
 
   if (useEmulator) {
     FirebaseFirestore.instance.settings = const Settings(
@@ -25,12 +32,14 @@ FirebaseFirestore firestore(Ref ref) {
       ),
     );
 
+    final networkGateway = ref.read(firestoreNetworkGatewayPod);
+
     void onOnline() {
-      FirebaseFirestore.instance.enableNetwork();
+      networkGateway.enableNetwork();
     }
 
     void onOffline() {
-      FirebaseFirestore.instance.disableNetwork();
+      networkGateway.disableNetwork();
     }
 
     // Capture before onDispose — Ref.read is illegal inside dispose callbacks.

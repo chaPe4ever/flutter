@@ -4,9 +4,7 @@ import 'package:core/contracts/core_exception.dart';
 import 'package:core/pods/logger_pod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final class LoggerHelper {
-  const LoggerHelper._();
-
+abstract final class LoggerHelper {
   /// It logs the coreException message providing the error itself to stacktrace
   /// if [customErrorToLog] is provided, it provides that error to stacktrace
   /// instead

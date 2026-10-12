@@ -2,9 +2,7 @@ import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 
 /// Localization Helper
-final class LocaleHelper {
-  const LocaleHelper._();
-
+abstract final class LocaleHelper {
   /// Localise the input. Enrich with additional Locales if required
   static String localiseInput({
     required BuildContext context,

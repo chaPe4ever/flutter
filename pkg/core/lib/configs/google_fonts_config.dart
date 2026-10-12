@@ -2,13 +2,21 @@ import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
+typedef FontLicenceAssetListLoader =
+    Future<List<String>> Function({
+      required String path,
+    });
+
 class GoogleFontsConfig implements ConfigBase {
   const GoogleFontsConfig({
     this.fontLicencesAbsPath,
     this.allowRuntimeFetching = true,
-  });
+    FontLicenceAssetListLoader? assetListLoader,
+  }) : _assetListLoader = assetListLoader ?? AssetsHelper.getAssetList;
+
   final String? fontLicencesAbsPath;
   final bool allowRuntimeFetching;
+  final FontLicenceAssetListLoader _assetListLoader;
   @override
   Future<void> init() async {
     // Assigning it to true means enable getting fonts using internet
@@ -22,7 +30,7 @@ class GoogleFontsConfig implements ConfigBase {
     if (path == null) {
       return Future.value();
     }
-    await AssetsHelper.getAssetList(path: path).then((licencePaths) async {
+    await _assetListLoader(path: path).then((licencePaths) async {
       LicenseRegistry.addLicense(() async* {
         for (final licencePath in licencePaths) {
           final licence = await rootBundle.loadString(licencePath);

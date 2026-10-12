@@ -12,8 +12,7 @@ enum UrlLaunchModeEnum {
   externalApplication,
 
   /// Passes the URL to the OS to be handled by another non-browser application.
-  externalNonBrowserApplication
-  ;
+  externalNonBrowserApplication;
 
   const UrlLaunchModeEnum();
 

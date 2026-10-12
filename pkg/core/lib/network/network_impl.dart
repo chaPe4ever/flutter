@@ -96,30 +96,28 @@ final class NetworkImpl implements NetworkBase {
     if (onOffline != null) _offlineCallbacks.add(onOffline);
 
     // Initialize the single subscription if it doesn't exist
-    _statusSubscription ??=
-        _connectionStatusController.stream.distinct().listen(
-      (network) {
-        if (network case NetworkStatus.offline) {
-          // Create a defensive copy to avoid concurrent modification
-          final callbacksCopy = Set<VoidCallback>.from(_offlineCallbacks);
-          for (final callback in callbacksCopy) {
-            // Check if the callback is still in the original set before calling
-            if (_offlineCallbacks.contains(callback)) {
-              callback();
-            }
-          }
-        } else {
-          // Create a defensive copy to avoid concurrent modification
-          final callbacksCopy = Set<VoidCallback>.from(_onlineCallbacks);
-          for (final callback in callbacksCopy) {
-            // Check if the callback is still in the original set before calling
-            if (_onlineCallbacks.contains(callback)) {
-              callback();
-            }
+    final statusStream = _connectionStatusController.stream.distinct();
+    _statusSubscription ??= statusStream.listen((network) {
+      if (network case NetworkStatus.offline) {
+        // Create a defensive copy to avoid concurrent modification
+        final callbacksCopy = Set<VoidCallback>.from(_offlineCallbacks);
+        for (final callback in callbacksCopy) {
+          // Check if the callback is still in the original set before calling
+          if (_offlineCallbacks.contains(callback)) {
+            callback();
           }
         }
-      },
-    );
+      } else {
+        // Create a defensive copy to avoid concurrent modification
+        final callbacksCopy = Set<VoidCallback>.from(_onlineCallbacks);
+        for (final callback in callbacksCopy) {
+          // Check if the callback is still in the original set before calling
+          if (_onlineCallbacks.contains(callback)) {
+            callback();
+          }
+        }
+      }
+    });
   }
 
   @override

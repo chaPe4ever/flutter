@@ -32,18 +32,25 @@ extension DocumentSnapshotX<T extends Object?> on DocumentSnapshot<T> {
   };
 
   R fromJsonOrCrash<R>(R Function(Map<String, dynamic> json) fromJson) {
-    final snapshotData = data();
-    if (!existsAndDataNotNull || snapshotData is! Map<String, dynamic>) {
-      throw FirestoreNullDocumentSnapshotException(
-        innerMessage:
-            'The snapshot: $this does not exist or it is null | | '
-            'ID: $id | parrent ID: ${reference.parent.id}',
-      );
-    }
-    return fromJson(
-      snapshotData..update('id', (_) => id, ifAbsent: () => id),
+    final jsonMap = requireFirestoreDocumentJsonMap(snapshot: this);
+    return fromJson(jsonMap..update('id', (_) => id, ifAbsent: () => id));
+  }
+}
+
+/// Validates [snapshot] data is a non-null JSON map
+/// (testable without Firestore).
+Map<String, dynamic> requireFirestoreDocumentJsonMap<T>({
+  required DocumentSnapshot<T> snapshot,
+}) {
+  final snapshotData = snapshot.data();
+  if (!snapshot.existsAndDataNotNull || snapshotData is! Map<String, dynamic>) {
+    throw FirestoreNullDocumentSnapshotException(
+      innerMessage:
+          'The snapshot: $snapshot does not exist or it is null | | '
+          'ID: ${snapshot.id} | parrent ID: ${snapshot.reference.parent.id}',
     );
   }
+  return snapshotData;
 }
 
 extension QuerySnapshotX<T extends Object?> on QuerySnapshot<T> {

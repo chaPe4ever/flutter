@@ -160,9 +160,11 @@ class Log {
         _Logger.blue.log(info, name: Logs.riverpod.name);
       }
       if (verboseCb != null) {
-        final log = verboseCb(isActive: false);
-        if (log != null && log.isNotEmpty) {
-          _Logger.cyan.log(log, name: Logs.riverpod.name);
+        for (final isActive in [false, true]) {
+          final log = verboseCb(isActive: isActive);
+          if (log != null && log.isNotEmpty) {
+            _Logger.cyan.log(log, name: Logs.riverpod.name);
+          }
         }
       }
     }

@@ -3,10 +3,7 @@ import 'package:core/utils/tz_helper.dart';
 import 'package:flutter/material.dart';
 
 /// Date time helper class
-final class DtHelper {
-  /// Private ctr
-  DtHelper._();
-
+abstract final class DtHelper {
   /// Parse the time string to time of day object
   static TimeOfDay parseTimeStr(String timeString) {
     final hours = int.parse(timeString.split(':')[0]);

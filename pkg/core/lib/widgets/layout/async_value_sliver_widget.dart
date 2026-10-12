@@ -60,24 +60,23 @@ class AsyncValueSliverWidget<T> extends StatelessWidget {
           ),
       error: (e, st) =>
           errorWidgetCb?.call(e, st) ??
-          SliverToBoxAdapter(
+          SliverFillRemaining(
+            hasScrollBody: false,
             child: kDebugMode
-                ? Scaffold(
-                    body: Center(
-                      child: Container(
-                        margin: const EdgeInsets.all(15),
-                        padding: const EdgeInsets.all(3),
-                        height: context.height * 0.5,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.red, width: 2),
-                        ),
-                        child: SingleChildScrollView(
-                          child: Text(
-                            'ERROR_MESSAGE: '
-                            '${e is CoreException ? e.messageKey.tr() : e}'
-                            '\n\nSTACKTRACE: $st',
-                            style: const TextStyle(color: Colors.red),
-                          ),
+                ? Center(
+                    child: Container(
+                      margin: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(3),
+                      height: context.height * 0.5,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.red, width: 2),
+                      ),
+                      child: SingleChildScrollView(
+                        child: Text(
+                          'ERROR_MESSAGE: '
+                          '${e is CoreException ? e.messageKey.tr() : e}'
+                          '\n\nSTACKTRACE: $st',
+                          style: const TextStyle(color: Colors.red),
                         ),
                       ),
                     ),

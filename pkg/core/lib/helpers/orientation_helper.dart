@@ -20,10 +20,6 @@ abstract class OrientationHelper {
     required List<DeviceOrientation> orientations,
   }) async {
     try {
-      assert(
-        orientations.isNotEmpty,
-        'The The orientation list cannot be empty',
-      );
       if (orientations.isEmpty) {
         return some(UnknownCoreException());
       }
@@ -48,7 +44,7 @@ abstract class OrientationHelper {
             ),
             DeviceOrientation.landscapeRight => await _platform.invokeMethod(
               'setOrientation',
-              DeviceOrientation.landscapeRight,
+              DeviceOrientation.landscapeRight.name,
             ),
           };
         } else {
@@ -131,22 +127,6 @@ abstract class OrientationHelper {
             DeviceOrientation.portraitDown,
           ].every((item) => orientations.toSet().contains(item))) {
             await _platform.invokeMethod('setOrientation', 'portraitAll');
-          } else if ([
-            DeviceOrientation.portraitUp,
-          ].every((item) => orientations.toSet().contains(item))) {
-            await _platform.invokeMethod('setOrientation', 'portraitUp');
-          } else if ([
-            DeviceOrientation.portraitDown,
-          ].every((item) => orientations.toSet().contains(item))) {
-            await _platform.invokeMethod('setOrientation', 'portraitDown');
-          } else if ([
-            DeviceOrientation.landscapeRight,
-          ].every((item) => orientations.toSet().contains(item))) {
-            await _platform.invokeMethod('setOrientation', 'landscapeRight');
-          } else if ([
-            DeviceOrientation.landscapeLeft,
-          ].every((item) => orientations.toSet().contains(item))) {
-            await _platform.invokeMethod('setOrientation', 'landscapeLeft');
           }
         }
       } else {
@@ -161,14 +141,18 @@ abstract class OrientationHelper {
       }
 
       return none();
-    } on PlatformException catch (e) {
-      return some(
-        UnknownCoreException(innerMessage: kDebugMode ? e.message : null),
-      );
     } on Exception catch (e) {
       return some(
-        UnknownCoreException(innerMessage: kDebugMode ? e.toString() : null),
+        UnknownCoreException(innerMessage: orientationExceptionMessage(e)),
       );
     }
   }
+}
+
+/// Maps orientation failures to user-visible inner messages.
+String? orientationExceptionMessage(Exception e) {
+  if (!kDebugMode) {
+    return null;
+  }
+  return e is PlatformException ? e.message : e.toString();
 }

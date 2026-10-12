@@ -6,10 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 ///
-final class FlavorHelper {
-  /// Ctr
-  const FlavorHelper._();
-
+abstract final class FlavorHelper {
   // Fields
   static late FlavorEnum _currentFlavor;
 

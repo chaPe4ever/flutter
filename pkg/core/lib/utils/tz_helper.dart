@@ -6,9 +6,7 @@ import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 /// Time zone helper class
-final class TzHelper {
-  TzHelper._();
-
+abstract final class TzHelper {
   static late tz.Location _tzLocation;
 
   /// Init once at the app start
