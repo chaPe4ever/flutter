@@ -15,10 +15,13 @@ import 'package:remote_config/models/app_version_model.dart';
 ///
 final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
   /// Constructor
-  FirebaseRemoteConfigImpl({required FirebaseRemoteConfig firebaseRemoteConfig})
-    : _firebaseRemoteConfig = firebaseRemoteConfig,
-      _remoteConfigKeysSetController =
-          StreamController<Set<String>>.broadcast() {
+  FirebaseRemoteConfigImpl({
+    required FirebaseRemoteConfig firebaseRemoteConfig,
+    bool emitDebugInnerMessages = kDebugMode,
+  }) : _firebaseRemoteConfig = firebaseRemoteConfig,
+       _emitDebugInnerMessages = emitDebugInnerMessages,
+       _remoteConfigKeysSetController =
+           StreamController<Set<String>>.broadcast() {
     _subscription = _firebaseRemoteConfig.onConfigUpdated.listen(
       (RemoteConfigUpdate result) {
         _remoteConfigKeysSetController.add(result.updatedKeys);
@@ -40,6 +43,7 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
 
   // Fields
   final FirebaseRemoteConfig _firebaseRemoteConfig;
+  final bool _emitDebugInnerMessages;
   late final StreamSubscription<RemoteConfigUpdate> _subscription;
   final StreamController<Set<String>> _remoteConfigKeysSetController;
 
@@ -101,11 +105,8 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
 
       if (json.isEmpty) {
         return left(
-          const RemoteConfigFirebaseException(
-            innerMessage: kDebugMode
-                ? 'The app_version json is null, please '
-                      'check that your firebase setup is correct'
-                : null,
+          RemoteConfigFirebaseException(
+            innerMessage: _emptyRemoteConfigDebugMessage('app_version'),
           ),
         );
       }
@@ -288,11 +289,8 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
 
       if (json.isEmpty) {
         return left(
-          const RemoteConfigFirebaseException(
-            innerMessage: kDebugMode
-                ? 'The app_maintenance json is null, please '
-                      'check that your firebase setup is correct'
-                : null,
+          RemoteConfigFirebaseException(
+            innerMessage: _emptyRemoteConfigDebugMessage('app_maintenance'),
           ),
         );
       }
@@ -315,4 +313,10 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
       return left(RemoteConfigFirebaseException(innerError: e, st: st));
     }
   }
+
+  String? _emptyRemoteConfigDebugMessage(String configKey) =>
+      _emitDebugInnerMessages
+      ? 'The $configKey json is null, please '
+            'check that your firebase setup is correct'
+      : null;
 }
