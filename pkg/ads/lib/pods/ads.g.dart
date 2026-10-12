@@ -32,7 +32,7 @@ final class AdsProvider extends $AsyncNotifierProvider<Ads, void> {
   Ads create() => Ads();
 }
 
-String _$adsHash() => r'aabcf9af1b6ef96d8d804352833c8db9e11e4216';
+String _$adsHash() => r'507279fa31fc72d505f608f58486f42c375a14dd';
 
 abstract class _$Ads extends $AsyncNotifier<void> {
   FutureOr<void> build();

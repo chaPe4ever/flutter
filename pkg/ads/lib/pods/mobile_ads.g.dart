@@ -13,8 +13,9 @@ part of 'mobile_ads.dart';
 final mobileAdsPod = MobileAdsProvider._();
 
 final class MobileAdsProvider
-    extends $FunctionalProvider<MobileAds, MobileAds, MobileAds>
-    with $Provider<MobileAds> {
+    extends
+        $FunctionalProvider<MobileAdsClient, MobileAdsClient, MobileAdsClient>
+    with $Provider<MobileAdsClient> {
   MobileAdsProvider._()
     : super(
         from: null,
@@ -31,21 +32,21 @@ final class MobileAdsProvider
 
   @$internal
   @override
-  $ProviderElement<MobileAds> $createElement($ProviderPointer pointer) =>
+  $ProviderElement<MobileAdsClient> $createElement($ProviderPointer pointer) =>
       $ProviderElement(pointer);
 
   @override
-  MobileAds create(Ref ref) {
+  MobileAdsClient create(Ref ref) {
     return mobileAds(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(MobileAds value) {
+  Override overrideWithValue(MobileAdsClient value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<MobileAds>(value),
+      providerOverride: $SyncValueProvider<MobileAdsClient>(value),
     );
   }
 }
 
-String _$mobileAdsHash() => r'0cc041e53bf308d5384483868fc2a8d2cfc21f02';
+String _$mobileAdsHash() => r'5b3ca8842e5e3665e7ae2fafba8e72413258a421';

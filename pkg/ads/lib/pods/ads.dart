@@ -1,6 +1,11 @@
 import 'dart:async';
 
+import 'package:ads/contracts/consent_client.dart';
+import 'package:ads/contracts/interstitial_ad_loader.dart';
 import 'package:ads/exceptions/ads_exceptions.dart';
+import 'package:ads/pods/consent.dart';
+import 'package:ads/pods/interstitial_ad_load_config.dart';
+import 'package:ads/pods/interstitial_ad_loader.dart';
 import 'package:ads/pods/mobile_ads.dart';
 import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
@@ -12,11 +17,14 @@ part 'ads.g.dart';
 class Ads extends _$Ads with NotifierMountedMixin {
   bool _isInitialized = false;
   bool _skipConsentForm = false;
-  String? _interstitialAdUnitId;
-  AdRequest? _adRequest;
-  Completer<InterstitialAd>? _interstitialAdCompleter;
+  Future<InterstitialAd>? _inFlightInterstitialLoad;
   InterstitialAd? _cachedInterstitialAd;
   Timer? _adLoadRetryTimer;
+
+  ConsentClient get _consent => ref.read(consentClientPod);
+
+  InterstitialAdLoader get _interstitialLoader =>
+      ref.read(interstitialAdLoaderPod);
 
   @override
   Future<void> build() async {
@@ -31,7 +39,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
     _adLoadRetryTimer?.cancel();
     _cachedInterstitialAd?.dispose();
     _cachedInterstitialAd = null;
-    _interstitialAdCompleter = null;
+    _inFlightInterstitialLoad = null;
   }
 
   Future<void> init({
@@ -43,8 +51,12 @@ class Ads extends _$Ads with NotifierMountedMixin {
       Log.info('Initializing ad service with ID: $interstitialAdUnitId');
       _isInitialized = true;
       _skipConsentForm = skipConsentForm;
-      _adRequest = adRequest;
-      _interstitialAdUnitId = interstitialAdUnitId;
+      ref
+          .read(interstitialAdLoadConfigPod.notifier)
+          .configure(
+            adUnitId: interstitialAdUnitId,
+            adRequest: adRequest,
+          );
 
       try {
         // First, request consent information
@@ -179,7 +191,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
         );
         // Consent-gated load failures are often reported as no-fill (code 1/3).
         if (error is AdsNoFillException && !_skipConsentForm) {
-          final canRequest = await ConsentInformation.instance.canRequestAds();
+          final canRequest = await _consent.canRequestAds();
           if (!canRequest) {
             error = AdsConsentChoicesOptedOutException(
               innerError: e,
@@ -265,8 +277,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
     });
   }
 
-  Future<bool> get isConsetnFormAvailable =>
-      ConsentInformation.instance.isConsentFormAvailable();
+  Future<bool> get isConsetnFormAvailable => _consent.isConsentFormAvailable();
 
   /// Resets the user's consent choice and shows the consent form again when
   /// the UMP SDK offers one (e.g. EEA). Elsewhere the form is often reported
@@ -275,7 +286,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
   Future<void> resetConsent() async {
     Log.info('Resetting user consent');
 
-    await ConsentInformation.instance.reset();
+    await _consent.reset();
     Log.info('Consent reset applied in storage');
 
     if (_skipConsentForm) {
@@ -283,8 +294,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
       return;
     }
 
-    final isFormAvailable = await ConsentInformation.instance
-        .isConsentFormAvailable();
+    final isFormAvailable = await _consent.isConsentFormAvailable();
 
     if (isFormAvailable) {
       await _requestConsentInfo();
@@ -305,116 +315,65 @@ class Ads extends _$Ads with NotifierMountedMixin {
     }
 
     // If we're already loading an ad, return that future
-    if (_interstitialAdCompleter != null) {
-      return _interstitialAdCompleter!.future;
+    final inFlight = _inFlightInterstitialLoad;
+    if (inFlight != null) {
+      return inFlight;
     }
 
-    // Start loading a new ad
-    _interstitialAdCompleter = Completer<InterstitialAd>();
+    final loadConfig = ref.read(interstitialAdLoadConfigPod);
+    final interstitialAdUnitId = loadConfig.adUnitId;
+    final adRequest = loadConfig.adRequest;
 
     // Make sure ad unit ID and ad request are not null
-    if (_interstitialAdUnitId == null || _adRequest == null) {
+    if (interstitialAdUnitId == null || adRequest == null) {
       Log.error('Ad unit ID or AdRequest is null');
-      _interstitialAdCompleter?.completeError(
-        const AdsInitException(innerMessage: 'Ad unit ID or AdRequest is null'),
-      );
-      _interstitialAdCompleter = null;
       throw const AdsInitException(
         innerMessage: 'Ad unit ID or AdRequest is null',
       );
     }
 
+    final loadFuture = _startInterstitialLoad(
+      interstitialAdUnitId: interstitialAdUnitId,
+      adRequest: adRequest,
+    );
+    _inFlightInterstitialLoad = loadFuture;
+
     try {
-      // Get consent status to determine non-personalized ads
-      final consentStatus = await ConsentInformation.instance
-          .getConsentStatus();
+      return await loadFuture;
+    } on Exception catch (e) {
+      Log.error('Error waiting for ad to load: $e');
+      rethrow;
+    } finally {
+      if (identical(_inFlightInterstitialLoad, loadFuture)) {
+        _inFlightInterstitialLoad = null;
+      }
+    }
+  }
+
+  Future<InterstitialAd> _startInterstitialLoad({
+    required String interstitialAdUnitId,
+    required AdRequest adRequest,
+  }) async {
+    try {
+      final consentStatus = await _consent.getConsentStatus();
       final useNonPersonalizedAds = consentStatus != ConsentStatus.obtained;
 
-      // Create an ad request with consent parameters
       final request = AdRequest(
         nonPersonalizedAds: useNonPersonalizedAds,
-        keywords: _adRequest?.keywords,
-        contentUrl: _adRequest?.contentUrl,
-        neighboringContentUrls: _adRequest?.neighboringContentUrls,
-        httpTimeoutMillis: _adRequest?.httpTimeoutMillis,
-        mediationExtras: _adRequest?.mediationExtras,
-        extras: _adRequest?.extras,
+        keywords: adRequest.keywords,
+        contentUrl: adRequest.contentUrl,
+        neighboringContentUrls: adRequest.neighboringContentUrls,
+        httpTimeoutMillis: adRequest.httpTimeoutMillis,
+        mediationExtras: adRequest.mediationExtras,
+        extras: adRequest.extras,
       );
-      await InterstitialAd.load(
-        adUnitId: _interstitialAdUnitId!,
+
+      return await _interstitialLoader.load(
+        adUnitId: interstitialAdUnitId,
         request: request,
-        adLoadCallback: InterstitialAdLoadCallback(
-          onAdLoaded: (InterstitialAd ad) {
-            Log.info('Interstitial ad loaded successfully');
-            ad.setImmersiveMode(true);
-
-            if (_interstitialAdCompleter?.isCompleted == false) {
-              _interstitialAdCompleter?.complete(ad);
-            } else {
-              // If for some reason the completer is no longer valid,
-              // cache the ad for next use
-              _cachedInterstitialAd = ad;
-            }
-            _interstitialAdCompleter = null;
-          },
-          onAdFailedToLoad: (LoadAdError error) {
-            Log.error('InterstitialAd failed to load: $error');
-            CoreException? exception;
-            if (error.code == 1 ||
-                (error.code == 3 &&
-                    error.message.toLowerCase().contains('no fill'))) {
-              exception = AdsNoFillException(
-                innerError: error,
-                innerCode: error.code.toString(),
-                innerMessage: error.message,
-              );
-            } else if (error.code == 2) {
-              exception = AdsBlockerException(
-                innerError: error,
-                innerCode: error.code.toString(),
-                innerMessage: error.message,
-              );
-            } else if (error.code == 3) {
-              exception = AdsConsentChoicesOptedOutException(
-                innerError: error,
-                innerCode: error.code.toString(),
-                innerMessage: error.message,
-              );
-            } else {
-              exception = AdsLoadException(
-                innerError: error,
-                innerCode: error.code.toString(),
-                innerMessage: error.message,
-              );
-            }
-
-            if (_interstitialAdCompleter?.isCompleted == false) {
-              _interstitialAdCompleter?.completeError(exception);
-            }
-            _interstitialAdCompleter = null;
-          },
-        ),
       );
     } on Exception catch (e) {
       Log.error('Exception while loading ad: $e');
-      if (_interstitialAdCompleter?.isCompleted == false) {
-        _interstitialAdCompleter?.completeError(e);
-      }
-      _interstitialAdCompleter = null;
-      rethrow;
-    }
-
-    try {
-      if (_interstitialAdCompleter != null) {
-        return await _interstitialAdCompleter!.future;
-      } else {
-        throw const AdsLoadException(
-          innerMessage: 'Interstitial ad load failed',
-        );
-      }
-    } on Exception catch (e) {
-      Log.error('Error waiting for ad to load: $e');
-      _interstitialAdCompleter = null;
       rethrow;
     }
   }
@@ -427,7 +386,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
     }
 
     try {
-      await ConsentForm.loadAndShowConsentFormIfRequired((formError) {
+      await _consent.loadAndShowConsentFormIfRequired((formError) {
         if (formError != null) {
           Log.error(
             'Consent form (if required) dismissed with error: '
@@ -441,7 +400,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
       Log.error('Error showing consent form before interstitial: $e');
     }
 
-    final canRequest = await ConsentInformation.instance.canRequestAds();
+    final canRequest = await _consent.canRequestAds();
     if (!canRequest) {
       throw const AdsConsentChoicesOptedOutException(
         innerMessage: 'Ads cannot be requested until consent allows it',
@@ -451,48 +410,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
 
   Future<void> _loadAndShowConsentForm() async {
     try {
-      Log.info('Loading consent form');
-
-      final formCompleter = Completer<void>();
-
-      ConsentForm.loadConsentForm(
-        (ConsentForm consentForm) async {
-          try {
-            Log.info('Consent form loaded, showing to user');
-            consentForm.show((formError) {
-              if (!formCompleter.isCompleted) {
-                if (formError != null) {
-                  Log.error('Consent form error: ${formError.message}');
-                  formCompleter.completeError(formError);
-                } else {
-                  Log.info('Consent form closed');
-                  formCompleter.complete();
-                }
-              }
-            });
-          } on Exception catch (e) {
-            Log.error('Error showing consent form: $e');
-            if (!formCompleter.isCompleted) {
-              formCompleter.completeError(e);
-            }
-          }
-        },
-        (formError) {
-          Log.error('Consent form load error: ${formError.message}');
-          if (!formCompleter.isCompleted) {
-            formCompleter.completeError(formError);
-          }
-        },
-      );
-
-      // Wait for the form to be closed
-      try {
-        await formCompleter.future;
-        Log.info('Consent process completed');
-      } on Exception catch (e) {
-        Log.error('Consent process error: $e');
-        // Continue with initialization even if consent fails
-      }
+      await _consent.loadAndShowConsentForm();
     } on Exception catch (e) {
       Log.error('Error in consent flow: $e');
       // Continue with initialization even if consent fails
@@ -501,9 +419,8 @@ class Ads extends _$Ads with NotifierMountedMixin {
 
   Future<void> _checkAndShowConsentForm() async {
     try {
-      final status = await ConsentInformation.instance.getConsentStatus();
-      final required = await ConsentInformation.instance
-          .isConsentFormAvailable();
+      final status = await _consent.getConsentStatus();
+      final required = await _consent.isConsentFormAvailable();
 
       Log.info('Consent status: $status, Form required: $required');
 
@@ -536,7 +453,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
       final completer = Completer<void>();
 
       // Request latest consent info
-      ConsentInformation.instance.requestConsentInfoUpdate(
+      _consent.requestConsentInfoUpdate(
         params,
         () {
           // Success callback
@@ -566,9 +483,11 @@ class Ads extends _$Ads with NotifierMountedMixin {
 
   Future<void> _preloadInterstitialAd() async {
     try {
-      if (_isInitialized && _interstitialAdCompleter == null) {
+      if (_isInitialized &&
+          _inFlightInterstitialLoad == null &&
+          _cachedInterstitialAd == null) {
         Log.info('Preloading interstitial ad');
-        await _loadInterstitialAd();
+        _cachedInterstitialAd = await _loadInterstitialAd();
       }
     } on Exception catch (e) {
       Log.error('Failed to preload interstitial ad: $e');
