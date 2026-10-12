@@ -1,8 +1,28 @@
 import 'dart:async';
 import 'dart:isolate';
 
+import 'package:core/core.dart';
 import 'package:crashlytics/crashlytics.dart';
 import 'package:flutter/foundation.dart';
+
+/// Chooses the throwable Sentry should title an issue with.
+///
+/// [CoreException] keeps the user-facing key on [CoreException.messageKey] and
+/// the original failure on [CoreException.innerError]. Reporting the wrapper
+/// makes the issue title that translation key.
+@visibleForTesting
+({Object throwable, StackTrace? stackTrace}) sentryReport(
+  Object error,
+  StackTrace? stackTrace,
+) {
+  if (error is CoreException) {
+    final inner = error.innerError;
+    if (inner is Object) {
+      return (throwable: inner, stackTrace: error.st ?? stackTrace);
+    }
+  }
+  return (throwable: error, stackTrace: stackTrace);
+}
 
 ///
 final class SentryCrashlyticsImpl implements CrashlyticsBase {
@@ -49,7 +69,11 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
       // Install a new handler that calls Sentry and then any previous handler
       FlutterError.onError = (FlutterErrorDetails details) {
         // Sentry first
-        Sentry.captureException(details.exception, stackTrace: details.stack);
+        final report = sentryReport(details.exception, details.stack);
+        Sentry.captureException(
+          report.throwable,
+          stackTrace: report.stackTrace,
+        );
 
         // Then call any previous handler
         originalOnError?.call(details);
@@ -59,7 +83,11 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
       final originalPlatformHandler = PlatformDispatcher.instance.onError;
 
       PlatformDispatcher.instance.onError = (error, stack) {
-        Sentry.captureException(error, stackTrace: stack);
+        final report = sentryReport(error, stack);
+        Sentry.captureException(
+          report.throwable,
+          stackTrace: report.stackTrace,
+        );
         // call original (if any) so nothing else breaks
         return originalPlatformHandler?.call(error, stack) ?? false;
       };
@@ -69,7 +97,15 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
         RawReceivePort((List<dynamic> pair) {
           final error = pair.first;
           final stack = StackTrace.fromString(pair.last as String);
-          Sentry.captureException(error, stackTrace: stack);
+          if (error is Object) {
+            final report = sentryReport(error, stack);
+            Sentry.captureException(
+              report.throwable,
+              stackTrace: report.stackTrace,
+            );
+          } else {
+            Sentry.captureException(error, stackTrace: stack);
+          }
         }).sendPort,
       );
     } on Exception catch (e, st) {
@@ -78,7 +114,18 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
   }
 
   @override
-  Future<void> captureException(dynamic error, {StackTrace? stackTrace}) async {
+  Future<void> captureException(
+    dynamic error, {
+    StackTrace? stackTrace,
+  }) async {
+    if (error is Object) {
+      final report = sentryReport(error, stackTrace);
+      await Sentry.captureException(
+        report.throwable,
+        stackTrace: report.stackTrace,
+      );
+      return;
+    }
     await Sentry.captureException(error, stackTrace: stackTrace);
   }
 
