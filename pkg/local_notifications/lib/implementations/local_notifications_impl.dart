@@ -9,8 +9,10 @@ import 'package:local_notifications/pods/local_notification_pod.dart';
 
 class LocalNotificationsImpl implements LocalNotificationsBase {
   LocalNotificationsImpl({required this.notifications})
-    : fgNotificationController = StreamController<NotificationResponse>(),
-      bgNotificationController = StreamController<NotificationResponse>();
+    : fgNotificationController =
+          StreamController<NotificationResponse>.broadcast(),
+      bgNotificationController =
+          StreamController<NotificationResponse>.broadcast();
 
   final FlutterLocalNotificationsPlugin notifications;
   @override
