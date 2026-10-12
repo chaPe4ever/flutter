@@ -2,17 +2,26 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_ui/theme/pallete/app_semantic_colors.dart';
 
+PlatformTextStyles platformTextStylesFor(
+  AppTextTheme theme, {
+  bool isWeb = kIsWeb,
+  TargetPlatform? platform,
+}) {
+  if (isWeb) {
+    return theme.web;
+  }
+  return switch (platform ?? defaultTargetPlatform) {
+    TargetPlatform.android => theme.android,
+    TargetPlatform.fuchsia => throw UnimplementedError(),
+    TargetPlatform.iOS => theme.ios,
+    TargetPlatform.linux => throw UnimplementedError(),
+    TargetPlatform.macOS => theme.desktop,
+    TargetPlatform.windows => theme.desktop,
+  };
+}
+
 extension AppTextThemeX on AppTextTheme {
-  PlatformTextStyles get textStyles => kIsWeb
-      ? web
-      : switch (defaultTargetPlatform) {
-          TargetPlatform.android => android,
-          TargetPlatform.fuchsia => throw UnimplementedError(),
-          TargetPlatform.iOS => ios,
-          TargetPlatform.linux => throw UnimplementedError(),
-          TargetPlatform.macOS => desktop,
-          TargetPlatform.windows => desktop,
-        };
+  PlatformTextStyles get textStyles => platformTextStylesFor(this);
 }
 
 @immutable

@@ -64,8 +64,8 @@ class _AppSearchbarState extends State<AppSearchbar> {
         ],
         hintText: widget.hintText,
         onChanged: widget.onChanged,
-        onSubmitted: (value) => FocusScope.of(context).unfocus(),
-        onTapOutside: (event) => FocusScope.of(context).unfocus(),
+        onSubmitted: (_) => FocusScope.of(context).unfocus(),
+        onTapOutside: (_) => FocusScope.of(context).unfocus(),
       ),
     );
   }

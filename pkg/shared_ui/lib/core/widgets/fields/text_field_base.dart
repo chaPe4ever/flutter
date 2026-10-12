@@ -252,9 +252,7 @@ class _OutlineTextFieldBaseState extends State<OutlineTextFieldBase> {
         prefixIcon: widget.prefixIcon,
         prefixIconConstraints: widget.prefixIconConstraints,
       ).applyDefaults(context.themeData.inputDecorationTheme),
-      onTapOutside: (_) {
-        FocusManager.instance.primaryFocus?.unfocus();
-      },
+      onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
     );
   }
 }

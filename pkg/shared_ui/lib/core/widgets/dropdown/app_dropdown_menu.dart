@@ -66,12 +66,11 @@ class _AppDropdownMenuState extends State<AppDropdownMenu> {
                   textStyle: WidgetStateProperty.all(
                     context.textStyles.bodyS,
                   ),
-                  backgroundColor: WidgetStateProperty.resolveWith((states) {
-                    if (states.contains(WidgetState.selected)) {
-                      return context.colors.borderPrimary;
-                    }
-                    return context.colors.backgroundPrimary;
-                  }),
+                  backgroundColor: WidgetStateProperty.resolveWith(
+                    (states) => states.contains(WidgetState.selected)
+                        ? context.colors.borderPrimary
+                        : context.colors.backgroundPrimary,
+                  ),
                   foregroundColor: WidgetStateProperty.all(
                     context.colors.contentPrimary,
                   ),

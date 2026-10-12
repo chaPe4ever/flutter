@@ -105,6 +105,10 @@ class TextHeadline extends AppText {
     maxLines: maxLines,
   );
 
+  /// Allows constructing unsupported sizes so [style] can throw in tests.
+  factory TextHeadline.withSize(TextSizeEnum size, String text) =>
+      TextHeadline._(size, text: text);
+
   final Color? color;
 
   @override
@@ -113,7 +117,7 @@ class TextHeadline extends AppText {
       TextSizeEnum.s => context.textStyles.headlineS.copyWith(color: color),
       TextSizeEnum.m => context.textStyles.headlineM.copyWith(color: color),
       TextSizeEnum.l => context.textStyles.headlineL.copyWith(color: color),
-      _ => throw UnknownCoreException(
+      TextSizeEnum.xs => throw UnknownCoreException(
         innerMessage: 'Unknown TextSizeEnum: $_size',
       ),
     };
@@ -170,6 +174,10 @@ class TextTitle extends AppText {
     overflow: overflow,
   );
 
+  /// Allows constructing unsupported sizes so [style] can throw in tests.
+  factory TextTitle.withSize(TextSizeEnum size, String text) =>
+      TextTitle._(size, text: text);
+
   final Color? color;
 
   @override
@@ -177,7 +185,7 @@ class TextTitle extends AppText {
     return switch (_size) {
       TextSizeEnum.m => context.textStyles.titleM.copyWith(color: color),
       TextSizeEnum.l => context.textStyles.titleL.copyWith(color: color),
-      _ => throw UnknownCoreException(
+      TextSizeEnum.xs || TextSizeEnum.s => throw UnknownCoreException(
         innerMessage: 'Unknown TextSizeEnum: $_size',
       ),
     };
@@ -353,6 +361,10 @@ final class TextLabel extends AppText {
     overflow: overflow,
   );
 
+  /// Allows constructing unsupported sizes so [style] can throw in tests.
+  factory TextLabel.withSize(TextSizeEnum size, String text) =>
+      TextLabel._(size, text: text);
+
   final Color? color;
 
   @override
@@ -361,7 +373,7 @@ final class TextLabel extends AppText {
       TextSizeEnum.s => context.textStyles.labelS.copyWith(color: color),
       TextSizeEnum.m => context.textStyles.labelM.copyWith(color: color),
       TextSizeEnum.l => context.textStyles.labelL.copyWith(color: color),
-      _ => throw UnknownCoreException(
+      TextSizeEnum.xs => throw UnknownCoreException(
         innerMessage: 'Unknown TextSizeEnum: $_size',
       ),
     };
