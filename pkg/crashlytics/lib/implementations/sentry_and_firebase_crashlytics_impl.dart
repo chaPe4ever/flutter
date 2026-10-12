@@ -1,7 +1,6 @@
-import 'dart:async';
-import 'dart:isolate';
-
 import 'package:crashlytics/crashlytics.dart';
+import 'package:crashlytics/implementations/isolate_error_handlers.dart';
+import 'package:crashlytics/implementations/isolate_error_listener.dart';
 import 'package:crashlytics/implementations/sentry_crashlytics_impl.dart';
 import 'package:flutter/foundation.dart';
 
@@ -11,11 +10,19 @@ final class SentryAndFirebaseCrashlyticsImpl implements CrashlyticsBase {
   SentryAndFirebaseCrashlyticsImpl({
     required SentryCrashlyticsImpl sentryCrashlytics,
     required FirebaseCrashlyticsImpl firebaseCrashlytics,
+    FirebaseCrashlytics? firebaseCrashlyticsInstance,
+    IsolateErrorListenerRegistrar? registerIsolateErrorListener,
   }) : _firebaseCrashlytics = firebaseCrashlytics,
-       _sentryCrashlytics = sentryCrashlytics;
+       _sentryCrashlytics = sentryCrashlytics,
+       _firebaseCrashlyticsInstance =
+           firebaseCrashlyticsInstance ?? FirebaseCrashlytics.instance,
+       _registerIsolateErrorListener =
+           registerIsolateErrorListener ?? registerDefaultIsolateErrorListener;
 
   final SentryCrashlyticsImpl _sentryCrashlytics;
   final FirebaseCrashlyticsImpl _firebaseCrashlytics;
+  final FirebaseCrashlytics _firebaseCrashlyticsInstance;
+  final IsolateErrorListenerRegistrar _registerIsolateErrorListener;
 
   @override
   Future<void> logEvent({required String message}) async {
@@ -57,7 +64,6 @@ final class SentryAndFirebaseCrashlyticsImpl implements CrashlyticsBase {
 
   @override
   Future<void> init() async {
-    final fbCrashlytics = FirebaseCrashlytics.instance;
     try {
       // Capture whatever handler is there now (Sentry’s)
       final originalOnError = FlutterError.onError;
@@ -66,7 +72,7 @@ final class SentryAndFirebaseCrashlyticsImpl implements CrashlyticsBase {
         originalOnError?.call(details);
 
         // Then send to Firebase Crashlytics
-        fbCrashlytics.recordFlutterError(details);
+        _firebaseCrashlyticsInstance.recordFlutterError(details);
       };
 
       // Same for uncaught async errors
@@ -77,22 +83,15 @@ final class SentryAndFirebaseCrashlyticsImpl implements CrashlyticsBase {
             originalPlatformHandler?.call(error, stack) ?? false;
 
         // Now Crashlytics
-        fbCrashlytics.recordError(error, stack, fatal: true);
+        _firebaseCrashlyticsInstance.recordError(error, stack, fatal: true);
 
         return sentryHandled;
       };
 
       // And for isolates:
-      Isolate.current.addErrorListener(
-        RawReceivePort((List<dynamic> pair) {
-          final error = pair.first;
-          final stack = StackTrace.fromString(pair.last as String);
-
-          // original handler—in Sentry’s zone—has already been wired to
-          // isolates, so we just forward to Crashlytics here
-          fbCrashlytics.recordError(error, stack, fatal: true);
-        }).sendPort,
-      );
+      _registerIsolateErrorListener((pair) {
+        onCombinedFirebaseIsolateError(_firebaseCrashlyticsInstance, pair);
+      });
     } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }

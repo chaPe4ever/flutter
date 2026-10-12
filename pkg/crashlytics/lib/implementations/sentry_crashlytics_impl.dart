@@ -1,39 +1,30 @@
-import 'dart:async';
-import 'dart:isolate';
-
-import 'package:core/core.dart';
 import 'package:crashlytics/crashlytics.dart';
+import 'package:crashlytics/implementations/isolate_error_handlers.dart';
+import 'package:crashlytics/implementations/isolate_error_listener.dart';
+import 'package:crashlytics/implementations/sentry_bindings.dart';
 import 'package:flutter/foundation.dart';
-
-/// Chooses the throwable Sentry should title an issue with.
-///
-/// [CoreException] keeps the user-facing key on [CoreException.messageKey] and
-/// the original failure on [CoreException.innerError]. Reporting the wrapper
-/// makes the issue title that translation key.
-@visibleForTesting
-({Object throwable, StackTrace? stackTrace}) sentryReport(
-  Object error,
-  StackTrace? stackTrace,
-) {
-  if (error is CoreException) {
-    final inner = error.innerError;
-    if (inner is Object) {
-      return (throwable: inner, stackTrace: error.st ?? stackTrace);
-    }
-  }
-  return (throwable: error, stackTrace: stackTrace);
-}
 
 ///
 final class SentryCrashlyticsImpl implements CrashlyticsBase {
   ///
-  SentryCrashlyticsImpl();
+  SentryCrashlyticsImpl({
+    SentryCrashlyticsBindings? sentry,
+    IsolateErrorListenerRegistrar? registerIsolateErrorListener,
+    SentryUserIdSetter? setUserIdAction,
+  }) : _sentry = sentry ?? const DefaultSentryCrashlyticsBindings(),
+       _registerIsolateErrorListener =
+           registerIsolateErrorListener ?? registerDefaultIsolateErrorListener,
+       _setUserIdAction = setUserIdAction ?? defaultSentryUserIdSetter;
+
+  final SentryCrashlyticsBindings _sentry;
+  final IsolateErrorListenerRegistrar _registerIsolateErrorListener;
+  final SentryUserIdSetter _setUserIdAction;
 
   @override
   Future<void> setCrashlytics({required bool enabled}) async {
     try {
       if (!enabled) {
-        Sentry.bindClient(SentryClient(SentryOptions(dsn: '')));
+        _sentry.bindClient(disabledSentryClient());
       }
     } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
@@ -43,6 +34,7 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
   @override
   Future<void> setUserId({required String userId}) async {
     try {
+      await _setUserIdAction(userId);
       // TODOCheck if this is the right way to set user id in Sentry
     } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
@@ -52,7 +44,7 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
   @override
   void testCrash() {
     if (kDebugMode) {
-      Sentry.captureException(
+      _sentry.captureException(
         const UnknownCrashlyticsException(
           messageKey: 'test_crash_key',
           innerMessage: 'Test crash',
@@ -70,7 +62,7 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
       FlutterError.onError = (FlutterErrorDetails details) {
         // Sentry first
         final report = sentryReport(details.exception, details.stack);
-        Sentry.captureException(
+        _sentry.captureException(
           report.throwable,
           stackTrace: report.stackTrace,
         );
@@ -84,7 +76,7 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
 
       PlatformDispatcher.instance.onError = (error, stack) {
         final report = sentryReport(error, stack);
-        Sentry.captureException(
+        _sentry.captureException(
           report.throwable,
           stackTrace: report.stackTrace,
         );
@@ -93,21 +85,9 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
       };
 
       //And in spawned isolates:
-      Isolate.current.addErrorListener(
-        RawReceivePort((List<dynamic> pair) {
-          final error = pair.first;
-          final stack = StackTrace.fromString(pair.last as String);
-          if (error is Object) {
-            final report = sentryReport(error, stack);
-            Sentry.captureException(
-              report.throwable,
-              stackTrace: report.stackTrace,
-            );
-          } else {
-            Sentry.captureException(error, stackTrace: stack);
-          }
-        }).sendPort,
-      );
+      _registerIsolateErrorListener((pair) {
+        onSentryIsolateError(_sentry, pair);
+      });
     } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
@@ -120,19 +100,19 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
   }) async {
     if (error is Object) {
       final report = sentryReport(error, stackTrace);
-      await Sentry.captureException(
+      await _sentry.captureException(
         report.throwable,
         stackTrace: report.stackTrace,
       );
       return;
     }
-    await Sentry.captureException(error, stackTrace: stackTrace);
+    await _sentry.captureException(error, stackTrace: stackTrace);
   }
 
   @override
   Future<void> logEvent({required String message}) async {
     try {
-      await Sentry.captureEvent(
+      await _sentry.captureEvent(
         SentryEvent(message: SentryMessage(message), level: SentryLevel.info),
       );
     } on Exception catch (e, st) {

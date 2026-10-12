@@ -1,16 +1,20 @@
-import 'dart:async';
-import 'dart:isolate';
-
 import 'package:crashlytics/crashlytics.dart';
+import 'package:crashlytics/implementations/isolate_error_handlers.dart';
+import 'package:crashlytics/implementations/isolate_error_listener.dart';
 import 'package:flutter/foundation.dart';
 
 ///
 final class FirebaseCrashlyticsImpl implements CrashlyticsBase {
   ///
-  FirebaseCrashlyticsImpl({required FirebaseCrashlytics crashlytics})
-    : _crashlytics = crashlytics;
+  FirebaseCrashlyticsImpl({
+    required FirebaseCrashlytics crashlytics,
+    IsolateErrorListenerRegistrar? registerIsolateErrorListener,
+  }) : _crashlytics = crashlytics,
+       _registerIsolateErrorListener =
+           registerIsolateErrorListener ?? registerDefaultIsolateErrorListener;
 
   final FirebaseCrashlytics _crashlytics;
+  final IsolateErrorListenerRegistrar _registerIsolateErrorListener;
 
   @override
   Future<void> setCrashlytics({required bool enabled}) async {
@@ -51,16 +55,9 @@ final class FirebaseCrashlyticsImpl implements CrashlyticsBase {
       };
 
       // Catch errors that happen outside of the Flutter context
-      Isolate.current.addErrorListener(
-        RawReceivePort((List<dynamic> pair) async {
-          final errorAndStacktrace = pair;
-          await _crashlytics.recordError(
-            errorAndStacktrace.first,
-            StackTrace.fromString(errorAndStacktrace.last as String),
-            fatal: true,
-          );
-        }).sendPort,
-      );
+      _registerIsolateErrorListener((pair) {
+        onFirebaseIsolateError(_crashlytics, pair);
+      });
     } on Exception catch (e, st) {
       throw UnknownCrashlyticsException(innerError: e, st: st);
     }
