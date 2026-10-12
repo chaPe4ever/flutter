@@ -34,6 +34,14 @@ abstract base class CoreException implements Exception {
 
   @override
   String toString() {
-    return '${prefix == null ? '' : '$prefix : '}$messageKey';
+    final head = '${prefix == null ? '' : '$prefix : '}$messageKey';
+    final details = <String>[
+      if (innerMessage != null && innerMessage!.isNotEmpty) innerMessage!,
+      if (innerError != null) '$innerError',
+    ];
+    if (details.isEmpty) {
+      return head;
+    }
+    return '$head (${details.join(' | ')})';
   }
 }
