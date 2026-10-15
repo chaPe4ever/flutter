@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -40,6 +41,20 @@ void main() {
         () => Log.riverpod(providerName: 'p', info: 'i'),
         returnsNormally,
       );
+    });
+
+    test('enabled error logs are visible on the debug console', () {
+      final lines = <String>[];
+      final previous = debugPrint;
+      debugPrint = (String? message, {int? wrapWidth}) {
+        lines.add(message ?? '');
+      };
+      addTearDown(() => debugPrint = previous);
+
+      Logs.enable([Logs.error]);
+      Log.error('startup-boom', st: StackTrace.empty);
+
+      expect(lines.any((line) => line.contains('startup-boom')), isTrue);
     });
 
     test('does not throw when channels are enabled', () {

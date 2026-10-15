@@ -1,6 +1,7 @@
 import 'dart:developer' as developer;
 
 import 'package:core/core.dart';
+import 'package:flutter/foundation.dart';
 
 enum Logs {
   api,
@@ -101,8 +102,14 @@ enum _Logger {
   const _Logger(this.code);
   final String code;
 
-  void log(dynamic text, {String name = 'App'}) =>
-      developer.log('\x1B[${code}m$text\x1B[0m', name: name);
+  void log(dynamic text, {String name = 'App'}) {
+    developer.log('\x1B[${code}m$text\x1B[0m', name: name);
+    // `dart:developer` log() is not printed by `flutter run`. Mirror enabled
+    // channels to the debug console only; release builds stay on developer.log.
+    if (kDebugMode) {
+      debugPrint('[$name] $text');
+    }
+  }
 }
 
 class Log {
