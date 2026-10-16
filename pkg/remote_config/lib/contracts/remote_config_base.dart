@@ -32,6 +32,24 @@ abstract interface class RemoteConfigBase {
   ///
   bool get isFetchSucceeded;
 
+  /// Activated value for [key].
+  ///
+  /// [fallback] applies only when the key has no in-app default and no
+  /// fetched value. A fetched empty string is returned as-is.
+  String getString(String key, {String? fallback});
+
+  /// Activated value for [key].
+  ///
+  /// [fallback] applies only when the key has no in-app default and no
+  /// fetched value. A fetched `0` is returned as-is.
+  int getInt(String key, {int? fallback});
+
+  /// Activated value for [key].
+  ///
+  /// [fallback] applies only when the key has no in-app default and no
+  /// fetched value. A fetched `false` is returned as-is.
+  bool getBool(String key, {bool? fallback});
+
   /// Listens for remote config updates
   ///
   /// Might throw [CoreException]

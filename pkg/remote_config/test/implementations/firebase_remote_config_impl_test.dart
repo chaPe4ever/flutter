@@ -372,6 +372,50 @@ void main() {
     });
   });
 
+  group('typed getters', () {
+    test('uses the fallback when the key was never configured', () {
+      expect(impl.getString('missing', fallback: 'local'), 'local');
+      expect(impl.getInt('missing', fallback: 7), 7);
+      expect(impl.getBool('missing', fallback: true), isTrue);
+    });
+
+    test('returns the static default when no fallback is given', () {
+      expect(impl.getString('missing'), isEmpty);
+      expect(impl.getInt('missing'), 0);
+      expect(impl.getBool('missing'), isFalse);
+    });
+
+    test('returns a fetched value, including zero and false', () {
+      activeRemoteConfigPlatform.configuredValues.addAll({
+        'label': TestRemoteConfigValue('live', ValueSource.valueRemote),
+        'count': TestRemoteConfigValue('0', ValueSource.valueRemote),
+        'flag': TestRemoteConfigValue('false', ValueSource.valueRemote),
+      });
+
+      expect(impl.getString('label', fallback: 'local'), 'live');
+      expect(impl.getInt('count', fallback: 7), 0);
+      expect(impl.getBool('flag', fallback: true), isFalse);
+    });
+
+    test('returns an in-app default instead of the fallback', () {
+      activeRemoteConfigPlatform.configuredValues['count'] =
+          TestRemoteConfigValue('3', ValueSource.valueDefault);
+
+      expect(impl.getInt('count', fallback: 7), 3);
+    });
+
+    test('returns the fallback when the read fails', () {
+      activeRemoteConfigPlatform.getValueError = FirebaseException(
+        plugin: 'remote_config',
+        code: 'read-failed',
+      );
+
+      expect(impl.getInt('count', fallback: 7), 7);
+      expect(impl.getString('label'), isEmpty);
+      expect(impl.getBool('flag'), isFalse);
+    });
+  });
+
   group('dispose', () {
     test('closes internal resources', () async {
       final localImpl = FirebaseRemoteConfigImpl(

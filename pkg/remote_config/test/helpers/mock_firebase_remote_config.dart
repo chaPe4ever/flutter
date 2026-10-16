@@ -1,7 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:mocktail/mocktail.dart';
+
+final class TestRemoteConfigValue extends RemoteConfigValue {
+  TestRemoteConfigValue(String raw, ValueSource source)
+    : super(utf8.encode(raw), source);
+}
 
 class MockFirebaseRemoteConfig extends Mock implements FirebaseRemoteConfig {}
 
@@ -48,9 +54,12 @@ class FirebaseRemoteConfigTestHarness {
 
   RemoteConfigFetchStatus fetchStatus = RemoteConfigFetchStatus.success;
   Map<String, String> stringValues = <String, String>{};
+  Map<String, TestRemoteConfigValue> configuredValues =
+      <String, TestRemoteConfigValue>{};
   Exception? ensureInitializedError;
   Exception? fetchAndActivateError;
   Exception? getStringError;
+  Exception? getValueError;
 
   int ensureInitializedCalls = 0;
   int setDefaultsCalls = 0;
@@ -95,6 +104,16 @@ class FirebaseRemoteConfigTestHarness {
     return stringValues[key] ?? '';
   }
 
+  RemoteConfigValue _getValue(Invocation invocation) {
+    final error = getValueError;
+    if (error != null) {
+      throw error;
+    }
+    final key = invocation.positionalArguments.first as String;
+    return configuredValues[key] ??
+        TestRemoteConfigValue('', ValueSource.valueStatic);
+  }
+
   Stream<RemoteConfigUpdate> _configUpdates(Invocation _) {
     if (useOverrideConfigUpdatesStream) {
       return overrideConfigUpdatesController.stream;
@@ -122,13 +141,16 @@ class FirebaseRemoteConfigTestHarness {
     // ignore: unnecessary_lambdas
     when(() => mock.fetchAndActivate()).thenAnswer(_fetchAndActivate);
     when(() => mock.getString(any())).thenAnswer(_getString);
+    when(() => mock.getValue(any())).thenAnswer(_getValue);
   }
 
   void resetBehavior() {
     stringValues = <String, String>{};
+    configuredValues = <String, TestRemoteConfigValue>{};
     ensureInitializedError = null;
     fetchAndActivateError = null;
     getStringError = null;
+    getValueError = null;
     fetchStatus = RemoteConfigFetchStatus.success;
     ensureInitializedCalls = 0;
     setDefaultsCalls = 0;

@@ -61,6 +61,48 @@ final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
   bool get isFetchSucceeded =>
       _firebaseRemoteConfig.lastFetchStatus == RemoteConfigFetchStatus.success;
 
+  @override
+  String getString(String key, {String? fallback}) => _read(
+    key: key,
+    fallback: fallback,
+    staticDefault: '',
+    read: (value) => value.asString(),
+  );
+
+  @override
+  int getInt(String key, {int? fallback}) => _read(
+    key: key,
+    fallback: fallback,
+    staticDefault: 0,
+    read: (value) => value.asInt(),
+  );
+
+  @override
+  bool getBool(String key, {bool? fallback}) => _read(
+    key: key,
+    fallback: fallback,
+    staticDefault: false,
+    read: (value) => value.asBool(),
+  );
+
+  T _read<T>({
+    required String key,
+    required T? fallback,
+    required T staticDefault,
+    required T Function(RemoteConfigValue value) read,
+  }) {
+    try {
+      final value = _firebaseRemoteConfig.getValue(key);
+      // valueStatic is the SDK placeholder, not a value anyone configured.
+      if (fallback != null && value.source == ValueSource.valueStatic) {
+        return fallback;
+      }
+      return read(value);
+    } on Exception {
+      return fallback ?? staticDefault;
+    }
+  }
+
   // Methods
   @override
   Future<void> init({
