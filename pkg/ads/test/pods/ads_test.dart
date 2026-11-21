@@ -120,7 +120,7 @@ void main() {
       expect(harness.lastInterstitialAd, isNotNull);
     });
 
-    test('swallows mobile ads initialization failures', () async {
+    test('failed initialize leaves ads uninitialized for retry', () async {
       final mobileAds = FakeMobileAdsClient(failInitialize: true);
       final container = createAdsTestContainer(mobileAds: mobileAds);
       addTearDown(container.dispose);
@@ -131,8 +131,16 @@ void main() {
           interstitialAdUnitId: 'test-unit',
           skipConsentForm: true,
         ),
-        completes,
+        throwsA(isA<Exception>()),
       );
+      expect(mobileAds.initializeCalls, 1);
+
+      mobileAds.failInitialize = false;
+      await notifier.init(
+        interstitialAdUnitId: 'test-unit',
+        skipConsentForm: true,
+      );
+      expect(mobileAds.initializeCalls, 2);
     });
 
     test('does not reinitialize when init is called twice', () async {

@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "docs-canvas": {
+      "enabled": true
+    },
+    "pr-review-canvas": {
+      "enabled": true
+    }
+  }
+}

@@ -47,37 +47,42 @@ class Ads extends _$Ads with NotifierMountedMixin {
     AdRequest adRequest = const AdRequest(),
     bool skipConsentForm = false,
   }) async {
-    if (!_isInitialized) {
-      Log.info('Initializing ad service with ID: $interstitialAdUnitId');
-      _isInitialized = true;
-      _skipConsentForm = skipConsentForm;
-      ref
-          .read(interstitialAdLoadConfigPod.notifier)
-          .configure(
-            adUnitId: interstitialAdUnitId,
-            adRequest: adRequest,
-          );
+    if (_isInitialized) {
+      return;
+    }
 
-      try {
-        // First, request consent information
-        if (!_skipConsentForm) {
-          await _requestConsentInfo();
-        } else {
-          Log.info('Skipping UMP consent form (skipConsentForm=true)');
-        }
+    Log.info('Initializing ad service with ID: $interstitialAdUnitId');
+    _skipConsentForm = skipConsentForm;
+    ref
+        .read(interstitialAdLoadConfigPod.notifier)
+        .configure(
+          adUnitId: interstitialAdUnitId,
+          adRequest: adRequest,
+        );
 
-        // Then initialize the Mobile Ads SDK
-        final mobileAds = ref.read(mobileAdsPod);
-        await mobileAds.initialize();
-        Log.info('Mobile ads initialized successfully');
-
-        // Pre-load an ad after initialization
-        unawaited(_preloadInterstitialAd());
-      } on Exception catch (e) {
-        Log.error('Error initializing ads: $e');
-        // Don't rethrow, just log - this allows the app to continue
-        // functioning even if ads fail
+    try {
+      // First, request consent information
+      if (!_skipConsentForm) {
+        await _requestConsentInfo();
+      } else {
+        Log.info('Skipping UMP consent form (skipConsentForm=true)');
       }
+
+      // Then initialize the Mobile Ads SDK
+      final mobileAds = ref.read(mobileAdsPod);
+      await mobileAds.initialize();
+      Log.info('Mobile ads initialized successfully');
+
+      // Only sticky after a successful SDK init so a later ensureReady /
+      // reconnect can retry (offline boot must not permanently skip ads).
+      _isInitialized = true;
+
+      // Pre-load an ad after initialization
+      unawaited(_preloadInterstitialAd());
+    } on Exception catch (e) {
+      Log.error('Error initializing ads: $e');
+      // Rethrow so ServiceReadiness does not cache a false ready state.
+      rethrow;
     }
   }
 
