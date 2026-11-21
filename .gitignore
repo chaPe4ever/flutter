@@ -95,3 +95,6 @@ firebase-debug.log
 *.fblite
 firebase-emulator-suite/
 
+
+# Cursor local
+.cursor/settings.json
