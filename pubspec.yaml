@@ -2,7 +2,7 @@ name: my_workspace
 publish_to: none
 
 environment:
-  sdk: ^3.10.0
+  sdk: ^3.13.0
 
 workspace:
   - pkg/ads
