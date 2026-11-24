@@ -5,7 +5,7 @@ version: 1.0.0
 publish_to: "none"
 
 environment:
-  sdk: ^3.10.0
+  sdk: ^3.13.0
 resolution: workspace
 
 dependencies:
@@ -35,8 +35,8 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^6.9.5
   mockito: ^5.4.6
-  riverpod_generator: ^4.0.4
-  riverpod_lint: ^3.1.4
+  riverpod_generator: ^4.0.10
+  riverpod_lint: ^3.2.0
   very_good_analysis: ^9.0.0
 
 flutter:
