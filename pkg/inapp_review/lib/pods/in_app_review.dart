@@ -1,10 +1,7 @@
 import 'package:core/core.dart';
-import 'package:in_app_review/in_app_review.dart';
+import 'package:inapp_review/contracts/review_prompt_client.dart';
+import 'package:inapp_review/implementations/rate_my_app_review_prompt_client.dart';
 
-part 'in_app_review.g.dart';
-
-/// Provider for InAppReview instance
-@Riverpod(keepAlive: true)
-InAppReview inAppReview(Ref ref) {
-  return InAppReview.instance;
-}
+final inAppReviewPod = Provider<ReviewPromptClient>((ref) {
+  return const RateMyAppReviewPromptClient();
+});

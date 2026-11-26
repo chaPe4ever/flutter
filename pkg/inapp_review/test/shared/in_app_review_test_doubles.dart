@@ -1,9 +1,9 @@
 import 'package:analytics/analytics.dart';
 import 'package:core/core.dart';
-import 'package:in_app_review/in_app_review.dart';
+import 'package:inapp_review/contracts/review_prompt_client.dart';
 import 'package:inapp_review/implementations/in_app_review_service_impl.dart';
 
-class FakeInAppReview implements InAppReview {
+class FakeInAppReview implements ReviewPromptClient {
   new({
     this.available = true,
   });
@@ -13,6 +13,7 @@ class FakeInAppReview implements InAppReview {
   int openStoreListingCalls = 0;
   String? lastAppStoreId;
   String? lastMicrosoftStoreId;
+  String? lastGooglePlayId;
 
   @override
   Future<bool> isAvailable() async => available;
@@ -26,10 +27,12 @@ class FakeInAppReview implements InAppReview {
   Future<void> openStoreListing({
     String? appStoreId,
     String? microsoftStoreId,
+    String? googlePlayId,
   }) async {
     openStoreListingCalls++;
     lastAppStoreId = appStoreId;
     lastMicrosoftStoreId = microsoftStoreId;
+    lastGooglePlayId = googlePlayId;
   }
 }
 
