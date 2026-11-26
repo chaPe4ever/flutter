@@ -1,11 +1,10 @@
 import 'package:analytics/analytics.dart';
 import 'package:core/core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:inapp_review/implementations/in_app_review_service_impl.dart';
 
 class FakeInAppReview implements InAppReview {
-  FakeInAppReview({
+  new({
     this.available = true,
   });
 
@@ -60,7 +59,7 @@ class FakeLocalStorage implements LocalStorageBase {
 }
 
 class FakeNetwork implements NetworkBase {
-  FakeNetwork({this.connected = true});
+  new({this.connected = true});
 
   bool connected;
 
@@ -141,7 +140,7 @@ class FrequencyNullOnSecondReadStorage extends FakeLocalStorage {
 }
 
 class ThrowingLocalStorage implements LocalStorageBase {
-  ThrowingLocalStorage(this.error);
+  new(this.error);
 
   final Exception error;
 

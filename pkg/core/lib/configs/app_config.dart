@@ -3,7 +3,7 @@ import 'package:core/configs/config_base.dart';
 /// App config class
 final class AppConfig implements ConfigBase {
   /// Constructor
-  AppConfig({required this.configs});
+  new({required this.configs});
 
   /// list of configs that the app needs to initialise
   final List<ConfigBase> configs;

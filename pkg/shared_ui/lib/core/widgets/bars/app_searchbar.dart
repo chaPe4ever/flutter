@@ -1,9 +1,8 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
-class AppSearchbar extends StatefulWidget {
-  const AppSearchbar({
+class AppSearchbar extends SignalStatefulWidget {
+  const new({
     required this.onChanged,
     this.onClearTap,
     this.hintText,
@@ -42,7 +41,7 @@ class _AppSearchbarState extends State<AppSearchbar> {
         trailing: [
           AnimatedSwitcher(
             duration: Durations.long2,
-            child: text.watch(context).isNotEmpty
+            child: text.value.isNotEmpty
                 ? TouchableWidget(
                     child: Icon(
                       Icons.cancel_outlined,

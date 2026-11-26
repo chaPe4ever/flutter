@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 
 /// Self explained
 sealed class CoreEx extends CoreException {
-  const CoreEx({
+  const new({
     required super.messageKey,
     super.innerCode,
     super.innerError,
@@ -15,7 +15,7 @@ sealed class CoreEx extends CoreException {
 /// Self explained
 final class StorageInitialisationException extends CoreEx {
   /// Self explained
-  const StorageInitialisationException({
+  const new({
     super.messageKey = 'storage_initialisation_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -27,7 +27,7 @@ final class StorageInitialisationException extends CoreEx {
 /// Self explained
 final class NoNetworkException extends CoreEx {
   /// Self explained
-  const NoNetworkException({
+  const new({
     super.messageKey = 'no_network_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -39,7 +39,7 @@ final class NoNetworkException extends CoreEx {
 /// Self explained
 final class LaunchUrlException extends CoreEx {
   /// Self explained
-  LaunchUrlException({
+  new({
     super.messageKey = 'launch_url_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -51,7 +51,7 @@ final class LaunchUrlException extends CoreEx {
 /// Self explained
 final class UnknownCoreException extends CoreEx {
   /// Self explained
-  UnknownCoreException({
+  new({
     super.messageKey = 'unknown_core_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -62,7 +62,7 @@ final class UnknownCoreException extends CoreEx {
 
 final class ClientVisibleException extends CoreEx {
   /// Self explained
-  const ClientVisibleException({
+  const new({
     required super.messageKey,
     super.innerCode,
     super.innerError,
@@ -74,7 +74,7 @@ final class ClientVisibleException extends CoreEx {
 ///
 final class FirestoreException extends CoreEx {
   ///
-  FirestoreException({
+  new({
     super.messageKey = 'unknown_core_exception_message_key',
     super.innerCode,
     super.innerMessage,
@@ -86,7 +86,7 @@ final class FirestoreException extends CoreEx {
 ///
 final class FirestoreNullDocumentSnapshotException extends CoreEx {
   ///
-  FirestoreNullDocumentSnapshotException({
+  new({
     super.messageKey = 'unknown_core_exception_message_key',
     super.innerCode,
     super.innerMessage,
@@ -98,7 +98,7 @@ final class FirestoreNullDocumentSnapshotException extends CoreEx {
 ///
 final class MaxRefreshTokenRetriesReached extends CoreEx {
   ///
-  MaxRefreshTokenRetriesReached({
+  new({
     super.messageKey = 'unknown_core_exception_message_key',
     super.innerCode,
     super.innerMessage,
@@ -110,7 +110,7 @@ final class MaxRefreshTokenRetriesReached extends CoreEx {
 ///
 final class DioClientException extends CoreEx {
   ///
-  DioClientException({
+  new({
     super.messageKey = 'unknown_core_exception_message_key',
     super.innerCode,
     super.innerMessage,
@@ -121,7 +121,7 @@ final class DioClientException extends CoreEx {
 
 final class UnInitialisedFlavorException extends CoreEx {
   ///
-  UnInitialisedFlavorException({
+  new({
     super.messageKey = 'unknown_core_exception_message_key',
     super.innerCode,
     super.innerMessage,
@@ -133,7 +133,7 @@ final class UnInitialisedFlavorException extends CoreEx {
 ///
 final class FirestoreFunctionsException extends CoreEx {
   ///
-  FirestoreFunctionsException({
+  new({
     super.messageKey = 'unknown_core_exception_message_key',
     super.innerCode,
     super.innerMessage,

@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../shared/fakes.dart';
 
-class _CountingInterceptor extends Interceptor {}
+class _CountingInterceptor extends Interceptor;
 
 void main() {
   test('invalidateDioInterceptors replaces interceptors', () {

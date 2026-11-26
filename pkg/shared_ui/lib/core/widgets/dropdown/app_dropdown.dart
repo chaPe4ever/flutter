@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:core/core.dart';
 import 'package:shared_ui/shared_ui.dart';
 
-sealed class DropdownBase<T> extends StatefulWidget {
-  const DropdownBase({
+sealed class DropdownBase<T> extends SignalStatefulWidget {
+  const new({
     required this.labelText,
     required this.items,
     this.onChanged,
@@ -25,7 +25,7 @@ sealed class DropdownBase<T> extends StatefulWidget {
 }
 
 abstract class DropdownButtonBase extends DropdownBase<String> {
-  const DropdownButtonBase({
+  const new({
     required super.labelText,
     required super.items,
     super.validator,
@@ -54,7 +54,7 @@ abstract class DropdownButtonBase extends DropdownBase<String> {
 }
 
 abstract class DropdownMenuBase extends DropdownBase<String> {
-  const DropdownMenuBase({
+  const new({
     required super.labelText,
     required super.items,
     super.onChanged,

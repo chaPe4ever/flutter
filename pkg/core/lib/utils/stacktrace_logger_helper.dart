@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 
 /// Stack trace logger helper class
 final class StackTraceLoggerHelper {
-  const StackTraceLoggerHelper._({
+  const new _({
     required this.functionName,
     required this.callerFunctionName,
     required this.fileName,
@@ -11,7 +11,7 @@ final class StackTraceLoggerHelper {
   });
 
   /// Get the logger helper model from a stacktrace
-  factory StackTraceLoggerHelper.from(StackTrace trace) {
+  factory from(StackTrace trace) {
     final frames = trace.toString().split('\n');
     final functionName = getFunctionNameFromFrame(frames[0]);
     final callerFunctionName = getFunctionNameFromFrame(frames[1]);
@@ -28,7 +28,7 @@ final class StackTraceLoggerHelper {
 
   /// Get he logger helper model from a stacktrace or from current if [trace]
   /// is empty
-  factory StackTraceLoggerHelper.st(StackTrace trace) {
+  factory st(StackTrace trace) {
     late StackTrace st;
     if (trace.toString().isEmpty) {
       st = StackTrace.current;

@@ -14,7 +14,7 @@ enum UrlLaunchModeEnum {
   /// Passes the URL to the OS to be handled by another non-browser application.
   externalNonBrowserApplication;
 
-  const UrlLaunchModeEnum();
+  new();
 
   LaunchMode toDomainMode() {
     return switch (this) {

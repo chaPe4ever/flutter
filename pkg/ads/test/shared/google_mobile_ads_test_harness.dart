@@ -12,7 +12,7 @@ import 'package:google_mobile_ads/src/ump/user_messaging_codec.dart';
 
 /// Test harness patterned after google_mobile_ads plugin tests.
 class GoogleMobileAdsTestHarness {
-  GoogleMobileAdsTestHarness._({
+  new _({
     required this.adsChannel,
     required this.umpChannel,
     required this.consentInformation,

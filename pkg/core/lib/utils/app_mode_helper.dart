@@ -23,9 +23,9 @@ base class AppModeStateBase {
 }
 
 final class AppModeHelper extends AppModeStateBase {
-  factory AppModeHelper() => _instance;
+  factory() => _instance;
 
-  AppModeHelper._internal() {
+  new _internal() {
     initialMode = AppModeEnum.real;
     _mode = initialMode;
   }

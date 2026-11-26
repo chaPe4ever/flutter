@@ -4,7 +4,7 @@ import 'package:logger/logger.dart';
 /// Logger implementation
 class LoggerImpl implements LoggerBase {
   /// Constructor
-  const LoggerImpl({required Logger logger}) : _logger = logger;
+  const new({required this._logger});
 
   final Logger _logger;
 

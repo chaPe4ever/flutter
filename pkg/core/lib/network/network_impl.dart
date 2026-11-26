@@ -2,14 +2,12 @@ import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:core/core.dart';
-import 'package:flutter/foundation.dart';
 
 /// Network connection implementation
 final class NetworkImpl implements NetworkBase {
   /// Constructor
-  NetworkImpl({required Connectivity connectivity})
-    : _connectivity = connectivity,
-      _connectionStatusController =
+  new({required this._connectivity})
+    : _connectionStatusController =
           StreamController<NetworkStatus>.broadcast() {
     // Initialize with current connectivity status
     _initConnectivity();

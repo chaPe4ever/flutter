@@ -4,7 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 /// [MobileAdsClient] backed by [MobileAds.instance].
 final class GoogleMobileAdsClient implements MobileAdsClient {
   /// Creates a client that delegates to [mobileAds].
-  GoogleMobileAdsClient(this.mobileAds);
+  new(this.mobileAds);
 
   /// Underlying Google Mobile Ads SDK entry point.
   final MobileAds mobileAds;

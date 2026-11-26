@@ -8,7 +8,7 @@ typedef FontLicenceAssetListLoader =
     });
 
 class GoogleFontsConfig implements ConfigBase {
-  const GoogleFontsConfig({
+  const new({
     this.fontLicencesAbsPath,
     this.allowRuntimeFetching = true,
     FontLicenceAssetListLoader? assetListLoader,

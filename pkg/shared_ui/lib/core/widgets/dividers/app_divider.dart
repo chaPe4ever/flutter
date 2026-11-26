@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 class AppDivider extends StatelessWidget {
-  const AppDivider({
+  const new({
     this.width,
     this.color,
     super.key,

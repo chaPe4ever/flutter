@@ -1,10 +1,9 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_ui/shared_ui.dart';
 
-abstract class TextFieldBase extends StatefulWidget {
-  const TextFieldBase({super.key});
+abstract class TextFieldBase extends SignalStatefulWidget {
+  const new({super.key});
 
   TextStyle style(BuildContext context) => WidgetStateTextStyle.resolveWith(
     (states) {
@@ -28,7 +27,7 @@ abstract class TextFieldBase extends StatefulWidget {
 }
 
 abstract class OutlineTextFieldBase<T extends Object> extends TextFieldBase {
-  const OutlineTextFieldBase({
+  const new({
     super.key,
     this.enableSuggestions = true,
     this.autocorrect = true,
@@ -206,7 +205,7 @@ class _OutlineTextFieldBaseState extends State<OutlineTextFieldBase> {
         helperText: widget.helperText,
         errorText: widget.errorText,
         labelStyle: context.textStyles.bodyS.copyWith(
-          color: errorText.watch(context).isNotEmpty
+          color: errorText.value.isNotEmpty
               ? context.colors.contentNegative
               : widget.helperText != null
               ? context.colors.contentSupport
@@ -223,7 +222,7 @@ class _OutlineTextFieldBaseState extends State<OutlineTextFieldBase> {
           gapAtEnd: true,
           children: [
             Visibility(
-              visible: tfText.watch(context).isNotEmpty,
+              visible: tfText.value.isNotEmpty,
               child: TouchableWidget(
                 child: Icon(
                   Icons.cancel_outlined,
@@ -239,7 +238,7 @@ class _OutlineTextFieldBaseState extends State<OutlineTextFieldBase> {
               ),
             ),
             Visibility(
-              visible: errorText.watch(context).isNotEmpty,
+              visible: errorText.value.isNotEmpty,
               child: Icon(
                 Icons.error,
                 color: context.colors.contentNegative,

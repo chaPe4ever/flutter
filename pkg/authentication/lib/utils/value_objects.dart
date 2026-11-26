@@ -4,11 +4,11 @@ import 'package:core/core.dart';
 ///
 final class EmailAddress extends ValueObject<String> {
   /// Ctr
-  factory EmailAddress(String? input) {
+  factory(String? input) {
     return EmailAddress._(validateEmailAddress(input));
   }
 
-  const EmailAddress._(this.value);
+  const new _(this.value);
 
   /// Used on textField validator as as a tear-off
   @override
@@ -25,11 +25,11 @@ final class EmailAddress extends ValueObject<String> {
 ///
 final class Password extends ValueObject<String> {
   ///
-  factory Password(String? value) {
+  factory(String? value) {
     return Password._(validatePassword(value));
   }
 
-  const Password._(this.value);
+  const new _(this.value);
 
   @override
   String? validator(String? value) {

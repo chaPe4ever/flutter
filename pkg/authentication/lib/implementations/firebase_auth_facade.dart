@@ -7,17 +7,15 @@ import 'package:authentication/utils/helpers.dart';
 import 'package:authentication/utils/value_objects.dart';
 import 'package:core/core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart' hide generateNonce;
 
 /// Firebase authentication facade implementation
 final class FirebaseAuthFacade implements AuthFacade {
   /// Constructor
-  FirebaseAuthFacade({
-    required FirebaseAuth firebaseAuth,
+  new({
+    required this._firebaseAuth,
     required LoggerBase loggerBase,
-  }) : _firebaseAuth = firebaseAuth,
-       _logger = loggerBase,
+  }) : _logger = loggerBase,
        _priorSignOutController =
            StreamController<List<Future<void>>>.broadcast();
 
@@ -504,7 +502,7 @@ final class FirebaseAuthFacade implements AuthFacade {
 
     // Initialize the auth state subscription if it doesn't exist
     _authStateSubscription ??= _firebaseAuth.authStateChanges().listen((
-      User? user,
+      user,
     ) {
       if (user == null) {
         // Create a defensive copy to avoid concurrent modification

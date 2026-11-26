@@ -1,9 +1,8 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
-class TouchableWidget extends StatefulWidget {
-  const TouchableWidget({
+class TouchableWidget extends SignalStatefulWidget {
+  const new({
     required this.child,
     required this.onTap,
     this.showIsBusy = true,
@@ -40,7 +39,7 @@ class _TouchableWidgetState extends State<TouchableWidget> {
           child: widget.child,
         ),
         Visibility(
-          visible: widget.showIsBusy && isBusy.watch(context),
+          visible: widget.showIsBusy && isBusy.value,
           child: const AppLoadingIndicator(),
         ),
       ],

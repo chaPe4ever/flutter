@@ -1,11 +1,10 @@
 import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 /// Generic AsyncValueWidget to work with values of type T
 class AsyncValueWidget<T> extends StatelessWidget {
   /// Constructor
-  const AsyncValueWidget({
+  const new({
     required this.value,
     required this.data,
     this.errorWidgetCb,

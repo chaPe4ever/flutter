@@ -1,10 +1,9 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 
 /// Template for ensuring content is within the safe area
 class ResponsiveSafeArea extends StatelessWidget {
   /// Ctr
-  const ResponsiveSafeArea({
+  const new({
     required this.child,
     this.hPadding = 20,
     super.key,

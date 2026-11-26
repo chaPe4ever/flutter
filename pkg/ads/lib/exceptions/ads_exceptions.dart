@@ -4,7 +4,7 @@ import 'package:core/core.dart';
 
 ///
 sealed class AdsEx extends CoreException {
-  const AdsEx({
+  const new({
     required super.messageKey,
     super.innerCode,
     super.innerError,
@@ -17,7 +17,7 @@ sealed class AdsEx extends CoreException {
 ///
 final class AdsInitException extends AdsEx {
   ///
-  const AdsInitException({
+  const new({
     super.messageKey = TransKeys.adsNotInitialisedKey,
     super.innerCode,
     super.innerError,
@@ -29,7 +29,7 @@ final class AdsInitException extends AdsEx {
 
 final class AdsLoadException extends AdsEx {
   ///
-  const AdsLoadException({
+  const new({
     super.messageKey = TransKeys.interstitialAdLoadFailedKey,
     super.innerCode,
     super.innerError,
@@ -41,7 +41,7 @@ final class AdsLoadException extends AdsEx {
 
 final class AdsShowException extends AdsEx {
   ///
-  const AdsShowException({
+  const new({
     super.messageKey = TransKeys.interstitialAdLoadFailedKey,
     super.innerCode,
     super.innerError,
@@ -53,7 +53,7 @@ final class AdsShowException extends AdsEx {
 
 final class AdsConsentFormNotAvailable extends AdsEx {
   ///
-  const AdsConsentFormNotAvailable({
+  const new({
     super.messageKey = TransKeys.adsConsentFormNotAvailableKey,
     super.innerCode,
     super.innerError,
@@ -65,7 +65,7 @@ final class AdsConsentFormNotAvailable extends AdsEx {
 
 final class AdsBlockerException extends AdsEx {
   ///
-  const AdsBlockerException({
+  const new({
     super.messageKey = TransKeys.adsBlockerExceptionKey,
     super.innerCode,
     super.innerError,
@@ -77,7 +77,7 @@ final class AdsBlockerException extends AdsEx {
 
 final class AdsNoFillException extends AdsEx {
   ///
-  const AdsNoFillException({
+  const new({
     super.messageKey = TransKeys.adsInventoryUnavailableKey,
     super.innerCode,
     super.innerError,
@@ -89,7 +89,7 @@ final class AdsNoFillException extends AdsEx {
 
 final class AdsConsentChoicesOptedOutException extends AdsEx {
   ///
-  const AdsConsentChoicesOptedOutException({
+  const new({
     super.messageKey = TransKeys.adsConsentChoicesOptedOutKey,
     super.innerCode,
     super.innerError,

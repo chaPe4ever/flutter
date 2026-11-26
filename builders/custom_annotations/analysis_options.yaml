@@ -14,3 +14,5 @@ linter:
   rules:
     unnecessary_library_name: false
     unnecessary_library_directive: false
+    discarded_futures: false
+    async_return_with_no_await: false

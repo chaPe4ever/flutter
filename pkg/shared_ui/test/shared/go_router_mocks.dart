@@ -1,11 +1,10 @@
 import 'package:core/core.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockGoRouter extends Mock implements GoRouter {}
+class MockGoRouter extends Mock implements GoRouter;
 
 class MockGoRouteInformationProvider extends Mock
-    implements GoRouteInformationProvider {}
+    implements GoRouteInformationProvider;
 
 MockGoRouter stubbedGoRouter({String path = '/', bool canPop = true}) {
   registerFallbackValue('/');

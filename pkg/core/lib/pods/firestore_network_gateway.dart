@@ -11,7 +11,7 @@ abstract interface class FirestoreNetworkGateway {
 }
 
 final class FirebaseFirestoreNetworkGateway implements FirestoreNetworkGateway {
-  FirebaseFirestoreNetworkGateway([FirebaseFirestore? firestore])
+  new([FirebaseFirestore? firestore])
     : _firestore = firestore ?? FirebaseFirestore.instance;
 
   final FirebaseFirestore _firestore;

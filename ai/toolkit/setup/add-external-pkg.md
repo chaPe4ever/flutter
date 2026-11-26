@@ -36,7 +36,7 @@ This is a guide on how to add external packages from the flutter repository to y
   - flutter_timezone: ^4.1.1
   - freezed_annotation: ^3.1.0
   - gap: ^3.0.1
-  - go_router: ^16.0.0
+  - go_router: ^17.3.0
   - google_fonts: ^6.2.1
   - hooks_riverpod: ^2.6.1
   - json_annotation: ^4.9.0

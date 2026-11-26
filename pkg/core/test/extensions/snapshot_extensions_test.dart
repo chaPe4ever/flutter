@@ -1,6 +1,5 @@
 import 'package:core/core.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 // Sealed Firestore types need lightweight fakes for map validation tests.
@@ -218,9 +217,9 @@ void main() {
 }
 
 final class _UserModel {
-  const _UserModel({required this.id, required this.name});
+  const new({required this.id, required this.name});
 
-  factory _UserModel.fromJson(Map<String, dynamic> json) => _UserModel(
+  factory fromJson(Map<String, dynamic> json) => _UserModel(
     id: json['id'] as String,
     name: json['name'] as String,
   );

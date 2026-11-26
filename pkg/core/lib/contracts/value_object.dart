@@ -4,7 +4,7 @@ import 'package:core/core.dart';
 @immutable
 abstract base class ValueObject<T> {
   /// Constructor
-  const ValueObject();
+  const new();
 
   /// The value of the valueObject class
   Either<CoreException, T> get value;

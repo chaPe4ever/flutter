@@ -1,9 +1,9 @@
 import 'package:core/core.dart';
 
 final class AppVersionModel extends Equatable {
-  const AppVersionModel({required this.version, required this.buildNumber});
+  const new({required this.version, required this.buildNumber});
 
-  AppVersionModel.fromJson(Map<String, dynamic> json)
+  new fromJson(Map<String, dynamic> json)
     : version = json['version'] as String,
       buildNumber = json['build_number'] as int;
 
@@ -26,13 +26,13 @@ final class AppVersionModel extends Equatable {
 }
 
 final class AppVersionRemoteModel extends AppVersionModel {
-  const AppVersionRemoteModel({
+  const new({
     required super.version,
     required super.buildNumber,
     required this.isOptional,
   });
 
-  factory AppVersionRemoteModel.def() {
+  factory def() {
     return const AppVersionRemoteModel(
       version: '1.0.0',
       buildNumber: 1,
@@ -40,7 +40,7 @@ final class AppVersionRemoteModel extends AppVersionModel {
     );
   }
 
-  AppVersionRemoteModel.fromJson(super.json)
+  new fromJson(super.json)
     : isOptional = json['is_optional'] as bool,
       super.fromJson();
 
@@ -69,14 +69,14 @@ final class AppVersionRemoteModel extends AppVersionModel {
 }
 
 final class AppVersionUpdateModel extends AppVersionRemoteModel {
-  const AppVersionUpdateModel({
+  const new({
     required super.version,
     required super.buildNumber,
     required super.isOptional,
     required this.isUpdateAvailable,
   });
 
-  factory AppVersionUpdateModel.def() {
+  factory def() {
     return const AppVersionUpdateModel(
       version: '1.0.0',
       buildNumber: 1,
@@ -85,7 +85,7 @@ final class AppVersionUpdateModel extends AppVersionRemoteModel {
     );
   }
 
-  AppVersionUpdateModel.fromJson(super.json)
+  new fromJson(super.json)
     : isUpdateAvailable = json['is_update_available'] as bool,
       super.fromJson();
 

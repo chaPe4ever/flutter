@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/exceptions/core_exceptions.dart';
 import 'package:core/extensions/primitive_types_extensions.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 extension AsyncSnapshotX<T> on AsyncSnapshot<T> {
   Widget when({

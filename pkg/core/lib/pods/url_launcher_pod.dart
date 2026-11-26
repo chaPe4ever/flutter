@@ -8,7 +8,7 @@ part 'url_launcher_pod.g.dart';
 UrlLauncher urlLauncher(Ref ref) => const UrlLauncher();
 
 class UrlLauncher {
-  const UrlLauncher();
+  const new();
 
   Future<Option<CoreException>> call({
     required String urlString,

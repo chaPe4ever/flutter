@@ -4,7 +4,7 @@ import 'package:inapp_review/constants/trans_keys_constants.dart';
 
 ///
 sealed class InAppReviewEx extends CoreException {
-  const InAppReviewEx({
+  const new({
     required super.messageKey,
     super.innerCode,
     super.innerError,
@@ -15,7 +15,7 @@ sealed class InAppReviewEx extends CoreException {
 }
 
 final class InAppReviewNotSupportedDeviceException extends InAppReviewEx {
-  const InAppReviewNotSupportedDeviceException({
+  const new({
     super.messageKey = TransKeys.inAppReviewNotSupportedDeviceKey,
     super.innerCode,
     super.innerMessage,
@@ -26,7 +26,7 @@ final class InAppReviewNotSupportedDeviceException extends InAppReviewEx {
 
 /// Exception thrown when the service is used before initialization
 final class NotInitialisedInAppReviewException extends InAppReviewEx {
-  const NotInitialisedInAppReviewException({
+  const new({
     super.messageKey = TransKeys.notInitialisedInAppReviewExceptionKey,
     super.innerCode,
     super.innerMessage,

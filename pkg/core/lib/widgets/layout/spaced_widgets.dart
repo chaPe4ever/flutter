@@ -1,8 +1,7 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 
 class SpacedColumn extends StatelessWidget {
-  const SpacedColumn({
+  const new({
     required this.children,
     this.spacing = 4,
     super.key,
@@ -39,7 +38,7 @@ class SpacedColumn extends StatelessWidget {
 }
 
 class SpacedRow extends StatelessWidget {
-  const SpacedRow({
+  const new({
     required this.children,
     this.spacing = 4,
     super.key,

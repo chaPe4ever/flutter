@@ -8,5 +8,5 @@ PrettyDioLogger prettyDioLoggerInterceptor(Ref ref) => PrettyDioLogger(
   requestBody: true,
   responseHeader: true,
   maxWidth: 80,
-  logPrint: (Object e) => ref.watch(loggerPod).d(e.toString()),
+  logPrint: (e) => ref.watch(loggerPod).d(e.toString()),
 );

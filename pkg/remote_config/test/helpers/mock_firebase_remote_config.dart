@@ -5,11 +5,11 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:mocktail/mocktail.dart';
 
 final class TestRemoteConfigValue extends RemoteConfigValue {
-  TestRemoteConfigValue(String raw, ValueSource source)
+  new(String raw, ValueSource source)
     : super(utf8.encode(raw), source);
 }
 
-class MockFirebaseRemoteConfig extends Mock implements FirebaseRemoteConfig {}
+class MockFirebaseRemoteConfig extends Mock implements FirebaseRemoteConfig;
 
 void registerRemoteConfigTestFallbacks() {
   registerFallbackValue(
@@ -37,7 +37,7 @@ void _registerFirebaseRemoteConfigMocktailFallbacks() {
 }
 
 class FirebaseRemoteConfigTestHarness {
-  FirebaseRemoteConfigTestHarness() : mock = MockFirebaseRemoteConfig() {
+  new() : mock = MockFirebaseRemoteConfig() {
     _registerFirebaseRemoteConfigMocktailFallbacks();
     _wireDefaults();
   }

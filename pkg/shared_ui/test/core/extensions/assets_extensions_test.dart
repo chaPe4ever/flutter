@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_ui/core/assets_gen/assets.gen.dart';
 import 'package:shared_ui/core/extensions/assets_extensions.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/painting.dart';
 import 'package:shared_ui/theme/app_effect_styles.dart';
 
 abstract class AppShadow {
-  const AppShadow._();
+  const new _();
   static const List<BoxShadow> l1 = [
     AppEffectStyles.shadowL1Effect0,
     AppEffectStyles.shadowL1Effect1,

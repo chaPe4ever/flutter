@@ -20,7 +20,7 @@ abstract interface class SentryCrashlyticsBindings {
 final class DefaultSentryCrashlyticsBindings
     implements SentryCrashlyticsBindings {
   /// Creates production bindings.
-  const DefaultSentryCrashlyticsBindings();
+  const new();
 
   @override
   Future<void> captureException(

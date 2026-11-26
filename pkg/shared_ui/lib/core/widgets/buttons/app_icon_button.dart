@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 enum IconButtonType {
@@ -11,7 +10,7 @@ enum IconButtonType {
 }
 
 class AppIconButton extends IconButtonBase {
-  const AppIconButton._({
+  const new _({
     required this.type,
     this.customPadding,
     super.icon,
@@ -20,7 +19,7 @@ class AppIconButton extends IconButtonBase {
     super.onTap,
   });
 
-  factory AppIconButton.primary({
+  factory primary({
     SvgPicture? svg,
     IconData? icon,
     Key? key,
@@ -37,7 +36,7 @@ class AppIconButton extends IconButtonBase {
     );
   }
 
-  factory AppIconButton.ouline({
+  factory ouline({
     SvgPicture? svg,
     IconData? icon,
     Key? key,
@@ -54,7 +53,7 @@ class AppIconButton extends IconButtonBase {
     );
   }
 
-  factory AppIconButton.secondary({
+  factory secondary({
     SvgPicture? svg,
     IconData? icon,
     Key? key,
@@ -71,7 +70,7 @@ class AppIconButton extends IconButtonBase {
     );
   }
 
-  factory AppIconButton.negative({
+  factory negative({
     SvgPicture? svg,
     IconData? icon,
     Key? key,
@@ -86,7 +85,7 @@ class AppIconButton extends IconButtonBase {
     );
   }
 
-  factory AppIconButton.back({
+  factory back({
     Key? key,
     VoidCallback? onTap,
   }) {

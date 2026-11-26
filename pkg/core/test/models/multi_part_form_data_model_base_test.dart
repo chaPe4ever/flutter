@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 final class _MinimalMultiPart extends MultiPartFormDataModelBase {
-  _MinimalMultiPart({required this.filePath, required this.fileMapKey});
+  new({required this.filePath, required this.fileMapKey});
 
   @override
   final String filePath;
@@ -13,7 +13,7 @@ final class _MinimalMultiPart extends MultiPartFormDataModelBase {
 }
 
 final class _TestMultiPart extends MultiPartFormDataModelBase {
-  _TestMultiPart({
+  new({
     required this.filePath,
     required this.fileMapKey,
     this.overrideFilename,

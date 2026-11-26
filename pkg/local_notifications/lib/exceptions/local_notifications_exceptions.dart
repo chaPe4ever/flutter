@@ -4,7 +4,7 @@ import 'package:local_notifications/constants/trans_keys_constants.dart';
 
 ///
 sealed class LocalNotificationsEx extends CoreException {
-  const LocalNotificationsEx({
+  const new({
     required super.messageKey,
     super.innerCode,
     super.innerError,
@@ -17,7 +17,7 @@ sealed class LocalNotificationsEx extends CoreException {
 ///
 final class LocalNotificationsInitException extends LocalNotificationsEx {
   ///
-  const LocalNotificationsInitException({
+  const new({
     super.messageKey = TransKeys.localNotificationsNotInitialisedKey,
     super.innerCode,
     super.innerError,
@@ -29,7 +29,7 @@ final class LocalNotificationsInitException extends LocalNotificationsEx {
 
 final class LocalNotificationsShowException extends LocalNotificationsEx {
   ///
-  const LocalNotificationsShowException({
+  const new({
     super.messageKey = TransKeys.localNotificationsShowFailedKey,
     super.innerCode,
     super.innerError,

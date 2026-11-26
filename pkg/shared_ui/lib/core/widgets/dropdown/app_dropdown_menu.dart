@@ -1,9 +1,8 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 class AppDropdownMenu extends DropdownMenuBase {
-  const AppDropdownMenu({
+  const new({
     required super.labelText,
     required super.items,
     super.onChanged,
@@ -37,7 +36,7 @@ class _AppDropdownMenuState extends State<AppDropdownMenu> {
         errorTextSignal.value = error ?? widget.errorText ?? '';
         return error;
       },
-      builder: (FormFieldState<String> field) => DropdownMenu(
+      builder: (field) => DropdownMenu(
         initialSelection: widget.value,
         onSelected: widget.onChanged,
         focusNode: widget.focusNode,
@@ -45,17 +44,17 @@ class _AppDropdownMenuState extends State<AppDropdownMenu> {
         helperText: widget.helperText,
         label: TextBody.s(
           widget.labelText,
-          color: errorTextSignal.watch(context).isNotEmpty
+          color: errorTextSignal.value.isNotEmpty
               ? context.colors.contentNegative
               : widget.helperText != null
               ? context.colors.contentSupport
               : context.colors.contentPrimary,
         ),
         trailingIcon: Icon(
-          errorTextSignal.watch(context).isNotEmpty
+          errorTextSignal.value.isNotEmpty
               ? Icons.error
               : Icons.arrow_drop_down,
-          color: errorTextSignal.watch(context).isNotEmpty
+          color: errorTextSignal.value.isNotEmpty
               ? context.colors.contentNegative
               : context.colors.contentSecondary,
         ),

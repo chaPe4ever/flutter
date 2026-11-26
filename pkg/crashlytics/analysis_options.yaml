@@ -7,9 +7,14 @@ analyzer:
     - "**.gr.dart"
     - "**/generated_plugin_registrant.dart"
     - build/**
+  errors:
+    invalid_export_of_internal_element: ignore
+    one_member_abstracts: ignore
 
 linter:
   rules:
     public_member_api_docs: false
     unnecessary_library_name: false
     unnecessary_library_directive: false
+    discarded_futures: false
+    async_return_with_no_await: false

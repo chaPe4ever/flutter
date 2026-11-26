@@ -1,12 +1,11 @@
 import 'dart:async';
 
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 
 /// Custom asset loader used for loading translations from multiple packages
 class AssetLoaderHelper extends AssetLoader {
   /// Ctr
-  const AssetLoaderHelper({required this.pkgAssetTransNames});
+  const new({required this.pkgAssetTransNames});
 
   final List<String> pkgAssetTransNames;
 

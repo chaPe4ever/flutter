@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -46,7 +45,7 @@ void main() {
     test('enabled error logs are visible on the debug console', () {
       final lines = <String>[];
       final previous = debugPrint;
-      debugPrint = (String? message, {int? wrapWidth}) {
+      debugPrint = (message, {wrapWidth}) {
         lines.add(message ?? '');
       };
       addTearDown(() => debugPrint = previous);
@@ -71,7 +70,7 @@ void main() {
           providerName: 'provider',
           info: 'info',
           error: StateError('e'),
-          verboseCb: ({required bool isActive}) => isActive ? 'v' : 'verbose',
+          verboseCb: ({required isActive}) => isActive ? 'v' : 'verbose',
         ),
         returnsNormally,
       );

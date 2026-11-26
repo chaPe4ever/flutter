@@ -15,7 +15,7 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
   /// - [network] - Network connectivity checker
   /// - [logger] - Logging service
   /// - [analytics] - Optional analytics service
-  const InAppReviewServiceImpl({
+  const new({
     required this.inAppReview,
     required this.localStorage,
     required this.network,

@@ -9,7 +9,7 @@
 /// * [Very Good Flutter Styles](https://www.figma.com/community/plugin/1208619373237156795)
 library;
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 abstract class AppPrimitiveColors {
   /// baseBlackRegular figma style properties

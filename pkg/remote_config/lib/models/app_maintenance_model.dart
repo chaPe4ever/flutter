@@ -3,16 +3,16 @@ import 'dart:convert';
 import 'package:core/core.dart';
 
 final class AppMaintenanceModel extends Equatable {
-  const AppMaintenanceModel({required this.isActive});
+  const new({required this.isActive});
 
-  factory AppMaintenanceModel.fromMap(Map<String, dynamic> map) {
+  factory fromMap(Map<String, dynamic> map) {
     return AppMaintenanceModel(isActive: (map['isActive'] ?? false) as bool);
   }
 
-  factory AppMaintenanceModel.fromJson(String source) =>
+  factory fromJson(String source) =>
       AppMaintenanceModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
-  factory AppMaintenanceModel.def() =>
+  factory def() =>
       const AppMaintenanceModel(isActive: false);
 
   final bool isActive;

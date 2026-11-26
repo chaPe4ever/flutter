@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_ui/core/assets_gen/assets.gen.dart';
 import 'package:shared_ui/core/widgets/buttons/button_base.dart';
@@ -7,7 +6,7 @@ import 'package:shared_ui/core/widgets/buttons/button_base.dart';
 import '../../../shared/pump_shared_ui_widget.dart';
 
 class _TestElevatedButton extends ElevatedButtonBase {
-  const _TestElevatedButton({
+  const new({
     super.onTap,
     super.leading,
     super.trailing,
@@ -42,7 +41,7 @@ class _TestElevatedButton extends ElevatedButtonBase {
 }
 
 class _TestOutlineButton extends OutlineButtonBase {
-  const _TestOutlineButton({
+  const new({
     super.onTap,
     super.leading,
     super.trailing,
@@ -74,7 +73,7 @@ class _TestOutlineButton extends OutlineButtonBase {
 }
 
 class _TestIconButton extends IconButtonBase {
-  const _TestIconButton({super.onTap, super.icon, super.svg}) : super();
+  const new({super.onTap, super.icon, super.svg}) : super();
 
   @override
   Color? backgroundColor(BuildContext context) => Colors.blue;

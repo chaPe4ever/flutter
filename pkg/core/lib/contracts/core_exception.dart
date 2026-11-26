@@ -2,7 +2,7 @@
 /// so that we don't have dependencies from 3rd party pkgs
 abstract base class CoreException implements Exception {
   /// Constructor
-  const CoreException({
+  const new({
     required this.messageKey,
     this.prefix,
     this.innerError,

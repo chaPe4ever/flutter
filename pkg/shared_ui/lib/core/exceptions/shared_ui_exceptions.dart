@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 
 sealed class SharedUiEx extends CoreException {
-  const SharedUiEx({
+  const new({
     required super.messageKey,
     super.innerCode,
     super.innerMessage,
@@ -12,7 +12,7 @@ sealed class SharedUiEx extends CoreException {
 }
 
 final class NoteException extends SharedUiEx {
-  const NoteException({
+  const new({
     // TODOAdd message key
     super.messageKey = 'hardcoded',
     super.innerCode,
@@ -23,7 +23,7 @@ final class NoteException extends SharedUiEx {
 }
 
 final class PageNotFoundCoreException extends SharedUiEx {
-  const PageNotFoundCoreException({
+  const new({
     // TODOAdd message key
     super.messageKey = 'hardcoded',
     super.innerCode,
@@ -34,7 +34,7 @@ final class PageNotFoundCoreException extends SharedUiEx {
 }
 
 final class UnknownSharedUiException extends SharedUiEx {
-  const UnknownSharedUiException({
+  const new({
     // TODOAdd message key
     super.messageKey = 'hardcoded',
     super.innerCode,

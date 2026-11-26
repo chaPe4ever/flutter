@@ -1,6 +1,6 @@
 import 'package:core/extensions/locale_extensions.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('LocaleX', () {

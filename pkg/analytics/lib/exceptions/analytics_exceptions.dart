@@ -3,7 +3,7 @@ import 'package:core/core.dart';
 
 ///
 sealed class AnalyticsEx extends CoreException {
-  const AnalyticsEx({
+  const new({
     required super.messageKey,
     super.innerCode,
     super.innerError,
@@ -16,7 +16,7 @@ sealed class AnalyticsEx extends CoreException {
 ///
 final class WrongAnalyticsEventUsageException extends AnalyticsEx {
   ///
-  WrongAnalyticsEventUsageException({
+  new({
     super.messageKey = 'wrong_analytics_event_usage_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -28,7 +28,7 @@ final class WrongAnalyticsEventUsageException extends AnalyticsEx {
 ///
 final class UnknownAnalyticsException extends AnalyticsEx {
   ///
-  UnknownAnalyticsException({
+  new({
     super.messageKey = 'unknown_analytics_exception_message_key',
     super.innerCode,
     super.innerError,

@@ -1,9 +1,8 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 
 /// Loads `assets/translations/{locale}.json` for widget tests.
 class TestTranslationsLoader extends AssetLoader {
-  const TestTranslationsLoader();
+  const new();
 
   static final Map<String, Map<String, dynamic>> _cache = {};
 

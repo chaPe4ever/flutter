@@ -7,14 +7,12 @@ import 'package:flutter/foundation.dart';
 ///
 final class SentryAndFirebaseCrashlyticsImpl implements CrashlyticsBase {
   ///
-  SentryAndFirebaseCrashlyticsImpl({
-    required SentryCrashlyticsImpl sentryCrashlytics,
-    required FirebaseCrashlyticsImpl firebaseCrashlytics,
+  new({
+    required this._sentryCrashlytics,
+    required this._firebaseCrashlytics,
     FirebaseCrashlytics? firebaseCrashlyticsInstance,
     IsolateErrorListenerRegistrar? registerIsolateErrorListener,
-  }) : _firebaseCrashlytics = firebaseCrashlytics,
-       _sentryCrashlytics = sentryCrashlytics,
-       _firebaseCrashlyticsInstance =
+  }) : _firebaseCrashlyticsInstance =
            firebaseCrashlyticsInstance ?? FirebaseCrashlytics.instance,
        _registerIsolateErrorListener =
            registerIsolateErrorListener ?? registerDefaultIsolateErrorListener;
@@ -67,7 +65,7 @@ final class SentryAndFirebaseCrashlyticsImpl implements CrashlyticsBase {
     try {
       // Capture whatever handler is there now (Sentry’s)
       final originalOnError = FlutterError.onError;
-      FlutterError.onError = (FlutterErrorDetails details) {
+      FlutterError.onError = (details) {
         // Let Sentry handle it first
         originalOnError?.call(details);
 

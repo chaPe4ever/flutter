@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_ui/core/assets_gen/assets.gen.dart';
 
 extension SvgGenImageX on SvgGenImage {

@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_ui/theme/app_theme.dart';
 import 'package:shared_ui/theme/pallete/app_semantic_colors.dart';
@@ -58,6 +57,9 @@ Future<ProviderContainer> pumpSharedUiWidget(
       ),
     ),
   );
+
+  await tester.runAsync(GoogleFonts.pendingFonts);
+  await tester.pump();
 
   if (settle) {
     await tester.pumpAndSettle();

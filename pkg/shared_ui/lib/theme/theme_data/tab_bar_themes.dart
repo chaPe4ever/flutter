@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 class TabBarThemes {
@@ -36,7 +36,7 @@ class TabBarThemes {
 }
 
 class RoundedTabIndicator extends Decoration {
-  const RoundedTabIndicator({
+  const new({
     required this.color,
     this.indicatorHeight = 3,
     this.topLeft = Radius.zero,
@@ -66,7 +66,7 @@ class RoundedTabIndicator extends Decoration {
 }
 
 class RoundedPainter extends BoxPainter {
-  const RoundedPainter({
+  const new({
     required this.color,
     required this.topLeft,
     required this.topRight,

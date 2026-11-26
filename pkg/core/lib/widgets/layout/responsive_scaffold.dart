@@ -1,11 +1,11 @@
 import 'package:core/widgets/layout/responsive_safe_area.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// The basic page template used as a base widget for all pages in order to add
 /// the app responsive layout and the app bar.
 class ResponsiveScaffold extends StatelessWidget {
   /// Ctr
-  const ResponsiveScaffold({
+  const new({
     required this.child,
     this.appBar,
     this.bottomNavigationBar,

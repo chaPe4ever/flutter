@@ -8,14 +8,12 @@ const String kMultiPartFormData = 'multi_part_form_data';
 ///
 class RefreshTokenInterceptor implements Interceptor {
   /// Constructor
-  RefreshTokenInterceptor({
-    required Dio dioRetry,
+  new({
+    required this._dioRetry,
     required LocalStorageBase localStorageBase,
-    required ApiAuthStrategy apiAuth,
+    required this._apiAuth,
     required PrettyDioLogger prettyDioLoggerInterceptor,
-  }) : _dioRetry = dioRetry,
-       _localStorage = localStorageBase,
-       _apiAuth = apiAuth {
+  }) : _localStorage = localStorageBase {
     _dioRetry.interceptors
       ..clear()
       ..add(prettyDioLoggerInterceptor);

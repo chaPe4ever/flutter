@@ -1,7 +1,7 @@
 import 'package:core/enums/breakpoint_enum.dart';
 import 'package:core/widgets/layout/app_responsive_widgets.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 void main() {

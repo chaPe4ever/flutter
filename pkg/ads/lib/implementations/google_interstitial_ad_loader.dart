@@ -19,14 +19,14 @@ final class GoogleInterstitialAdLoader implements InterstitialAdLoader {
         adUnitId: adUnitId,
         request: request,
         adLoadCallback: InterstitialAdLoadCallback(
-          onAdLoaded: (InterstitialAd ad) {
+          onAdLoaded: (ad) {
             Log.info('Interstitial ad loaded successfully');
             ad.setImmersiveMode(true);
             if (!completer.isCompleted) {
               completer.complete(ad);
             }
           },
-          onAdFailedToLoad: (LoadAdError error) {
+          onAdFailedToLoad: (error) {
             Log.error('InterstitialAd failed to load: $error');
             if (!completer.isCompleted) {
               completer.completeError(_mapLoadError(error));

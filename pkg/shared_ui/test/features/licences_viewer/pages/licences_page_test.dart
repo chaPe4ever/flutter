@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_ui/features/licences_viewer/controllers/licences_page_controller.dart';
 import 'package:shared_ui/features/licences_viewer/pages/licences_page.dart';
@@ -26,7 +26,7 @@ List<LicenseEntry> _licences() {
 
 void _ignoreListTileInkAssertion() {
   final previous = FlutterError.onError;
-  FlutterError.onError = (FlutterErrorDetails details) {
+  FlutterError.onError = (details) {
     if (details.exceptionAsString().contains(
       'ListTile background color or ink splashes may be invisible',
     )) {

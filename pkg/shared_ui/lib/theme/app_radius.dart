@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 abstract class AppRadius {
-  const AppRadius._();
+  const new _();
   static const xxs = Radius.circular(2);
   static const xs = Radius.circular(4);
   static const s = Radius.circular(8);

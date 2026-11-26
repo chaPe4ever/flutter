@@ -9,10 +9,10 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'firebase_crashlytics_test_setup.dart';
 
-class MockFirebaseCrashlytics extends Mock implements FirebaseCrashlytics {}
+class MockFirebaseCrashlytics extends Mock implements FirebaseCrashlytics;
 
 class MockSentryCrashlyticsBindings extends Mock
-    implements SentryCrashlyticsBindings {}
+    implements SentryCrashlyticsBindings;
 
 const kTestFirebaseOptions = FirebaseOptions(
   apiKey: 'api-key',

@@ -13,7 +13,7 @@ import 'package:remote_storage/models/storage_meta_data.dart';
 ///
 final class FirebaseRemoteStorageImpl implements RemoteStorageBase {
   /// Ctr
-  FirebaseRemoteStorageImpl({required FirebaseStorage firebaseStorage})
+  new({required FirebaseStorage firebaseStorage})
     : _storage = firebaseStorage;
 
   // Fields

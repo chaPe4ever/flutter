@@ -8,7 +8,7 @@ import 'package:local_notifications/contracts/notification_action_base.dart';
 import 'package:local_notifications/pods/local_notification_pod.dart';
 
 class LocalNotificationsImpl implements LocalNotificationsBase {
-  LocalNotificationsImpl({required this.notifications})
+  new({required this.notifications})
     : fgNotificationController =
           StreamController<NotificationResponse>.broadcast(),
       bgNotificationController =

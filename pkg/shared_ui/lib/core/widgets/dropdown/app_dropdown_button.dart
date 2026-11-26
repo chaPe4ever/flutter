@@ -1,9 +1,8 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 class AppDropdownButton extends DropdownButtonBase {
-  const AppDropdownButton({
+  const new({
     required super.labelText,
     required super.items,
     super.onChanged,
@@ -43,7 +42,7 @@ class _AppDropdownButtonState extends State<AppDropdownButton> {
           .decoration(context)
           ?.copyWith(
             labelStyle: context.textStyles.bodyS.copyWith(
-              color: errorTextSignal.watch(context).isNotEmpty
+              color: errorTextSignal.value.isNotEmpty
                   ? context.colors.contentNegative
                   : widget.helperText != null
                   ? context.colors.contentSupport
@@ -51,10 +50,10 @@ class _AppDropdownButtonState extends State<AppDropdownButton> {
             ),
           ),
       icon: Icon(
-        errorTextSignal.watch(context).isNotEmpty
+        errorTextSignal.value.isNotEmpty
             ? Icons.error
             : Icons.arrow_drop_down,
-        color: errorTextSignal.watch(context).isNotEmpty
+        color: errorTextSignal.value.isNotEmpty
             ? context.colors.contentNegative
             : context.colors.contentSecondary,
       ),

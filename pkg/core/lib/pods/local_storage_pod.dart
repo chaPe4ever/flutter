@@ -1,6 +1,5 @@
 import 'package:core/core.dart';
 import 'package:core/storage/local_storage_shared_prefs_impl.dart';
-import 'package:flutter/foundation.dart';
 
 part 'local_storage_pod.g.dart';
 

@@ -1,7 +1,7 @@
 import 'package:core/contracts/core_exception.dart';
 import 'package:core/utils/tz_helper.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// DateTime extensions
 extension DateTimeX on DateTime {

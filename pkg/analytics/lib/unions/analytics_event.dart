@@ -1,10 +1,10 @@
 ///
-sealed class AnalyticsEvent {}
+sealed class AnalyticsEvent;
 
 ///
 final class FirebaseAnalyticsEvent extends AnalyticsEvent {
   ///
-  FirebaseAnalyticsEvent({required this.name, this.parameters});
+  new({required this.name, this.parameters});
 
   ///
   final String name;

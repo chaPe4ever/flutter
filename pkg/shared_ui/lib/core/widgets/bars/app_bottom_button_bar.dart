@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 enum AppButtonBarType {
@@ -10,7 +9,7 @@ enum AppButtonBarType {
 }
 
 class AppBottomButtonBar extends StatelessWidget {
-  const AppBottomButtonBar._(
+  const new _(
     this._type, {
     this.labelPrimary,
     this.onPrimaryTap,
@@ -20,7 +19,7 @@ class AppBottomButtonBar extends StatelessWidget {
     this.padding,
   });
 
-  factory AppBottomButtonBar.singlePrimary({
+  factory singlePrimary({
     required String label,
     VoidCallback? onTap,
     EdgeInsetsGeometry? padding,
@@ -35,7 +34,7 @@ class AppBottomButtonBar extends StatelessWidget {
     );
   }
 
-  factory AppBottomButtonBar.singleSecondary({
+  factory singleSecondary({
     required String label,
     VoidCallback? onTap,
     EdgeInsetsGeometry? padding,
@@ -50,7 +49,7 @@ class AppBottomButtonBar extends StatelessWidget {
     );
   }
 
-  factory AppBottomButtonBar.doubleMix({
+  factory doubleMix({
     required String labelPrimary,
     required String labelSecondary,
     VoidCallback? onPrimaryTap,
@@ -69,7 +68,7 @@ class AppBottomButtonBar extends StatelessWidget {
     );
   }
 
-  factory AppBottomButtonBar.doubleSecondary({
+  factory doubleSecondary({
     required String labelFirst,
     required String labelSecond,
     VoidCallback? onFirstTap,

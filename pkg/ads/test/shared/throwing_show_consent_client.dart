@@ -9,7 +9,7 @@ import 'throwing_consent_form.dart';
 
 /// Runs the consent form flow but uses [ThrowingConsentForm] when showing.
 final class ThrowingShowConsentClient implements ConsentClient {
-  ThrowingShowConsentClient({ConsentClient? delegate})
+  new({ConsentClient? delegate})
     : _delegate = delegate ?? GoogleConsentClient();
 
   final ConsentClient _delegate;
@@ -49,7 +49,7 @@ final class ThrowingShowConsentClient implements ConsentClient {
     final formCompleter = Completer<void>();
 
     ConsentForm.loadConsentForm(
-      (ConsentForm consentForm) async {
+      (consentForm) async {
         try {
           Log.info('Consent form loaded, showing to user');
           ThrowingConsentForm().show((formError) {

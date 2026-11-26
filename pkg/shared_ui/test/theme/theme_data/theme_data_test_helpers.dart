@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shared_ui/theme/app_theme.dart';
 
 const Set<WidgetState> emptyWidgetStates = <WidgetState>{};
