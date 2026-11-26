@@ -5,4 +5,3 @@ import 'package:inapp_review/implementations/rate_my_app_review_prompt_client.da
 final inAppReviewPod = Provider<ReviewPromptClient>((ref) {
   return const RateMyAppReviewPromptClient();
 });
-
