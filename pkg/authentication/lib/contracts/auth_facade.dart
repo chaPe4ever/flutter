@@ -2,7 +2,6 @@ import 'package:authentication/exceptions/auth_exceptions.dart';
 import 'package:authentication/utils/value_objects.dart';
 import 'package:core/core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 
 /// Authentication facade interface
 abstract interface class AuthFacade {

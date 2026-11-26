@@ -1,5 +1,4 @@
 import 'package:core/core.dart' hide ValueNotifierX;
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_ui/shared_ui.dart';
 
@@ -8,7 +7,7 @@ enum TextFieldType { primary }
 final Signal<bool> _isObscured = signal<bool>(true);
 
 class AppTextField extends OutlineTextFieldBase {
-  factory AppTextField({
+  factory({
     required String labelText,
     Key? key,
     ValueChanged<String>? onChanged,
@@ -45,7 +44,7 @@ class AppTextField extends OutlineTextFieldBase {
       inputFormatters: inputFormatters,
     );
   }
-  const AppTextField._({
+  const new _({
     super.onClearButtonPressed,
     super.textInputAction,
     super.key,
@@ -69,7 +68,7 @@ class AppTextField extends OutlineTextFieldBase {
     super.autocorrect = true,
   }) : type = TextFieldType.primary;
 
-  factory AppTextField.email({
+  factory email({
     required String labelText,
     Key? key,
     ValueChanged<String>? onChanged,
@@ -91,7 +90,7 @@ class AppTextField extends OutlineTextFieldBase {
     );
   }
 
-  factory AppTextField.password({
+  factory password({
     required String labelText,
     Key? key,
     String? hintText,
@@ -109,7 +108,7 @@ class AppTextField extends OutlineTextFieldBase {
       labelText: labelText,
       onChanged: onChanged,
       validator: (value) => validator?.call(value),
-      obscureText: _isObscured.watch,
+      obscureText: (_) => _isObscured.value,
       suffixIcon: AppIconButton.primary(
         icon: Icons.visibility,
         onTap: _isObscured.toggle,
@@ -122,7 +121,7 @@ class AppTextField extends OutlineTextFieldBase {
     );
   }
 
-  factory AppTextField.firstName({
+  factory firstName({
     required String labelText,
     Key? key,
     ValueChanged<String>? onChanged,
@@ -144,7 +143,7 @@ class AppTextField extends OutlineTextFieldBase {
     );
   }
 
-  factory AppTextField.lastName({
+  factory lastName({
     required String labelText,
     Key? key,
     ValueChanged<String>? onChanged,

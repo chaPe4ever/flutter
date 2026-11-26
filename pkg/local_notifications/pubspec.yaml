@@ -16,7 +16,7 @@ dependencies:
       path: pkg/core
   flutter:
     sdk: flutter
-  flutter_local_notifications: ^21.0.0
+  flutter_local_notifications: ^23.0.4
 
 dev_dependencies:
   build_runner: ^2.6.0
@@ -30,15 +30,16 @@ dev_dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  freezed: ^3.0.6
+  freezed: ^4.0.1
   integration_test:
     sdk: flutter
   json_serializable: ^6.9.5
+  material_ui: ^1.11.1
   mockito: ^5.4.6
   mocktail: ^1.0.4
   riverpod_generator: ^4.0.10
   riverpod_lint: ^3.2.0
-  very_good_analysis: ^9.0.0
+  very_good_analysis: ^11.0.0
 
 flutter:
   uses-material-design: true

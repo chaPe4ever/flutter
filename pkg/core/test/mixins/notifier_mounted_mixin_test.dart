@@ -1,7 +1,7 @@
 import 'package:core/mixins/notifier_mounted_mixin.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-final class _MountedProbe with NotifierMountedMixin {}
+final class _MountedProbe with NotifierMountedMixin;
 
 void main() {
   group('NotifierMountedMixin', () {

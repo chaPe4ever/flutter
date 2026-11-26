@@ -212,7 +212,7 @@ void main() {
 }
 
 final class _ThrowingApiAuth implements ApiAuthStrategy {
-  _ThrowingApiAuth(this.error);
+  new(this.error);
 
   final Exception error;
 
@@ -221,7 +221,7 @@ final class _ThrowingApiAuth implements ApiAuthStrategy {
 }
 
 final class _UploadPart extends MultiPartFormDataModelBase {
-  _UploadPart({required this.filePath, required this.fileMapKey});
+  new({required this.filePath, required this.fileMapKey});
 
   @override
   final String filePath;

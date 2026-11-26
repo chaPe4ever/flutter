@@ -4,8 +4,7 @@ import 'package:core/core.dart' show CoreException;
 ///
 final class FirebaseAnalyticsImpl implements AnalyticsBase {
   ///
-  FirebaseAnalyticsImpl({required FirebaseAnalytics analytics})
-    : _analytics = analytics;
+  new({required this._analytics});
 
   final FirebaseAnalytics _analytics;
 
@@ -14,8 +13,8 @@ final class FirebaseAnalyticsImpl implements AnalyticsBase {
     try {
       switch (analyticsEvent) {
         case FirebaseAnalyticsEvent(
-          name: final name,
-          parameters: final parameters,
+          : final name,
+          : final parameters,
         ):
           await _analytics.logEvent(name: name, parameters: parameters);
       }

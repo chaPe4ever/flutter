@@ -5,14 +5,14 @@ import 'dart:typed_data';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockFirebaseStorage extends Mock implements FirebaseStorage {}
+class MockFirebaseStorage extends Mock implements FirebaseStorage;
 
-class MockReference extends Mock implements Reference {}
+class MockReference extends Mock implements Reference;
 
-class MockTaskSnapshot extends Mock implements TaskSnapshot {}
+class MockTaskSnapshot extends Mock implements TaskSnapshot;
 
 class CompletedUploadTask extends Fake implements UploadTask {
-  CompletedUploadTask(this._snapshot);
+  new(this._snapshot);
 
   final TaskSnapshot _snapshot;
 

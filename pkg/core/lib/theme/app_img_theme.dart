@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 @immutable
 class AppImgTheme extends ThemeExtension<AppImgTheme> {
-  const AppImgTheme._({required this.color, this.size = 14.0});
+  const new _({required this.color, this.size = 14.0});
 
-  factory AppImgTheme.light({
+  factory light({
     Color defColor = Colors.black,
     double size = 14.0,
   }) {
     return AppImgTheme._(color: defColor, size: size);
   }
-  factory AppImgTheme.dark({
+  factory dark({
     Color defColor = Colors.white,
     double size = 14.0,
   }) {

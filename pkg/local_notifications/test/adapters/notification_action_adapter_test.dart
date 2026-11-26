@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local_notifications/adapters/notification_action_adapter.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('NotificationActionAdapter', () {

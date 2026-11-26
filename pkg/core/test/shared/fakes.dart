@@ -70,7 +70,7 @@ final class FakeLogger implements LoggerBase {
 
 /// Returns a fixed access token from [getAccessToken].
 final class FakeApiAuthStrategy implements ApiAuthStrategy {
-  FakeApiAuthStrategy(this.token);
+  new(this.token);
 
   final String token;
 

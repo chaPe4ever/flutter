@@ -1,11 +1,10 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 enum AppDialogType { primary, secondary, danger }
 
 class AppDialog extends StatelessWidget {
-  const AppDialog._(
+  const new _(
     this._type, {
     required this.title,
     super.key,
@@ -18,7 +17,7 @@ class AppDialog extends StatelessWidget {
     this.onDangerTap,
   });
 
-  factory AppDialog.primary({
+  factory primary({
     required String title,
     required String primaryText,
     String? content,
@@ -33,7 +32,7 @@ class AppDialog extends StatelessWidget {
     onPrimaryTap: onPrimaryTap,
   );
 
-  factory AppDialog.secondary({
+  factory secondary({
     required String title,
     required String primaryText,
     required String secondaryText,
@@ -52,7 +51,7 @@ class AppDialog extends StatelessWidget {
     onSecondaryTap: onSecondaryTap,
   );
 
-  factory AppDialog.danger({
+  factory danger({
     required String title,
     required String secondaryText,
     required String dangerText,

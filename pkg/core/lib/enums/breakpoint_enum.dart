@@ -1,6 +1,5 @@
 import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 /// This enum is used to define the breakpoints for the responsive design.
 /// The [end] property represents the max width of the breakpoint.
@@ -11,7 +10,7 @@ enum BreakpointEnum {
   s(393, 767),
   xs(320, 392);
 
-  const BreakpointEnum(this.start, this.end);
+  new(this.start, this.end);
 
   final double end;
   final double start;

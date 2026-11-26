@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 
 class FakeLogger implements LoggerBase {
-  FakeLogger();
+  new();
 
   final List<String> debugMessages = [];
   final List<String> errorMessages = [];

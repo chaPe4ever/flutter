@@ -1,5 +1,5 @@
 abstract class AppBorderWidth {
-  const AppBorderWidth._();
+  const new _();
   static const xs = 1.0;
   static const s = 1.5;
   static const m = 2.0;

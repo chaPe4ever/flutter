@@ -14,7 +14,7 @@ typedef LoadConsentForm =
 /// [ConsentClient] backed by the Google UMP SDK.
 final class GoogleConsentClient implements ConsentClient {
   /// Creates a client that delegates to [consentInformation].
-  GoogleConsentClient({
+  new({
     ConsentInformation? consentInformation,
     LoadConsentForm? loadConsentForm,
   }) : _consentInformation = consentInformation ?? ConsentInformation.instance,
@@ -64,7 +64,7 @@ final class GoogleConsentClient implements ConsentClient {
     final formCompleter = Completer<void>();
 
     _loadConsentForm(
-      (ConsentForm consentForm) async {
+      (consentForm) async {
         try {
           Log.info('Consent form loaded, showing to user');
           consentForm.show((formError) {

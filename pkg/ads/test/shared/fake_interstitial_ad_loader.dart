@@ -6,7 +6,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// Controllable interstitial loader for ads pod tests.
 final class FakeInterstitialAdLoader implements InterstitialAdLoader {
-  FakeInterstitialAdLoader({InterstitialAdLoader? delegate})
+  new({InterstitialAdLoader? delegate})
     : _delegate = delegate ?? GoogleInterstitialAdLoader();
 
   final InterstitialAdLoader _delegate;

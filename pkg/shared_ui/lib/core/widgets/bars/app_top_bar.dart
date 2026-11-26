@@ -1,12 +1,11 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_ui/core/assets_gen/assets.gen.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 /// The default app bar for the app
 class AppTopBar extends ConsumerWidget implements PreferredSizeWidget {
   /// Ctr
-  const AppTopBar({
+  const new({
     required this.title,
     this.actions,
     this.bottom,
@@ -80,7 +79,7 @@ List<ActionBase> appTopBarActions({
 }
 
 class UserAction extends ActionBase {
-  const UserAction({super.model, super.key});
+  const new({super.model, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +98,7 @@ class UserAction extends ActionBase {
 }
 
 final class ChatAction extends ActionBase {
-  const ChatAction({super.model, super.key});
+  const new({super.model, super.key});
   @override
   Widget build(BuildContext context) {
     return TouchableWidget(
@@ -117,7 +116,7 @@ final class ChatAction extends ActionBase {
 }
 
 abstract class ActionBase extends StatelessWidget {
-  const ActionBase({
+  const new({
     this.model,
     super.key,
   });
@@ -126,7 +125,7 @@ abstract class ActionBase extends StatelessWidget {
 }
 
 class ActionModel extends Equatable {
-  const ActionModel({
+  const new({
     required this.onTap,
     this.icon,
   });

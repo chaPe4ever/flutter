@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 final class _RecordingConfig implements ConfigBase {
-  _RecordingConfig(this.label);
+  new(this.label);
 
   final String label;
   final List<String> initLog = [];

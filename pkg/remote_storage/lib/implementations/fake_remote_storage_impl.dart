@@ -8,7 +8,7 @@ import 'package:remote_storage/models/storage_meta_data.dart';
 /// No-op [RemoteStorageBase] for local runs and tests.
 final class FakeRemoteStorageImpl implements RemoteStorageBase {
   /// Creates a [FakeRemoteStorageImpl].
-  const FakeRemoteStorageImpl({
+  const new({
     this.bucket = 'fake-bucket',
     this.fullPath = '',
     this.name = '',

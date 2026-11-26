@@ -211,7 +211,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
 
       // Set up the callback before showing the ad
       interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
-        onAdShowedFullScreenContent: (InterstitialAd ad) {
+        onAdShowedFullScreenContent: (ad) {
           Log.info('Interstitial ad displayed');
           onAdShowedFullScreenContent?.call();
 
@@ -224,13 +224,13 @@ class Ads extends _$Ads with NotifierMountedMixin {
             _preloadInterstitialAd,
           );
         },
-        onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        onAdDismissedFullScreenContent: (ad) {
           Log.info('Interstitial ad dismissed');
           ad.dispose();
           _cachedInterstitialAd = null;
           onAdDismissedFullScreenContent?.call();
         },
-        onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        onAdFailedToShowFullScreenContent: (ad, error) {
           Log.error('Interstitial ad failed to show: $error');
           ad.dispose();
           _cachedInterstitialAd = null;
@@ -471,7 +471,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
                     .complete(); // Complete anyway to continue initialization
               });
         },
-        (FormError error) {
+        (error) {
           // Error callback
           Log.error('Consent info update failed: ${error.message}');
           completer.complete(); // Complete to continue initialization

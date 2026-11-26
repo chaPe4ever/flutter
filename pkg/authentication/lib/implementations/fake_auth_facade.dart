@@ -3,15 +3,14 @@ import 'package:authentication/exceptions/auth_exceptions.dart';
 import 'package:authentication/utils/value_objects.dart';
 import 'package:core/core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 
 /// Firebase authentication facade implementation
 final class FakeAuthFacade implements AuthFacade {
   /// Constructor
-  FakeAuthFacade() : this.withUser(_defaultFakeUser());
+  new() : this.withUser(_defaultFakeUser());
 
   @visibleForTesting
-  FakeAuthFacade.withUser(FakeUser user) : _user = InMemoryStore<User?>(user);
+  new withUser(FakeUser user) : _user = InMemoryStore<User?>(user);
 
   static FakeUser _defaultFakeUser() => FakeUser(
     metadata: UserMetadata(0, 0),
@@ -342,7 +341,7 @@ final class FakeAuthFacade implements AuthFacade {
 }
 
 class FakeUser implements User {
-  const FakeUser({
+  const new({
     required this.uid,
     required this.displayName,
     required this.photoURL,
@@ -506,7 +505,7 @@ class FakeUser implements User {
 
 class FakeUserCredential implements UserCredential {
   /// Constructor for the fake user credential.
-  const FakeUserCredential({
+  const new({
     required this.user,
     this.additionalUserInfo,
     this.credential,
@@ -531,7 +530,7 @@ class FakeUserCredential implements UserCredential {
 /// Fake implementation of [AdditionalUserInfo].
 class FakeAdditionalUserInfo implements AdditionalUserInfo {
   /// Constructor for the fake additional user info.
-  const FakeAdditionalUserInfo({
+  const new({
     required this.isNewUser,
     required this.providerId,
     this.profile,

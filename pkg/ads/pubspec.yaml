@@ -30,14 +30,14 @@ dev_dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  freezed: ^3.0.6
+  freezed: ^4.0.1
   integration_test:
     sdk: flutter
   json_serializable: ^6.9.5
   mockito: ^5.4.6
   riverpod_generator: ^4.0.10
   riverpod_lint: ^3.2.0
-  very_good_analysis: ^9.0.0
+  very_good_analysis: ^11.0.0
 
 flutter:
   uses-material-design: true

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_ui/core/widgets/bars/app_top_bar.dart';
 import 'package:shared_ui/core/widgets/buttons/app_icon_button.dart';

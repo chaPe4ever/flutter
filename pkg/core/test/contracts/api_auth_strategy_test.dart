@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 final class _FakeApiAuthStrategy implements ApiAuthStrategy {
-  _FakeApiAuthStrategy(this.token);
+  new(this.token);
 
   final String token;
 

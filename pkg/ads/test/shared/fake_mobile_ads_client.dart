@@ -2,7 +2,7 @@ import 'package:ads/contracts/mobile_ads_client.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class FakeMobileAdsClient implements MobileAdsClient {
-  FakeMobileAdsClient({this.failInitialize = false});
+  new({this.failInitialize = false});
 
   bool failInitialize;
   int initializeCalls = 0;

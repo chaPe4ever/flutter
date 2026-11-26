@@ -24,7 +24,7 @@ void main() {
     test('registers licences when a font licence path is provided', () async {
       final config = GoogleFontsConfig(
         fontLicencesAbsPath: 'assets/translations',
-        assetListLoader: ({required String path}) async => [
+        assetListLoader: ({required path}) async => [
           'assets/translations/en.json',
         ],
       );

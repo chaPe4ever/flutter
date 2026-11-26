@@ -23,7 +23,7 @@ void configureWebFlutterErrorHandling({
     return;
   }
   final logger = logError ?? Log.error;
-  FlutterError.onError = (FlutterErrorDetails details) {
+  FlutterError.onError = (details) {
     if (!releaseMode) {
       logger(details.exceptionAsString(), st: details.stack);
     }

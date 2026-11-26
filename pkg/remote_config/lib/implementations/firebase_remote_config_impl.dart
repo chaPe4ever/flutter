@@ -15,15 +15,13 @@ import 'package:remote_config/models/app_version_model.dart';
 ///
 final class FirebaseRemoteConfigImpl implements RemoteConfigBase {
   /// Constructor
-  FirebaseRemoteConfigImpl({
-    required FirebaseRemoteConfig firebaseRemoteConfig,
-    bool emitDebugInnerMessages = kDebugMode,
-  }) : _firebaseRemoteConfig = firebaseRemoteConfig,
-       _emitDebugInnerMessages = emitDebugInnerMessages,
-       _remoteConfigKeysSetController =
+  new({
+    required this._firebaseRemoteConfig,
+    this._emitDebugInnerMessages = kDebugMode,
+  }) : _remoteConfigKeysSetController =
            StreamController<Set<String>>.broadcast() {
     _subscription = _firebaseRemoteConfig.onConfigUpdated.listen(
-      (RemoteConfigUpdate result) {
+      (result) {
         _remoteConfigKeysSetController.add(result.updatedKeys);
       },
       onError: (dynamic e, StackTrace st) {

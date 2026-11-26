@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:flutter/widgets.dart';
 
 /// List extension
 extension ListX<T> on List<T> {

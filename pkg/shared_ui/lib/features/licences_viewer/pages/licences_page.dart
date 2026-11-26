@@ -1,11 +1,10 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_ui/core/assets_gen/assets.gen.dart';
 import 'package:shared_ui/core/constants/trans_keys_constants.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 class LicencesPage extends ConsumerWidget {
-  const LicencesPage({this.padding = const EdgeInsets.all(20), super.key});
+  const new({this.padding = const EdgeInsets.all(20), super.key});
   final EdgeInsetsGeometry padding;
 
   @override

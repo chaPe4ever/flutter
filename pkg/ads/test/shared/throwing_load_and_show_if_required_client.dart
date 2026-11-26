@@ -4,7 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// Consent client that throws from [loadAndShowConsentFormIfRequired].
 final class ThrowingLoadAndShowIfRequiredClient implements ConsentClient {
-  ThrowingLoadAndShowIfRequiredClient({ConsentClient? delegate})
+  new({ConsentClient? delegate})
     : _delegate = delegate ?? GoogleConsentClient();
 
   final ConsentClient _delegate;

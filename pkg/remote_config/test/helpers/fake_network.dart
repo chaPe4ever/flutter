@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:core/core.dart';
-import 'package:flutter/foundation.dart';
 
 final class FakeNetwork implements NetworkBase {
-  FakeNetwork({this.connected = true});
+  new({this.connected = true});
 
   bool connected;
 

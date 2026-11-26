@@ -1,22 +1,22 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local_notifications/implementations/local_notifications_impl.dart';
 import 'package:local_notifications/pods/local_notification_pod.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 class _MockFlutterLocalNotificationsPlugin extends Mock
-    implements FlutterLocalNotificationsPlugin {}
+    implements FlutterLocalNotificationsPlugin;
 
 class _MockAndroidFlutterLocalNotificationsPlugin extends Mock
-    implements AndroidFlutterLocalNotificationsPlugin {}
+    implements AndroidFlutterLocalNotificationsPlugin;
 
 class _MockIosFlutterLocalNotificationsPlugin extends Mock
-    implements IOSFlutterLocalNotificationsPlugin {}
+    implements IOSFlutterLocalNotificationsPlugin;
 
 class _MockMacOsFlutterLocalNotificationsPlugin extends Mock
-    implements MacOSFlutterLocalNotificationsPlugin {}
+    implements MacOSFlutterLocalNotificationsPlugin;
 
 void main() {
   late _MockFlutterLocalNotificationsPlugin mockPlugin;

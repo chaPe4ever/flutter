@@ -1,7 +1,7 @@
 /// [StorageMetadata] class used to set and get metadata from server
 final class StorageMetadata {
   /// Creates a new [StorageMetadata] instance.
-  StorageMetadata({
+  new({
     this.contentEncoding,
     this.contentLanguage,
     this.contentType,

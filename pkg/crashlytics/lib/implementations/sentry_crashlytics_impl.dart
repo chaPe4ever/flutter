@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 ///
 final class SentryCrashlyticsImpl implements CrashlyticsBase {
   ///
-  SentryCrashlyticsImpl({
+  new({
     SentryCrashlyticsBindings? sentry,
     IsolateErrorListenerRegistrar? registerIsolateErrorListener,
     SentryUserIdSetter? setUserIdAction,
@@ -59,7 +59,7 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
       final originalOnError = FlutterError.onError;
 
       // Install a new handler that calls Sentry and then any previous handler
-      FlutterError.onError = (FlutterErrorDetails details) {
+      FlutterError.onError = (details) {
         // Sentry first
         final report = sentryReport(details.exception, details.stack);
         _sentry.captureException(

@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 abstract class AppEffectStyles {
-  const AppEffectStyles._();
+  const new _();
   static const BoxShadow shadowL1Effect0 = BoxShadow(
     color: Color(0x14000000),
     blurRadius: 2,

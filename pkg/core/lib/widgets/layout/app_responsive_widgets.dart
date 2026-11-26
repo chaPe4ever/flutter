@@ -1,13 +1,13 @@
 import 'package:core/enums/breakpoint_enum.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 /// Responsive layout that shows two child widgets side by side if there is
 /// enough space, or vertically stacked if there is not enough space.
 class ResponsiveTwoColumnLayout extends StatelessWidget {
   /// Ctr
-  const ResponsiveTwoColumnLayout({
+  const new({
     required this.startContent,
     required this.endContent,
     required this.spacing,
@@ -66,7 +66,7 @@ class ResponsiveTwoColumnLayout extends StatelessWidget {
 /// Useful for displaying forms and other widgets that need to be scrollable.
 class ResponsiveScrollableCard extends StatelessWidget {
   /// Ctr
-  const ResponsiveScrollableCard({
+  const new({
     required this.child,
     this.padding = 20,
     super.key,
@@ -98,7 +98,7 @@ class ResponsiveScrollableCard extends StatelessWidget {
 /// available width.
 class ResponsiveCenter extends StatelessWidget {
   /// Ctr
-  const ResponsiveCenter({
+  const new({
     required this.child,
     super.key,
     this.breakpoint = BreakpointEnum.l,
@@ -127,7 +127,7 @@ class ResponsiveCenter extends StatelessWidget {
 /// Sliver-equivalent of [ResponsiveCenter].
 class ResponsiveSliverCenter extends StatelessWidget {
   /// Ctr
-  const ResponsiveSliverCenter({
+  const new({
     required this.child,
     this.breakpoint = BreakpointEnum.l,
     this.padding = EdgeInsets.zero,
@@ -152,7 +152,7 @@ class ResponsiveSliverCenter extends StatelessWidget {
 
 class AppResponsiveScaledBox extends StatelessWidget {
   /// Ctr
-  const AppResponsiveScaledBox({
+  const new({
     required this.child,
     this.width = 1920,
     super.key,
@@ -184,7 +184,7 @@ class AppResponsiveScaledBox extends StatelessWidget {
 /// [FlexFit] options.
 class AppResponsiveRowColumn extends StatelessWidget {
   /// Ctr
-  const AppResponsiveRowColumn({
+  const new({
     required this.layout,
     this.children = const [],
     this.rowMainAxisAlignment = MainAxisAlignment.start,
@@ -253,7 +253,7 @@ class AppResponsiveRowColumn extends StatelessWidget {
 /// Sets the max width of a widget.
 class AppMaxWidthBox extends StatelessWidget {
   /// Ctr
-  const AppMaxWidthBox({
+  const new({
     required this.maxWidth,
     required this.child,
     this.backgroundColor,
@@ -295,7 +295,7 @@ class AppMaxWidthBox extends StatelessWidget {
 /// items and limit items in a row.
 class AppResponsiveGrid extends StatelessWidget {
   /// Ctr
-  const AppResponsiveGrid({
+  const new({
     required this.gridDelegate,
     required this.itemBuilder,
     this.scrollDirection = Axis.vertical,
@@ -387,7 +387,7 @@ class AppResponsiveGrid extends StatelessWidget {
 /// valid conditions must be passed.
 class AppResponsiveValue<T> extends ResponsiveValue<T> {
   /// Ctr
-  AppResponsiveValue(
+  new(
     super.context, {
     required List<AppCondition<T>> conditionalValues,
     super.defaultValue,
@@ -401,7 +401,7 @@ class AppResponsiveValue<T> extends ResponsiveValue<T> {
 /// fields. The [child] widget is [visible] by default.
 class AppResponsiveVisibility extends StatelessWidget {
   /// Ctr
-  const AppResponsiveVisibility({
+  const new({
     required this.child,
     this.visible = true,
     this.visibleConditions = const [],
@@ -445,7 +445,7 @@ class AppResponsiveVisibility extends StatelessWidget {
 
 class AppResponsiveConstraints extends StatelessWidget {
   /// Ctr
-  const AppResponsiveConstraints({
+  const new({
     required this.child,
     this.constraint,
     this.conditionalConstraints = const [],
@@ -479,7 +479,7 @@ extension AppRowColumnTypeX on AppRowColumnType {
 
 class AppBreakpoint extends Breakpoint {
   /// Ctr
-  const AppBreakpoint({
+  const new({
     required super.start,
     required super.end,
     super.name,
@@ -505,17 +505,17 @@ extension AppConditionalX on AppConditional {
 /// Provides the [value] when the [condition] is active.
 /// Compare conditions by setting either breakpoint or name values.
 class AppCondition<T> extends Condition<T> {
-  AppCondition.equals({required super.name, super.value, super.landscapeValue})
+  new equals({required super.name, super.value, super.landscapeValue})
     : super.equals();
 
-  const AppCondition.largerThan({
+  const new largerThan({
     super.breakpoint,
     super.name,
     super.value,
     super.landscapeValue,
   }) : super.largerThan();
 
-  const AppCondition.smallerThan({
+  const new smallerThan({
     super.breakpoint,
     super.name,
     super.value,
@@ -523,7 +523,7 @@ class AppCondition<T> extends Condition<T> {
   }) : super.smallerThan();
 
   /// Conditional when screen width is between [start] and [end] inclusive.
-  const AppCondition.between({
+  const new between({
     required super.start,
     required super.end,
     super.value,
@@ -533,7 +533,7 @@ class AppCondition<T> extends Condition<T> {
 
 class AppResponsiveBreakpoints extends ResponsiveBreakpoints {
   /// Ctr
-  const AppResponsiveBreakpoints({
+  const new({
     required super.child,
     required super.breakpoints,
     super.breakpointsLandscape,
@@ -593,7 +593,7 @@ class AppResponsiveBreakpoints extends ResponsiveBreakpoints {
 /// [rowFit] and [columnFit].
 class AppResponsiveRowColumnItem extends ResponsiveRowColumnItem {
   /// Ctr
-  const AppResponsiveRowColumnItem({
+  const new({
     required super.child,
     super.rowOrder = 1073741823,
     super.columnOrder = 1073741823,

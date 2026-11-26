@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class _FakeLogger implements LoggerBase {
@@ -24,7 +23,7 @@ class _FakeLogger implements LoggerBase {
 }
 
 class _FakeNetwork implements NetworkBase {
-  _FakeNetwork({this.connected = true});
+  new({this.connected = true});
 
   final bool connected;
 

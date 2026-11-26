@@ -42,7 +42,7 @@ void main() {
 }
 
 final class _BareException extends CoreException {
-  const _BareException({
+  const new({
     required super.messageKey,
     super.innerMessage,
     super.innerError,

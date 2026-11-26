@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 final class _FakeConfig implements ConfigBase {
-  _FakeConfig(this.id);
+  new(this.id);
 
   final int id;
   static final List<int> initOrder = [];

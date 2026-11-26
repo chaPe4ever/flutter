@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_ui/theme/app_effect_styles.dart';
 import 'package:shared_ui/theme/app_text_theme.dart';
 import 'package:shared_ui/theme/pallete/app_semantic_colors.dart';

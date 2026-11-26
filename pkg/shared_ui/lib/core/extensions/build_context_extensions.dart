@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 extension BuildContextEx on BuildContext {
@@ -19,7 +18,7 @@ extension BuildContextEx on BuildContext {
     context: this,
     barrierDismissible: barrierDismissible,
     routeSettings: const RouteSettings(name: 'AppDialog'),
-    builder: (BuildContext context) => child,
+    builder: (context) => child,
   );
 
   Future<T?> showDialogPrimary<T>({
@@ -33,7 +32,7 @@ extension BuildContextEx on BuildContext {
     context: this,
     barrierDismissible: barrierDismissible,
     routeSettings: const RouteSettings(name: 'AppDialog.primary'),
-    builder: (BuildContext context) => AppDialog.primary(
+    builder: (context) => AppDialog.primary(
       key: key,
       title: title,
       content: content,
@@ -55,7 +54,7 @@ extension BuildContextEx on BuildContext {
     context: this,
     barrierDismissible: barrierDismissible,
     routeSettings: const RouteSettings(name: 'AppDialog.secondary'),
-    builder: (BuildContext context) => AppDialog.secondary(
+    builder: (context) => AppDialog.secondary(
       key: key,
       title: title,
       content: content,
@@ -79,7 +78,7 @@ extension BuildContextEx on BuildContext {
     context: this,
     barrierDismissible: barrierDismissible,
     routeSettings: const RouteSettings(name: 'AppDialog.danger'),
-    builder: (BuildContext context) => AppDialog.danger(
+    builder: (context) => AppDialog.danger(
       key: key,
       title: title,
       content: content,
@@ -151,7 +150,7 @@ extension BuildContextEx on BuildContext {
       isDismissible: isDismissible,
       useRootNavigator: useRootNavigator,
       isScrollControlled: true,
-      builder: (BuildContext context) {
+      builder: (context) {
         return ConstrainedBox(
           constraints: BoxConstraints(
             minHeight: height * 0.35,

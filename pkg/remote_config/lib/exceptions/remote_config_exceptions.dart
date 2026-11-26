@@ -4,7 +4,7 @@ import 'package:remote_config/constants/trans_keys_constants.dart';
 
 ///
 sealed class RemoteConfigEx extends CoreException {
-  const RemoteConfigEx({
+  const new({
     required super.messageKey,
     super.innerCode,
     super.innerError,
@@ -17,7 +17,7 @@ sealed class RemoteConfigEx extends CoreException {
 /// UnknownCrashlyticsException is used as a fallback exception
 final class RemoteConfigFirebaseException extends RemoteConfigEx {
   ///
-  const RemoteConfigFirebaseException({
+  const new({
     super.messageKey = TransKeys.remoteConfigFirebaseExceptionMessageKey,
     super.innerCode,
     super.innerError,

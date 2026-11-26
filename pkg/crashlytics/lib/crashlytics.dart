@@ -38,7 +38,6 @@ export 'package:sentry_flutter/sentry_flutter.dart'
         SentryFeatures,
         SentryIdleSpanFinishReasons,
         SentryInternalLogger,
-        SentrySpanData,
         SentrySpanDescriptions,
         SentrySpanOperations,
         SentrySpanStatusMessages,

@@ -99,7 +99,7 @@ enum _Logger {
   cyan('36'),
   white('37');
 
-  const _Logger(this.code);
+  new(this.code);
   final String code;
 
   void log(dynamic text, {String name = 'App'}) {
@@ -188,7 +188,7 @@ class SignalsLogger extends LoggingSignalsObserver {
 }
 
 base class RiverpodLogger extends ProviderObserver {
-  const RiverpodLogger();
+  const new();
   @override
   void didUpdateProvider(
     ProviderObserverContext context,
@@ -213,7 +213,7 @@ base class RiverpodLogger extends ProviderObserver {
     );
     Log.riverpod(
       info: 'previousValueType: ${previousValue.runtimeType}',
-      verboseCb: ({required bool isActive}) {
+      verboseCb: ({required isActive}) {
         if (isActive) {
           return 'previousValue: $previousValue';
         }
@@ -222,7 +222,7 @@ base class RiverpodLogger extends ProviderObserver {
     );
     Log.riverpod(
       info: 'newValueType: ${newValue.runtimeType}',
-      verboseCb: ({required bool isActive}) {
+      verboseCb: ({required isActive}) {
         if (isActive) {
           return 'newValue: $newValue';
         }

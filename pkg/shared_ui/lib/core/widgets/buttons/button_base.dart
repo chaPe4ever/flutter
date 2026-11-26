@@ -1,11 +1,10 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 typedef IconBuilder = Widget Function(Color? iconColor);
 
 abstract class ButtonBase extends StatelessWidget {
-  const ButtonBase({super.key});
+  const new({super.key});
 
   /// The state when the user navigates with the keyboard to a given widget.
   ///
@@ -194,7 +193,7 @@ abstract class ButtonBase extends StatelessWidget {
 }
 
 abstract class ElevatedButtonBase extends ButtonBase {
-  const ElevatedButtonBase({
+  const new({
     required this.label,
     super.key,
     this.onTap,
@@ -278,7 +277,7 @@ abstract class ElevatedButtonBase extends ButtonBase {
 }
 
 abstract class OutlineButtonBase extends ButtonBase {
-  const OutlineButtonBase({
+  const new({
     required this.label,
     super.key,
     this.onTap,
@@ -361,7 +360,7 @@ abstract class OutlineButtonBase extends ButtonBase {
 }
 
 abstract class IconButtonBase extends ButtonBase {
-  const IconButtonBase({
+  const new({
     this.svg,
     this.icon,
     super.key,

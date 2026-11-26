@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AppNetworkImage extends StatelessWidget {
-  const AppNetworkImage({
+  const new({
     required this.url,
     super.key,
     this.alignment = Alignment.center,

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 enum AppButtonType {
@@ -9,7 +9,7 @@ enum AppButtonType {
 }
 
 class AppButton extends ElevatedButtonBase {
-  const AppButton._({
+  const new _({
     required super.label,
     required this.type,
     super.key,
@@ -19,7 +19,7 @@ class AppButton extends ElevatedButtonBase {
     super.fixedSize,
   });
 
-  factory AppButton.primary({
+  factory primary({
     required String label,
     Key? key,
     VoidCallback? onTap,
@@ -36,7 +36,7 @@ class AppButton extends ElevatedButtonBase {
     fixedSize: fixedSize,
   );
 
-  factory AppButton.secondary({
+  factory secondary({
     required String label,
     Key? key,
     VoidCallback? onTap,
@@ -53,7 +53,7 @@ class AppButton extends ElevatedButtonBase {
     fixedSize: fixedSize,
   );
 
-  factory AppButton.danger({
+  factory danger({
     required String label,
     Key? key,
     VoidCallback? onTap,
@@ -70,7 +70,7 @@ class AppButton extends ElevatedButtonBase {
     trailing: trailing,
   );
 
-  factory AppButton.text({
+  factory text({
     required String label,
     Key? key,
     VoidCallback? onTap,

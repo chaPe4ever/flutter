@@ -1,11 +1,10 @@
 import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 ///
 class AsyncValueSliverWidget<T> extends StatelessWidget {
   /// Constructor
-  const AsyncValueSliverWidget({
+  const new({
     required this.value,
     required this.data,
     this.loadingWidget,

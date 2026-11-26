@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 extension LocaleX on Locale {
   /// Convert locale to String with custom separator

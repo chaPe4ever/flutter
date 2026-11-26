@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:core/core.dart';
-import 'package:flutter/widgets.dart';
 
 extension RiverpodX on Ref {
   /// Cache can be used to cache data for a provided [duration] for an

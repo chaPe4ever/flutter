@@ -1,5 +1,5 @@
 abstract class AppSpacing {
-  const AppSpacing._();
+  const new _();
   static const deviderHeight = 1.0;
   // Content
   static const contentXS = 2.0;

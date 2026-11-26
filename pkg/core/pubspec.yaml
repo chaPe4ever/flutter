@@ -11,10 +11,11 @@ resolution: workspace
 dependencies:
   async: ^2.13.0
   cached_network_image: ^4.0.0
-  cloud_firestore: ^6.9.0
-  cloud_functions: ^6.4.0
+  cloud_firestore: ^7.2.0
+  cloud_functions: ^7.1.0
   collection: ^1.19.1
-  connectivity_plus: ^6.1.4
+  connectivity_plus: ^7.3.2
+  cupertino_ui: ^1.1.7
   custom_annotations:
     git:
       url: https://github.com/chaPe4ever/flutter
@@ -26,11 +27,11 @@ dependencies:
   easy_localization: ^3.0.7
   equatable: ^2.0.7
   faker: ^2.2.0
-  firebase_core: ^4.14.0
-  firebase_database: ^12.5.0
+  firebase_core: ^5.2.0
+  firebase_database: ^13.1.0
   flutter:
     sdk: flutter
-  flutter_hooks: ^0.21.2
+  flutter_hooks: ^0.21.4
   flutter_pdfview: ^1.4.1
   flutter_svg: ^2.2.0
   flutter_timezone: ^5.1.0
@@ -38,23 +39,23 @@ dependencies:
     sdk: flutter
   freezed_annotation: ^3.1.0
   gap: ^3.0.1
-  go_router: ^16.0.0
-  google_fonts: ^8.2.1
+  go_router: ^18.1.4
+  google_fonts: ^9.0.0
   hooks_riverpod: ^3.5.0
   json_annotation: ^4.9.0
   logger: ^2.6.0
+  material_ui: ^1.11.1
   package_info_plus: ^10.2.1
   path_provider: ^2.1.5
-  pdfrx: ^2.5.0
-  permission_handler: ^12.0.1
+  permission_handler: ^13.0.2
   pretty_dio_logger: ^1.4.0
   responsive_framework: ^1.5.1
   riverpod_annotation: ^4.0.8
   rxdart: ^0.28.0
   share_plus: ^13.3.0
   shared_preferences: ^2.5.3
-  shimmer: ^3.0.0
-  signals: ^6.0.2
+  shimmer: ^4.0.0
+  signals: ^7.1.0
   timezone: ^0.11.0
   url_launcher: ^6.3.1
   uuid: ^4.5.1
@@ -71,7 +72,7 @@ dev_dependencies:
       url: https://github.com/chaPe4ever/flutter
       ref: main
       path: builders/custom_builders
-  fake_cloud_firestore: ^4.2.0
+  fake_cloud_firestore: ^4.5.0
   # TODO: custom_lint still lags analyzer 13 (riverpod_generator 4.0.10 / freezed 4).
   # custom_lint: ^0.8.1
   firebase_core_platform_interface: ^8.1.1
@@ -81,7 +82,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^4.0.1
-  go_router_builder: ^4.2.0
+  go_router_builder: ^4.5.3
   integration_test:
     sdk: flutter
   json_serializable: ^6.9.5
@@ -89,7 +90,7 @@ dev_dependencies:
   riverpod_generator: ^4.0.10
   riverpod_lint: ^3.2.0
   shared_preferences_platform_interface: ^2.4.2
-  very_good_analysis: ^9.0.0
+  very_good_analysis: ^11.0.0
 
 flutter:
   uses-material-design: true

@@ -3,7 +3,7 @@ import 'package:authentication/constants/trans_keys_constants.dart';
 import 'package:core/core.dart';
 
 sealed class AuthenticationEx extends CoreException {
-  const AuthenticationEx({
+  const new({
     required super.messageKey,
     super.innerCode,
     super.innerError,
@@ -16,7 +16,7 @@ sealed class AuthenticationEx extends CoreException {
 ///
 final class AuthCanceledByUserException extends AuthenticationEx {
   ///
-  const AuthCanceledByUserException({
+  const new({
     super.messageKey = 'auth_canceled_by_user_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -28,7 +28,7 @@ final class AuthCanceledByUserException extends AuthenticationEx {
 ///
 final class AuthServerErrorException extends AuthenticationEx {
   ///
-  const AuthServerErrorException({
+  const new({
     super.messageKey = 'auth_server_error_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -40,7 +40,7 @@ final class AuthServerErrorException extends AuthenticationEx {
 ///
 final class AuthEmailAlreadyInUseException extends AuthenticationEx {
   ///
-  const AuthEmailAlreadyInUseException({
+  const new({
     super.messageKey = 'auth_email_already_in_use_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -53,7 +53,7 @@ final class AuthEmailAlreadyInUseException extends AuthenticationEx {
 final class AuthInvalidEmailAndPasswordCombinationException
     extends AuthenticationEx {
   ///
-  const AuthInvalidEmailAndPasswordCombinationException({
+  const new({
     super.messageKey =
         'auth_invalid_email_and_password_combination_exception_message_key',
     super.innerCode,
@@ -66,7 +66,7 @@ final class AuthInvalidEmailAndPasswordCombinationException
 ///
 final class InvalidPasswordException extends AuthenticationEx {
   ///
-  const InvalidPasswordException({
+  const new({
     super.messageKey = 'invalid_password_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -78,7 +78,7 @@ final class InvalidPasswordException extends AuthenticationEx {
 ///
 final class InvalidEmailException extends AuthenticationEx {
   ///
-  const InvalidEmailException({
+  const new({
     super.messageKey = 'invalid_email_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -89,7 +89,7 @@ final class InvalidEmailException extends AuthenticationEx {
 
 final class SignOutFailedException extends AuthenticationEx {
   ///
-  const SignOutFailedException({
+  const new({
     super.messageKey = 'sign_out_failed_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -100,7 +100,7 @@ final class SignOutFailedException extends AuthenticationEx {
 
 final class NoSignedInUserException extends AuthenticationEx {
   ///
-  const NoSignedInUserException({
+  const new({
     super.messageKey = 'no_signed_in_user_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -111,7 +111,7 @@ final class NoSignedInUserException extends AuthenticationEx {
 
 final class IsEmailVerifiedFailedException extends AuthenticationEx {
   ///
-  const IsEmailVerifiedFailedException({
+  const new({
     super.messageKey = 'is_email_verified_failed_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -122,7 +122,7 @@ final class IsEmailVerifiedFailedException extends AuthenticationEx {
 
 final class ResetPasswordFailedException extends AuthenticationEx {
   ///
-  const ResetPasswordFailedException({
+  const new({
     super.messageKey = 'reset_password_failed_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -133,7 +133,7 @@ final class ResetPasswordFailedException extends AuthenticationEx {
 
 final class SendEmailVerificationFailedException extends AuthenticationEx {
   ///
-  const SendEmailVerificationFailedException({
+  const new({
     super.messageKey = 'send_email_verification_failed_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -144,7 +144,7 @@ final class SendEmailVerificationFailedException extends AuthenticationEx {
 
 final class UserEmailIsNullAuthException extends AuthenticationEx {
   ///
-  const UserEmailIsNullAuthException({
+  const new({
     super.messageKey = 'user_email_is_null_auth_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -155,7 +155,7 @@ final class UserEmailIsNullAuthException extends AuthenticationEx {
 
 final class UnknownAuthException extends AuthenticationEx {
   ///
-  const UnknownAuthException({
+  const new({
     super.messageKey = 'unknown_auth_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -166,7 +166,7 @@ final class UnknownAuthException extends AuthenticationEx {
 
 final class RequiresRecentLoginException extends AuthenticationEx {
   ///
-  const RequiresRecentLoginException({
+  const new({
     super.messageKey = 'no_signed_in_user_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -177,7 +177,7 @@ final class RequiresRecentLoginException extends AuthenticationEx {
 
 final class FirebaseAuthRawException extends AuthenticationEx {
   ///
-  const FirebaseAuthRawException({
+  const new({
     super.messageKey = 'firebase_auth_core_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -188,7 +188,7 @@ final class FirebaseAuthRawException extends AuthenticationEx {
 
 final class UserSignedInUnonymouslyException extends AuthenticationEx {
   ///
-  const UserSignedInUnonymouslyException({
+  const new({
     super.messageKey = 'user_signed_in_anonymously_exception_message_key',
     super.innerCode,
     super.innerError,
@@ -199,7 +199,7 @@ final class UserSignedInUnonymouslyException extends AuthenticationEx {
 
 final class EmailNotVerifiedException extends AuthenticationEx {
   ///
-  const EmailNotVerifiedException({
+  const new({
     super.messageKey = TransKeys.emailNotVerified,
     super.innerCode,
     super.innerError,

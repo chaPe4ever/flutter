@@ -4,7 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// Consent client that throws when [getConsentStatus] is read.
 final class ThrowingGetConsentStatusClient implements ConsentClient {
-  ThrowingGetConsentStatusClient({ConsentClient? delegate})
+  new({ConsentClient? delegate})
     : _delegate = delegate ?? GoogleConsentClient();
 
   final ConsentClient _delegate;

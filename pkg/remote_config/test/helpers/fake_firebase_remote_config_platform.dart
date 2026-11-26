@@ -5,7 +5,7 @@ import 'package:firebase_remote_config_platform_interface/firebase_remote_config
 
 final class FakeFirebaseRemoteConfigPlatform
     extends FirebaseRemoteConfigPlatform {
-  FakeFirebaseRemoteConfigPlatform({FirebaseApp? app})
+  new({FirebaseApp? app})
     : super(appInstance: app);
 
   final StreamController<RemoteConfigUpdate> configUpdatesController =

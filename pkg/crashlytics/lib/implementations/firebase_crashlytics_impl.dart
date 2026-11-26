@@ -6,11 +6,10 @@ import 'package:flutter/foundation.dart';
 ///
 final class FirebaseCrashlyticsImpl implements CrashlyticsBase {
   ///
-  FirebaseCrashlyticsImpl({
-    required FirebaseCrashlytics crashlytics,
+  new({
+    required this._crashlytics,
     IsolateErrorListenerRegistrar? registerIsolateErrorListener,
-  }) : _crashlytics = crashlytics,
-       _registerIsolateErrorListener =
+  }) : _registerIsolateErrorListener =
            registerIsolateErrorListener ?? registerDefaultIsolateErrorListener;
 
   final FirebaseCrashlytics _crashlytics;

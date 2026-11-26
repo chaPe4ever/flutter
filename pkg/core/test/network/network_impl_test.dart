@@ -6,11 +6,11 @@ import 'package:core/network/network_status.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class FakeConnectivity extends Fake implements Connectivity {
-  FakeConnectivity({
-    required Stream<List<ConnectivityResult>> onChanged,
+  new({
+    required this._onChanged,
     this.checkResults = const [ConnectivityResult.wifi],
     this.throwOnCheck = false,
-  }) : _onChanged = onChanged;
+  });
 
   final Stream<List<ConnectivityResult>> _onChanged;
   List<ConnectivityResult> checkResults;

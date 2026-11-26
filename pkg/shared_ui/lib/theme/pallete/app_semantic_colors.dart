@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shared_ui/theme/pallete/app_primitive_colors.dart';
 
 abstract class AppSemanticColors {
-  const AppSemanticColors._();
+  const new _();
   static const SemanticColors light = SemanticColors(
     borderBrand: AppPrimitiveColors.basePurpleRegular,
     borderDisabled: AppPrimitiveColors.baseGrayRegular,
@@ -111,7 +111,7 @@ abstract class AppSemanticColors {
 }
 
 final class SemanticColors {
-  const SemanticColors({
+  const new({
     required this.borderPrimary,
     required this.borderInversed,
     required this.borderPressed,

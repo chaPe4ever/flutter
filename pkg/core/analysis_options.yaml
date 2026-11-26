@@ -12,9 +12,12 @@ analyzer:
     # $ types resolve from package:core/core.dart. Those generated symbols are
     # marked internal.
     invalid_export_of_internal_element: ignore
+    one_member_abstracts: ignore
   # plugins:
   #   - custom_lint
 
 linter:
   rules:
     public_member_api_docs: false
+    discarded_futures: false
+    async_return_with_no_await: false

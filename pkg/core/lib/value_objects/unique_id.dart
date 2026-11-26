@@ -4,12 +4,12 @@ import 'package:core/core.dart';
 final class UniqueId extends ValueObject<String> {
   /// We cannot let a simple String be passed in. This would allow for
   /// possible non-unique IDs.
-  factory UniqueId() => UniqueId._(right(const Uuid().v1()));
+  factory() => UniqueId._(right(const Uuid().v1()));
 
-  const UniqueId._(this.value);
+  const new _(this.value);
 
   /// Used with strings we trust are unique, such as database IDs.
-  factory UniqueId.fromUniqueString(String uniqueIdStr) {
+  factory fromUniqueString(String uniqueIdStr) {
     return UniqueId._(right(uniqueIdStr));
   }
 

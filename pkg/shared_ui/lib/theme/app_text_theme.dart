@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shared_ui/theme/pallete/app_semantic_colors.dart';
 
 PlatformTextStyles platformTextStylesFor(
@@ -26,14 +26,14 @@ extension AppTextThemeX on AppTextTheme {
 
 @immutable
 class AppTextTheme extends ThemeExtension<AppTextTheme> {
-  const AppTextTheme({
+  const new({
     required this.android,
     required this.ios,
     required this.web,
     required this.desktop,
   });
 
-  AppTextTheme.light()
+  new light()
     : this(
         android: PlatformTextStyles.light(
           primaryColor: AppSemanticColors.light.contentPrimary,
@@ -53,7 +53,7 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
         ),
       );
 
-  AppTextTheme.dark()
+  new dark()
     : this(
         android: PlatformTextStyles.dark(
           primaryColor: AppSemanticColors.dark.contentPrimary,
@@ -106,7 +106,7 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
 
 @immutable
 class PlatformTextStyles {
-  factory PlatformTextStyles.lerp(
+  factory lerp(
     PlatformTextStyles a,
     PlatformTextStyles b,
     double t,
@@ -126,7 +126,7 @@ class PlatformTextStyles {
       headlineL: TextStyle.lerp(a.headlineL, b.headlineL, t)!,
     );
   }
-  factory PlatformTextStyles.dark({
+  factory dark({
     required Color primaryColor,
     required String fontFamily,
   }) {
@@ -135,7 +135,7 @@ class PlatformTextStyles {
       fontFamily: fontFamily,
     );
   }
-  const PlatformTextStyles._({
+  const new _({
     required this.labelS,
     required this.labelM,
     required this.labelL,
@@ -150,7 +150,7 @@ class PlatformTextStyles {
     required this.headlineL,
   });
 
-  factory PlatformTextStyles.light({
+  factory light({
     required Color primaryColor,
     required String fontFamily,
   }) {

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:core/extensions/locale_extensions.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Assets helper class
 class AssetsHelper {

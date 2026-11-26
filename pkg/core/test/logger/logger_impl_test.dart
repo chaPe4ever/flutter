@@ -49,7 +49,7 @@ void main() {
 }
 
 final class _CollectingOutput extends LogOutput {
-  _CollectingOutput(this.events);
+  new(this.events);
 
   final List<OutputEvent> events;
 

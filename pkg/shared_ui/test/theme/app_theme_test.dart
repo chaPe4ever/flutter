@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shared_ui/theme/app_theme.dart';
 import 'package:shared_ui/theme/pallete/app_semantic_colors.dart';
 

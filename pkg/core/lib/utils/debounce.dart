@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Debouncing is a programming pattern or a technique to restrict the
 /// calling of a time-consuming function frequently, by delaying the execution
 /// of the function until a specified time to avoid unnecessary CPU cycles,
 /// and API calls and improve performance.
 class Debounce {
-  const Debounce({this.duration = const Duration(milliseconds: 230)});
+  const new({this.duration = const Duration(milliseconds: 230)});
 
   static Timer? _timer;
 

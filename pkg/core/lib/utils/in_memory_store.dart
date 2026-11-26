@@ -3,7 +3,7 @@ import 'package:rxdart/rxdart.dart';
 /// An in-memory store backed by BehaviorSubject that can be used to
 /// store the data for all the fake repositories in the app.
 class InMemoryStore<T> {
-  InMemoryStore(T initial) : _subject = BehaviorSubject<T>.seeded(initial);
+  new(T initial) : _subject = BehaviorSubject<T>.seeded(initial);
 
   /// The BehaviorSubject that holds the data
   final BehaviorSubject<T> _subject;
@@ -22,7 +22,7 @@ class InMemoryStore<T> {
 }
 
 class InMemoryBroadcast<T> {
-  InMemoryBroadcast() : _subject = PublishSubject<T>();
+  new() : _subject = PublishSubject<T>();
 
   /// The BehaviorSubject that holds the data
   final PublishSubject<T> _subject;

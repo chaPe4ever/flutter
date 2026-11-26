@@ -1,8 +1,8 @@
-import 'package:core/core.dart';
-import 'package:flutter/material.dart';
+import 'package:core/core.dart' hide useTabController;
+import 'package:material_hooks/material_hooks.dart';
 
 class AppTabBar extends HookWidget implements PreferredSizeWidget {
-  const AppTabBar({required this.tabs, this.controller, this.onTap, super.key});
+  const new({required this.tabs, this.controller, this.onTap, super.key});
   final List<String> tabs;
   final TabController? controller;
   final ValueChanged<int>? onTap;

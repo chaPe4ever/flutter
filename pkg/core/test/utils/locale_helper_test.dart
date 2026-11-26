@@ -1,7 +1,7 @@
 import 'package:core/utils/locale_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +37,10 @@ void main() {
         child: Builder(
           builder: (context) {
             return MaterialApp(
-              localizationsDelegates: context.localizationDelegates,
+              localizationsDelegates: [
+                ...context.localizationDelegates,
+                ...GlobalMaterialLocalizations.delegates,
+              ],
               supportedLocales: context.supportedLocales,
               locale: context.locale,
               home: Builder(
@@ -77,7 +80,10 @@ void main() {
         child: Builder(
           builder: (context) {
             return MaterialApp(
-              localizationsDelegates: context.localizationDelegates,
+              localizationsDelegates: [
+                ...context.localizationDelegates,
+                ...GlobalMaterialLocalizations.delegates,
+              ],
               supportedLocales: context.supportedLocales,
               locale: context.locale,
               home: Builder(

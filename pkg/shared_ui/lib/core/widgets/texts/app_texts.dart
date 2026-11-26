@@ -1,11 +1,10 @@
 import 'package:core/core.dart';
-import 'package:flutter/widgets.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 enum TextSizeEnum { xs, s, m, l }
 
 abstract class AppText extends StatelessWidget {
-  const AppText(
+  const new(
     this._size, {
     required this.text,
     this.textAlign,
@@ -37,7 +36,7 @@ abstract class AppText extends StatelessWidget {
 }
 
 class TextHeadline extends AppText {
-  const TextHeadline._(
+  const new _(
     super._size, {
     required super.text,
     this.color,
@@ -48,7 +47,7 @@ class TextHeadline extends AppText {
     super.softWrap,
   });
 
-  factory TextHeadline.s(
+  factory s(
     String text, {
     Key? key,
     Color? color,
@@ -67,7 +66,7 @@ class TextHeadline extends AppText {
     maxLines: maxLines,
   );
 
-  factory TextHeadline.m(
+  factory m(
     String text, {
     Key? key,
     Color? color,
@@ -86,7 +85,7 @@ class TextHeadline extends AppText {
     maxLines: maxLines,
   );
 
-  factory TextHeadline.l(
+  factory l(
     String text, {
     Key? key,
     Color? color,
@@ -106,7 +105,7 @@ class TextHeadline extends AppText {
   );
 
   /// Allows constructing unsupported sizes so [style] can throw in tests.
-  factory TextHeadline.withSize(TextSizeEnum size, String text) =>
+  factory withSize(TextSizeEnum size, String text) =>
       TextHeadline._(size, text: text);
 
   final Color? color;
@@ -125,7 +124,7 @@ class TextHeadline extends AppText {
 }
 
 class TextTitle extends AppText {
-  const TextTitle._(
+  const new _(
     super._size, {
     required super.text,
     super.overflow,
@@ -136,7 +135,7 @@ class TextTitle extends AppText {
     super.softWrap,
   });
 
-  factory TextTitle.m(
+  factory m(
     String text, {
     Color? color,
     bool? softWrap,
@@ -155,7 +154,7 @@ class TextTitle extends AppText {
     overflow: overflow,
   );
 
-  factory TextTitle.l(
+  factory l(
     String text, {
     Color? color,
     Key? key,
@@ -175,7 +174,7 @@ class TextTitle extends AppText {
   );
 
   /// Allows constructing unsupported sizes so [style] can throw in tests.
-  factory TextTitle.withSize(TextSizeEnum size, String text) =>
+  factory withSize(TextSizeEnum size, String text) =>
       TextTitle._(size, text: text);
 
   final Color? color;
@@ -193,7 +192,7 @@ class TextTitle extends AppText {
 }
 
 class TextBody extends AppText {
-  const TextBody._(
+  const new _(
     super._size, {
     required super.text,
     super.textAlign,
@@ -204,7 +203,7 @@ class TextBody extends AppText {
     super.softWrap,
   });
 
-  factory TextBody.xs(
+  factory xs(
     String text, {
     Key? key,
     Color? color,
@@ -223,7 +222,7 @@ class TextBody extends AppText {
     overflow: overflow,
   );
 
-  factory TextBody.s(
+  factory s(
     String text, {
     Key? key,
     Color? color,
@@ -242,7 +241,7 @@ class TextBody extends AppText {
     overflow: overflow,
   );
 
-  factory TextBody.m(
+  factory m(
     String text, {
     Key? key,
     Color? color,
@@ -261,7 +260,7 @@ class TextBody extends AppText {
     overflow: overflow,
   );
 
-  factory TextBody.l(
+  factory l(
     String text, {
     Key? key,
     Color? color,
@@ -293,7 +292,7 @@ class TextBody extends AppText {
 }
 
 final class TextLabel extends AppText {
-  const TextLabel._(
+  const new _(
     super._size, {
     required super.text,
     super.key,
@@ -304,7 +303,7 @@ final class TextLabel extends AppText {
     super.softWrap,
   });
 
-  factory TextLabel.s(
+  factory s(
     String text, {
     Key? key,
     Color? color,
@@ -323,7 +322,7 @@ final class TextLabel extends AppText {
     overflow: overflow,
   );
 
-  factory TextLabel.m(
+  factory m(
     String text, {
     Key? key,
     Color? color,
@@ -342,7 +341,7 @@ final class TextLabel extends AppText {
     overflow: overflow,
   );
 
-  factory TextLabel.l(
+  factory l(
     String text, {
     Key? key,
     bool? softWrap,
@@ -362,7 +361,7 @@ final class TextLabel extends AppText {
   );
 
   /// Allows constructing unsupported sizes so [style] can throw in tests.
-  factory TextLabel.withSize(TextSizeEnum size, String text) =>
+  factory withSize(TextSizeEnum size, String text) =>
       TextLabel._(size, text: text);
 
   final Color? color;

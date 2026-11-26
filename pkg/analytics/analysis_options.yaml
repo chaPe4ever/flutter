@@ -7,6 +7,8 @@ analyzer:
     - "**.gr.dart"
     - "**/generated_plugin_registrant.dart"
     - build/**
+  errors:
+    one_member_abstracts: ignore
   # plugins:
   #   - custom_lint
 
@@ -14,3 +16,5 @@ linter:
   rules:
     unnecessary_library_name: false
     public_member_api_docs: false
+    discarded_futures: false
+    async_return_with_no_await: false

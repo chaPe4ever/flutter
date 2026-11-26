@@ -490,7 +490,7 @@ void main() {
 }
 
 final class _ReloadThrowingFakeUser extends FakeUser {
-  _ReloadThrowingFakeUser({this.code = 'user-not-found'})
+  new({this.code = 'user-not-found'})
     : super(
         metadata: UserMetadata(0, 0),
         uid: 'uid',
@@ -509,7 +509,7 @@ final class _ReloadThrowingFakeUser extends FakeUser {
 }
 
 final class _DeleteThrowingFakeUser extends FakeUser {
-  _DeleteThrowingFakeUser(this.exception)
+  new(this.exception)
     : super(
         metadata: UserMetadata(0, 0),
         uid: 'uid',
@@ -528,7 +528,7 @@ final class _DeleteThrowingFakeUser extends FakeUser {
 }
 
 final class _PasswordThrowingFakeUser extends FakeUser {
-  _PasswordThrowingFakeUser(this.exception)
+  new(this.exception)
     : super(
         metadata: UserMetadata(0, 0),
         uid: 'uid',
@@ -547,7 +547,7 @@ final class _PasswordThrowingFakeUser extends FakeUser {
 }
 
 final class _ReauthFakeUser extends FakeUser {
-  _ReauthFakeUser()
+  new()
     : super(
         metadata: UserMetadata(0, 0),
         uid: 'uid',
@@ -566,7 +566,7 @@ final class _ReauthFakeUser extends FakeUser {
 }
 
 final class _ReauthThrowingFakeUser extends FakeUser {
-  _ReauthThrowingFakeUser(this.exception)
+  new(this.exception)
     : super(
         metadata: UserMetadata(0, 0),
         uid: 'uid',
@@ -587,7 +587,7 @@ final class _ReauthThrowingFakeUser extends FakeUser {
 }
 
 final class _TokenThrowingFakeUser extends FakeUser {
-  _TokenThrowingFakeUser(this.exception)
+  new(this.exception)
     : super(
         metadata: UserMetadata(0, 0),
         uid: 'uid',

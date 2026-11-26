@@ -5,7 +5,7 @@ import 'package:shared_ui/features/licences_viewer/controllers/licences_page_con
 import '../../../shared/provider_container.dart';
 
 class _License extends LicenseEntry {
-  _License(this.packages, this.paragraphs);
+  new(this.packages, this.paragraphs);
 
   @override
   final List<String> packages;

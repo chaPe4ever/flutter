@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 class WmConfig implements ConfigBase {
   @override

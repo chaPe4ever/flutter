@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:shared_ui/theme/app_spacing.dart';
 
 abstract class AppPadding {
-  const AppPadding._();
+  const new _();
   static EdgeInsetsGeometry mobilePage = const EdgeInsets.symmetric(
     horizontal: AppSpacing.sectionXS,
   );

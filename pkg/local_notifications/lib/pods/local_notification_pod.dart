@@ -21,7 +21,7 @@ class LocalNotifications extends _$LocalNotifications {
 }
 
 class AndroidNotificationActionAdapter extends NotificationActionBase {
-  const AndroidNotificationActionAdapter({
+  const new({
     required super.id,
     required super.title,
     required super.titleColor,

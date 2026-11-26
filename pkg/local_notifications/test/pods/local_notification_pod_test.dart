@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local_notifications/implementations/local_notifications_impl.dart';

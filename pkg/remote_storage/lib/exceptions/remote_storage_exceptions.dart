@@ -3,7 +3,7 @@ import 'package:remote_storage/constants/remote_storage_constants.dart';
 
 ///
 sealed class RemoteStorageEx extends CoreException {
-  const RemoteStorageEx({
+  const new({
     required super.messageKey,
     super.innerCode,
     super.innerError,
@@ -16,7 +16,7 @@ sealed class RemoteStorageEx extends CoreException {
 ///
 final class FirebaseRemoteStorageException extends RemoteStorageEx {
   ///
-  FirebaseRemoteStorageException({
+  new({
     required super.messageKey,
     super.innerCode,
     super.innerError,
