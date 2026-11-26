@@ -1,20 +1,11 @@
 import 'package:analytics/contracts/analytics_base.dart';
 import 'package:analytics/unions/analytics_event.dart';
 import 'package:core/core.dart';
-import 'package:in_app_review/in_app_review.dart';
 import 'package:inapp_review/contracts/in_app_review_service_base.dart';
+import 'package:inapp_review/contracts/review_prompt_client.dart';
 import 'package:inapp_review/exceptions/in_app_review_exceptions.dart';
 
-/// Implementation of the in-app review service
 final class InAppReviewServiceImpl implements InAppReviewServiceBase {
-  /// Creates a new instance of the InAppReviewServiceImpl
-  ///
-  /// Requires:
-  /// - [inAppReview] - Platform in-app review API
-  /// - [localStorage] - Storage for tracking review state
-  /// - [network] - Network connectivity checker
-  /// - [logger] - Logging service
-  /// - [analytics] - Optional analytics service
   const new({
     required this.inAppReview,
     required this.localStorage,
@@ -24,7 +15,7 @@ final class InAppReviewServiceImpl implements InAppReviewServiceBase {
     this.getCurrentTime = defaultGetCurrentTime,
   });
 
-  final InAppReview inAppReview;
+  final ReviewPromptClient inAppReview;
   final LocalStorageBase localStorage;
   final NetworkBase network;
   final LoggerBase logger;
