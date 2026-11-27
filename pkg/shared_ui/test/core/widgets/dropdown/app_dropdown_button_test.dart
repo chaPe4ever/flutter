@@ -52,11 +52,7 @@ void main() {
     await pumpSharedUiWidget(
       tester,
       child: const Form(
-        child: AppDropdownButton(
-          labelText: 'Label',
-          items: ['a'],
-          value: 'a',
-        ),
+        child: AppDropdownButton(labelText: 'Label', items: ['a'], value: 'a'),
       ),
     );
     expect(find.byIcon(Icons.arrow_drop_down), findsOneWidget);

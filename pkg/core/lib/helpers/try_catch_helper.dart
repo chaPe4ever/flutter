@@ -257,9 +257,8 @@ Future<T> futureTryCatch<T>(
   if (await network.isConnected ||
       AppModeHelper().currentMode == AppModeEnum.fake) {
     if (cacheDuration.inSeconds >= 1) {
-      return AsyncCache<T>(
-        cacheDuration,
-      ).fetch(() => cb().catchError(_errorThroableCb));
+      return AsyncCache<T>(cacheDuration)
+          .fetch(() => cb().catchError(_errorThroableCb));
     } else {
       return cb().catchError(_errorThroableCb);
     }

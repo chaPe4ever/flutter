@@ -36,10 +36,7 @@ void main() {
 
       await SettingsHelper.init(
         storage: storage,
-        settingExtras: {
-          'existing': 'replace',
-          'newKey': 42,
-        },
+        settingExtras: {'existing': 'replace', 'newKey': 42},
       );
 
       expect(storage.store['existing'], 'keep');

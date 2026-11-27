@@ -159,9 +159,8 @@ void main() {
             return Column(
               children: [
                 TextButton(
-                  onPressed: () => context.showSnackBarError(
-                    UnknownCoreException(),
-                  ),
+                  onPressed: () =>
+                      context.showSnackBarError(UnknownCoreException()),
                   child: const Text('snack-err'),
                 ),
                 TextButton(

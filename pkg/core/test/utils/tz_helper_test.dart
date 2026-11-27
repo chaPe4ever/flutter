@@ -94,10 +94,7 @@ void main() {
     test('isDeviceTzEqTo compares device and app timezone', () async {
       const channel = MethodChannel('flutter_timezone');
       TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-          .setMockMethodCallHandler(
-            channel,
-            (_) async => 'Europe/Berlin',
-          );
+          .setMockMethodCallHandler(channel, (_) async => 'Europe/Berlin');
       addTearDown(
         () => TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
             .setMockMethodCallHandler(channel, null),

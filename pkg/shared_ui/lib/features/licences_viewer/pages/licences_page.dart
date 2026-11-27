@@ -19,10 +19,7 @@ class LicencesPage extends ConsumerWidget {
             children: [
               Assets.svg.appLogo.svg(height: 16),
               const SizedBox(width: AppSpacing.contentM),
-              TextBody.m(
-                TransKeys.licences.tr(),
-                textAlign: TextAlign.center,
-              ),
+              TextBody.m(TransKeys.licences.tr(), textAlign: TextAlign.center),
             ],
           ),
           const SizedBox(height: AppSpacing.sectionS),
@@ -41,31 +38,21 @@ class LicencesPage extends ConsumerWidget {
                         final item = licences[index];
                         return ExpansionTile(
                           key: Key(index.toString()),
-                          title: TextBody.m(
-                            item.packages.join(', '),
-                          ),
+                          title: TextBody.m(item.packages.join(', ')),
                           children: [
-                            TextBody.m(
-                              TransKeys.licences.tr(),
-                            ),
-                            const SizedBox(
-                              height: AppSpacing.contentL,
-                            ),
+                            TextBody.m(TransKeys.licences.tr()),
+                            const SizedBox(height: AppSpacing.contentL),
                             ListBody(
                               children: item.paragraphs.map((paragraph) {
                                 return Padding(
                                   padding: EdgeInsets.symmetric(
                                     horizontal: padding.horizontal,
                                   ),
-                                  child: TextBody.s(
-                                    paragraph.text,
-                                  ),
+                                  child: TextBody.s(paragraph.text),
                                 );
                               }).toList(),
                             ),
-                            const SizedBox(
-                              height: AppSpacing.contentL,
-                            ),
+                            const SizedBox(height: AppSpacing.contentL),
                           ],
                         );
                       },
@@ -76,10 +63,7 @@ class LicencesPage extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.sectionL),
-          AppButton.primary(
-            label: TransKeys.close.tr(),
-            onTap: context.pop,
-          ),
+          AppButton.primary(label: TransKeys.close.tr(), onTap: context.pop),
         ],
       ),
     );

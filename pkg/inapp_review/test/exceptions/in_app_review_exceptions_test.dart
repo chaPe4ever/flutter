@@ -19,10 +19,7 @@ void main() {
     test('InAppReviewNotSupportedDeviceException exposes its message key', () {
       const exception = InAppReviewNotSupportedDeviceException();
 
-      expect(
-        exception.messageKey,
-        TransKeys.inAppReviewNotSupportedDeviceKey,
-      );
+      expect(exception.messageKey, TransKeys.inAppReviewNotSupportedDeviceKey);
       expect(
         exception.toString(),
         '$kInAppReviewPkgName : ${TransKeys.inAppReviewNotSupportedDeviceKey}',

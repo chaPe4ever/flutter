@@ -19,10 +19,7 @@ void main() {
     });
 
     test('setUserId completes without side effects', () async {
-      await expectLater(
-        crashlytics.setUserId(userId: 'user-1'),
-        completes,
-      );
+      await expectLater(crashlytics.setUserId(userId: 'user-1'), completes);
     });
 
     test('captureException completes without side effects', () async {
@@ -33,10 +30,7 @@ void main() {
     });
 
     test('logEvent completes without side effects', () async {
-      await expectLater(
-        crashlytics.logEvent(message: 'noop'),
-        completes,
-      );
+      await expectLater(crashlytics.logEvent(message: 'noop'), completes);
     });
 
     test('testCrash completes without side effects', () {

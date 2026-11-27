@@ -119,10 +119,8 @@ void main() {
 
       expect(result.isLeft(), isTrue);
       result.fold(
-        (error) => expect(
-          error.innerMessage,
-          contains('app_version json is null'),
-        ),
+        (error) =>
+            expect(error.innerMessage, contains('app_version json is null')),
         (_) => fail('expected left'),
       );
     });
@@ -281,9 +279,7 @@ void main() {
 
     test('notifies version listeners after config updates', () async {
       Either<CoreException, AppVersionUpdateModel>? seen;
-      impl.addListener(
-        onVersionUpdate: (result) => seen = result,
-      );
+      impl.addListener(onVersionUpdate: (result) => seen = result);
 
       activeRemoteConfigPlatform.stringValues['app_version'] = jsonEncode(
         const AppVersionRemoteModel(

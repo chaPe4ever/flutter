@@ -30,10 +30,7 @@ void main() {
     );
     registerFallbackValue(
       const NotificationDetails(
-        android: AndroidNotificationDetails(
-          'channel',
-          'name',
-        ),
+        android: AndroidNotificationDetails('channel', 'name'),
       ),
     );
   });
@@ -64,24 +61,21 @@ void main() {
       () async {
         debugDefaultTargetPlatformOverride = TargetPlatform.android;
         final android = _MockAndroidFlutterLocalNotificationsPlugin();
-        when(
-          () => mockPlugin.initialize(settings: any(named: 'settings')),
-        ).thenAnswer((_) async => true);
+        when(() => mockPlugin.initialize(settings: any(named: 'settings')))
+            .thenAnswer((_) async => true);
         when(
           () => mockPlugin
               .resolvePlatformSpecificImplementation<
                 AndroidFlutterLocalNotificationsPlugin
               >(),
         ).thenReturn(android);
-        when(
-          android.requestNotificationsPermission,
-        ).thenAnswer((_) async => true);
+        when(android.requestNotificationsPermission)
+            .thenAnswer((_) async => true);
 
         await impl.init();
 
-        verify(
-          () => mockPlugin.initialize(settings: any(named: 'settings')),
-        ).called(1);
+        verify(() => mockPlugin.initialize(settings: any(named: 'settings')))
+            .called(1);
         verify(android.requestNotificationsPermission).called(1);
       },
     );
@@ -106,9 +100,8 @@ void main() {
               IOSFlutterLocalNotificationsPlugin
             >(),
       ).thenReturn(ios);
-      when(
-        () => ios.requestPermissions(alert: true, badge: true, sound: true),
-      ).thenAnswer((_) async => true);
+      when(() => ios.requestPermissions(alert: true, badge: true, sound: true))
+          .thenAnswer((_) async => true);
 
       await impl.init(
         onDidReceiveBackgroundNotificationResponse: (_) {},
@@ -134,9 +127,8 @@ void main() {
     test('requests macOS permissions', () async {
       debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
       final macos = _MockMacOsFlutterLocalNotificationsPlugin();
-      when(
-        () => mockPlugin.initialize(settings: any(named: 'settings')),
-      ).thenAnswer((_) async => true);
+      when(() => mockPlugin.initialize(settings: any(named: 'settings')))
+          .thenAnswer((_) async => true);
       when(
         () => mockPlugin
             .resolvePlatformSpecificImplementation<
@@ -156,9 +148,8 @@ void main() {
 
     test('throws when the platform is not supported', () async {
       debugDefaultTargetPlatformOverride = TargetPlatform.linux;
-      when(
-        () => mockPlugin.initialize(settings: any(named: 'settings')),
-      ).thenAnswer((_) async => true);
+      when(() => mockPlugin.initialize(settings: any(named: 'settings')))
+          .thenAnswer((_) async => true);
 
       await expectLater(impl.init(), throwsA(isA<UnimplementedError>()));
     });
@@ -241,9 +232,8 @@ void main() {
 
   group('cancel', () {
     test('cancelNotification forwards the id', () async {
-      when(
-        () => mockPlugin.cancel(id: any(named: 'id')),
-      ).thenAnswer((_) async {});
+      when(() => mockPlugin.cancel(id: any(named: 'id')))
+          .thenAnswer((_) async {});
 
       await impl.cancelNotification(id: 9);
 

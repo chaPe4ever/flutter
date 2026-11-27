@@ -13,10 +13,7 @@ void main() {
       tester,
       child: Column(
         children: [
-          AppBottomButtonBar.singlePrimary(
-            label: 'Go',
-            onTap: () => primary++,
-          ),
+          AppBottomButtonBar.singlePrimary(label: 'Go', onTap: () => primary++),
           AppBottomButtonBar.singleSecondary(
             label: 'Back',
             onTap: () => secondary++,

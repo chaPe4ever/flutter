@@ -28,10 +28,7 @@ void main() {
     user = MockUser();
     userCredential = MockUserCredential();
     logger = FakeLogger();
-    facade = FirebaseAuthFacade(
-      firebaseAuth: firebaseAuth,
-      loggerBase: logger,
-    );
+    facade = FirebaseAuthFacade(firebaseAuth: firebaseAuth, loggerBase: logger);
 
     when(() => user.uid).thenReturn('uid-1');
     when(() => user.email).thenReturn('user@example.com');
@@ -43,18 +40,16 @@ void main() {
     when(() => user.updatePassword(any())).thenAnswer((_) async {});
     when(() => user.getIdToken()).thenAnswer((_) async => 'token');
     when(() => user.sendEmailVerification(any())).thenAnswer((_) async {});
-    when(() => user.reauthenticateWithCredential(any())).thenAnswer(
-      (_) async => userCredential,
-    );
+    when(() => user.reauthenticateWithCredential(any()))
+        .thenAnswer((_) async => userCredential);
     when(() => user.updateDisplayName(any())).thenAnswer((_) async {});
 
     when(() => userCredential.user).thenReturn(user);
     when(() => userCredential.additionalUserInfo).thenReturn(null);
 
     when(() => firebaseAuth.currentUser).thenReturn(user);
-    when(() => firebaseAuth.authStateChanges()).thenAnswer(
-      (_) => const Stream<User?>.empty(),
-    );
+    when(() => firebaseAuth.authStateChanges())
+        .thenAnswer((_) => const Stream<User?>.empty());
     when(() => firebaseAuth.signOut()).thenAnswer((_) async {});
   });
 
@@ -155,28 +150,25 @@ void main() {
       },
     );
 
-    test(
-      'maps invalid credential codes to '
-      'AuthInvalidEmailAndPasswordCombinationException',
-      () async {
-        when(
-          () => firebaseAuth.signInWithEmailAndPassword(
-            email: any(named: 'email'),
-            password: any(named: 'password'),
-          ),
-        ).thenThrow(FirebaseAuthException(code: 'wrong-password'));
+    test('maps invalid credential codes to '
+        'AuthInvalidEmailAndPasswordCombinationException', () async {
+      when(
+        () => firebaseAuth.signInWithEmailAndPassword(
+          email: any(named: 'email'),
+          password: any(named: 'password'),
+        ),
+      ).thenThrow(FirebaseAuthException(code: 'wrong-password'));
 
-        final result = await facade.signInWithEmailAndPassword(
-          email: validEmail(),
-          password: validPassword(),
-        );
+      final result = await facade.signInWithEmailAndPassword(
+        email: validEmail(),
+        password: validPassword(),
+      );
 
-        expect(
-          result,
-          authSome(const AuthInvalidEmailAndPasswordCombinationException()),
-        );
-      },
-    );
+      expect(
+        result,
+        authSome(const AuthInvalidEmailAndPasswordCombinationException()),
+      );
+    });
 
     test('maps unknown Firebase errors to AuthServerErrorException', () async {
       when(
@@ -201,9 +193,8 @@ void main() {
         email: 'user@example.com',
         password: 'secret12',
       );
-      when(
-        () => firebaseAuth.signInWithCredential(authCredential),
-      ).thenAnswer((_) async => userCredential);
+      when(() => firebaseAuth.signInWithCredential(authCredential))
+          .thenAnswer((_) async => userCredential);
 
       final result = await facade.signInWithCredential(
         authCredential: authCredential,
@@ -218,9 +209,8 @@ void main() {
       final additional = MockAdditionalUserInfo();
       when(() => additional.isNewUser).thenReturn(true);
       when(() => userCredential.additionalUserInfo).thenReturn(additional);
-      when(
-        () => firebaseAuth.signInWithProvider(any()),
-      ).thenAnswer((_) async => userCredential);
+      when(() => firebaseAuth.signInWithProvider(any()))
+          .thenAnswer((_) async => userCredential);
 
       final result = await facade.signInWithGoogle(locale: 'de');
 
@@ -228,9 +218,8 @@ void main() {
     });
 
     test('returns null for returning google users', () async {
-      when(
-        () => firebaseAuth.signInWithProvider(any()),
-      ).thenAnswer((_) async => userCredential);
+      when(() => firebaseAuth.signInWithProvider(any()))
+          .thenAnswer((_) async => userCredential);
 
       final result = await facade.signInWithGoogle();
 
@@ -238,9 +227,8 @@ void main() {
     });
 
     test('maps popup cancellation to AuthCanceledByUserException', () async {
-      when(() => firebaseAuth.signInWithProvider(any())).thenThrow(
-        FirebaseAuthException(code: 'popup-closed-by-user'),
-      );
+      when(() => firebaseAuth.signInWithProvider(any()))
+          .thenThrow(FirebaseAuthException(code: 'popup-closed-by-user'));
 
       final result = await facade.signInWithGoogle();
 
@@ -254,10 +242,7 @@ void main() {
 
       final result = await facade.signInWithGoogle();
 
-      expect(
-        result,
-        authLeft<User?>(const AuthServerErrorException()),
-      );
+      expect(result, authLeft<User?>(const AuthServerErrorException()));
     });
   });
 
@@ -336,9 +321,8 @@ void main() {
   group('password reset and action codes', () {
     test('checkActionCode returns action code info', () async {
       final info = MockActionCodeInfo();
-      when(
-        () => firebaseAuth.checkActionCode('code'),
-      ).thenAnswer((_) async => info);
+      when(() => firebaseAuth.checkActionCode('code'))
+          .thenAnswer((_) async => info);
 
       final result = await facade.checkActionCode(code: 'code');
 
@@ -366,9 +350,8 @@ void main() {
     });
 
     test('verifyPasswordResetCode returns the email', () async {
-      when(
-        () => firebaseAuth.verifyPasswordResetCode('code'),
-      ).thenAnswer((_) async => 'user@example.com');
+      when(() => firebaseAuth.verifyPasswordResetCode('code'))
+          .thenAnswer((_) async => 'user@example.com');
 
       expect(
         await facade.verifyPasswordResetCode(code: 'code'),
@@ -394,9 +377,8 @@ void main() {
     });
 
     test('setPersistence completes on success', () async {
-      when(
-        () => firebaseAuth.setPersistence(Persistence.LOCAL),
-      ).thenAnswer((_) async {});
+      when(() => firebaseAuth.setPersistence(Persistence.LOCAL))
+          .thenAnswer((_) async {});
 
       expect(
         await facade.setPersistence(persistence: Persistence.LOCAL),
@@ -421,9 +403,8 @@ void main() {
     });
 
     test('deleteCurrentUser maps requires-recent-login', () async {
-      when(() => user.delete()).thenThrow(
-        FirebaseAuthException(code: 'requires-recent-login'),
-      );
+      when(() => user.delete())
+          .thenThrow(FirebaseAuthException(code: 'requires-recent-login'));
 
       expect(
         await facade.deleteCurrentUser(),
@@ -434,9 +415,8 @@ void main() {
     test(
       'deleteCurrentUser wraps other FirebaseAuthException errors',
       () async {
-        when(() => user.delete()).thenThrow(
-          FirebaseAuthException(code: 'network-request-failed'),
-        );
+        when(() => user.delete())
+            .thenThrow(FirebaseAuthException(code: 'network-request-failed'));
 
         final result = await facade.deleteCurrentUser();
 
@@ -466,9 +446,8 @@ void main() {
     });
 
     test('updatePassword maps requires-recent-login', () async {
-      when(() => user.updatePassword(any())).thenThrow(
-        FirebaseAuthException(code: 'requires-recent-login'),
-      );
+      when(() => user.updatePassword(any()))
+          .thenThrow(FirebaseAuthException(code: 'requires-recent-login'));
 
       expect(
         await facade.updatePassword(password: validPassword()),
@@ -477,9 +456,8 @@ void main() {
     });
 
     test('updatePassword wraps other FirebaseAuthException errors', () async {
-      when(() => user.updatePassword(any())).thenThrow(
-        FirebaseAuthException(code: 'network-request-failed'),
-      );
+      when(() => user.updatePassword(any()))
+          .thenThrow(FirebaseAuthException(code: 'network-request-failed'));
 
       final result = await facade.updatePassword(password: validPassword());
 
@@ -512,9 +490,8 @@ void main() {
     });
 
     test('reAuthenticateWithPassword maps wrong-password', () async {
-      when(() => user.reauthenticateWithCredential(any())).thenThrow(
-        FirebaseAuthException(code: 'wrong-password'),
-      );
+      when(() => user.reauthenticateWithCredential(any()))
+          .thenThrow(FirebaseAuthException(code: 'wrong-password'));
 
       expect(
         await facade.reAuthenticateWithPassword(password: validPassword()),
@@ -532,9 +509,8 @@ void main() {
     test(
       'reAuthenticateWithPassword wraps other FirebaseAuthException errors',
       () async {
-        when(() => user.reauthenticateWithCredential(any())).thenThrow(
-          FirebaseAuthException(code: 'network-request-failed'),
-        );
+        when(() => user.reauthenticateWithCredential(any()))
+            .thenThrow(FirebaseAuthException(code: 'network-request-failed'));
 
         final result = await facade.reAuthenticateWithPassword(
           password: validPassword(),
@@ -566,9 +542,8 @@ void main() {
     );
 
     test('wraps FirebaseAuthException from getIdToken', () async {
-      when(() => user.getIdToken()).thenThrow(
-        FirebaseAuthException(code: 'user-token-expired'),
-      );
+      when(() => user.getIdToken())
+          .thenThrow(FirebaseAuthException(code: 'user-token-expired'));
 
       final result = await facade.idToken;
 
@@ -586,9 +561,8 @@ void main() {
       var signedOut = false;
       final controller = StreamController<User?>();
 
-      when(() => firebaseAuth.authStateChanges()).thenAnswer(
-        (_) => controller.stream,
-      );
+      when(() => firebaseAuth.authStateChanges())
+          .thenAnswer((_) => controller.stream);
 
       facade.addListener(
         onSignIn: (_) => signedIn = true,
@@ -608,9 +582,8 @@ void main() {
 
     test('removeListener cancels auth subscriptions when empty', () async {
       final controller = StreamController<User?>();
-      when(() => firebaseAuth.authStateChanges()).thenAnswer(
-        (_) => controller.stream,
-      );
+      when(() => firebaseAuth.authStateChanges())
+          .thenAnswer((_) => controller.stream);
 
       Future<void> onPreSignOut() async {}
       void onSignOut() {}
@@ -636,9 +609,7 @@ void main() {
       final events = <List<Future<void>>>[];
       final subscription = facade.priorSignOutStream().listen(events.add);
 
-      facade.addListener(
-        onPreSignOut: () async {},
-      );
+      facade.addListener(onPreSignOut: () async {});
       await facade.signOut();
       await Future<void>.delayed(Duration.zero);
 
@@ -673,9 +644,8 @@ void main() {
 
     test('isOAuthUser is true when a non-password provider exists', () {
       final provider = MockUserInfo();
-      when(
-        () => provider.providerId,
-      ).thenReturn(GoogleAuthProvider.PROVIDER_ID);
+      when(() => provider.providerId)
+          .thenReturn(GoogleAuthProvider.PROVIDER_ID);
       when(() => user.providerData).thenReturn([provider]);
 
       expect(facade.isOAuthUser, isTrue);

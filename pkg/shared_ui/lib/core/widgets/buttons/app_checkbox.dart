@@ -24,21 +24,13 @@ class AppCheckbox extends StatelessWidget {
           Transform.scale(
             scale: context.responsive(0.6, xs: 0.6),
             child: Transform.translate(
-              offset: context.responsive(
-                const Offset(-15, 0),
-              ),
+              offset: context.responsive(const Offset(-15, 0)),
               child: Checkbox(
-                side: WidgetStateBorderSide.resolveWith(
-                  (states) {
-                    return states.contains(WidgetState.selected)
-                        ? BorderSide(
-                            color: context.colors.backgroundBrand,
-                          )
-                        : BorderSide(
-                            color: context.colors.backgroundDisabled,
-                          );
-                  },
-                ),
+                side: WidgetStateBorderSide.resolveWith((states) {
+                  return states.contains(WidgetState.selected)
+                      ? BorderSide(color: context.colors.backgroundBrand)
+                      : BorderSide(color: context.colors.backgroundDisabled);
+                }),
                 visualDensity: VisualDensity.compact,
                 splashRadius: 0,
                 value: value,
@@ -48,9 +40,7 @@ class AppCheckbox extends StatelessWidget {
           ),
           if (label != null)
             Transform.translate(
-              offset: context.responsive(
-                const Offset(-15, 0),
-              ),
+              offset: context.responsive(const Offset(-15, 0)),
               child: TextBody.s(label!),
             ),
         ],

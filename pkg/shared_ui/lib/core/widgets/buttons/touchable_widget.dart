@@ -28,14 +28,11 @@ class _TouchableWidgetState extends State<TouchableWidget> {
       children: [
         GestureDetector(
           behavior: HitTestBehavior.opaque,
-          onTap: createDebouncedCallback(
-            () async {
-              isBusy.value = true;
-              await widget.onTap.call();
-              isBusy.value = false;
-            },
-            debounce: debounce,
-          ),
+          onTap: createDebouncedCallback(() async {
+            isBusy.value = true;
+            await widget.onTap.call();
+            isBusy.value = false;
+          }, debounce: debounce),
           child: widget.child,
         ),
         Visibility(

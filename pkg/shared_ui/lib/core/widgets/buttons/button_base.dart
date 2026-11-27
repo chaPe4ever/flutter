@@ -73,122 +73,110 @@ abstract class ButtonBase extends StatelessWidget {
   ButtonStyle buttonStyle(BuildContext context) => ButtonStyle(
     elevation: WidgetStateProperty.all(0),
     splashFactory: NoSplash.splashFactory,
-    shape: WidgetStateProperty.resolveWith(
-      (states) {
-        const shape = RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(AppRadius.pill),
-        );
+    shape: WidgetStateProperty.resolveWith((states) {
+      const shape = RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(AppRadius.pill),
+      );
 
-        if (states.contains(WidgetState.disabled)) {
-          return shape.copyWith(side: disabledBorder(context));
-        }
+      if (states.contains(WidgetState.disabled)) {
+        return shape.copyWith(side: disabledBorder(context));
+      }
 
-        if (states.contains(WidgetState.focused)) {
-          return shape.copyWith(side: focusedBorder(context));
-        }
+      if (states.contains(WidgetState.focused)) {
+        return shape.copyWith(side: focusedBorder(context));
+      }
 
-        if (states.contains(WidgetState.hovered)) {
-          return shape.copyWith(side: hoverBorder(context));
-        }
+      if (states.contains(WidgetState.hovered)) {
+        return shape.copyWith(side: hoverBorder(context));
+      }
 
-        if (states.contains(WidgetState.pressed)) {
-          return shape.copyWith(side: focusedBorder(context));
-        }
+      if (states.contains(WidgetState.pressed)) {
+        return shape.copyWith(side: focusedBorder(context));
+      }
 
-        return shape.copyWith(side: defaultBorder(context));
-      },
-    ),
-    overlayColor: WidgetStateProperty.resolveWith(
-      (states) {
-        if (states.contains(WidgetState.disabled)) {
-          return disabledColor(context);
-        }
+      return shape.copyWith(side: defaultBorder(context));
+    }),
+    overlayColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.disabled)) {
+        return disabledColor(context);
+      }
 
-        if (states.contains(WidgetState.hovered)) {
-          return hoverColor(context);
-        }
+      if (states.contains(WidgetState.hovered)) {
+        return hoverColor(context);
+      }
 
-        if (states.contains(WidgetState.focused)) {
-          return focusColor(context);
-        }
+      if (states.contains(WidgetState.focused)) {
+        return focusColor(context);
+      }
 
-        if (states.contains(WidgetState.pressed)) {
-          return pressedColor(context);
-        }
+      if (states.contains(WidgetState.pressed)) {
+        return pressedColor(context);
+      }
 
-        if (states.contains(WidgetState.error)) {
-          return errorColor(context);
-        }
+      if (states.contains(WidgetState.error)) {
+        return errorColor(context);
+      }
 
-        if (states.contains(WidgetState.selected)) {
-          return selectedColor(context);
-        }
+      if (states.contains(WidgetState.selected)) {
+        return selectedColor(context);
+      }
 
-        return backgroundColor(context);
-      },
-    ),
-    backgroundColor: WidgetStateProperty.resolveWith(
-      (states) {
-        if (states.contains(WidgetState.disabled)) {
-          return disabledColor(context);
-        }
+      return backgroundColor(context);
+    }),
+    backgroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.disabled)) {
+        return disabledColor(context);
+      }
 
-        if (states.contains(WidgetState.hovered)) {
-          return hoverColor(context);
-        }
+      if (states.contains(WidgetState.hovered)) {
+        return hoverColor(context);
+      }
 
-        if (states.contains(WidgetState.focused)) {
-          return focusColor(context);
-        }
+      if (states.contains(WidgetState.focused)) {
+        return focusColor(context);
+      }
 
-        if (states.contains(WidgetState.pressed)) {
-          return pressedColor(context);
-        }
+      if (states.contains(WidgetState.pressed)) {
+        return pressedColor(context);
+      }
 
-        if (states.contains(WidgetState.error)) {
-          return errorColor(context);
-        }
+      if (states.contains(WidgetState.error)) {
+        return errorColor(context);
+      }
 
-        if (states.contains(WidgetState.selected)) {
-          return selectedColor(context);
-        }
+      if (states.contains(WidgetState.selected)) {
+        return selectedColor(context);
+      }
 
-        return backgroundColor(context);
-      },
-    ),
-    foregroundColor: WidgetStateProperty.resolveWith(
-      (states) {
-        if (states.contains(WidgetState.disabled)) {
-          return disabledChildElementColor(context);
-        }
-        if (states.contains(WidgetState.hovered)) {
-          return hoverChildElementColor(context);
-        }
+      return backgroundColor(context);
+    }),
+    foregroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.disabled)) {
+        return disabledChildElementColor(context);
+      }
+      if (states.contains(WidgetState.hovered)) {
+        return hoverChildElementColor(context);
+      }
 
-        return childElementColor(context);
-      },
-    ),
-    textStyle: WidgetStateProperty.resolveWith(
-      (states) {
-        return context.responsive(
-          context.textStyles.labelM,
-          mobile: context.textStyles.labelL,
-          tablet: context.textStyles.labelL,
-          desktop: context.textStyles.labelL,
-        );
-      },
-    ),
-    iconSize: WidgetStateProperty.resolveWith(
-      (states) {
-        return context.responsive(
-          AppSpacing.contentXL,
-          s: AppSpacing.contentXL,
-          m: AppSpacing.contentXL,
-          l: AppSpacing.sectionS,
-          xl: AppSpacing.sectionS,
-        );
-      },
-    ),
+      return childElementColor(context);
+    }),
+    textStyle: WidgetStateProperty.resolveWith((states) {
+      return context.responsive(
+        context.textStyles.labelM,
+        mobile: context.textStyles.labelL,
+        tablet: context.textStyles.labelL,
+        desktop: context.textStyles.labelL,
+      );
+    }),
+    iconSize: WidgetStateProperty.resolveWith((states) {
+      return context.responsive(
+        AppSpacing.contentXL,
+        s: AppSpacing.contentXL,
+        m: AppSpacing.contentXL,
+        l: AppSpacing.sectionS,
+        xl: AppSpacing.sectionS,
+      );
+    }),
   );
 }
 
@@ -341,10 +329,7 @@ abstract class OutlineButtonBase extends ButtonBase {
             ),
             SizedBox(width: inBetweenSpace),
           ],
-          Text(
-            label,
-            textAlign: TextAlign.center,
-          ),
+          Text(label, textAlign: TextAlign.center),
           if (trailing != null) ...[
             SizedBox(width: inBetweenSpace),
             trailing!(
@@ -360,16 +345,11 @@ abstract class OutlineButtonBase extends ButtonBase {
 }
 
 abstract class IconButtonBase extends ButtonBase {
-  const new({
-    this.svg,
-    this.icon,
-    super.key,
-    this.onTap,
-    this.fixedSize,
-  }) : assert(
-         svg != null || icon != null,
-         'Either svg or icon must be provided',
-       );
+  const new({this.svg, this.icon, super.key, this.onTap, this.fixedSize})
+    : assert(
+        svg != null || icon != null,
+        'Either svg or icon must be provided',
+      );
 
   /// The svg for the icon button.
   final SvgPicture? svg;
@@ -411,10 +391,7 @@ abstract class IconButtonBase extends ButtonBase {
                 ? childElementColor(context)
                 : disabledChildElementColor(context),
           ) ??
-          Icon(
-            icon,
-            size: size,
-          ),
+          Icon(icon, size: size),
     );
   }
 }

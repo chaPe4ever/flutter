@@ -41,11 +41,7 @@ class UrlLauncher {
       // other platform errors
       final message = e.message ?? 'Could not launch $url';
       return some(
-        LaunchUrlException(
-          innerError: e,
-          innerMessage: message,
-          st: st,
-        ),
+        LaunchUrlException(innerError: e, innerMessage: message, st: st),
       );
     }
   }

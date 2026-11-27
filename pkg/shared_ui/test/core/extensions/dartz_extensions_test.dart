@@ -15,10 +15,7 @@ void main() {
         tester,
         child: Builder(
           builder: (context) {
-            return either.whenDataElseSnackbar(
-              Text.new,
-              context: context,
-            );
+            return either.whenDataElseSnackbar(Text.new, context: context);
           },
         ),
       );
@@ -36,10 +33,7 @@ void main() {
         tester,
         child: Builder(
           builder: (context) {
-            return either.whenDataElseSnackbar(
-              Text.new,
-              context: context,
-            );
+            return either.whenDataElseSnackbar(Text.new, context: context);
           },
         ),
       );
@@ -55,12 +49,10 @@ void main() {
           builder: (context) {
             return TextButton(
               onPressed: () async {
-                await const Right<CoreException, int>(1).onDataElseSnackbarCb(
-                  (v) async {
-                    dataCalled = true;
-                  },
-                  context: context,
-                );
+                await const Right<CoreException, int>(1)
+                    .onDataElseSnackbarCb((v) async {
+                      dataCalled = true;
+                    }, context: context);
               },
               child: const Text('right'),
             );
@@ -77,15 +69,14 @@ void main() {
           builder: (context) {
             return TextButton(
               onPressed: () async {
-                await Left<CoreException, int>(
-                  UnknownCoreException(),
-                ).onDataElseSnackbarCb(
-                  (_) async {},
-                  context: context,
-                  onError: (_) async {
-                    errorCalled = true;
-                  },
-                );
+                await Left<CoreException, int>(UnknownCoreException())
+                    .onDataElseSnackbarCb(
+                      (_) async {},
+                      context: context,
+                      onError: (_) async {
+                        errorCalled = true;
+                      },
+                    );
               },
               child: const Text('left'),
             );

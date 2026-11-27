@@ -22,10 +22,7 @@ void main() {
     test('round-trips through map and json', () {
       const model = AppMaintenanceModel(isActive: true);
       expect(AppMaintenanceModel.fromMap(model.toMap()), model);
-      expect(
-        AppMaintenanceModel.fromJson(model.toJson()),
-        model,
-      );
+      expect(AppMaintenanceModel.fromJson(model.toJson()), model);
       expect(json.decode(model.toJson()), model.toMap());
     });
 

@@ -66,19 +66,11 @@ void main() {
       right<CoreException, String>('https://fake.storage/hello.txt'),
     );
     expect(
-      await impl.putBlob(
-        blob: Object(),
-        path: 'blob.bin',
-        metadata: metadata,
-      ),
+      await impl.putBlob(blob: Object(), path: 'blob.bin', metadata: metadata),
       right<CoreException, String>('https://fake.storage/blob.bin'),
     );
     expect(
-      await impl.putFile(
-        file: file,
-        path: 'file.bin',
-        metadata: metadata,
-      ),
+      await impl.putFile(file: file, path: 'file.bin', metadata: metadata),
       right<CoreException, String>('https://fake.storage/file.bin'),
     );
   });

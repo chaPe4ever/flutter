@@ -32,11 +32,7 @@ void main() {
       final container = ProviderContainer();
       addTearDown(container.dispose);
 
-      final result = await container
-          .read(urlLauncherPod)
-          .call(
-            urlString: ':',
-          );
+      final result = await container.read(urlLauncherPod).call(urlString: ':');
 
       expect(result, isA<Some<CoreException>>());
     });
@@ -82,9 +78,7 @@ void main() {
 
       final result = await container
           .read(urlLauncherPod)
-          .call(
-            urlString: 'https://example.com',
-          );
+          .call(urlString: 'https://example.com');
 
       expect(result, isA<Some<CoreException>>());
       result.fold(

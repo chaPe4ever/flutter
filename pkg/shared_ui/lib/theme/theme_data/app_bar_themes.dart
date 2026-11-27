@@ -6,9 +6,7 @@ class AppBarThemes {
     return AppBarTheme(
       backgroundColor: AppSemanticColors.light.backgroundPrimary,
       surfaceTintColor: AppSemanticColors.light.backgroundPrimary,
-      iconTheme: IconThemeData(
-        color: AppSemanticColors.light.backgroundBrand,
-      ),
+      iconTheme: IconThemeData(color: AppSemanticColors.light.backgroundBrand),
       titleSpacing: 2,
       elevation: 0,
       scrolledUnderElevation: 2,
@@ -25,9 +23,7 @@ class AppBarThemes {
     return AppBarTheme(
       backgroundColor: AppSemanticColors.dark.backgroundPrimary,
       surfaceTintColor: AppSemanticColors.dark.backgroundPrimary,
-      iconTheme: IconThemeData(
-        color: AppSemanticColors.dark.backgroundBrand,
-      ),
+      iconTheme: IconThemeData(color: AppSemanticColors.dark.backgroundBrand),
       titleSpacing: 2,
       elevation: 0,
       scrolledUnderElevation: 2,

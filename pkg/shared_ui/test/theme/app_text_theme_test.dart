@@ -14,10 +14,7 @@ void main() {
   group('platformTextStylesFor', () {
     test('returns web styles when isWeb is true', () {
       final theme = AppTextTheme.light();
-      expect(
-        platformTextStylesFor(theme, isWeb: true),
-        same(theme.web),
-      );
+      expect(platformTextStylesFor(theme, isWeb: true), same(theme.web));
     });
   });
 
@@ -66,10 +63,7 @@ void main() {
   group('AppTextTheme', () {
     test('dark() uses dark semantic colors and Inter on web', () {
       final theme = AppTextTheme.dark();
-      expect(
-        theme.android.bodyM.color,
-        AppSemanticColors.dark.contentPrimary,
-      );
+      expect(theme.android.bodyM.color, AppSemanticColors.dark.contentPrimary);
       expect(theme.web.bodyM.fontFamily, 'Inter');
       expect(theme.android.bodyM.fontFamily, 'Roboto');
     });
@@ -77,10 +71,7 @@ void main() {
     test('light() exposes web styles for the web branch', () {
       final theme = AppTextTheme.light();
       expect(theme.web.bodyM.fontFamily, 'Inter');
-      expect(
-        theme.web.bodyM.color,
-        AppSemanticColors.light.contentPrimary,
-      );
+      expect(theme.web.bodyM.color, AppSemanticColors.light.contentPrimary);
     });
 
     test('copyWith keeps existing styles when omitted', () {

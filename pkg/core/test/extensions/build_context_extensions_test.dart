@@ -41,38 +41,30 @@ void main() {
     expect(ctx.appImgTheme.color, Colors.black);
   });
 
-  testWidgets(
-    'BuildContextX responsive picks width breakpoint',
-    (tester) async {
-      late BuildContext ctx;
-      await tester.binding.setSurfaceSize(const Size(500, 800));
-      addTearDown(() => tester.binding.setSurfaceSize(null));
+  testWidgets('BuildContextX responsive picks width breakpoint', (
+    tester,
+  ) async {
+    late BuildContext ctx;
+    await tester.binding.setSurfaceSize(const Size(500, 800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Builder(
-            builder: (context) {
-              ctx = context;
-              return const SizedBox();
-            },
-          ),
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Builder(
+          builder: (context) {
+            ctx = context;
+            return const SizedBox();
+          },
         ),
-      );
-      await tester.pumpAndSettle();
+      ),
+    );
+    await tester.pumpAndSettle();
 
-      expect(
-        ctx.responsive(
-          'fb',
-          xs: 'xs',
-          s: 's',
-          m: 'm',
-          l: 'l',
-          xl: 'xl',
-        ),
-        isNotEmpty,
-      );
-    },
-  );
+    expect(
+      ctx.responsive('fb', xs: 'xs', s: 's', m: 'm', l: 'l', xl: 'xl'),
+      isNotEmpty,
+    );
+  });
 
   testWidgets('BuildContextX goRouter and navigator', (tester) async {
     late BuildContext ctx;
@@ -159,10 +151,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(
-      ctx.responsive('fallback', xs: 'xs'),
-      'fallback',
-    );
+    expect(ctx.responsive('fallback', xs: 'xs'), 'fallback');
   });
 
   testWidgets('BuildContextX breakpoint data and navigatorPop', (tester) async {

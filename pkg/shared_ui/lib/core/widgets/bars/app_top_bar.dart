@@ -116,19 +116,13 @@ final class ChatAction extends ActionBase {
 }
 
 abstract class ActionBase extends StatelessWidget {
-  const new({
-    this.model,
-    super.key,
-  });
+  const new({this.model, super.key});
 
   final ActionModel? model;
 }
 
 class ActionModel extends Equatable {
-  const new({
-    required this.onTap,
-    this.icon,
-  });
+  const new({required this.onTap, this.icon});
 
   final Widget? icon;
   final VoidCallback onTap;

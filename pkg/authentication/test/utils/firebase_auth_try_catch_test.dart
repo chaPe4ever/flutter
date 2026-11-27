@@ -2,6 +2,7 @@ import 'package:authentication/exceptions/auth_exceptions.dart';
 import 'package:authentication/utils/firebase_auth_try_catch.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import '../helpers/auth_dartz.dart';
 
 import '../helpers/fake_logger.dart';
@@ -129,13 +130,10 @@ void main() {
       );
 
       expect(result.isLeft(), isTrue);
-      result.fold(
-        (ex) {
-          expect(ex, isA<UnknownAuthException>());
-          expect(ex.st, isNot(StackTrace.empty));
-        },
-        (_) => fail('expected left'),
-      );
+      result.fold((ex) {
+        expect(ex, isA<UnknownAuthException>());
+        expect(ex.st, isNot(StackTrace.empty));
+      }, (_) => fail('expected left'));
     });
   });
 }

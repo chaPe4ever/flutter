@@ -13,9 +13,8 @@ final class EmailAddress extends ValueObject<String> {
   /// Used on textField validator as as a tear-off
   @override
   String? validator(String? value) {
-    return EmailAddress._(
-      validateEmailAddress(value),
-    ).value.fold((l) => l.messageKey.tr(), (r) => null);
+    return EmailAddress._(validateEmailAddress(value)).value
+        .fold((l) => l.messageKey.tr(), (r) => null);
   }
 
   @override
@@ -33,9 +32,8 @@ final class Password extends ValueObject<String> {
 
   @override
   String? validator(String? value) {
-    return Password._(
-      validatePassword(value),
-    ).value.fold((l) => l.messageKey.tr(), (r) => null);
+    return Password._(validatePassword(value)).value
+        .fold((l) => l.messageKey.tr(), (r) => null);
   }
 
   @override

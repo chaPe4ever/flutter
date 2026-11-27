@@ -4,10 +4,7 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 /// Abstraction over static [Sentry] APIs for testing and production wiring.
 abstract interface class SentryCrashlyticsBindings {
   /// Captures an exception in Sentry.
-  Future<void> captureException(
-    dynamic exception, {
-    StackTrace? stackTrace,
-  });
+  Future<void> captureException(dynamic exception, {StackTrace? stackTrace});
 
   /// Captures a structured event in Sentry.
   Future<void> captureEvent(SentryEvent event);
@@ -23,10 +20,8 @@ final class DefaultSentryCrashlyticsBindings
   const new();
 
   @override
-  Future<void> captureException(
-    dynamic exception, {
-    StackTrace? stackTrace,
-  }) => Sentry.captureException(exception, stackTrace: stackTrace);
+  Future<void> captureException(dynamic exception, {StackTrace? stackTrace}) =>
+      Sentry.captureException(exception, stackTrace: stackTrace);
 
   @override
   Future<void> captureEvent(SentryEvent event) => Sentry.captureEvent(event);

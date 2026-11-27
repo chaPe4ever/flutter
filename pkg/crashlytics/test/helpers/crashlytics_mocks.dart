@@ -24,9 +24,7 @@ const kTestFirebaseOptions = FirebaseOptions(
 void registerCrashlyticsFallbacks() {
   registerFallbackValue('');
   registerFallbackValue(false);
-  registerFallbackValue(
-    FlutterErrorDetails(exception: Exception('fallback')),
-  );
+  registerFallbackValue(FlutterErrorDetails(exception: Exception('fallback')));
   registerFallbackValue(StackTrace.empty);
   registerFallbackValue(SentryEvent(message: SentryMessage('fallback')));
   registerFallbackValue(SentryClient(SentryOptions(dsn: sentryDsn)));

@@ -16,10 +16,7 @@ void main() {
     });
 
     test('getOrThrow maps right', () {
-      expect(
-        right<CoreException, int>(3).getOrThrow((r) => r * 2),
-        6,
-      );
+      expect(right<CoreException, int>(3).getOrThrow((r) => r * 2), 6);
     });
   });
 
@@ -39,16 +36,14 @@ void main() {
   group('EitherFutureX', () {
     test('toOptionAsync maps left to some', () async {
       const ex = NoNetworkException();
-      final result = await Future.value(
-        left<CoreException, int>(ex),
-      ).toOptionAsync();
+      final result = await Future.value(left<CoreException, int>(ex))
+          .toOptionAsync();
       expect(result, some<CoreException>(ex));
     });
 
     test('toOptionAsync maps right to none', () async {
-      final result = await Future.value(
-        right<CoreException, int>(1),
-      ).toOptionAsync();
+      final result = await Future.value(right<CoreException, int>(1))
+          .toOptionAsync();
       expect(result, none<CoreException>());
     });
   });

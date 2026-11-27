@@ -106,11 +106,7 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
 
 @immutable
 class PlatformTextStyles {
-  factory lerp(
-    PlatformTextStyles a,
-    PlatformTextStyles b,
-    double t,
-  ) {
+  factory lerp(PlatformTextStyles a, PlatformTextStyles b, double t) {
     return PlatformTextStyles._(
       labelS: TextStyle.lerp(a.labelS, b.labelS, t)!,
       labelM: TextStyle.lerp(a.labelM, b.labelM, t)!,
@@ -126,10 +122,7 @@ class PlatformTextStyles {
       headlineL: TextStyle.lerp(a.headlineL, b.headlineL, t)!,
     );
   }
-  factory dark({
-    required Color primaryColor,
-    required String fontFamily,
-  }) {
+  factory dark({required Color primaryColor, required String fontFamily}) {
     return PlatformTextStyles.light(
       primaryColor: primaryColor,
       fontFamily: fontFamily,
@@ -150,10 +143,7 @@ class PlatformTextStyles {
     required this.headlineL,
   });
 
-  factory light({
-    required Color primaryColor,
-    required String fontFamily,
-  }) {
+  factory light({required Color primaryColor, required String fontFamily}) {
     return PlatformTextStyles._(
       headlineL: TextStyle(
         fontSize: 32,

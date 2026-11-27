@@ -69,9 +69,7 @@ void main() {
       final buildStep = mockBuildStep(
         package: 'custom_builders',
         inputPath: 'lib/input.dart',
-        assets: {
-          'custom_builders|$jsonPath': await readProjectFile(jsonPath),
-        },
+        assets: {'custom_builders|$jsonPath': await readProjectFile(jsonPath)},
       );
 
       final output = await generator.generateForAnnotatedElement(
@@ -80,9 +78,7 @@ void main() {
         buildStep,
       );
 
-      expect(
-        output,
-        '''
+      expect(output, '''
 class TransKeysKeys {
   static const helloWorld = "hello_world";
   static const fooBar = "foo-bar";
@@ -90,8 +86,7 @@ class TransKeysKeys {
   static const aB = "a__b";
   static const  = "";
 }
-''',
-      );
+''');
     });
   });
 }

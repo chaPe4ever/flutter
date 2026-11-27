@@ -8,11 +8,8 @@ part 'file_model.freezed.dart';
 @freezed
 @immutable
 abstract class FileModel with _$FileModel {
-  const factory({
-    required String fileName,
-    required String base64FileBytes,
-  }) = _FileModel;
+  const factory({required String fileName, required String base64FileBytes}) =
+      _FileModel;
 
-  factory fromJson(Map<String, dynamic> json) =>
-      _$FileModelFromJson(json);
+  factory fromJson(Map<String, dynamic> json) => _$FileModelFromJson(json);
 }

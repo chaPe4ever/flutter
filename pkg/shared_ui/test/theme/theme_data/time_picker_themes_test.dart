@@ -7,10 +7,7 @@ void main() {
   group('TimePickerThemes', () {
     test('light and dark resolve dial text colors', () {
       for (final theme in [TimePickerThemes.light(), TimePickerThemes.dark()]) {
-        resolveWidgetStateColor(
-          theme.dialTextColor,
-          selectedWidgetStates,
-        );
+        resolveWidgetStateColor(theme.dialTextColor, selectedWidgetStates);
         resolveWidgetStateColor(theme.dialTextColor, emptyWidgetStates);
       }
     });

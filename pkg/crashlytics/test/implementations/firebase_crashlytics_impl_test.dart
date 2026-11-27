@@ -32,25 +32,21 @@ void main() {
 
     group('setCrashlytics', () {
       test('forwards the enabled flag to Firebase Crashlytics', () async {
-        when(
-          () => firebaseCrashlytics.setCrashlyticsCollectionEnabled(any()),
-        ).thenAnswer((_) async {});
+        when(() => firebaseCrashlytics.setCrashlyticsCollectionEnabled(any()))
+            .thenAnswer((_) async {});
 
         await impl.setCrashlytics(enabled: true);
         await impl.setCrashlytics(enabled: false);
 
-        verify(
-          () => firebaseCrashlytics.setCrashlyticsCollectionEnabled(true),
-        ).called(1);
-        verify(
-          () => firebaseCrashlytics.setCrashlyticsCollectionEnabled(false),
-        ).called(1);
+        verify(() => firebaseCrashlytics.setCrashlyticsCollectionEnabled(true))
+            .called(1);
+        verify(() => firebaseCrashlytics.setCrashlyticsCollectionEnabled(false))
+            .called(1);
       });
 
       test('wraps delegate failures in UnknownCrashlyticsException', () async {
-        when(
-          () => firebaseCrashlytics.setCrashlyticsCollectionEnabled(any()),
-        ).thenThrow(Exception('channel down'));
+        when(() => firebaseCrashlytics.setCrashlyticsCollectionEnabled(any()))
+            .thenThrow(Exception('channel down'));
 
         await expectLater(
           impl.setCrashlytics(enabled: true),
@@ -61,21 +57,18 @@ void main() {
 
     group('setUserId', () {
       test('forwards the user id to Firebase Crashlytics', () async {
-        when(
-          () => firebaseCrashlytics.setUserIdentifier(any()),
-        ).thenAnswer((_) async {});
+        when(() => firebaseCrashlytics.setUserIdentifier(any()))
+            .thenAnswer((_) async {});
 
         await impl.setUserId(userId: 'user-42');
 
-        verify(
-          () => firebaseCrashlytics.setUserIdentifier('user-42'),
-        ).called(1);
+        verify(() => firebaseCrashlytics.setUserIdentifier('user-42'))
+            .called(1);
       });
 
       test('wraps delegate failures in UnknownCrashlyticsException', () async {
-        when(
-          () => firebaseCrashlytics.setUserIdentifier(any()),
-        ).thenThrow(Exception('channel down'));
+        when(() => firebaseCrashlytics.setUserIdentifier(any()))
+            .thenThrow(Exception('channel down'));
 
         expect(
           () => impl.setUserId(userId: 'user-42'),
@@ -98,9 +91,8 @@ void main() {
 
         await impl.captureException(error, stackTrace: stack);
 
-        verify(
-          () => firebaseCrashlytics.recordError(error, stack, fatal: true),
-        ).called(1);
+        verify(() => firebaseCrashlytics.recordError(error, stack, fatal: true))
+            .called(1);
       });
 
       test('wraps delegate failures in UnknownCrashlyticsException', () async {
@@ -129,9 +121,8 @@ void main() {
       });
 
       test('wraps delegate failures in UnknownCrashlyticsException', () async {
-        when(
-          () => firebaseCrashlytics.log(any()),
-        ).thenThrow(Exception('channel down'));
+        when(() => firebaseCrashlytics.log(any()))
+            .thenThrow(Exception('channel down'));
 
         expect(
           () => impl.logEvent(message: 'hello'),
@@ -152,9 +143,8 @@ void main() {
 
     group('init', () {
       test('routes Flutter framework errors to Firebase Crashlytics', () async {
-        when(
-          () => firebaseCrashlytics.recordFlutterError(any()),
-        ).thenAnswer((_) async {});
+        when(() => firebaseCrashlytics.recordFlutterError(any()))
+            .thenAnswer((_) async {});
 
         await impl.init();
 
@@ -183,9 +173,8 @@ void main() {
         final handled = PlatformDispatcher.instance.onError!(error, stack);
 
         expect(handled, isTrue);
-        verify(
-          () => firebaseCrashlytics.recordError(error, stack, fatal: true),
-        ).called(1);
+        verify(() => firebaseCrashlytics.recordError(error, stack, fatal: true))
+            .called(1);
       });
 
       test('wraps init failures in UnknownCrashlyticsException', () async {

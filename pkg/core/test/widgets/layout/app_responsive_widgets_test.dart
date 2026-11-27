@@ -9,9 +9,7 @@ void main() {
     testWidgets('uses row layout when width meets breakpoint end', (
       tester,
     ) async {
-      await tester.binding.setSurfaceSize(
-        Size(BreakpointEnum.m.end + 50, 800),
-      );
+      await tester.binding.setSurfaceSize(Size(BreakpointEnum.m.end + 50, 800));
       addTearDown(() => tester.binding.setSurfaceSize(null));
 
       await tester.pumpWidget(
@@ -81,9 +79,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: CustomScrollView(
-            slivers: [
-              ResponsiveSliverCenter(child: Text('in sliver')),
-            ],
+            slivers: [ResponsiveSliverCenter(child: Text('in sliver'))],
           ),
         ),
       );
@@ -108,10 +104,7 @@ void main() {
 
   group('AppConditionalX', () {
     test('maps to responsive_framework conditional values', () {
-      expect(
-        AppConditional.largerThan.toConditional,
-        Conditional.LARGER_THAN,
-      );
+      expect(AppConditional.largerThan.toConditional, Conditional.LARGER_THAN);
       expect(AppConditional.equals.toConditional, Conditional.EQUALS);
       expect(
         AppConditional.smallerThan.toConditional,
@@ -171,14 +164,11 @@ void main() {
     testWidgets('of throws when no ResponsiveBreakpoints ancestor', (
       tester,
     ) async {
-      await tester.pumpWidget(
-        const MaterialApp(home: SizedBox.shrink()),
-      );
+      await tester.pumpWidget(const MaterialApp(home: SizedBox.shrink()));
 
       expect(
-        () => AppResponsiveBreakpoints.of(
-          tester.element(find.byType(SizedBox)),
-        ),
+        () =>
+            AppResponsiveBreakpoints.of(tester.element(find.byType(SizedBox))),
         throwsFlutterError,
       );
     });
@@ -188,10 +178,7 @@ void main() {
     testWidgets('wraps child in ResponsiveScaledBox', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: AppResponsiveScaledBox(
-            width: 1200,
-            child: Text('scaled'),
-          ),
+          home: AppResponsiveScaledBox(width: 1200, child: Text('scaled')),
         ),
       );
 
@@ -203,9 +190,7 @@ void main() {
   group('ResponsiveScrollableCard', () {
     testWidgets('renders scrollable card around child', (tester) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: ResponsiveScrollableCard(child: Text('form')),
-        ),
+        const MaterialApp(home: ResponsiveScrollableCard(child: Text('form'))),
       );
 
       expect(find.byType(SingleChildScrollView), findsOneWidget);
@@ -218,10 +203,7 @@ void main() {
     testWidgets('wraps child in MaxWidthBox', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: AppMaxWidthBox(
-            maxWidth: 400,
-            child: Text('bounded'),
-          ),
+          home: AppMaxWidthBox(maxWidth: 400, child: Text('bounded')),
         ),
       );
 

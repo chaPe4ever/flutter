@@ -7,21 +7,21 @@ import 'package:custom_annotations/custom_annotations.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:source_gen/source_gen.dart';
 
-class MockBuildStep extends Mock implements BuildStep {}
+class MockBuildStep extends Mock implements BuildStep;
 
-class MockClassElement extends Mock implements ClassElement {}
+class MockClassElement extends Mock implements ClassElement;
 
 class MockTopLevelVariableElement extends Mock
-    implements TopLevelVariableElement {}
+    implements TopLevelVariableElement;
 
-class MockConstantReader extends Mock implements ConstantReader {}
+class MockConstantReader extends Mock implements ConstantReader;
 
-class MockLibraryReader extends Mock implements LibraryReader {}
+class MockLibraryReader extends Mock implements LibraryReader;
 
-class MockDartType extends Mock implements DartType {}
+class MockDartType extends Mock implements DartType;
 
 class FakeReturnType extends Fake implements InterfaceType {
-  FakeReturnType(this.typeName);
+  new(this.typeName);
 
   final String typeName;
 
@@ -29,9 +29,9 @@ class FakeReturnType extends Fake implements InterfaceType {
   String toString() => typeName;
 }
 
-class MockConstructorElement extends Mock implements ConstructorElement {}
+class MockConstructorElement extends Mock implements ConstructorElement;
 
-class MockFieldElement extends Mock implements FieldElement {}
+class MockFieldElement extends Mock implements FieldElement;
 
 void registerGeneratorTestFallbacks() {
   registerFallbackValue(AssetId('fallback', 'fallback'));

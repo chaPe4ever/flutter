@@ -10,10 +10,7 @@ void main() {
     final dio = Dio();
     dio.interceptors.add(_CountingInterceptor());
 
-    invalidateDioInterceptors(
-      dio: dio,
-      interceptors: [_CountingInterceptor()],
-    );
+    invalidateDioInterceptors(dio: dio, interceptors: [_CountingInterceptor()]);
 
     expect(dio.interceptors.whereType<_CountingInterceptor>(), hasLength(1));
   });
@@ -30,10 +27,7 @@ void main() {
           ..maxRetries = 1
           ..resetMaxRetries();
 
-    invalidateDioInterceptors(
-      dio: dio,
-      interceptors: [interceptor],
-    );
+    invalidateDioInterceptors(dio: dio, interceptors: [interceptor]);
 
     expect(dio.interceptors.whereType<RefreshTokenInterceptor>(), hasLength(1));
   });

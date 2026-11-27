@@ -102,10 +102,7 @@ extension BuildContextEx on BuildContext {
         behavior: SnackBarBehavior.floating,
         action: actionLabel == null || onActionTap == null
             ? null
-            : SnackBarAction(
-                label: actionLabel,
-                onPressed: onActionTap,
-              ),
+            : SnackBarAction(label: actionLabel, onPressed: onActionTap),
         content: TextBody.m(text, color: colors.backgroundSnackbar),
         duration: duration,
         key: key,
@@ -127,10 +124,7 @@ extension BuildContextEx on BuildContext {
         behavior: SnackBarBehavior.floating,
         action: actionLabel == null || onActionTap == null
             ? null
-            : SnackBarAction(
-                label: actionLabel,
-                onPressed: onActionTap,
-              ),
+            : SnackBarAction(label: actionLabel, onPressed: onActionTap),
         content: TextBody.m(
           e.messageKey.tr(),
           color: colors.backgroundSnackbar,
@@ -156,10 +150,7 @@ extension BuildContextEx on BuildContext {
             minHeight: height * 0.35,
             maxHeight: height * 0.6,
           ),
-          child: Padding(
-            padding: AppPadding.mobilePage,
-            child: child,
-          ),
+          child: Padding(padding: AppPadding.mobilePage, child: child),
         );
       },
     );

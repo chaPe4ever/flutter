@@ -30,19 +30,12 @@ void main() {
     when(() => numVariable.name).thenReturn('topLevelNum');
     when(() => stringVariable.name).thenReturn('topLevelString');
 
-    when(() => reader.allElements).thenReturn([
-      intVariable,
-      doubleVariable,
-      numVariable,
-      stringVariable,
-    ]);
+    when(() => reader.allElements)
+        .thenReturn([intVariable, doubleVariable, numVariable, stringVariable]);
 
     final names = topLevelNumVariables(reader).map((e) => e.name).toList();
 
-    expect(
-      names,
-      ['topLevelInt', 'topLevelDouble', 'topLevelNum'],
-    );
+    expect(names, ['topLevelInt', 'topLevelDouble', 'topLevelNum']);
   });
 
   test('topLevelNumVariables ignores non-num top-level variables', () {

@@ -65,15 +65,12 @@ void main() {
       };
 
       await expectLater(
-        () => functionsFutureTryCatch<void>(
-          () async {
-            throw FirebaseFunctionsException(
-              code: 'permission-denied',
-              message: 'nope',
-            );
-          },
-          logger: logger,
-        ),
+        () => functionsFutureTryCatch<void>(() async {
+          throw FirebaseFunctionsException(
+            code: 'permission-denied',
+            message: 'nope',
+          );
+        }, logger: logger),
         throwsA(isA<FirestoreFunctionsException>()),
       );
 
@@ -87,15 +84,12 @@ void main() {
       };
 
       await expectLater(
-        () => functionsFutureTryCatch<void>(
-          () async {
-            throw FirebaseFunctionsException(
-              code: 'unauthenticated',
-              message: 'bad token',
-            );
-          },
-          logger: logger,
-        ),
+        () => functionsFutureTryCatch<void>(() async {
+          throw FirebaseFunctionsException(
+            code: 'unauthenticated',
+            message: 'bad token',
+          );
+        }, logger: logger),
         throwsA(isA<FirestoreFunctionsException>()),
       );
 

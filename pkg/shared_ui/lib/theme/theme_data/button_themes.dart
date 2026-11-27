@@ -10,9 +10,7 @@ class ButtonThemes {
   );
   static const EdgeInsets _padding = EdgeInsets.all(AppSpacing.contentXL);
 
-  static const BorderRadius _borderRadius = BorderRadius.all(
-    AppRadius.xs,
-  );
+  static const BorderRadius _borderRadius = BorderRadius.all(AppRadius.xs);
 
   static IconButtonThemeData iconLight() {
     return const IconButtonThemeData(
@@ -37,9 +35,7 @@ class ButtonThemes {
       style: ButtonStyle(
         shape: WidgetStateProperty.all(
           const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              AppRadius.xs,
-            ),
+            borderRadius: BorderRadius.all(AppRadius.xs),
           ),
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -65,9 +61,7 @@ class ButtonThemes {
       style: ButtonStyle(
         shape: WidgetStateProperty.all(
           const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              AppRadius.xs,
-            ),
+            borderRadius: BorderRadius.all(AppRadius.xs),
           ),
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,

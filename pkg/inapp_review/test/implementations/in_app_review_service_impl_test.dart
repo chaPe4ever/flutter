@@ -69,10 +69,7 @@ void main() {
     test('persists init config and seeds last review date', () async {
       final service = createService();
 
-      await service.init(
-        frequency: const Duration(days: 14),
-        maxPrompts: 5,
-      );
+      await service.init(frequency: const Duration(days: 14), maxPrompts: 5);
 
       expect(
         await localStorage.read<int>(
@@ -119,10 +116,7 @@ void main() {
         storage: ThrowingLocalStorage(Exception('disk full')),
       );
 
-      await expectLater(
-        service.init(),
-        throwsA(isA<UnknownCoreException>()),
-      );
+      await expectLater(service.init(), throwsA(isA<UnknownCoreException>()));
       expect(logger.errorMessages, isNotEmpty);
     });
   });

@@ -119,9 +119,8 @@ void main() {
       test(
         'wraps unexpected failures in UnknownCrashlyticsException',
         () async {
-          when(() => sentryBindings.bindClient(any())).thenThrow(
-            Exception('fail'),
-          );
+          when(() => sentryBindings.bindClient(any()))
+              .thenThrow(Exception('fail'));
 
           await expectLater(
             impl.setCrashlytics(enabled: false),
@@ -191,9 +190,8 @@ void main() {
       test(
         'wraps unexpected failures in UnknownCrashlyticsException',
         () async {
-          when(
-            () => sentryBindings.captureEvent(any()),
-          ).thenThrow(Exception('fail'));
+          when(() => sentryBindings.captureEvent(any()))
+              .thenThrow(Exception('fail'));
 
           await expectLater(
             impl.logEvent(message: 'hello'),
@@ -284,9 +282,7 @@ void main() {
         final captured = <void Function(List<dynamic> pair)>[];
         impl = SentryCrashlyticsImpl(
           sentry: sentryBindings,
-          registerIsolateErrorListener: capturingIsolateErrorListener(
-            captured,
-          ),
+          registerIsolateErrorListener: capturingIsolateErrorListener(captured),
         );
 
         await impl.init();

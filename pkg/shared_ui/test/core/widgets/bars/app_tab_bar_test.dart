@@ -33,9 +33,7 @@ void main() {
       tester,
       wrapWithScaffold: false,
       child: Material(
-        child: AppTabBar(
-          tabs: List.generate(6, (i) => 'Tab $i'),
-        ),
+        child: AppTabBar(tabs: List.generate(6, (i) => 'Tab $i')),
       ),
     );
     expect(find.byType(TabBar), findsOneWidget);

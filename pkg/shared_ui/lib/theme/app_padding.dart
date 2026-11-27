@@ -17,9 +17,7 @@ abstract class AppPadding {
     vertical: AppSpacing.contentM,
   );
 
-  static EdgeInsets buttonBar = const EdgeInsets.all(
-    AppSpacing.sectionXS,
-  );
+  static EdgeInsets buttonBar = const EdgeInsets.all(AppSpacing.sectionXS);
 
   static EdgeInsets buttonBarHorizontal = const EdgeInsets.symmetric(
     horizontal: AppSpacing.sectionXS,

@@ -91,10 +91,7 @@ void main() {
         mockGoRouter: stubbedGoRouter(),
         child: const AppTopBar(
           title: 'Defaults',
-          actions: [
-            UserAction(),
-            ChatAction(),
-          ],
+          actions: [UserAction(), ChatAction()],
         ),
       );
       expect(find.byType(UserAction), findsOneWidget);

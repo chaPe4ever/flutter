@@ -54,30 +54,12 @@ void main() {
           DeviceOrientation.landscapeLeft,
           DeviceOrientation.landscapeRight,
         ],
-        [
-          DeviceOrientation.landscapeLeft,
-          DeviceOrientation.landscapeRight,
-        ],
-        [
-          DeviceOrientation.portraitUp,
-          DeviceOrientation.landscapeRight,
-        ],
-        [
-          DeviceOrientation.portraitDown,
-          DeviceOrientation.landscapeRight,
-        ],
-        [
-          DeviceOrientation.portraitUp,
-          DeviceOrientation.landscapeLeft,
-        ],
-        [
-          DeviceOrientation.portraitDown,
-          DeviceOrientation.landscapeLeft,
-        ],
-        [
-          DeviceOrientation.portraitUp,
-          DeviceOrientation.portraitDown,
-        ],
+        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight],
+        [DeviceOrientation.portraitUp, DeviceOrientation.landscapeRight],
+        [DeviceOrientation.portraitDown, DeviceOrientation.landscapeRight],
+        [DeviceOrientation.portraitUp, DeviceOrientation.landscapeLeft],
+        [DeviceOrientation.portraitDown, DeviceOrientation.landscapeLeft],
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
         [DeviceOrientation.portraitUp],
         [DeviceOrientation.portraitDown],

@@ -8,9 +8,6 @@ void main() {
     final container = ProviderContainer();
     addTearDown(container.dispose);
 
-    expect(
-      container.read(inAppReviewPod),
-      isA<RateMyAppReviewPromptClient>(),
-    );
+    expect(container.read(inAppReviewPod), isA<RateMyAppReviewPromptClient>());
   });
 }

@@ -55,10 +55,7 @@ class Ads extends _$Ads with NotifierMountedMixin {
     _skipConsentForm = skipConsentForm;
     ref
         .read(interstitialAdLoadConfigPod.notifier)
-        .configure(
-          adUnitId: interstitialAdUnitId,
-          adRequest: adRequest,
-        );
+        .configure(adUnitId: interstitialAdUnitId, adRequest: adRequest);
 
     try {
       // First, request consent information

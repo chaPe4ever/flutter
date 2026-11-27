@@ -36,10 +36,7 @@ void main() {
       expect(() => Log.analytics('x'), returnsNormally);
       expect(() => Log.push('x'), returnsNormally);
       expect(() => Log.error('x'), returnsNormally);
-      expect(
-        () => Log.riverpod(providerName: 'p', info: 'i'),
-        returnsNormally,
-      );
+      expect(() => Log.riverpod(providerName: 'p', info: 'i'), returnsNormally);
     });
 
     test('enabled error logs are visible on the debug console', () {
@@ -90,9 +87,7 @@ void main() {
     test('didUpdateProvider runs when riverpod logging is enabled', () {
       Logs.enable([Logs.riverpod]);
       const observer = RiverpodLogger();
-      final container = ProviderContainer(
-        observers: [observer],
-      );
+      final container = ProviderContainer(observers: [observer]);
       addTearDown(container.dispose);
 
       expect(container.read(_riverpodProbePod), 0);
@@ -103,26 +98,16 @@ void main() {
     test('didUpdateProvider logs AsyncError values', () {
       Logs.enable([Logs.riverpod]);
       const observer = RiverpodLogger();
-      final container = ProviderContainer(
-        observers: [observer],
-      );
+      final container = ProviderContainer(observers: [observer]);
       addTearDown(container.dispose);
 
       container
           .read(_riverpodErrorProbePod.notifier)
-          .fail(
-            const NoNetworkException(),
-          );
+          .fail(const NoNetworkException());
       container
           .read(_riverpodErrorProbePod.notifier)
-          .fail(
-            const ClientVisibleException(messageKey: 'visible'),
-          );
-      container
-          .read(_riverpodErrorProbePod.notifier)
-          .fail(
-            StateError('plain'),
-          );
+          .fail(const ClientVisibleException(messageKey: 'visible'));
+      container.read(_riverpodErrorProbePod.notifier).fail(StateError('plain'));
     });
   });
 

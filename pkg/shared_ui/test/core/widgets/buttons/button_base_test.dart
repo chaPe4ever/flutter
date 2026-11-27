@@ -6,11 +6,8 @@ import 'package:shared_ui/core/widgets/buttons/button_base.dart';
 import '../../../shared/pump_shared_ui_widget.dart';
 
 class _TestElevatedButton extends ElevatedButtonBase {
-  const new({
-    super.onTap,
-    super.leading,
-    super.trailing,
-  }) : super(label: 'Elevated');
+  const new({super.onTap, super.leading, super.trailing})
+    : super(label: 'Elevated');
 
   @override
   Color? backgroundColor(BuildContext context) => Colors.blue;
@@ -41,11 +38,8 @@ class _TestElevatedButton extends ElevatedButtonBase {
 }
 
 class _TestOutlineButton extends OutlineButtonBase {
-  const new({
-    super.onTap,
-    super.leading,
-    super.trailing,
-  }) : super(label: 'Outline');
+  const new({super.onTap, super.leading, super.trailing})
+    : super(label: 'Outline');
 
   @override
   Color? backgroundColor(BuildContext context) => Colors.transparent;
@@ -191,10 +185,7 @@ void main() {
             leading: (c) => Icon(Icons.star, color: c),
             trailing: (c) => Icon(Icons.arrow_forward, color: c),
           ),
-          _TestIconButton(
-            icon: Icons.favorite,
-            onTap: () => taps++,
-          ),
+          _TestIconButton(icon: Icons.favorite, onTap: () => taps++),
           const _TestIconButton(icon: Icons.favorite),
         ],
       ),
@@ -217,18 +208,10 @@ void main() {
           return Column(
             children: [
               _TestIconButton(
-                svg: Assets.svg.chat.svg(
-                  width: 24,
-                  height: 24,
-                ),
+                svg: Assets.svg.chat.svg(width: 24, height: 24),
                 onTap: () {},
               ),
-              _TestIconButton(
-                svg: Assets.svg.chat.svg(
-                  width: 24,
-                  height: 24,
-                ),
-              ),
+              _TestIconButton(svg: Assets.svg.chat.svg(width: 24, height: 24)),
             ],
           );
         },

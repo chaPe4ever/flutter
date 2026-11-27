@@ -62,9 +62,7 @@ class _AppDropdownMenuState extends State<AppDropdownMenu> {
             .map(
               (e) => DropdownMenuEntry<String>(
                 style: ButtonStyle(
-                  textStyle: WidgetStateProperty.all(
-                    context.textStyles.bodyS,
-                  ),
+                  textStyle: WidgetStateProperty.all(context.textStyles.bodyS),
                   backgroundColor: WidgetStateProperty.resolveWith(
                     (states) => states.contains(WidgetState.selected)
                         ? context.colors.borderPrimary

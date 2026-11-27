@@ -33,9 +33,8 @@ abstract final class FlavorHelper {
       if (kIsWeb || Platform.isWindows) {
         flavor = const String.fromEnvironment('flavor');
       } else {
-        flavor = await const MethodChannel(
-          'flavor',
-        ).invokeMethod<String>('getFlavor');
+        flavor = await const MethodChannel('flavor')
+            .invokeMethod<String>('getFlavor');
       }
 
       if (flavor == null || flavor.isEmpty) {

@@ -2,11 +2,7 @@ import 'package:core/core.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 class ExpandableTextListWidget extends StatefulWidget {
-  const new({
-    required this.texts,
-    this.textStyle,
-    super.key,
-  });
+  const new({required this.texts, this.textStyle, super.key});
 
   final List<String> texts;
   final TextStyle? textStyle;
@@ -82,14 +78,8 @@ class _ExpandableTextListWidgetState extends State<ExpandableTextListWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: texts
           .map(
-            (text) => Column(
-              children: [
-                TextBody.m(
-                  text,
-                ),
-                const SizedBox(height: 2),
-              ],
-            ),
+            (text) =>
+                Column(children: [TextBody.m(text), const SizedBox(height: 2)]),
           )
           .toList(),
     );

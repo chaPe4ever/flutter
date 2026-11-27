@@ -2,10 +2,9 @@ import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-typedef FontLicenceAssetListLoader =
-    Future<List<String>> Function({
-      required String path,
-    });
+typedef FontLicenceAssetListLoader = Future<List<String>> Function({
+  required String path,
+});
 
 class GoogleFontsConfig implements ConfigBase {
   const new({

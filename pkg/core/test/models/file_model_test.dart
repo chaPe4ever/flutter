@@ -3,17 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('FileModel', () {
-    const model = FileModel(
-      fileName: 'doc.pdf',
-      base64FileBytes: 'YWJj',
-    );
+    const model = FileModel(fileName: 'doc.pdf', base64FileBytes: 'YWJj');
 
     test('round-trips through json', () {
       final json = model.toJson();
-      expect(
-        FileModel.fromJson(json),
-        model,
-      );
+      expect(FileModel.fromJson(json), model);
     });
 
     test('copyWith preserves unchanged fields', () {

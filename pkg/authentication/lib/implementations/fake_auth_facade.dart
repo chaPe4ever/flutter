@@ -505,11 +505,7 @@ class FakeUser implements User {
 
 class FakeUserCredential implements UserCredential {
   /// Constructor for the fake user credential.
-  const new({
-    required this.user,
-    this.additionalUserInfo,
-    this.credential,
-  });
+  const new({required this.user, this.additionalUserInfo, this.credential});
 
   @override
   final User? user;

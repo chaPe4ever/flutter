@@ -26,10 +26,7 @@ void main() {
 
     test('valueOrNull unwraps or returns null', () {
       expect(_StringValue(right('x')).valueOrNull, 'x');
-      expect(
-        _StringValue(left(UnknownCoreException())).valueOrNull,
-        isNull,
-      );
+      expect(_StringValue(left(UnknownCoreException())).valueOrNull, isNull);
     });
 
     test('isValid and isInvalid reflect Either state', () {

@@ -27,10 +27,7 @@ void main() {
 
     test('uses the authentication package prefix in toString', () {
       for (final exception in cases) {
-        expect(
-          exception.toString(),
-          startsWith('$kAuthenticationPkgName : '),
-        );
+        expect(exception.toString(), startsWith('$kAuthenticationPkgName : '));
       }
     });
 

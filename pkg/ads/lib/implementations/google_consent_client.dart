@@ -5,11 +5,10 @@ import 'package:core/core.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// Loads a UMP consent form.
-typedef LoadConsentForm =
-    void Function(
-      void Function(ConsentForm consentForm) onFormLoaded,
-      void Function(FormError formError) onFormError,
-    );
+typedef LoadConsentForm = void Function(
+  void Function(ConsentForm consentForm) onFormLoaded,
+  void Function(FormError formError) onFormError,
+);
 
 /// [ConsentClient] backed by the Google UMP SDK.
 final class GoogleConsentClient implements ConsentClient {
@@ -43,11 +42,7 @@ final class GoogleConsentClient implements ConsentClient {
     OnConsentInfoUpdateSuccessListener onSuccess,
     OnConsentInfoUpdateFailureListener onFailure,
   ) {
-    _consentInformation.requestConsentInfoUpdate(
-      params,
-      onSuccess,
-      onFailure,
-    );
+    _consentInformation.requestConsentInfoUpdate(params, onSuccess, onFailure);
   }
 
   @override

@@ -10,9 +10,8 @@ void main() {
             slivers: [
               AsyncValueSliverWidget<int>(
                 value: const AsyncValue.data(7),
-                data: (value) => SliverToBoxAdapter(
-                  child: Text('sliver:$value'),
-                ),
+                data: (value) =>
+                    SliverToBoxAdapter(child: Text('sliver:$value')),
               ),
             ],
           ),

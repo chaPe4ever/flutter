@@ -1,6 +1,7 @@
 import 'package:authentication/exceptions/auth_exceptions.dart';
 import 'package:authentication/utils/value_objects.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import '../helpers/auth_dartz.dart';
 
 void main() {

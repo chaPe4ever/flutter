@@ -15,10 +15,7 @@ extension GlobalKeyX on GlobalKey<ScaffoldMessengerState> {
         behavior: SnackBarBehavior.floating,
         action: actionLabel == null || onActionTap == null
             ? null
-            : SnackBarAction(
-                label: actionLabel,
-                onPressed: onActionTap,
-              ),
+            : SnackBarAction(label: actionLabel, onPressed: onActionTap),
         content: TextBody.m(text),
         duration: duration,
         key: key,

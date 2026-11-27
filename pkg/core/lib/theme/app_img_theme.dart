@@ -4,16 +4,10 @@ import 'package:material_ui/material_ui.dart';
 class AppImgTheme extends ThemeExtension<AppImgTheme> {
   const new _({required this.color, this.size = 14.0});
 
-  factory light({
-    Color defColor = Colors.black,
-    double size = 14.0,
-  }) {
+  factory light({Color defColor = Colors.black, double size = 14.0}) {
     return AppImgTheme._(color: defColor, size: size);
   }
-  factory dark({
-    Color defColor = Colors.white,
-    double size = 14.0,
-  }) {
+  factory dark({Color defColor = Colors.white, double size = 14.0}) {
     return AppImgTheme._(color: defColor, size: size);
   }
 

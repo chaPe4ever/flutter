@@ -1,13 +1,7 @@
 import 'package:core/core.dart';
 import 'package:shared_ui/shared_ui.dart';
 
-enum IconButtonType {
-  primary,
-  secondary,
-  outline,
-  negative,
-  back,
-}
+enum IconButtonType { primary, secondary, outline, negative, back }
 
 class AppIconButton extends IconButtonBase {
   const new _({
@@ -85,10 +79,7 @@ class AppIconButton extends IconButtonBase {
     );
   }
 
-  factory back({
-    Key? key,
-    VoidCallback? onTap,
-  }) {
+  factory back({Key? key, VoidCallback? onTap}) {
     return AppIconButton._(
       icon: Icons.arrow_back,
       key: key,

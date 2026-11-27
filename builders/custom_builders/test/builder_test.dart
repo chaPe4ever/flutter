@@ -27,9 +27,7 @@ void main() {
     final buildStep = mockBuildStep(
       package: 'custom_builders',
       inputPath: 'lib/input.dart',
-      assets: {
-        'custom_builders|$jsonPath': await readProjectFile(jsonPath),
-      },
+      assets: {'custom_builders|$jsonPath': await readProjectFile(jsonPath)},
     );
 
     final output = await JsonKeysGenerator().generateForAnnotatedElement(

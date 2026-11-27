@@ -10,10 +10,7 @@ class InterstitialAdLoadConfig extends _$InterstitialAdLoadConfig {
   ({String? adUnitId, AdRequest? adRequest}) build() =>
       (adUnitId: null, adRequest: null);
 
-  void configure({
-    required String adUnitId,
-    required AdRequest adRequest,
-  }) {
+  void configure({required String adUnitId, required AdRequest adRequest}) {
     state = (adUnitId: adUnitId, adRequest: adRequest);
   }
 

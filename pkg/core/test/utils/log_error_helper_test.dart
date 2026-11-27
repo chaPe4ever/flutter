@@ -41,10 +41,7 @@ void main() {
           overrides: [loggerPod.overrideWithValue(logger)],
           child: Consumer(
             builder: (context, ref, _) {
-              LoggerHelper.logError(
-                e: const NoNetworkException(),
-                ref: ref,
-              );
+              LoggerHelper.logError(e: const NoNetworkException(), ref: ref);
               return const SizedBox();
             },
           ),

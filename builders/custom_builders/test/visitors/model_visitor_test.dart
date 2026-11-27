@@ -28,13 +28,7 @@ void main() {
       ..visitFieldElement(countField);
 
     expect(visitor.className, 'MyModel');
-    expect(
-      visitor.fields,
-      {
-        'name': 'String',
-        'count': 'int',
-      },
-    );
+    expect(visitor.fields, {'name': 'String', 'count': 'int'});
   });
 
   test('ModelVisitor keeps nullable types without star suffix', () {

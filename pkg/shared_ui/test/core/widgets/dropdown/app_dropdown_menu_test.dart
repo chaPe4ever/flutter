@@ -102,14 +102,8 @@ void main() {
       find.byType(DropdownMenu<String>),
     );
     final background = menu.dropdownMenuEntries.first.style!.backgroundColor!;
-    expect(
-      background.resolve({WidgetState.selected}),
-      isNotNull,
-    );
-    expect(
-      background.resolve(<WidgetState>{}),
-      isNotNull,
-    );
+    expect(background.resolve({WidgetState.selected}), isNotNull);
+    expect(background.resolve(<WidgetState>{}), isNotNull);
 
     await tester.tap(find.text('two').last);
     await tester.pumpAndSettle();

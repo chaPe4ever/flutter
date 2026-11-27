@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:remote_config/models/app_maintenance_model.dart';

@@ -16,10 +16,10 @@ const _customPadding = EdgeInsets.fromLTRB(4, 6, 8, 10);
 
 List<LicenseEntry> _licences() {
   return const [
-    LicenseEntryWithLineBreaks(
-      <String>['alpha', 'beta'],
-      'First paragraph\n\nSecond paragraph',
-    ),
+    LicenseEntryWithLineBreaks(<String>[
+      'alpha',
+      'beta',
+    ], 'First paragraph\n\nSecond paragraph'),
     LicenseEntryWithLineBreaks(<String>['gamma'], 'Solo'),
   ];
 }
@@ -66,9 +66,7 @@ void main() {
     _ignoreListTileInkAssertion();
     await pumpSharedUiWidget(
       tester,
-      overrides: [
-        fetchLicencesPod.overrideWith((ref) async => _licences()),
-      ],
+      overrides: [fetchLicencesPod.overrideWith((ref) async => _licences())],
       child: const LicencesPage(padding: _customPadding),
     );
 
@@ -101,9 +99,7 @@ void main() {
     await pumpSharedUiWidget(
       tester,
       mockGoRouter: router,
-      overrides: [
-        fetchLicencesPod.overrideWith((ref) async => _licences()),
-      ],
+      overrides: [fetchLicencesPod.overrideWith((ref) async => _licences())],
       child: const LicencesPage(),
     );
 

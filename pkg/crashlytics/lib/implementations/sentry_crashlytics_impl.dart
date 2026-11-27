@@ -94,10 +94,7 @@ final class SentryCrashlyticsImpl implements CrashlyticsBase {
   }
 
   @override
-  Future<void> captureException(
-    dynamic error, {
-    StackTrace? stackTrace,
-  }) async {
+  Future<void> captureException(dynamic error, {StackTrace? stackTrace}) async {
     if (error is Object) {
       final report = sentryReport(error, stackTrace);
       await _sentry.captureException(

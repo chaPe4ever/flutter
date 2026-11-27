@@ -12,12 +12,10 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart' hide generateNonce;
 /// Firebase authentication facade implementation
 final class FirebaseAuthFacade implements AuthFacade {
   /// Constructor
-  new({
-    required this._firebaseAuth,
-    required LoggerBase loggerBase,
-  }) : _logger = loggerBase,
-       _priorSignOutController =
-           StreamController<List<Future<void>>>.broadcast();
+  new({required this._firebaseAuth, required LoggerBase loggerBase})
+    : _logger = loggerBase,
+      _priorSignOutController =
+          StreamController<List<Future<void>>>.broadcast();
 
   // Fields
   final FirebaseAuth _firebaseAuth;
@@ -501,9 +499,7 @@ final class FirebaseAuthFacade implements AuthFacade {
     if (onSignIn != null) _onSignInCallbacks.add(onSignIn);
 
     // Initialize the auth state subscription if it doesn't exist
-    _authStateSubscription ??= _firebaseAuth.authStateChanges().listen((
-      user,
-    ) {
+    _authStateSubscription ??= _firebaseAuth.authStateChanges().listen((user) {
       if (user == null) {
         // Create a defensive copy to avoid concurrent modification
         final callbacksCopy = Set<VoidCallback>.from(_onSignOutCallbacks);

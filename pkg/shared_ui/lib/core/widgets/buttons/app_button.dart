@@ -1,12 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:shared_ui/shared_ui.dart';
 
-enum AppButtonType {
-  primary,
-  secondary,
-  danger,
-  text,
-}
+enum AppButtonType { primary, secondary, danger, text }
 
 class AppButton extends ElevatedButtonBase {
   const new _({
@@ -70,16 +65,13 @@ class AppButton extends ElevatedButtonBase {
     trailing: trailing,
   );
 
-  factory text({
-    required String label,
-    Key? key,
-    VoidCallback? onTap,
-  }) => AppButton._(
-    label: label,
-    type: AppButtonType.text,
-    key: key,
-    onTap: onTap,
-  );
+  factory text({required String label, Key? key, VoidCallback? onTap}) =>
+      AppButton._(
+        label: label,
+        type: AppButtonType.text,
+        key: key,
+        onTap: onTap,
+      );
 
   final AppButtonType type;
 
@@ -205,9 +197,7 @@ class AppButton extends ElevatedButtonBase {
       AppButtonType.primary ||
       AppButtonType.danger ||
       AppButtonType.text => super.focusedBorder(context),
-      AppButtonType.secondary => BorderSide(
-        color: context.colors.borderBrand,
-      ),
+      AppButtonType.secondary => BorderSide(color: context.colors.borderBrand),
     };
   }
 
@@ -218,9 +208,7 @@ class AppButton extends ElevatedButtonBase {
       AppButtonType.secondary => BorderSide(
         color: context.colors.contentFocused,
       ),
-      AppButtonType.danger => BorderSide(
-        color: context.colors.borderNegative,
-      ),
+      AppButtonType.danger => BorderSide(color: context.colors.borderNegative),
       AppButtonType.text => BorderSide.none,
     };
   }

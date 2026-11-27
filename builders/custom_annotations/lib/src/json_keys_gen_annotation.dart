@@ -1,5 +1,5 @@
 class JSONKeysGen {
-  const JSONKeysGen({required this.jsonPath});
+  const new({required this.jsonPath});
   final String jsonPath;
 }
 

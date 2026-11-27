@@ -36,10 +36,7 @@ void main() {
   testWidgets('AppSearchbar unfocuses on submit and tap outside', (
     tester,
   ) async {
-    await pumpSharedUiWidget(
-      tester,
-      child: AppSearchbar(onChanged: (_) {}),
-    );
+    await pumpSharedUiWidget(tester, child: AppSearchbar(onChanged: (_) {}));
     final searchBar = tester.widget<SearchBar>(find.byType(SearchBar));
     searchBar.onSubmitted!('query');
     searchBar.onTapOutside!(const PointerDownEvent());

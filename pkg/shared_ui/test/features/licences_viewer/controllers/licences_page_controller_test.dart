@@ -24,20 +24,11 @@ void main() {
       final combined = combineLicenseEntries([
         _License(
           ['shared', 'only'],
-          const [
-            LicenseParagraph('alpha', 0),
-            LicenseParagraph('beta', 1),
-          ],
+          const [LicenseParagraph('alpha', 0), LicenseParagraph('beta', 1)],
         ),
-        _License(
-          ['shared'],
-          const [LicenseParagraph('gamma', 0)],
-        ),
+        _License(['shared'], const [LicenseParagraph('gamma', 0)]),
         _License(['blank'], const []),
-        _License(
-          const [],
-          const [LicenseParagraph('unused', 0)],
-        ),
+        _License(const [], const [LicenseParagraph('unused', 0)]),
       ]);
 
       LicenseEntryWithLineBreaks entryFor(String package) {

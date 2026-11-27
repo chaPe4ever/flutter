@@ -66,11 +66,7 @@ class ResponsiveTwoColumnLayout extends StatelessWidget {
 /// Useful for displaying forms and other widgets that need to be scrollable.
 class ResponsiveScrollableCard extends StatelessWidget {
   /// Ctr
-  const new({
-    required this.child,
-    this.padding = 20,
-    super.key,
-  });
+  const new({required this.child, this.padding = 20, super.key});
 
   final Widget child;
   final double padding;
@@ -152,11 +148,7 @@ class ResponsiveSliverCenter extends StatelessWidget {
 
 class AppResponsiveScaledBox extends StatelessWidget {
   /// Ctr
-  const new({
-    required this.child,
-    this.width = 1920,
-    super.key,
-  });
+  const new({required this.child, this.width = 1920, super.key});
 
   final Widget child;
   final double width;
@@ -479,12 +471,7 @@ extension AppRowColumnTypeX on AppRowColumnType {
 
 class AppBreakpoint extends Breakpoint {
   /// Ctr
-  const new({
-    required super.start,
-    required super.end,
-    super.name,
-    super.data,
-  });
+  const new({required super.start, required super.end, super.name, super.data});
 }
 
 /// Internal equality comparators.

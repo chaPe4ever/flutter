@@ -3,6 +3,7 @@ import 'package:authentication/implementations/fake_auth_facade.dart';
 import 'package:authentication/utils/value_objects.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import '../helpers/auth_dartz.dart';
 
 void main() {
@@ -30,13 +31,10 @@ void main() {
       );
 
       expect(result.isRight(), isTrue);
-      result.fold(
-        (_) => fail('expected right'),
-        (credential) {
-          expect(credential.user?.email, email.requireValue);
-          expect(credential.additionalUserInfo?.isNewUser, isTrue);
-        },
-      );
+      result.fold((_) => fail('expected right'), (credential) {
+        expect(credential.user?.email, email.requireValue);
+        expect(credential.additionalUserInfo?.isNewUser, isTrue);
+      });
     });
 
     test('signInWithEmailAndPassword succeeds for a verified user', () async {
@@ -219,10 +217,8 @@ void main() {
         throwsA(isA<UnimplementedError>()),
       );
       expect(
-        () => facade.confirmPasswordReset(
-          code: 'code',
-          newPassword: 'secret12',
-        ),
+        () =>
+            facade.confirmPasswordReset(code: 'code', newPassword: 'secret12'),
         throwsA(isA<UnimplementedError>()),
       );
       expect(
@@ -395,9 +391,7 @@ void main() {
 
     test('reAuthenticateWithPassword maps wrong password', () async {
       final facadeWithThrowingUser = FakeAuthFacade.withUser(
-        _ReauthThrowingFakeUser(
-          FirebaseAuthException(code: 'wrong-password'),
-        ),
+        _ReauthThrowingFakeUser(FirebaseAuthException(code: 'wrong-password')),
       );
 
       final result = await facadeWithThrowingUser.reAuthenticateWithPassword(

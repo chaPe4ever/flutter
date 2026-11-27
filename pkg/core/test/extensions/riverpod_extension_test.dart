@@ -21,10 +21,7 @@ void main() {
     addTearDown(container.dispose);
 
     final provider = Provider.autoDispose<int>((ref) {
-      return ref.cache(
-        () => 42,
-        duration: const Duration(seconds: 5),
-      );
+      return ref.cache(() => 42, duration: const Duration(seconds: 5));
     });
 
     expect(container.read(provider), 42);

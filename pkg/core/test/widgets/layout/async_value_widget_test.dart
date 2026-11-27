@@ -30,21 +30,20 @@ void main() {
       expect(find.text('loading'), findsOneWidget);
     });
 
-    testWidgets(
-      'shows default progress indicator when loading',
-      (tester) async {
-        await tester.pumpWidget(
-          MaterialApp(
-            home: AsyncValueWidget<int>(
-              value: const AsyncValue.loading(),
-              data: (_) => const SizedBox.shrink(),
-            ),
+    testWidgets('shows default progress indicator when loading', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: AsyncValueWidget<int>(
+            value: const AsyncValue.loading(),
+            data: (_) => const SizedBox.shrink(),
           ),
-        );
+        ),
+      );
 
-        expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      },
-    );
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
 
     testWidgets('uses custom error callback', (tester) async {
       final error = Exception('boom');

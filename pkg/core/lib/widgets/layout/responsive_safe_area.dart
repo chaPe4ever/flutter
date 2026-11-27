@@ -3,11 +3,7 @@ import 'package:core/core.dart';
 /// Template for ensuring content is within the safe area
 class ResponsiveSafeArea extends StatelessWidget {
   /// Ctr
-  const new({
-    required this.child,
-    this.hPadding = 20,
-    super.key,
-  });
+  const new({required this.child, this.hPadding = 20, super.key});
 
   final Widget child;
   final double hPadding;

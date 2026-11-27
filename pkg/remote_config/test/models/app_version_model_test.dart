@@ -112,10 +112,7 @@ void main() {
           isUpdateAvailable: true,
         ),
       );
-      expect(
-        model.copyWith(isOptional: false).isUpdateAvailable,
-        isFalse,
-      );
+      expect(model.copyWith(isOptional: false).isUpdateAvailable, isFalse);
     });
   });
 }

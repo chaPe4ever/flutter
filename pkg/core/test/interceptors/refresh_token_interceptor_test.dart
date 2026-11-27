@@ -42,10 +42,7 @@ void main() {
 
       await interceptor.onRequest(options, handler);
 
-      expect(
-        options.headers['Authorization'],
-        'Bearer stored-token',
-      );
+      expect(options.headers['Authorization'], 'Bearer stored-token');
       expect(handler.forwarded, same(options));
     });
 

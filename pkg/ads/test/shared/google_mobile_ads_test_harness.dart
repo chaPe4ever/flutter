@@ -275,14 +275,11 @@ class GoogleMobileAdsTestHarness {
     required String eventName,
     Map<dynamic, dynamic> extra = const {},
   }) async {
-    final methodCall = MethodCall(
-      'onAdEvent',
-      <dynamic, dynamic>{
-        'adId': adId,
-        'eventName': eventName,
-        ...extra,
-      },
-    );
+    final methodCall = MethodCall('onAdEvent', <dynamic, dynamic>{
+      'adId': adId,
+      'eventName': eventName,
+      ...extra,
+    });
     final data = instanceManager.channel.codec.encodeMethodCall(methodCall);
     await TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .handlePlatformMessage(

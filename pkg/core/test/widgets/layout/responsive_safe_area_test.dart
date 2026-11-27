@@ -9,10 +9,7 @@ void main() {
 
       await tester.pumpWidget(
         const MaterialApp(
-          home: ResponsiveSafeArea(
-            hPadding: padding,
-            child: Text('content'),
-          ),
+          home: ResponsiveSafeArea(hPadding: padding, child: Text('content')),
         ),
       );
 

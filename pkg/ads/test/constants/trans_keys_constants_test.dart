@@ -17,10 +17,7 @@ void main() {
         TransKeys.adsConsentFormNotAvailableKey,
         'ads_consent_form_not_available_key',
       );
-      expect(
-        TransKeys.adsBlockerExceptionKey,
-        'ads_blocker_exception_key',
-      );
+      expect(TransKeys.adsBlockerExceptionKey, 'ads_blocker_exception_key');
       expect(
         TransKeys.adsInventoryUnavailableKey,
         'ads_inventory_unavailable_key',

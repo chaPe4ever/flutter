@@ -30,10 +30,7 @@ void main() {
       final response = Response<String>(
         requestOptions: RequestOptions(path: '/'),
       );
-      expect(
-        response.getDataOrThrow,
-        throwsA(isA<UnknownCoreException>()),
-      );
+      expect(response.getDataOrThrow, throwsA(isA<UnknownCoreException>()));
     });
 
     test('getDataOrThrow throws custom exception when data is null', () {

@@ -100,10 +100,7 @@ void main() {
         () => user.unlink(GoogleAuthProvider.PROVIDER_ID),
         throwsA(isA<UnimplementedError>()),
       );
-      expect(
-        user.getIdTokenResult,
-        throwsA(isA<UnimplementedError>()),
-      );
+      expect(user.getIdTokenResult, throwsA(isA<UnimplementedError>()));
     });
   });
 }

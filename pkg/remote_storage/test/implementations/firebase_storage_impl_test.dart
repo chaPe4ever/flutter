@@ -57,9 +57,8 @@ void main() {
     });
 
     test('returns a mapped exception when Firebase delete fails', () async {
-      when(() => mockPathRef.delete()).thenThrow(
-        _storageException(code: 'not-found'),
-      );
+      when(() => mockPathRef.delete())
+          .thenThrow(_storageException(code: 'not-found'));
 
       final result = await impl.delete(path: 'avatars/a.png');
 
@@ -82,9 +81,8 @@ void main() {
     });
 
     test('returns a mapped exception when Firebase getData fails', () async {
-      when(() => mockPathRef.getData(any())).thenThrow(
-        _storageException(code: 'retry'),
-      );
+      when(() => mockPathRef.getData(any()))
+          .thenThrow(_storageException(code: 'retry'));
 
       final result = await impl.getData(path: 'data.bin', maxSize: 512);
 
@@ -99,9 +97,8 @@ void main() {
 
   group('getDownloadURL', () {
     test('returns the download url when Firebase succeeds', () async {
-      when(
-        () => mockPathRef.getDownloadURL(),
-      ).thenAnswer((_) async => 'https://cdn.example/object');
+      when(() => mockPathRef.getDownloadURL())
+          .thenAnswer((_) async => 'https://cdn.example/object');
 
       final result = await impl.getDownloadURL(path: 'object');
 
@@ -112,9 +109,8 @@ void main() {
     });
 
     test('returns a mapped exception when Firebase fails', () async {
-      when(() => mockPathRef.getDownloadURL()).thenThrow(
-        _storageException(code: 'unauthorized'),
-      );
+      when(() => mockPathRef.getDownloadURL())
+          .thenThrow(_storageException(code: 'unauthorized'));
 
       final result = await impl.getDownloadURL(path: 'object');
 
@@ -134,15 +130,13 @@ void main() {
       uploadTask = CompletedUploadTask(mockSnapshot);
 
       when(() => mockSnapshot.ref).thenReturn(mockSnapshotRef);
-      when(
-        () => mockSnapshotRef.getDownloadURL(),
-      ).thenAnswer((_) async => 'https://cdn.example/uploaded');
+      when(() => mockSnapshotRef.getDownloadURL())
+          .thenAnswer((_) async => 'https://cdn.example/uploaded');
     });
 
     test('putData uploads bytes and resolves the download url', () async {
-      when(
-        () => mockPathRef.putData(any(), any()),
-      ).thenAnswer((_) => uploadTask);
+      when(() => mockPathRef.putData(any(), any()))
+          .thenAnswer((_) => uploadTask);
 
       final result = await impl.putData(
         data: Uint8List.fromList([1]),
@@ -158,9 +152,8 @@ void main() {
     });
 
     test('putData maps Firebase failures', () async {
-      when(() => mockPathRef.putData(any(), any())).thenThrow(
-        _storageException(code: 'quota'),
-      );
+      when(() => mockPathRef.putData(any(), any()))
+          .thenThrow(_storageException(code: 'quota'));
 
       final result = await impl.putData(
         data: Uint8List.fromList([1]),
@@ -171,9 +164,8 @@ void main() {
     });
 
     test('putBlob uploads a blob and resolves the download url', () async {
-      when(() => mockPathRef.putBlob(any<Object>(), any())).thenAnswer(
-        (_) => uploadTask,
-      );
+      when(() => mockPathRef.putBlob(any<Object>(), any()))
+          .thenAnswer((_) => uploadTask);
       final blob = Object();
 
       final result = await impl.putBlob(
@@ -190,9 +182,8 @@ void main() {
     });
 
     test('putBlob maps Firebase failures', () async {
-      when(() => mockPathRef.putBlob(any<Object>(), any())).thenThrow(
-        _storageException(code: 'invalid'),
-      );
+      when(() => mockPathRef.putBlob(any<Object>(), any()))
+          .thenThrow(_storageException(code: 'invalid'));
 
       final result = await impl.putBlob(blob: Object(), path: 'uploads/blob');
 
@@ -200,9 +191,8 @@ void main() {
     });
 
     test('putString uploads text and resolves the download url', () async {
-      when(
-        () => mockPathRef.putString(any(), metadata: any(named: 'metadata')),
-      ).thenAnswer((_) => uploadTask);
+      when(() => mockPathRef.putString(any(), metadata: any(named: 'metadata')))
+          .thenAnswer((_) => uploadTask);
 
       final result = await impl.putString(
         data: 'hello',
@@ -217,9 +207,8 @@ void main() {
     });
 
     test('putString maps Firebase failures', () async {
-      when(
-        () => mockPathRef.putString(any(), metadata: any(named: 'metadata')),
-      ).thenThrow(_storageException(code: 'canceled'));
+      when(() => mockPathRef.putString(any(), metadata: any(named: 'metadata')))
+          .thenThrow(_storageException(code: 'canceled'));
 
       final result = await impl.putString(
         data: 'hello',
@@ -230,9 +219,8 @@ void main() {
     });
 
     test('putFile uploads a file and resolves the download url', () async {
-      when(() => mockPathRef.putFile(any(), any())).thenAnswer(
-        (_) => uploadTask,
-      );
+      when(() => mockPathRef.putFile(any(), any()))
+          .thenAnswer((_) => uploadTask);
       final file = File('firebase_storage_impl_put_file_test.txt');
       addTearDown(() {
         if (file.existsSync()) {
@@ -253,9 +241,8 @@ void main() {
     });
 
     test('putFile maps Firebase failures', () async {
-      when(() => mockPathRef.putFile(any(), any())).thenThrow(
-        _storageException(code: 'unknown'),
-      );
+      when(() => mockPathRef.putFile(any(), any()))
+          .thenThrow(_storageException(code: 'unknown'));
 
       final result = await impl.putFile(
         file: File('missing-upload.txt'),
@@ -268,9 +255,8 @@ void main() {
 
   group('writeToFile', () {
     test('returns none when Firebase writeToFile succeeds', () async {
-      when(
-        () => mockPathRef.writeToFile(any()),
-      ).thenAnswer((_) => CompletedDownloadTask());
+      when(() => mockPathRef.writeToFile(any()))
+          .thenAnswer((_) => CompletedDownloadTask());
       final file = File('firebase_storage_impl_write_test.txt');
       addTearDown(() {
         if (file.existsSync()) {
@@ -289,9 +275,8 @@ void main() {
     test(
       'returns a mapped exception when Firebase writeToFile fails',
       () async {
-        when(() => mockPathRef.writeToFile(any())).thenThrow(
-          _storageException(code: 'write-failed'),
-        );
+        when(() => mockPathRef.writeToFile(any()))
+            .thenThrow(_storageException(code: 'write-failed'));
 
         final result = await impl.writeToFile(
           file: File('firebase_storage_impl_write_fail_test.txt'),

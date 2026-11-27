@@ -63,24 +63,25 @@ flutter/
 
 ### Melos Commands
 Workspace + Melos config lives in the root `pubspec.yaml` (Melos 8 / pub workspaces).
-Run Melos via `dart run melos …` (or a global `melos` that matches the lockfile).
+Use a global `melos` that matches the lockfile (`dart pub global activate melos 8.9.0`).
+Avoid `dart run melos …` here — `cli_launcher` fails to resolve the global install.
 
 ```bash
 # Bootstrap all packages
-dart run melos bootstrap
+melos bootstrap
 
-# Run tests (100% coverage via very_good_cli)
-dart run melos run test --no-select
-dart run melos run test_changed --no-select
+# Run tests (100% coverage via very_good_cli --workspace)
+melos run test --no-select
+melos run test_changed --no-select
 
 # Code quality
-dart run melos run format
-dart run melos run analyze --no-select   # dart analyze --fatal-infos
+melos run format
+melos run analyze --no-select   # dart analyze --fatal-infos
 
 # Build runner
-dart run melos run build_runner_build
-dart run melos run build_runner_clean
-dart run melos run build_runner_watch
+melos run build_runner_build
+melos run build_runner_clean
+melos run build_runner_watch
 ```
 
 ### Package-Specific Build Runner

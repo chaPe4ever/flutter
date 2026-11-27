@@ -24,9 +24,7 @@ class AppSwitch extends StatelessWidget {
           Transform.scale(
             scale: context.responsive(0.6, xs: 0.6),
             child: Transform.translate(
-              offset: context.responsive(
-                const Offset(-15, 0),
-              ),
+              offset: context.responsive(const Offset(-15, 0)),
               child: Switch(
                 splashRadius: 0,
                 value: value,
@@ -36,9 +34,7 @@ class AppSwitch extends StatelessWidget {
           ),
           if (label != null)
             Transform.translate(
-              offset: context.responsive(
-                const Offset(-15, 0),
-              ),
+              offset: context.responsive(const Offset(-15, 0)),
               child: TextBody.s(label!),
             ),
         ],

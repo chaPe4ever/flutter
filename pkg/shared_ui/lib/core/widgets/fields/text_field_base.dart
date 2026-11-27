@@ -5,25 +5,22 @@ import 'package:shared_ui/shared_ui.dart';
 abstract class TextFieldBase extends SignalStatefulWidget {
   const new({super.key});
 
-  TextStyle style(BuildContext context) => WidgetStateTextStyle.resolveWith(
-    (states) {
-      late final Color textColor;
+  TextStyle style(BuildContext context) =>
+      WidgetStateTextStyle.resolveWith((states) {
+        late final Color textColor;
 
-      if (states.contains(WidgetState.error)) {
-        textColor = context.colors.contentNegative;
-      } else if (states.contains(WidgetState.focused)) {
-        textColor = context.colors.borderFocused;
-      } else if (states.contains(WidgetState.disabled)) {
-        textColor = context.colors.contentDisabled;
-      } else {
-        textColor = context.colors.contentPrimary;
-      }
+        if (states.contains(WidgetState.error)) {
+          textColor = context.colors.contentNegative;
+        } else if (states.contains(WidgetState.focused)) {
+          textColor = context.colors.borderFocused;
+        } else if (states.contains(WidgetState.disabled)) {
+          textColor = context.colors.contentDisabled;
+        } else {
+          textColor = context.colors.contentPrimary;
+        }
 
-      return context.textStyles.bodyS.copyWith(
-        color: textColor,
-      );
-    },
-  );
+        return context.textStyles.bodyS.copyWith(color: textColor);
+      });
 }
 
 abstract class OutlineTextFieldBase<T extends Object> extends TextFieldBase {
@@ -229,20 +226,16 @@ class _OutlineTextFieldBaseState extends State<OutlineTextFieldBase> {
                   color: context.colors.contentPrimary,
                 ),
                 onTap: () =>
-                    Future.sync(() => widget.onClearButtonPressed?.call()).then(
-                      (_) {
-                        tfText.value = '';
-                        textController.clear();
-                      },
-                    ),
+                    Future.sync(() => widget.onClearButtonPressed?.call())
+                        .then((_) {
+                          tfText.value = '';
+                          textController.clear();
+                        }),
               ),
             ),
             Visibility(
               visible: errorText.value.isNotEmpty,
-              child: Icon(
-                Icons.error,
-                color: context.colors.contentNegative,
-              ),
+              child: Icon(Icons.error, color: context.colors.contentNegative),
             ),
             widget.suffixIcon,
           ],

@@ -1,30 +1,25 @@
 import 'package:core/core.dart';
 
-/// Localization Helper
 abstract final class LocaleHelper {
-  /// Localise the input. Enrich with additional Locales if required
   static String localiseInput({
     required BuildContext context,
     required String inputEn,
     required String inputDe,
   }) {
-    final easyLocalization = EasyLocalization.of(context);
-    final currentLocale = easyLocalization?.currentLocale ?? const Locale('en');
-
-    switch (currentLocale.languageCode) {
-      case 'en':
-        return inputEn;
-      case 'de':
-        return inputDe;
-      default:
-        return inputEn;
+    final languageCode = localeOf(context).languageCode;
+    if (languageCode == 'de') {
+      return inputDe;
     }
+    return inputEn;
   }
 
   static String getCurrentLangCode({required BuildContext context}) {
-    final easyLocalization = EasyLocalization.of(context);
-    final currentLocale = easyLocalization?.currentLocale ?? const Locale('en');
-
-    return currentLocale.languageCode;
+    return localeOf(context).languageCode;
   }
+
+  static Locale localeOf(BuildContext context) {
+    return localeOrEnglish(EasyLocalization.of(context)?.currentLocale);
+  }
+
+  static Locale localeOrEnglish(Locale? locale) => locale ?? const Locale('en');
 }

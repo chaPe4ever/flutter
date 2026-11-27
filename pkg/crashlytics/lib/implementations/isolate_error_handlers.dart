@@ -41,10 +41,7 @@ void onSentryIsolateError(
   final stack = StackTrace.fromString(pair.last as String);
   if (error is Object) {
     final report = sentryReport(error, stack);
-    sentry.captureException(
-      report.throwable,
-      stackTrace: report.stackTrace,
-    );
+    sentry.captureException(report.throwable, stackTrace: report.stackTrace);
   } else {
     sentry.captureException(error, stackTrace: stack);
   }

@@ -5,41 +5,32 @@ import 'package:shared_ui/core/widgets/fields/app_text_field.dart';
 import '../../../shared/pump_shared_ui_widget.dart';
 
 void main() {
-  testWidgets(
-    'OutlineTextFieldBase validator shows error icon',
-    (tester) async {
-      final key = GlobalKey<FormState>();
-      await pumpSharedUiWidget(
-        tester,
-        child: Form(
-          key: key,
-          child: AppTextField(
-            labelText: 'Field',
-            validator: (v) => 'bad',
-            errorText: 'bad',
-          ),
+  testWidgets('OutlineTextFieldBase validator shows error icon', (
+    tester,
+  ) async {
+    final key = GlobalKey<FormState>();
+    await pumpSharedUiWidget(
+      tester,
+      child: Form(
+        key: key,
+        child: AppTextField(
+          labelText: 'Field',
+          validator: (v) => 'bad',
+          errorText: 'bad',
         ),
-      );
-      key.currentState!.validate();
-      await tester.pump();
-      expect(find.byIcon(Icons.error), findsOneWidget);
-    },
-  );
+      ),
+    );
+    key.currentState!.validate();
+    await tester.pump();
+    expect(find.byIcon(Icons.error), findsOneWidget);
+  });
 
   testWidgets('text field styles disabled and focused states', (tester) async {
     await pumpSharedUiWidget(
       tester,
-      child: AppTextField(
-        labelText: 'Disabled',
-        enabled: false,
-      ),
+      child: AppTextField(labelText: 'Disabled', enabled: false),
     );
-    await pumpSharedUiWidget(
-      tester,
-      child: AppTextField(
-        labelText: 'Focused',
-      ),
-    );
+    await pumpSharedUiWidget(tester, child: AppTextField(labelText: 'Focused'));
     await tester.tap(find.byType(TextFormField));
     await tester.pump();
     await tester.enterText(find.byType(TextFormField), 'x');
@@ -69,10 +60,7 @@ void main() {
   });
 
   testWidgets('TextField onTapOutside callback runs', (tester) async {
-    await pumpSharedUiWidget(
-      tester,
-      child: AppTextField(labelText: 'Name'),
-    );
+    await pumpSharedUiWidget(tester, child: AppTextField(labelText: 'Name'));
     final textField = tester.widget<TextField>(find.byType(TextField));
     textField.onTapOutside!(const PointerDownEvent());
     await tester.pump();
@@ -83,17 +71,11 @@ void main() {
   ) async {
     await pumpSharedUiWidget(
       tester,
-      child: AppTextField(
-        labelText: 'With helper',
-        helperText: 'Help',
-      ),
+      child: AppTextField(labelText: 'With helper', helperText: 'Help'),
     );
     expect(find.text('With helper'), findsOneWidget);
 
-    await pumpSharedUiWidget(
-      tester,
-      child: AppTextField(labelText: 'Primary'),
-    );
+    await pumpSharedUiWidget(tester, child: AppTextField(labelText: 'Primary'));
     expect(find.text('Primary'), findsOneWidget);
   });
 }

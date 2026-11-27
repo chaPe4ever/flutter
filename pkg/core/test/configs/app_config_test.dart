@@ -19,11 +19,7 @@ void main() {
   group('AppConfig.init', () {
     test('initialises every nested config', () async {
       final appConfig = AppConfig(
-        configs: [
-          _FakeConfig(1),
-          _FakeConfig(2),
-          _FakeConfig(3),
-        ],
+        configs: [_FakeConfig(1), _FakeConfig(2), _FakeConfig(3)],
       );
 
       await appConfig.init();

@@ -208,9 +208,7 @@ base class RiverpodLogger extends ProviderObserver {
       }
     }
 
-    Log.riverpod(
-      providerName: 'Provider: ${context.provider}',
-    );
+    Log.riverpod(providerName: 'Provider: ${context.provider}');
     Log.riverpod(
       info: 'previousValueType: ${previousValue.runtimeType}',
       verboseCb: ({required isActive}) {

@@ -12,20 +12,14 @@ void main() {
       expect(AppEffectStyles.shadowL4Effect1.offset, const Offset(0, 10));
       expect(AppEffectStyles.shadowL5Effect0.blurRadius, 10);
       expect(AppEffectStyles.shadowL6Effect1.blurRadius, 32);
-      expect(
-        AppEffectStyles.redLinearGradient.colors,
-        [
-          AppPrimitiveColors.baseBrownRegular,
-          AppPrimitiveColors.baseRedDark,
-        ],
-      );
-      expect(
-        AppEffectStyles.blueLinearGradient.colors,
-        [
-          AppPrimitiveColors.baseBlueRegular,
-          AppPrimitiveColors.baseBlueLight,
-        ],
-      );
+      expect(AppEffectStyles.redLinearGradient.colors, [
+        AppPrimitiveColors.baseBrownRegular,
+        AppPrimitiveColors.baseRedDark,
+      ]);
+      expect(AppEffectStyles.blueLinearGradient.colors, [
+        AppPrimitiveColors.baseBlueRegular,
+        AppPrimitiveColors.baseBlueLight,
+      ]);
     });
   });
 }

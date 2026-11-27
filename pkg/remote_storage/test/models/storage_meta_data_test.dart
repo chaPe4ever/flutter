@@ -11,27 +11,21 @@ void main() {
         customMetadata: {'owner': 'test'},
       );
 
-      expect(
-        metadata.asMap(),
-        {
-          'contentEncoding': 'gzip',
-          'contentLanguage': 'en',
-          'contentType': 'image/png',
-          'customMetadata': {'owner': 'test'},
-        },
-      );
+      expect(metadata.asMap(), {
+        'contentEncoding': 'gzip',
+        'contentLanguage': 'en',
+        'contentType': 'image/png',
+        'customMetadata': {'owner': 'test'},
+      });
     });
 
     test('preserves null fields in the map', () {
-      expect(
-        StorageMetadata().asMap(),
-        {
-          'contentEncoding': null,
-          'contentLanguage': null,
-          'contentType': null,
-          'customMetadata': null,
-        },
-      );
+      expect(StorageMetadata().asMap(), {
+        'contentEncoding': null,
+        'contentLanguage': null,
+        'contentType': null,
+        'customMetadata': null,
+      });
     });
   });
 }

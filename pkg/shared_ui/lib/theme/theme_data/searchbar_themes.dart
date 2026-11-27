@@ -16,13 +16,9 @@ class SearchbarThemes {
         return AppSemanticColors.light.backgroundSelected;
       }),
       hintStyle: WidgetStateProperty.all(
-        ts.bodyL.copyWith(
-          color: AppSemanticColors.light.contentDisabled,
-        ),
+        ts.bodyL.copyWith(color: AppSemanticColors.light.contentDisabled),
       ),
-      textStyle: WidgetStateProperty.all(
-        ts.bodyM,
-      ),
+      textStyle: WidgetStateProperty.all(ts.bodyM),
     );
   }
 
@@ -40,13 +36,9 @@ class SearchbarThemes {
         return AppSemanticColors.dark.backgroundSelected;
       }),
       hintStyle: WidgetStateProperty.all(
-        ts.bodyL.copyWith(
-          color: AppSemanticColors.dark.contentDisabled,
-        ),
+        ts.bodyL.copyWith(color: AppSemanticColors.dark.contentDisabled),
       ),
-      textStyle: WidgetStateProperty.all(
-        ts.bodyM,
-      ),
+      textStyle: WidgetStateProperty.all(ts.bodyM),
     );
   }
 }

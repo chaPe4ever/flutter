@@ -24,13 +24,10 @@ void main() {
       );
 
       expect(result.isRight(), isTrue);
-      result.fold(
-        (_) => fail('expected success'),
-        (container) {
-          expect(container, isA<ProviderContainer>());
-          container.dispose();
-        },
-      );
+      result.fold((_) => fail('expected success'), (container) {
+        expect(container, isA<ProviderContainer>());
+        container.dispose();
+      });
     });
 
     test('returns left when onPostInit throws CoreException', () async {
@@ -93,14 +90,11 @@ void main() {
         networkBase: network,
       );
 
-      result.fold(
-        (_) => fail('expected success'),
-        (container) {
-          expect(container.read(loggerPod), same(logger));
-          expect(container.read(networkPod), same(network));
-          container.dispose();
-        },
-      );
+      result.fold((_) => fail('expected success'), (container) {
+        expect(container.read(loggerPod), same(logger));
+        expect(container.read(networkPod), same(network));
+        container.dispose();
+      });
     });
   });
 }

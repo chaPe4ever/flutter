@@ -4,9 +4,7 @@ import 'package:inapp_review/contracts/review_prompt_client.dart';
 import 'package:inapp_review/implementations/in_app_review_service_impl.dart';
 
 class FakeInAppReview implements ReviewPromptClient {
-  new({
-    this.available = true,
-  });
+  new({this.available = true});
 
   bool available;
   int requestReviewCalls = 0;

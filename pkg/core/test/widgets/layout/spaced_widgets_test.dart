@@ -10,11 +10,7 @@ void main() {
         const MaterialApp(
           home: SpacedColumn(
             spacing: 8,
-            children: [
-              Text('a'),
-              null,
-              Text('b'),
-            ],
+            children: [Text('a'), null, Text('b')],
           ),
         ),
       );
@@ -48,10 +44,7 @@ void main() {
     testWidgets('inserts gaps between non-null children', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: SpacedRow(
-            spacing: 12,
-            children: [Text('x'), Text('y')],
-          ),
+          home: SpacedRow(spacing: 12, children: [Text('x'), Text('y')]),
         ),
       );
 

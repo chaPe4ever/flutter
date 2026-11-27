@@ -9,9 +9,7 @@ class BottomSheetThemes {
       backgroundColor: AppSemanticColors.light.backgroundPrimary,
       surfaceTintColor: Colors.transparent,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: AppRadius.l,
-        ),
+        borderRadius: BorderRadius.vertical(top: AppRadius.l),
       ),
     );
   }
@@ -23,9 +21,7 @@ class BottomSheetThemes {
       backgroundColor: AppSemanticColors.dark.backgroundPrimary,
       surfaceTintColor: Colors.transparent,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: AppRadius.l,
-        ),
+        borderRadius: BorderRadius.vertical(top: AppRadius.l),
       ),
     );
   }

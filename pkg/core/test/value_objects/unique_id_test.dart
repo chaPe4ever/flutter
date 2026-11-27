@@ -15,10 +15,7 @@ void main() {
     });
 
     test('accepts non-empty strings', () {
-      expect(
-        validateId('abc-123'),
-        right<CoreException, String>('abc-123'),
-      );
+      expect(validateId('abc-123'), right<CoreException, String>('abc-123'));
     });
   });
 

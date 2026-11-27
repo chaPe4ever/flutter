@@ -60,10 +60,7 @@ void main() {
         tester,
         child: Consumer(
           builder: (context, ref, _) {
-            ref.listenAndShowSnackBarOnError(
-              asyncErrorPod,
-              onError: () {},
-            );
+            ref.listenAndShowSnackBarOnError(asyncErrorPod, onError: () {});
             return const SizedBox();
           },
         ),

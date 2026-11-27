@@ -28,10 +28,7 @@ void main() {
     user = MockUser();
     userCredential = MockUserCredential();
     logger = FakeLogger();
-    facade = FirebaseAuthFacade(
-      firebaseAuth: firebaseAuth,
-      loggerBase: logger,
-    );
+    facade = FirebaseAuthFacade(firebaseAuth: firebaseAuth, loggerBase: logger);
 
     when(() => user.uid).thenReturn('apple-uid');
     when(() => user.email).thenReturn('user@example.com');
@@ -44,9 +41,8 @@ void main() {
     when(() => userCredential.additionalUserInfo).thenReturn(null);
 
     when(() => firebaseAuth.currentUser).thenReturn(user);
-    when(
-      () => firebaseAuth.signInWithCredential(any()),
-    ).thenAnswer((_) async => userCredential);
+    when(() => firebaseAuth.signInWithCredential(any()))
+        .thenAnswer((_) async => userCredential);
   });
 
   tearDown(() {
@@ -201,9 +197,8 @@ void main() {
             }
             return null;
           });
-      when(() => firebaseAuth.signInWithCredential(any())).thenThrow(
-        FirebaseAuthException(code: 'user-cancelled'),
-      );
+      when(() => firebaseAuth.signInWithCredential(any()))
+          .thenThrow(FirebaseAuthException(code: 'user-cancelled'));
 
       final result = await facade.signInWithApple();
 
@@ -222,9 +217,8 @@ void main() {
             }
             return null;
           });
-      when(() => firebaseAuth.signInWithCredential(any())).thenThrow(
-        FirebaseAuthException(code: 'network-request-failed'),
-      );
+      when(() => firebaseAuth.signInWithCredential(any()))
+          .thenThrow(FirebaseAuthException(code: 'network-request-failed'));
 
       final result = await facade.signInWithApple();
 

@@ -185,10 +185,7 @@ void main() {
                 Exception('fail'),
                 StackTrace.current,
               );
-              return snapshot.when(
-                data: Text.new,
-                err: null,
-              );
+              return snapshot.when(data: Text.new, err: null);
             },
           ),
         ),
@@ -219,10 +216,8 @@ void main() {
 final class _UserModel {
   const new({required this.id, required this.name});
 
-  factory fromJson(Map<String, dynamic> json) => _UserModel(
-    id: json['id'] as String,
-    name: json['name'] as String,
-  );
+  factory fromJson(Map<String, dynamic> json) =>
+      _UserModel(id: json['id'] as String, name: json['name'] as String);
 
   final String id;
   final String name;

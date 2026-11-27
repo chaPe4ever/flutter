@@ -61,9 +61,8 @@ void main() {
       });
 
       test('wraps delegate failures in UnknownCrashlyticsException', () async {
-        when(
-          () => mockFirebaseCrashlytics.log(any()),
-        ).thenThrow(Exception('channel down'));
+        when(() => mockFirebaseCrashlytics.log(any()))
+            .thenThrow(Exception('channel down'));
 
         await expectLater(
           impl.logEvent(message: 'hello'),
@@ -99,21 +98,18 @@ void main() {
 
     group('setUserId', () {
       test('forwards the user id to Firebase', () async {
-        when(
-          () => mockFirebaseCrashlytics.setUserIdentifier(any()),
-        ).thenAnswer((_) async {});
+        when(() => mockFirebaseCrashlytics.setUserIdentifier(any()))
+            .thenAnswer((_) async {});
 
         await impl.setUserId(userId: 'user-42');
 
-        verify(
-          () => mockFirebaseCrashlytics.setUserIdentifier('user-42'),
-        ).called(1);
+        verify(() => mockFirebaseCrashlytics.setUserIdentifier('user-42'))
+            .called(1);
       });
 
       test('wraps delegate failures in UnknownCrashlyticsException', () async {
-        when(
-          () => mockFirebaseCrashlytics.setUserIdentifier(any()),
-        ).thenThrow(Exception('channel down'));
+        when(() => mockFirebaseCrashlytics.setUserIdentifier(any()))
+            .thenThrow(Exception('channel down'));
 
         await expectLater(
           impl.setUserId(userId: 'user-42'),
@@ -229,10 +225,7 @@ void main() {
         );
 
         await impl.init();
-        captured.single([
-          StateError('isolate'),
-          StackTrace.current.toString(),
-        ]);
+        captured.single([StateError('isolate'), StackTrace.current.toString()]);
 
         expect(fakeFirebaseCrashlyticsHostApi.calls, contains('recordError'));
       });
@@ -240,10 +233,10 @@ void main() {
 
     group('onCombinedFirebaseIsolateError', () {
       test('records fatal isolate errors on Firebase Crashlytics', () {
-        onCombinedFirebaseIsolateError(
-          FirebaseCrashlytics.instance,
-          [StateError('isolate'), StackTrace.current.toString()],
-        );
+        onCombinedFirebaseIsolateError(FirebaseCrashlytics.instance, [
+          StateError('isolate'),
+          StackTrace.current.toString(),
+        ]);
 
         expect(fakeFirebaseCrashlyticsHostApi.calls, contains('recordError'));
       });

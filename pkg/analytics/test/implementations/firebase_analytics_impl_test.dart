@@ -48,27 +48,20 @@ void main() {
 
       test('rethrows core exceptions unchanged', () async {
         final coreError = UnknownCoreException();
-        when(
-          firebaseAnalytics.logEvent(name: 'fail'),
-        ).thenThrow(coreError);
+        when(firebaseAnalytics.logEvent(name: 'fail')).thenThrow(coreError);
 
         await expectLater(
-          impl.logEvent(
-            analyticsEvent: FirebaseAnalyticsEvent(name: 'fail'),
-          ),
+          impl.logEvent(analyticsEvent: FirebaseAnalyticsEvent(name: 'fail')),
           throwsA(same(coreError)),
         );
       });
 
       test('wraps unexpected errors in UnknownAnalyticsException', () async {
-        when(
-          firebaseAnalytics.logEvent(name: 'fail'),
-        ).thenThrow(Exception('channel down'));
+        when(firebaseAnalytics.logEvent(name: 'fail'))
+            .thenThrow(Exception('channel down'));
 
         await expectLater(
-          impl.logEvent(
-            analyticsEvent: FirebaseAnalyticsEvent(name: 'fail'),
-          ),
+          impl.logEvent(analyticsEvent: FirebaseAnalyticsEvent(name: 'fail')),
           throwsA(
             isA<UnknownAnalyticsException>().having(
               (e) => e.innerError,
@@ -82,28 +75,22 @@ void main() {
 
     group('setAnalytics', () {
       test('enables or disables collection on the delegate', () async {
-        when(
-          firebaseAnalytics.setAnalyticsCollectionEnabled(true),
-        ).thenAnswer((_) async {});
-        when(
-          firebaseAnalytics.setAnalyticsCollectionEnabled(false),
-        ).thenAnswer((_) async {});
+        when(firebaseAnalytics.setAnalyticsCollectionEnabled(true))
+            .thenAnswer((_) async {});
+        when(firebaseAnalytics.setAnalyticsCollectionEnabled(false))
+            .thenAnswer((_) async {});
 
         await impl.setAnalytics(enabled: true);
         await impl.setAnalytics(enabled: false);
 
-        verify(
-          firebaseAnalytics.setAnalyticsCollectionEnabled(true),
-        ).called(1);
-        verify(
-          firebaseAnalytics.setAnalyticsCollectionEnabled(false),
-        ).called(1);
+        verify(firebaseAnalytics.setAnalyticsCollectionEnabled(true)).called(1);
+        verify(firebaseAnalytics.setAnalyticsCollectionEnabled(false))
+            .called(1);
       });
 
       test('wraps synchronous delegate failures', () {
-        when(
-          firebaseAnalytics.setAnalyticsCollectionEnabled(true),
-        ).thenThrow(Exception('sync failure'));
+        when(firebaseAnalytics.setAnalyticsCollectionEnabled(true))
+            .thenThrow(Exception('sync failure'));
 
         expect(
           () => impl.setAnalytics(enabled: true),
@@ -114,21 +101,18 @@ void main() {
 
     group('setCurrentScreen', () {
       test('logs a screen view with the provided name', () async {
-        when(
-          firebaseAnalytics.logScreenView(screenName: 'Settings'),
-        ).thenAnswer((_) async {});
+        when(firebaseAnalytics.logScreenView(screenName: 'Settings'))
+            .thenAnswer((_) async {});
 
         await impl.setCurrentScreen(screenName: 'Settings');
 
-        verify(
-          firebaseAnalytics.logScreenView(screenName: 'Settings'),
-        ).called(1);
+        verify(firebaseAnalytics.logScreenView(screenName: 'Settings'))
+            .called(1);
       });
 
       test('wraps synchronous delegate failures', () {
-        when(
-          firebaseAnalytics.logScreenView(screenName: 'Broken'),
-        ).thenThrow(Exception('sync failure'));
+        when(firebaseAnalytics.logScreenView(screenName: 'Broken'))
+            .thenThrow(Exception('sync failure'));
 
         expect(
           () => impl.setCurrentScreen(screenName: 'Broken'),
@@ -139,9 +123,8 @@ void main() {
 
     group('setUserId', () {
       test('forwards the user id to the delegate', () async {
-        when(
-          firebaseAnalytics.setUserId(id: 'user-42'),
-        ).thenAnswer((_) async {});
+        when(firebaseAnalytics.setUserId(id: 'user-42'))
+            .thenAnswer((_) async {});
         when(firebaseAnalytics.setUserId()).thenAnswer((_) async {});
 
         await impl.setUserId(id: 'user-42');
@@ -152,9 +135,8 @@ void main() {
       });
 
       test('wraps synchronous delegate failures', () {
-        when(
-          firebaseAnalytics.setUserId(id: 'user-42'),
-        ).thenThrow(Exception('sync failure'));
+        when(firebaseAnalytics.setUserId(id: 'user-42'))
+            .thenThrow(Exception('sync failure'));
 
         expect(
           () => impl.setUserId(id: 'user-42'),

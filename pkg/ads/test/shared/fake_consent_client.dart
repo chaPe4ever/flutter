@@ -4,10 +4,8 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /// Consent client that delegates to [GoogleConsentClient] unless overridden.
 final class FakeConsentClient implements ConsentClient {
-  new({
-    ConsentClient? delegate,
-    this.throwOnLoadAndShowConsentForm = false,
-  }) : _delegate = delegate ?? GoogleConsentClient();
+  new({ConsentClient? delegate, this.throwOnLoadAndShowConsentForm = false})
+    : _delegate = delegate ?? GoogleConsentClient();
 
   final ConsentClient _delegate;
   final bool throwOnLoadAndShowConsentForm;

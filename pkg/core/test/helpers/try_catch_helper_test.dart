@@ -50,16 +50,13 @@ void main() {
     test('maps FirebaseException to FirestoreException', () async {
       final logger = _FakeLogger();
       await expectLater(
-        () => firestoreFutureTryCatch<void>(
-          () async {
-            throw FirebaseException(
-              plugin: 'firestore',
-              code: 'permission-denied',
-              message: 'denied',
-            );
-          },
-          logger: logger,
-        ),
+        () => firestoreFutureTryCatch<void>(() async {
+          throw FirebaseException(
+            plugin: 'firestore',
+            code: 'permission-denied',
+            message: 'denied',
+          );
+        }, logger: logger),
         throwsA(isA<FirestoreException>()),
       );
       expect(logger.errors, isNotEmpty);
@@ -69,10 +66,8 @@ void main() {
       final logger = _FakeLogger();
       const ex = NoNetworkException();
       await expectLater(
-        () => firestoreFutureTryCatch<void>(
-          () async => throw ex,
-          logger: logger,
-        ),
+        () =>
+            firestoreFutureTryCatch<void>(() async => throw ex, logger: logger),
         throwsA(same(ex)),
       );
     });
@@ -80,20 +75,17 @@ void main() {
     test('maps DioException to DioClientException', () async {
       final logger = _FakeLogger();
       await expectLater(
-        () => firestoreFutureTryCatch<void>(
-          () async {
-            throw DioException(
+        () => firestoreFutureTryCatch<void>(() async {
+          throw DioException(
+            requestOptions: RequestOptions(path: '/'),
+            type: DioExceptionType.badResponse,
+            response: Response(
               requestOptions: RequestOptions(path: '/'),
-              type: DioExceptionType.badResponse,
-              response: Response(
-                requestOptions: RequestOptions(path: '/'),
-                statusCode: 500,
-                statusMessage: 'error',
-              ),
-            );
-          },
-          logger: logger,
-        ),
+              statusCode: 500,
+              statusMessage: 'error',
+            ),
+          );
+        }, logger: logger),
         throwsA(isA<DioClientException>()),
       );
     });
@@ -153,10 +145,8 @@ void main() {
     test('uses custom callback instead of throwing', () async {
       final logger = _FakeLogger();
       final result = await functionsFutureTryCatch<int>(
-        () async => throw FirebaseFunctionsException(
-          code: 'internal',
-          message: 'fail',
-        ),
+        () async =>
+            throw FirebaseFunctionsException(code: 'internal', message: 'fail'),
         logger: logger,
         onFunctionsCustomExCb: (_, _) => 99,
       );
@@ -167,10 +157,8 @@ void main() {
       final logger = _FakeLogger();
       const ex = NoNetworkException();
       await expectLater(
-        () => functionsFutureTryCatch<void>(
-          () async => throw ex,
-          logger: logger,
-        ),
+        () =>
+            functionsFutureTryCatch<void>(() async => throw ex, logger: logger),
         throwsA(same(ex)),
       );
     });
@@ -311,11 +299,7 @@ void main() {
       const ex = NoNetworkException();
       final dio = Dio();
       await expectLater(
-        () => dioTryCatch<void>(
-          () async => throw ex,
-          logger: logger,
-          dio: dio,
-        ),
+        () => dioTryCatch<void>(() async => throw ex, logger: logger, dio: dio),
         throwsA(same(ex)),
       );
     });
@@ -414,10 +398,8 @@ void main() {
     test('rethrows CoreException from callback', () async {
       const ex = NoNetworkException();
       await expectLater(
-        () => futureTryCatch<void>(
-          () async => throw ex,
-          network: _FakeNetwork(),
-        ),
+        () =>
+            futureTryCatch<void>(() async => throw ex, network: _FakeNetwork()),
         throwsA(same(ex)),
       );
     });

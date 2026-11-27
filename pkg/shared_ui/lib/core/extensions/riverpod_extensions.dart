@@ -20,10 +20,7 @@ extension WidgetRefEX on WidgetRef {
         FlavorEnum.prod || FlavorEnum.dev => coreEx.messageKey.tr(),
       };
 
-      context ??
-          this.context.showSnackBar(
-            text: text,
-          );
+      context ?? this.context.showSnackBar(text: text);
     }
   });
 }

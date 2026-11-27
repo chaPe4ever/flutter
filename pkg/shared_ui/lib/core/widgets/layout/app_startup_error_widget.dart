@@ -5,11 +5,7 @@ import 'package:shared_ui/shared_ui.dart';
 /// A widget to display when the app is starting up and an error occurs.
 class AppStartupErrorWidget extends StatelessWidget {
   /// Ctr
-  const new({
-    required this.message,
-    required this.onRetry,
-    super.key,
-  });
+  const new({required this.message, required this.onRetry, super.key});
 
   final String message;
   final VoidCallback onRetry;
@@ -21,15 +17,9 @@ class AppStartupErrorWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextBody.m(
-              message,
-              textAlign: TextAlign.center,
-            ),
+            TextBody.m(message, textAlign: TextAlign.center),
             const SizedBox(height: AppSpacing.contentM),
-            ElevatedButton(
-              onPressed: onRetry,
-              child: TextBody.m('retry'.tr()),
-            ),
+            ElevatedButton(onPressed: onRetry, child: TextBody.m('retry'.tr())),
           ],
         ),
       ),

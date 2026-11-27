@@ -5,10 +5,11 @@ void main() {
   group('StackTraceLoggerHelper parsing helpers', () {
     test('getFileInfoFromFrame splits file line column', () {
       const frame = '#0      demo (file:///app/lib/demo.dart:12:34)';
-      expect(
-        StackTraceLoggerHelper.getFileInfoFromFrame(frame),
-        ['demo.dart', '12', '34)'],
-      );
+      expect(StackTraceLoggerHelper.getFileInfoFromFrame(frame), [
+        'demo.dart',
+        '12',
+        '34)',
+      ]);
     });
 
     test('getFunctionNameFromFrame extracts symbol', () {

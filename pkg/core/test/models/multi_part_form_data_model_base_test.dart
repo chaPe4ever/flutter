@@ -65,10 +65,7 @@ void main() {
     });
 
     test('exposes default upload metadata', () {
-      final model = _TestMultiPart(
-        filePath: '/tmp/a.bin',
-        fileMapKey: 'file',
-      );
+      final model = _TestMultiPart(filePath: '/tmp/a.bin', fileMapKey: 'file');
 
       expect(model.boundaryName, '--dio-boundary');
       expect(model.filename, isNull);

@@ -62,10 +62,7 @@ void main() {
       harness.interstitialLoadBehavior = InterstitialLoadBehavior.success;
       final notifier = await readAdsNotifier(container);
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await _drainPendingAdWork();
 
       expect(harness.lastInterstitialAd, isNotNull);
@@ -127,10 +124,7 @@ void main() {
       final notifier = await readAdsNotifier(container);
 
       await expectLater(
-        notifier.init(
-          interstitialAdUnitId: 'test-unit',
-          skipConsentForm: true,
-        ),
+        notifier.init(interstitialAdUnitId: 'test-unit', skipConsentForm: true),
         throwsA(isA<Exception>()),
       );
       expect(mobileAds.initializeCalls, 1);
@@ -149,10 +143,7 @@ void main() {
       addTearDown(container.dispose);
       final notifier = await readAdsNotifier(container);
 
-      await notifier.init(
-        interstitialAdUnitId: 'first',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'first', skipConsentForm: true);
       mobileAds.failInitialize = true;
 
       await notifier.init(
@@ -182,10 +173,7 @@ void main() {
       addTearDown(container.dispose);
       final notifier = await readAdsNotifier(container);
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
 
       await expectLater(notifier.resetConsent(), completes);
     });
@@ -251,10 +239,7 @@ void main() {
       addTearDown(container.dispose);
       final notifier = await readAdsNotifier(container);
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await Future<void>.delayed(Duration.zero);
 
       await notifier.showInterstitialAd();
@@ -309,9 +294,7 @@ void main() {
           skipConsentForm: true,
         );
 
-        await notifier.showInterstitialAd(
-          testDeviceIds: const ['device-a'],
-        );
+        await notifier.showInterstitialAd(testDeviceIds: const ['device-a']);
 
         expect(container.read(adsPod), isA<AsyncData<void>>());
       },
@@ -324,10 +307,7 @@ void main() {
 
       harness.interstitialLoadBehavior = InterstitialLoadBehavior.noFill;
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await _drainPendingAdWork();
 
       CoreException? reported;
@@ -375,10 +355,7 @@ void main() {
 
       harness.interstitialLoadBehavior = InterstitialLoadBehavior.networkError;
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await _drainPendingAdWork();
 
       await notifier.showInterstitialAd();
@@ -392,10 +369,7 @@ void main() {
 
       harness.interstitialLoadBehavior = InterstitialLoadBehavior.consentError;
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await _drainPendingAdWork();
 
       await notifier.showInterstitialAd();
@@ -410,10 +384,7 @@ void main() {
       harness.interstitialLoadBehavior =
           InterstitialLoadBehavior.noFillWithMessage;
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await _drainPendingAdWork();
 
       await notifier.showInterstitialAd();
@@ -427,10 +398,7 @@ void main() {
 
       harness.interstitialLoadBehavior = InterstitialLoadBehavior.genericError;
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await _drainPendingAdWork();
 
       await notifier.showInterstitialAd();
@@ -520,10 +488,7 @@ void main() {
       addTearDown(container.dispose);
       final notifier = await readAdsNotifier(container);
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await Future<void>.delayed(Duration.zero);
 
       CoreException? reported;
@@ -547,10 +512,7 @@ void main() {
       addTearDown(container.dispose);
       final notifier = await readAdsNotifier(container);
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await Future<void>.delayed(Duration.zero);
 
       CoreException? reported;
@@ -574,10 +536,7 @@ void main() {
       addTearDown(container.dispose);
       final notifier = await readAdsNotifier(container);
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await Future<void>.delayed(Duration.zero);
 
       CoreException? reported;
@@ -601,10 +560,7 @@ void main() {
       addTearDown(container.dispose);
       final notifier = await readAdsNotifier(container);
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await _drainPendingAdWork();
 
       await notifier.showInterstitialAd();
@@ -618,10 +574,7 @@ void main() {
       addTearDown(container.dispose);
       final notifier = await readAdsNotifier(container);
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await _drainPendingAdWork();
 
       await notifier.showInterstitialAd();
@@ -646,10 +599,7 @@ void main() {
         ..consentStatus = ConsentStatus.required
         ..failLoadConsentForm = true;
 
-      await expectLater(
-        notifier.init(interstitialAdUnitId: 'unit'),
-        completes,
-      );
+      await expectLater(notifier.init(interstitialAdUnitId: 'unit'), completes);
       await _drainPendingAdWork();
     });
 
@@ -668,10 +618,7 @@ void main() {
         message: 'dismissed with error',
       );
 
-      await expectLater(
-        notifier.showInterstitialAd(),
-        completes,
-      );
+      await expectLater(notifier.showInterstitialAd(), completes);
     });
 
     test('records a consent form error when loadAndShow returns one', () async {
@@ -695,10 +642,7 @@ void main() {
       addTearDown(container.dispose);
       final notifier = await readAdsNotifier(container);
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await _drainPendingAdWork();
 
       final first = notifier.showInterstitialAd();
@@ -712,10 +656,7 @@ void main() {
       addTearDown(container.dispose);
       final notifier = await readAdsNotifier(container);
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await _drainPendingAdWork();
       await notifier.showInterstitialAd();
       container.read(interstitialAdLoadConfigPod.notifier).clear();
@@ -759,10 +700,7 @@ void main() {
 
       harness.interstitialLoadBehavior = InterstitialLoadBehavior.throwOnLoad;
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await _drainPendingAdWork();
 
       await notifier.showInterstitialAd();
@@ -776,10 +714,7 @@ void main() {
 
       harness.interstitialLoadBehavior = InterstitialLoadBehavior.noFill;
 
-      await notifier.init(
-        interstitialAdUnitId: 'unit',
-        skipConsentForm: true,
-      );
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
       await _drainPendingAdWork();
     });
 
@@ -793,10 +728,7 @@ void main() {
         ..consentStatus = ConsentStatus.required
         ..failIsConsentFormAvailable = true;
 
-      await expectLater(
-        notifier.init(interstitialAdUnitId: 'unit'),
-        completes,
-      );
+      await expectLater(notifier.init(interstitialAdUnitId: 'unit'), completes);
       await _drainPendingAdWork();
     });
 
@@ -810,10 +742,7 @@ void main() {
         ..consentStatus = ConsentStatus.required
         ..failGetConsentStatusAfterCallCount = 3;
 
-      await expectLater(
-        notifier.init(interstitialAdUnitId: 'unit'),
-        completes,
-      );
+      await expectLater(notifier.init(interstitialAdUnitId: 'unit'), completes);
       await _drainPendingAdWork();
     });
 
@@ -830,10 +759,7 @@ void main() {
           message: 'user dismissed with error',
         );
 
-      await expectLater(
-        notifier.init(interstitialAdUnitId: 'unit'),
-        completes,
-      );
+      await expectLater(notifier.init(interstitialAdUnitId: 'unit'), completes);
       await _drainPendingAdWork();
     });
 
@@ -847,10 +773,7 @@ void main() {
         ..consentStatus = ConsentStatus.required
         ..failConsentFormShow = true;
 
-      await expectLater(
-        notifier.init(interstitialAdUnitId: 'unit'),
-        completes,
-      );
+      await expectLater(notifier.init(interstitialAdUnitId: 'unit'), completes);
       await _drainPendingAdWork();
     });
 
@@ -898,44 +821,32 @@ void main() {
       },
     );
 
-    test(
-      'surfaces load failures when consent status cannot be read',
-      () async {
-        final container = createAdsTestContainer(
-          consentClient: ThrowingGetConsentStatusClient(),
-        );
-        addTearDown(container.dispose);
-        final notifier = await readAdsNotifier(container);
+    test('surfaces load failures when consent status cannot be read', () async {
+      final container = createAdsTestContainer(
+        consentClient: ThrowingGetConsentStatusClient(),
+      );
+      addTearDown(container.dispose);
+      final notifier = await readAdsNotifier(container);
 
-        await notifier.init(
-          interstitialAdUnitId: 'unit',
-          skipConsentForm: true,
-        );
-        await _drainPendingAdWork();
+      await notifier.init(interstitialAdUnitId: 'unit', skipConsentForm: true);
+      await _drainPendingAdWork();
 
-        await notifier.showInterstitialAd();
-        _expectAdsPodError(container, isA<Exception>());
-      },
-    );
+      await notifier.showInterstitialAd();
+      _expectAdsPodError(container, isA<Exception>());
+    });
 
-    test(
-      'continues init when the post-update consent check throws',
-      () async {
-        final container = createAdsTestContainer(
-          consentClient: GoogleConsentClient(
-            consentInformation: FailingCheckConsentInformation(),
-          ),
-        );
-        addTearDown(container.dispose);
-        final notifier = await readAdsNotifier(container);
+    test('continues init when the post-update consent check throws', () async {
+      final container = createAdsTestContainer(
+        consentClient: GoogleConsentClient(
+          consentInformation: FailingCheckConsentInformation(),
+        ),
+      );
+      addTearDown(container.dispose);
+      final notifier = await readAdsNotifier(container);
 
-        await expectLater(
-          notifier.init(interstitialAdUnitId: 'unit'),
-          completes,
-        );
-        await _drainPendingAdWork();
-      },
-    );
+      await expectLater(notifier.init(interstitialAdUnitId: 'unit'), completes);
+      await _drainPendingAdWork();
+    });
 
     test(
       'uses non-personalized ad requests when consent is not obtained',
@@ -960,9 +871,7 @@ void main() {
       'clears the in-flight completer when the load future fails early',
       () async {
         final loader = FakeInterstitialAdLoader();
-        final container = createAdsTestContainer(
-          interstitialAdLoader: loader,
-        );
+        final container = createAdsTestContainer(interstitialAdLoader: loader);
         addTearDown(container.dispose);
         final notifier = await readAdsNotifier(container);
 
@@ -976,9 +885,7 @@ void main() {
         final showFuture = notifier.showInterstitialAd();
         await _drainPendingAdWork();
 
-        loader.completePendingLoadError(
-          Exception('manual load wait failure'),
-        );
+        loader.completePendingLoadError(Exception('manual load wait failure'));
 
         await showFuture;
         _expectAdsPodError(container, isA<Exception>());
@@ -994,10 +901,7 @@ void main() {
         ..consentFormAvailable = true
         ..consentStatus = ConsentStatus.required;
 
-      await expectLater(
-        notifier.init(interstitialAdUnitId: 'unit'),
-        completes,
-      );
+      await expectLater(notifier.init(interstitialAdUnitId: 'unit'), completes);
       await _drainPendingAdWork();
     });
 
@@ -1049,9 +953,7 @@ void main() {
       'continues init when loading the consent form throws at the start',
       () async {
         final container = createAdsTestContainer(
-          consentClient: FakeConsentClient(
-            throwOnLoadAndShowConsentForm: true,
-          ),
+          consentClient: FakeConsentClient(throwOnLoadAndShowConsentForm: true),
         );
         addTearDown(container.dispose);
         final notifier = await readAdsNotifier(container);

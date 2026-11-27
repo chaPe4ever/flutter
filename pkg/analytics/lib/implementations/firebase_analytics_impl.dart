@@ -12,10 +12,7 @@ final class FirebaseAnalyticsImpl implements AnalyticsBase {
   Future<void> logEvent({required AnalyticsEvent analyticsEvent}) async {
     try {
       switch (analyticsEvent) {
-        case FirebaseAnalyticsEvent(
-          : final name,
-          : final parameters,
-        ):
+        case FirebaseAnalyticsEvent(:final name, :final parameters):
           await _analytics.logEvent(name: name, parameters: parameters);
       }
     } on CoreException {

@@ -27,17 +27,14 @@ melos:
   scripts:
     analyze:
       description: Analyze all packages (dart analyze --fatal-infos)
-      exec: dart analyze --fatal-infos
+      run: melos exec -- dart analyze --fatal-infos
 
     test:
       description: >
-        Run very_good tests with 100% coverage across packages that have a
-        test/ directory
-      packageFilters:
-        dirExists: test
-      exec: >
-        very_good test --coverage -r --min-coverage 100 --show-uncovered
-        --test-randomize-ordering-seed random --fail-fast
+        Run very_good tests with 100% coverage across the Pub workspace
+      run: >
+        very_good test --workspace --coverage --min-coverage 100
+        --show-uncovered --test-randomize-ordering-seed random --fail-fast
         --exclude-coverage "**/*.g.dart **/*.freezed.dart **/*.gr.dart **/*.gen.dart"
         --exclude-tags golden
 
@@ -47,14 +44,14 @@ melos:
         dirExists: test
         diff: origin/main
       exec: >
-        very_good test --coverage -r --min-coverage 100 --show-uncovered
+        very_good test --coverage --min-coverage 100 --show-uncovered
         --test-randomize-ordering-seed random --fail-fast
         --exclude-coverage "**/*.g.dart **/*.freezed.dart **/*.gr.dart **/*.gen.dart"
         --exclude-tags golden
 
     format:
       description: Format all packages and fail if files would change
-      exec: dart format --set-exit-if-changed .
+      run: melos exec -- dart format --set-exit-if-changed .
 
     pub_upgrade:
       description: Upgrade dependencies in all packages

@@ -6,11 +6,20 @@ import 'package:material_ui/material_ui.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
+  test('localeOrEnglish falls back when locale is null', () {
+    expect(LocaleHelper.localeOrEnglish(null), const Locale('en'));
+    expect(
+      LocaleHelper.localeOrEnglish(const Locale('de')),
+      const Locale('de'),
+    );
+  });
+
   testWidgets('defaults to English when localization missing', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Builder(
           builder: (context) {
+            expect(LocaleHelper.localeOf(context), const Locale('en'));
             expect(
               LocaleHelper.localiseInput(
                 context: context,
@@ -45,6 +54,7 @@ void main() {
               locale: context.locale,
               home: Builder(
                 builder: (context) {
+                  expect(LocaleHelper.localeOf(context), const Locale('de'));
                   expect(
                     LocaleHelper.localiseInput(
                       context: context,

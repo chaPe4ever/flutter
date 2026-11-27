@@ -50,9 +50,7 @@ class _AppDropdownButtonState extends State<AppDropdownButton> {
             ),
           ),
       icon: Icon(
-        errorTextSignal.value.isNotEmpty
-            ? Icons.error
-            : Icons.arrow_drop_down,
+        errorTextSignal.value.isNotEmpty ? Icons.error : Icons.arrow_drop_down,
         color: errorTextSignal.value.isNotEmpty
             ? context.colors.contentNegative
             : context.colors.contentSecondary,
@@ -60,10 +58,8 @@ class _AppDropdownButtonState extends State<AppDropdownButton> {
       initialValue: widget.value,
       items: widget.items
           .map(
-            (item) => DropdownMenuItem<String>(
-              value: item,
-              child: TextBody.s(item),
-            ),
+            (item) =>
+                DropdownMenuItem<String>(value: item, child: TextBody.s(item)),
           )
           .toList(),
       onChanged: widget.onChanged,

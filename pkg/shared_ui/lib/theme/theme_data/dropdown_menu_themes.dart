@@ -11,18 +11,12 @@ class DropdownMenuThemes {
     textStyle: tsL.bodyS,
     menuStyle: MenuStyle(
       elevation: WidgetStateProperty.all(5),
-      backgroundColor: WidgetStateProperty.all(
-        colorsL.backgroundPrimary,
-      ),
+      backgroundColor: WidgetStateProperty.all(colorsL.backgroundPrimary),
       side: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.error)) {
-          return BorderSide(
-            color: colorsL.contentNegative,
-          );
+          return BorderSide(color: colorsL.contentNegative);
         }
-        return BorderSide(
-          color: colorsL.contentTertiary,
-        );
+        return BorderSide(color: colorsL.contentTertiary);
       }),
     ),
     inputDecorationTheme: InputDecorationTheme(
@@ -49,38 +43,28 @@ class DropdownMenuThemes {
       focusColor: colorsL.contentBrand,
       hoverColor: colorsL.borderHovered,
       fillColor: colorsL.backgroundPrimary,
-      hintStyle: tsL.titleL.copyWith(
-        color: colorsL.contentTertiary,
-      ),
-      errorStyle: tsL.bodyS.copyWith(
-        color: colorsL.contentNegative,
-      ),
-      labelStyle: tsL.bodyS.copyWith(
-        color: colorsL.contentPrimary,
-      ),
-      helperStyle: tsL.bodyS.copyWith(
-        color: colorsL.contentSupport,
-      ),
-      floatingLabelStyle: WidgetStateTextStyle.resolveWith(
-        (states) {
-          late final Color textColor;
+      hintStyle: tsL.titleL.copyWith(color: colorsL.contentTertiary),
+      errorStyle: tsL.bodyS.copyWith(color: colorsL.contentNegative),
+      labelStyle: tsL.bodyS.copyWith(color: colorsL.contentPrimary),
+      helperStyle: tsL.bodyS.copyWith(color: colorsL.contentSupport),
+      floatingLabelStyle: WidgetStateTextStyle.resolveWith((states) {
+        late final Color textColor;
 
-          if (states.contains(WidgetState.error)) {
-            textColor = colorsL.contentNegative;
-          } else if (states.contains(WidgetState.focused)) {
-            textColor = colorsL.borderFocused;
-          } else if (states.contains(WidgetState.disabled)) {
-            textColor = colorsL.contentDisabled;
-          } else {
-            textColor = colorsL.contentPrimary;
-          }
+        if (states.contains(WidgetState.error)) {
+          textColor = colorsL.contentNegative;
+        } else if (states.contains(WidgetState.focused)) {
+          textColor = colorsL.borderFocused;
+        } else if (states.contains(WidgetState.disabled)) {
+          textColor = colorsL.contentDisabled;
+        } else {
+          textColor = colorsL.contentPrimary;
+        }
 
-          return tsL.bodyS.copyWith(
-            backgroundColor: colorsL.borderSelected,
-            color: textColor,
-          );
-        },
-      ),
+        return tsL.bodyS.copyWith(
+          backgroundColor: colorsL.borderSelected,
+          color: textColor,
+        );
+      }),
     ),
   );
 
@@ -88,9 +72,7 @@ class DropdownMenuThemes {
     textStyle: tsD.bodyS,
     menuStyle: MenuStyle(
       elevation: WidgetStateProperty.all(5),
-      backgroundColor: WidgetStateProperty.all(
-        colorsD.backgroundPrimary,
-      ),
+      backgroundColor: WidgetStateProperty.all(colorsD.backgroundPrimary),
     ),
     inputDecorationTheme: InputDecorationTheme(
       helperMaxLines: 1,
@@ -116,38 +98,28 @@ class DropdownMenuThemes {
       focusColor: colorsD.contentBrand,
       hoverColor: colorsD.borderHovered,
       fillColor: colorsD.backgroundPrimary,
-      hintStyle: tsD.titleL.copyWith(
-        color: colorsD.contentTertiary,
-      ),
-      errorStyle: tsD.bodyS.copyWith(
-        color: colorsD.contentNegative,
-      ),
-      labelStyle: tsD.bodyS.copyWith(
-        color: colorsD.contentPrimary,
-      ),
-      helperStyle: tsD.bodyS.copyWith(
-        color: colorsD.contentSupport,
-      ),
-      floatingLabelStyle: WidgetStateTextStyle.resolveWith(
-        (states) {
-          late final Color textColor;
+      hintStyle: tsD.titleL.copyWith(color: colorsD.contentTertiary),
+      errorStyle: tsD.bodyS.copyWith(color: colorsD.contentNegative),
+      labelStyle: tsD.bodyS.copyWith(color: colorsD.contentPrimary),
+      helperStyle: tsD.bodyS.copyWith(color: colorsD.contentSupport),
+      floatingLabelStyle: WidgetStateTextStyle.resolveWith((states) {
+        late final Color textColor;
 
-          if (states.contains(WidgetState.error)) {
-            textColor = colorsD.contentNegative;
-          } else if (states.contains(WidgetState.focused)) {
-            textColor = colorsD.borderFocused;
-          } else if (states.contains(WidgetState.disabled)) {
-            textColor = colorsD.contentDisabled;
-          } else {
-            textColor = colorsL.contentPrimary;
-          }
+        if (states.contains(WidgetState.error)) {
+          textColor = colorsD.contentNegative;
+        } else if (states.contains(WidgetState.focused)) {
+          textColor = colorsD.borderFocused;
+        } else if (states.contains(WidgetState.disabled)) {
+          textColor = colorsD.contentDisabled;
+        } else {
+          textColor = colorsL.contentPrimary;
+        }
 
-          return tsD.bodyS.copyWith(
-            backgroundColor: colorsD.borderSupport,
-            color: textColor,
-          );
-        },
-      ),
+        return tsD.bodyS.copyWith(
+          backgroundColor: colorsD.borderSupport,
+          color: textColor,
+        );
+      }),
     ),
   );
 }

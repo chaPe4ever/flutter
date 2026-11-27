@@ -19,9 +19,7 @@ void main() {
     test('uses loggerPod for logPrint', () {
       final fakeLogger = FakeLogger();
       final container = ProviderContainer(
-        overrides: [
-          loggerPod.overrideWithValue(fakeLogger),
-        ],
+        overrides: [loggerPod.overrideWithValue(fakeLogger)],
       );
       addTearDown(container.dispose);
 
